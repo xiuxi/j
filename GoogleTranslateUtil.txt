@@ -1,0 +1,16 @@
+https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q=%E8%8B%B1%E8%AF%AD
+
+
+https://www.whatismyip.com/dns-lookup/
+
+173.194.218.95
+
+C:\Windows\System32\drivers\etc\hosts
+
+173.194.218.95 www.googletranslate.com
+
+173.194.218.95 translate.googleapis.com
+173.194.218.95 translate.google.com
+
+
+

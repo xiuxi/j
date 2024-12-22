@@ -1,0 +1,403 @@
+package j;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.jsoup.nodes.*;
+import org.jsoup.select.*;
+
+import test.TransApi;
+
+import org.apache.commons.io.FileUtils;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.time.Clock;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+
+import org.jsoup.*;
+
+
+// TODO 自动翻译英文
+/*
+https://stackoverflow.com/questions/7105778/get-readable-text-only-from-clipboard
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
+
+String data = (String) Toolkit.getDefaultToolkit()
+                .getSystemClipboard().getData(DataFlavor.stringFlavor); 
+*/
+
+import java.awt.datatransfer.DataFlavor;
+public class mpc_web {
+    public static TransApi api = TransApi.getTransApi();
+    private static List<String> readLines;
+    static String prevText = "";
+    static String prev_mp4Name = "";
+    static boolean useTranslate = false;
+    public static void main(String[] args)  {
+        if (useTranslate) {
+            newThread.start();
+        }
+        String prev_result = "";
+        String result_bak = "";
+        // newThread.start();
+        while(true) {
+            try {
+                boolean read_mp4_srt_checkbox = true;
+                try {
+                    read_mp4_srt_checkbox = "1".equals(FileUtils.readFileToString(new File(
+                        "D:\\gitHub\\java_ubuntu_windows\\bat\\read_mp4_srt_checkbox.txt"), "utf8"));
+                    if (!read_mp4_srt_checkbox) {
+                        Thread.sleep(3*1000);
+                        continue;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                Executor executor = Executors.newSingleThreadExecutor();
+                String url = "http://localhost:13579/controls.html";
+                String result = readStringFromURL(url);
+                // System.out.println(result);
+                result_bak = result;
+                if (prev_result.equals(result_bak)) {
+                    Thread.sleep(50);
+                    continue;
+                }
+                int index = result.indexOf("/controls.html");
+                if (index >= 0) {
+                    String mp4Name = result.substring(index+"/controls.html".length()+2);
+                    mp4Name = mp4Name.substring(0, mp4Name.indexOf('<'));
+                    if (!mp4Name.equals(prev_mp4Name)) {
+                        try {
+                            System.out.println("\""+mp4Name+"\"");
+                            SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd HH-mm-ss ");
+                            String dateTimeFileName = sdf.format(new Date());
+
+                            dateTimeFileName += mp4Name.substring(mp4Name.lastIndexOf("\\")+1);
+                            dateTimeFileName = dateTimeFileName.substring(0, dateTimeFileName.lastIndexOf(".")) + ".bat";
+                            // File dateTimeFile = new File("D:\\gitHub\\mpc-hc-open-history\\mp4播放历史\\", 
+                            //     dateTimeFileName);
+                            // FileUtils.write(dateTimeFile, "\""+mp4Name+"\"", "utf8");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        prev_mp4Name = mp4Name;
+                    }
+                    String srtStart = result.substring(result.indexOf("<td id=\"time\">")+"<td id=\"time\">".length());
+                    srtStart = srtStart.substring(0, "00:03:13".length());
+
+                    File srtFile = findSrtFile(mp4Name);
+                    if (srtFile != null) {
+                        String srtLine = findSrtLine(srtFile, srtStart);
+                        String myString = srtLine;
+                        boolean canPlay = myString.startsWith("[") && myString.endsWith("]");
+                        canPlay = !canPlay;
+                        // System.out.println("myString="+myString);
+                        if (!prevText.equals(myString) 
+                            // && canPlay
+                            ) {
+                            if (1!=1) {
+                                // executor.execute(() -> {
+                                //     CmdExcuter.executer("balcon -n Kangkang -t \""+myString+"\""+
+                                //     "  -s 4 -v 100");
+                                // });
+                                
+                                System.out.println("hello");
+                            } else {
+                                String[] myStrings = new String[]{};
+                                if (myString.contains("`")) {
+                                    myStrings = myString.split("`");
+                                } else {
+                                    myStrings = new String[]{myString};
+                                }
+                                // Thread.sleep(100);
+                                boolean pause = true;
+                                try {
+                                    String text = FileUtils.readFileToString(new File(
+                                        "D:\\gitHub\\java_ubuntu_windows\\bat\\mpc_web_pause.txt"), "utf8");
+                                    pause = "1".equals(text)?true:false;
+                                } catch (Exception e2) {
+                                    e2.printStackTrace();
+                                }
+                                if (pause) {
+                                    CmdExcuter.executer("D:\\gitHub\\java_ubuntu_windows\\autohotkey\\mpc-hc64.exe.pause.exe");
+                                }
+                                for (String myString1 : myStrings) {
+                                    String myString2 = myString1;
+                                    myString2 = myString2.replaceAll("\\[", " ");
+                                    myString2 = myString2.replaceAll("\\]", " ");
+                                    myString2 = replace(myString2);
+                                    
+                                    if (useTranslate && false) {
+                                        myString = api.getTransResult(myString, "auto", "zh");
+                                        prevText = myString;
+                                    }
+                                    if (1!=1) {
+                                        System.out.println("myString1="+myString);
+    
+                                        System.out.println("\n\n\n\n\n\n\n\n"+myString);
+                                        StringSelection stringSelection = new StringSelection(myString);
+                                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                                        clipboard.setContents(stringSelection, null);
+                                        Thread1.sleep(myString.length() * 140);    
+                                    } else if (containsHanScript.containChinese(myString2)) {
+                                        // System.out.println("1111111" + myString);
+                                        // long begin = System.currentTimeMillis();
+                                        // speech_balcon_commind_line.speech_zh(myString);
+                                        // System.out.println(zh_feng_ci.printLine(myString2));
+                                        // CmdExcuter.executer("D:\\gitHub\\java_ubuntu_windows\\autohotkey\\mpc-hc64.exe.pause.exe");
+                                        if (1==1) {
+                                            if (true && read_text_under_mouse_loop.beta_版_使用Unicode_utf8提供全球语言支持) {
+                                                java_cpp.speech_(myString2, java_cpp.chinese);
+                                            } else {
+                                                java_cpp.speech1(myString2.getBytes(), java_cpp.chinese);
+                                            }
+                                        }
+                                        // CmdExcuter.executer("D:\\gitHub\\java_ubuntu_windows\\autohotkey\\mpc-hc64.exe.play.exe");
+                                        // System.out.println((System.currentTimeMillis() - begin)*1.0/1000 );
+                                    } else {
+                                        // System.out.println("222222" + myString);
+                                        // speech_balcon_commind_line.speech_en(myString);
+                                        
+                                        // CmdExcuter.executer("D:\\gitHub\\java_ubuntu_windows\\autohotkey\\mpc-hc64.exe.pause.exe");
+                                        boolean read_zh_en_srt_checkbox = true;
+                                        try {
+                                            String text = FileUtils.readFileToString(
+                                                new File("D:\\gitHub\\java_ubuntu_windows\\bat\\read_zh_en_srt_checkbox.txt"),
+                                                "utf8");
+                                            read_zh_en_srt_checkbox = "1".equals(text);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        if (read_zh_en_srt_checkbox) {
+                                            System.out.println(myString2);
+                                            java_cpp.speech1(myString2.getBytes(), java_cpp.english);
+                                        }
+                                        // CmdExcuter.executer("D:\\gitHub\\java_ubuntu_windows\\autohotkey\\mpc-hc64.exe.play.exe");
+                                    }
+                                    
+                                }
+                                // System.out.println("1");
+                                // Thread.sleep(500);
+                                if (pause) {
+                                    CmdExcuter.executer("D:\\gitHub\\java_ubuntu_windows\\autohotkey\\mpc-hc64.exe.play.exe");
+                                 
+                                }
+                                       
+                            }
+                        } else {
+                            Thread1.sleep(300);
+                        }
+                        prevText = myString;
+                    } else {
+                        Thread1.sleep(1000);
+                    }
+                    
+                } else {
+                    
+                    Thread1.sleep(1000);
+                }
+                prev_result = result_bak;
+            } catch (Exception e) {
+                //e.printStackTrace();
+                System.out.println(e.toString());
+            }
+        }
+        
+    }
+    static Map<String, String> replace_map = new HashMap<>();
+    static {
+        replace_map.put("哇哇", "哇");
+        replace_map.put("嘎嘎", "嘎");
+        replace_map.put("嗷嗷", "嗷");
+        replace_map.put("啦啦", "啦");
+    }
+    private static String replace(String myString2) {
+        for (String key : replace_map.keySet()) {
+            while (myString2.contains(key)) {
+                myString2 = myString2.replaceAll(key, replace_map.get(key));
+            }
+        }
+        // myString2 = myString2.replaceAll("哇哇", "哇");
+        // myString2 = myString2.replaceAll("嘎", " ");
+        // myString2 = myString2.replaceAll("嗷", " ");
+        // myString2 = myString2.replaceAll("啦", " ");
+        return myString2;
+    }
+    static String prev_dstData = "";
+    public static Thread newThread = new Thread(new Runnable(){
+        
+        public void run() {
+            while(true) {
+                try {
+                    String dstData = "";
+                    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                    {
+                        Transferable content = clipboard.getContents(clipboard);
+                        dstData = (String) content.getTransferData(DataFlavor.stringFlavor);
+                        if (prev_dstData != null && prev_dstData.length() != 0
+                             && prev_dstData.equals(dstData)) {
+
+                            Thread1.sleep(100);
+                            continue;
+                        }
+                        dstData = removeUrl(dstData);
+                        // dstData = dstData.replaceAll("https://", " ");
+                        // dstData = dstData.replaceAll("http://", " ");
+                        // dstData = dstData.replaceAll("www.", " ");
+                        // dstData = dstData.replaceAll(".com", " ");
+                        // System.out.println(dstData);
+                        dstData = dstData.replaceAll("https://www.youtube.com/", " ");
+                        String new_dstData = "";
+                        for (int i = 0; i < dstData.length(); i++) {
+                            char char1 = dstData.charAt(i);
+                            if (Character.isUpperCase(char1)) {
+                                new_dstData += " ";
+                            }
+                            new_dstData += ""+char1;
+                        }
+                        // System.out.println("data="+dstData+" " + "new="+ new_dstData);
+                        
+                        dstData = new_dstData.toLowerCase();
+                        dstData = new_dstData.toLowerCase();
+                        dstData = dstData.replaceAll("<", " ");
+                        dstData = dstData.replaceAll(">", " ");
+                        dstData = dstData.replaceAll("\\(", " ");
+                        dstData = dstData.replaceAll("\\)", " ");
+                        dstData = dstData.replaceAll("\\{", " ");
+                        dstData = dstData.replaceAll("\\}", " ");
+                        dstData = dstData.replaceAll(":", " ");
+                        dstData = dstData.replaceAll(":", " ");
+                        dstData = dstData.replaceAll("\\“", " ");
+                        dstData = dstData.replaceAll("\\”", " ");
+                        dstData = dstData.replaceAll("/", " ");
+                        dstData = dstData.replaceAll("#", " ");
+                        dstData = dstData.replaceAll("`", " ");
+                        dstData = dstData.replaceAll("\\.", " ");
+                        dstData = dstData.replaceAll("\"", " ");
+                        dstData = dstData.replaceAll("-", " ");
+                        dstData = dstData.replaceAll("=", " = ");
+                        dstData = dstData.replaceAll("  ", " ");
+                        dstData = dstData.replaceAll("  ", " ");
+                        dstData = dstData.replaceAll("  ", " ");
+                        dstData = dstData.replaceAll("  ", " ");
+                        
+                        
+                        dstData = dstData.replaceAll("!", " ");
+                        dstData = dstData.replaceAll("--", " ");
+                        dstData = dstData.replaceAll("\r\n", " ");
+                        dstData = dstData.replaceAll("\n", " ");
+                        //System.out.println(dstData);
+                        if (dstData == null || dstData.trim().length() == 0 ||
+                            dstData.trim().length() > 0 && dstData.equals(prev_dstData)) {
+                            Thread1.sleep(100);
+                            continue;
+                        }
+                    }
+                    {
+                        System.out.println("api2");
+                        String myString = dstData;
+                        myString = api.getTransResult(myString, "auto", "zh");
+                        prev_dstData = myString;
+                        System.out.println("myString2="+myString);
+                        //"balcon -n Kangkang -t "文本会慢慢阅读。" -s -5 -v 70"
+                        System.out.println("\n\n\n\n\n\n\n\n"+myString);
+                        StringSelection stringSelection = new StringSelection(myString);
+                        clipboard.setContents(stringSelection, null);
+                        Thread1.sleep(myString.length() * 140);
+                    }
+                    Thread1.sleep(500);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                    try {
+                        Thread1.sleep(500);
+                    } catch (Exception e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                }
+            }
+        };
+    });
+    private static String removeUrl(String commentstr)
+    {
+        String urlPattern = "((https?|ftp|gopher|telnet|file|Unsure|http):((//)|(\\\\))+[\\w\\d:#@%/;$()~_?\\+-=\\\\\\.&]*)";
+        Pattern p = Pattern.compile(urlPattern,Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(commentstr);
+        int i = 0;
+        while (m.find()) {
+            commentstr = commentstr.replaceAll(m.group(i),"").trim();
+            i++;
+        }
+        return commentstr;
+    }
+    private static String findSrtLine(File srtFile, String srtStart) throws IOException {
+        srtStart = srtStart.replaceAll(":", "");
+        int current = Integer.parseInt(srtStart);
+        List<String> srtLines = FileUtils.readLines(srtFile, "utf8");
+        for (int i = 0; i < srtLines.size(); i++) {
+            String line = srtLines.get(i);
+            // System.out.println(line);
+            if (line.length() == "00:00:02,190 --> 00:00:07,590".length()
+                && line.contains(" --> ")
+                ) {
+                int start = Integer.parseInt(line.split(" --> ")[0].substring(0, "00:02:16".length())
+                    .replaceAll(":", ""));
+                int end = Integer.parseInt(line.split(" --> ")[1].substring(0, "00:02:16".length())
+                    .replaceAll(":", ""));
+                if (current >= start && current < end) {
+                    // System.out.println(srtStart + "    "  + line);
+                    return srtLines.get(i+1);
+                }
+            }
+        }
+        // System.out.println("findSrtLine 可能格式错误");
+        return "";
+    }
+
+    public static File findSrtFile(String mp4FullName) {
+        String mp4Part = mp4FullName.substring(0,  mp4FullName.length()
+            - ".srt".length());
+        File[] dirFiles = new File(mp4FullName).getParentFile().listFiles();
+        for (File file : dirFiles) {
+            String srtFullName = file.toString();
+            if (file.isFile() && srtFullName.startsWith(mp4Part) &&
+                srtFullName.endsWith(".srt")) {
+                    // System.out.println(file.toString());
+                    return file;
+                }
+        }
+        return null;
+        // File mp4 = new File(mp4FullName);
+
+        // return new File(mp4FullName.substring(0, mp4FullName.length() - ".srt".length()) + ".web.txt");
+    }
+
+	 public static String readStringFromURL(String requestURL) throws IOException{
+        try (Scanner scanner = new Scanner(new URL(requestURL).openStream(),
+                StandardCharsets.UTF_8.toString()))
+        {
+            scanner.useDelimiter("\\A");
+            return scanner.hasNext() ? scanner.next() : "";
+        }
+    }
+    
+}

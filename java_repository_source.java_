@@ -1,0 +1,86 @@
+
+package j;
+
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.web.servlet.ServletComponentScan;
+
+public class java_repository_source {
+    static String base = "C:\\Users\\xiuxi\\.m2\\repository\\";
+
+    public static void main(String[] args) {
+        init.init(java_repository_source.class);
+        list(new File(base));
+    }
+
+    public static void list(File file) {
+        if (file.isDirectory()) {
+            File[] sub_files = file.listFiles();
+            for (File sub_file : sub_files) {
+                list(sub_file);
+            }
+        } else {
+            String name = file.toString();
+            if (name.endsWith("-sources.jar")) {
+                return;
+            }
+            if (name.endsWith(".jar")) {
+                //https://repo.maven.apache.org/maven2/org/springframework/spring-webmvc/5.3.1/spring-webmvc-5.3.1.jar
+                File source_jar = new File(name.substring(0, name.length() - ".jar".length()) +
+                        "-sources.jar");
+                if (!source_jar.exists()) {
+                    String base_https = "https://repo.maven.apache.org/maven2/" + name.substring(base.length());
+                    base_https = base_https.replace("\\", "/");
+                    base_https = base_https.substring(0, base_https.length() - ".jar".length());
+                    String url = "";
+                    url = base_https + "-javadoc.jar.asc";
+                    dowload(url);
+                    url = base_https + "-javadoc.jar.asc";
+                    dowload(url);
+                    url = base_https + "-javadoc.jar.asc";
+                    dowload(url);
+                    url = base_https + "-javadoc.jar.md5";
+                    dowload(url);
+                    url = base_https + "-javadoc.jar.sha1";
+                    dowload(url);
+                    url = base_https + "-sources.jar";
+                    dowload(url);
+                    url = base_https + "-sources.jar.asc";
+                    dowload(url);
+                    url = base_https + "-sources.jar.md5";
+                    dowload(url);
+                    url = base_https + "-sources.jar.sha1";
+                    dowload(url);
+                    url = base_https + ".jar";
+                    dowload(url);
+                    url = base_https + ".jar.asc";
+                    dowload(url);
+                    url = base_https + "-javadoc.jar";
+                    dowload(url);
+                    url = base_https + ".jar.md5";
+                    dowload(url);
+                    url = base_https + ".jar.sha1";
+                    dowload(url);
+                    url = base_https + ".pom";
+                    dowload(url);
+                    url = base_https + ".pom.asc";
+                    dowload(url);
+                    url = base_https + ".pom.md5";
+                    dowload(url);
+                    url = base_https + ".pom.sha1";
+                    dowload(url);
+                    // System.out.println(base_https);
+                }
+            }
+        }
+    }
+
+    private static void dowload(String url) {
+        System.out.println(url);
+    }
+}

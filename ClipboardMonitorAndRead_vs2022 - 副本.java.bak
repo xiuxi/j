@@ -1,0 +1,497 @@
+package j;
+
+import java.io.File;
+import java.nio.file.FileSystems;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.io.File;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.time.Clock;
+
+import com.github.houbb.opencc4j.core.ZhConvert;
+import com.luhuiguo.chinese.ChineseUtils;
+
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.*;
+
+public class ClipboardMonitorAndRead_vs2022 {
+    public static void main(String[] args) {
+        run(text);
+    }
+
+    static List<String> list = new ArrayList<>();
+
+    public static boolean start_with(String txt) {
+        // if (need_filter_clipboard.is()) {
+        // return false;
+        // }
+        if (1 == 1) {
+            // return false;
+        }
+        boolean need_read = Int.isInteger(txt)
+                || srt.srt(txt)
+                || txt.startsWith("http:")
+                || txt.startsWith("C:\\")
+                || txt.startsWith("https")
+                || txt.startsWith("IDMan.exe ")
+                || txt.startsWith("c:")
+                || txt.startsWith("d:")
+                || txt.endsWith("个运行窗口")
+                || txt.equals("暂停 (k)")
+                || txt.equals("C_WINDOWS_system32_cmdexe")
+                || txt.equals("任务切换")
+                || txt.equals("下一个 (SHIFT+n)")
+                || txt.equals("无法显示字幕")
+                || txt.equals("自动播放模式已开启")
+                || txt.equals("设置")
+                || txt.equals("迷你播放器 (i)")
+                || txt.equals("剧场模式 (t)")
+                || txt.equals("视频字幕 - YouTube Studio")
+                || txt.equals("https://studio.youtube.com/video/g2aPdiqL-CE/translations")
+                || txt.equals("Play with Docker")
+                || txt.equals("https://labs.play-with-docker.com")
+                || txt.equals("点击此帐号个人资料照片能打开辅助帐号列表")
+                || txt.equals("头像图片")
+                || txt.equals("iP地址查询--手机号码查询归属地 | 邮政编码查询 | iP地址归属地查询 | 身份证号码验证在线查询网")
+                || txt.equals("Go语言标准库文档中文版 | Go语言中文网 | Golang中文社区 | Golang中国")
+                || txt.equals("新建标签页")
+                || txt.equals("关闭标签页")
+                || txt.equals("刷新")
+                || txt.equals("前进")
+                || txt.equals("返回")
+                || txt.equals("主页")
+                || txt.equals("查看站点信息")
+                || txt.equals("全部")
+                || txt.equals("直播")
+                || txt.equals("木工")
+                || txt.equals("手工艺品")
+                || txt.equals("烹饪节目")
+                || txt.equals("数学")
+                || txt.equals("旅游")
+                || txt.equals("音乐")
+                || txt.equals("家居装饰")
+                || txt.equals("模拟类视频游戏")
+                || txt.equals("合辑")
+                || txt.equals("足球")
+                || txt.equals("烹饪")
+                || txt.equals("宠物")
+                || txt.equals("操作菜单")
+                || txt.equals("探索")
+                || txt.equals("订阅内容")
+                || txt.equals("媒体库")
+                || txt.equals("历史记录")
+                || txt.equals("您的视频")
+                || txt.equals("稍后观看")
+                || txt.equals("展开")
+                || txt.equals("華視新聞 CH52。直播中。")
+                || txt.endsWith("次观看")
+                || txt.endsWith("小时前")
+                || txt.endsWith("年前")
+                || txt.endsWith("个月前")
+                || txt.startsWith("命令提示符")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || txt.equals("")
+                || (txt.contains("内存") && txt.contains("磁盘") && txt.contains("网络"));
+        if (!need_read && !list.contains(txt)) {
+            // System_out.println(txt);
+            list.add(txt);
+        }
+        return need_read;
+    }
+
+    public static void run(String string) {
+        try {
+            // List<String> readLines = FileUtils.readLines(new File("D:\\go\\g.txt"),
+            // "utf8");
+            // for (String line : readLines) {
+            // System_out.println(line);
+            // if (containsHanScript.containChinese(line)) {
+            // java_cpp.speech1(line.getBytes(), java_cpp.chinese);
+            // } else {
+            // java_cpp.speech1(line.getBytes(), java_cpp.english);
+            // }
+            // }
+            String prev_text = "";
+            String ClipboardMonitorAndRead_vs2022 = class_dir.get_path(
+                    "D:\\gitHub\\java_ubuntu_windows\\c#_dotnet\\ClipboardMonitorAndRead_vs2022\\ClipboardMonitorAndRead_vs2022\\");
+            while (true) {
+                try {
+                    final java.nio.file.Path path = FileSystems.getDefault().getPath(ClipboardMonitorAndRead_vs2022);
+                    // System_out.println(path);
+                    try (final WatchService watchService = FileSystems.getDefault().newWatchService()) {
+                        final WatchKey watchKey = path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+                        while (true) {
+                            final WatchKey wk = watchService.take();
+                            for (WatchEvent<?> event : wk.pollEvents()) {
+                                final java.nio.file.Path changed = (java.nio.file.Path) event.context();
+                                String text = FileUtils.readFileToString(new File(ClipboardMonitorAndRead_vs2022,
+                                        "ClipboardMonitorAndRead_vs2022.txt"), "utf8");
+                                if (text.toLowerCase().startsWith("c:")
+                                        || text.toLowerCase().startsWith("c :")
+                                        || text.toLowerCase().startsWith("d:")
+                                        || text.toLowerCase().startsWith("e:")
+                                        || text.toLowerCase().startsWith("f:")) {
+                                    continue;
+                                }
+
+                                // read_text_under_mouse_loop.dstData = text;
+                                if (false) {
+                                    text = text.replace("`", "`\n");
+                                }
+
+                                // if (prev_text.equals(text)) {
+                                // prev_text = text;
+                                // continue;
+                                // }
+                                // prev_text = text;
+                                // text = text.replace("", "\n");
+                                // text = text.replace("", "\n");
+                                // text = text.replace("", "\n");
+                                // text = text.replace("", "\n");
+                                // text = text.replace("", "\n");
+                                // text = text.replace("", "\n");
+                                // text = text.replace("", "\n");
+                                // text = text.replace("", "\n");
+                                // text = text.replace("", "\n");
+                                // text = text.replace("", "\n");
+                                int index = text.indexOf("\n");
+                                if (index > 0) {
+                                    String[] lines = text.split("\n");
+                                    StringBuffer sb = new StringBuffer();
+                                    for (String line : lines) {
+                                        index = line.indexOf("`");
+                                        if (index > 0) {
+                                            line = line.substring(0, index);
+                                        }
+                                        sb.append(line + "\n");
+                                    }
+                                    text = sb.toString();
+                                }
+                                String new_text = text;
+                                if (false) {
+                                    if (text.contains("\n")) {
+                                        String[] texts = line_split.split(text);
+                                        new_text = "";
+                                        for (String txt : texts) {
+                                            try {
+                                                txt = txt.trim();
+                                                if (start_with(txt)) {
+                                                    continue;
+                                                }
+                                                new_text += "\n" + txt;
+                                            } catch (Exception e) {
+
+                                            }
+                                        }
+                                    } else if (start_with(new_text)) {
+                                        System_out.println(new_text);
+                                        new_text = "";
+                                    }
+
+                                    if (new_text.contains("\n")) {
+                                        String[] lines = new_text.split("\n");
+                                        for (String line : lines) {
+                                            line = line.trim();
+                                            if (line.length() > 0) {
+                                                speak(line);
+                                            }
+                                        }
+                                    } else {
+                                        speak(new_text);
+                                    }
+                                }
+                                long diff = System.currentTimeMillis() - prev_time;
+                                // System_out.println(diff);
+                                // System_out.println("diff="+diff + " prev_text.equals(dstData)="
+                                // +(prev_text.equals(dstData)));
+                                if (prev_text.equals(new_text)
+                                        && diff < 3000) {
+
+                                    continue;
+                                }
+                                if (api == null) {
+                                    api = TransApi.getTransApi();
+                                }
+                                if (new_text.equals(prev_text)) {
+                                    continue;
+                                }
+                                if (true) {
+                                    new_text = ChineseUtils.toSimplified(new_text);
+                                    new_text = youtube_video_titles_replace.replace(new_text);
+                                    if (new_text.trim().length() > 0) {
+                                        Cmd.hide();
+                                        Cmd.clear();
+                                        Cmd.gbk();
+                                        // Cmd.show();
+                                        speech_wraper.is_chinese_true();
+
+                                        if (!zh_contains.true_(new_text)) {
+                                            new_text = new_text.replace(".", ".`");
+                                            new_text = new_text.replace("<p>", "` ");
+                                            new_text = new_text.replace("<pre>", "` ");
+                                            new_text = new_text.replace("{@code", " ");
+                                            new_text = new_text.replace("@return", "` return `");
+                                            new_text = new_text.replace("@since", "` since `");
+                                            new_text = new_text.replace("\n", " ");
+                                            new_text = new_text.replace("<ul>", " ");
+                                            new_text = new_text.replace("<li>", " ");
+                                            new_text = new_text.replace("*", " ");
+                                            new_text = new_text.replace("\r\n", " ");
+                                            new_text = new_text.replace("</ul>", " ");
+                                            new_text = new_text.replaceAll("(\\;)", "(\\;`)");
+                                            new_text = new_text.replace("@throws", "` throws` ");
+                                            new_text = new_text.replace("@see", "` see `");
+                                            new_text = new_text.replace("@apiNote", "` apiNote `");
+                                            new_text = new_text.replace("@param", "` param `");
+                                            // new_text = new_text.replace("", " ");
+                                            new_text = new_text.replace("@return", "` return `");
+                                            // new_text = new_text.replace("", " ");
+                                            // new_text = new_text.replace("", " ");
+                                            // new_text = new_text.replace("", " ");
+                                            // new_text = new_text.replace("", " ");
+                                            // new_text = new_text.replace("", " ");
+                                            // new_text = new_text.replace("", " ");
+                                            // new_text = new_text.replace("", " ");
+                                            // new_text = new_text.replace("", " ");
+                                            // new_text = new_text.replace("", " ");
+                                            // new_text = new_text.replace("", " ");
+                                            new_text = new_text.replace("@", " ");
+                                            // new_text = new_text.replace("", " ");
+                                            // new_text = new_text.replace("", " ");
+                                            // new_text = new_text.replace("", " ");
+                                        } else {
+                                            new_text = new_text.replace(".", ".`");
+                                            new_text = new_text.replace("！", "！`");
+                                            new_text = new_text.replace("，", "，`");
+                                            new_text = new_text.replace("！", "！`");
+                                            new_text = new_text.replace(":", ":`");
+                                            new_text = new_text.replace("：", "：`");
+                                            new_text = new_text.replace("（", "`");
+                                            new_text = new_text.replace("）", "`");
+                                            // new_text = new_text.replace("", "`");
+                                            // new_text = new_text.replace("", "`");
+                                            // new_text = new_text.replace("", "`");
+                                            // new_text = new_text.replace("", "`");
+                                            // new_text = new_text.replace("", "`");
+                                            // new_text = new_text.replace("", "`");
+                                            // new_text = new_text.replace("", "`");
+                                            // new_text = new_text.replace("", "`");
+                                            // new_text = new_text.replace("", "`");
+                                        }
+                                        String[] split_new_texts = new_text.split("`");
+                                        for (String split_new_text : split_new_texts) {
+                                            split_new_text = split_new_text.trim();
+                                            if (split_new_text.length() == 0) {
+                                                continue;
+                                            }
+                                            try {
+                                                Double.parseDouble(split_new_text.trim());
+                                                continue;
+                                            } catch (Exception e) {
+
+                                            }
+                                            language_data.begin(split_new_text);
+                                            text_speach.play(split_new_text);
+                                            language_data.emply();
+                                        }
+
+                                        // Cmd.hide();
+                                    }
+                                } else {
+                                    new_text = new_text.replace("_", " ");
+                                    if (containsHanScript.containChinese(new_text)) {
+                                        if (true) {
+                                            System_out.println(zh_feng_ci.printLine(new_text));
+                                            speech_wraper.speech(new_text, java_cpp.chinese);
+                                            if (false) {
+                                                TransApi.zh_to_en_speach(new_text);
+                                            }
+                                        } else {
+                                            String lines[] = line_split.split(new_text);
+                                            for (String line : lines) {
+                                                if (containsHanScript.containChinese(line)) {
+                                                    System_out.println(line);
+                                                    speech_wraper.speech(line, java_cpp.chinese);
+                                                    TransApi.zh_to_en_speach(line);
+
+                                                    if (false) {
+                                                        String en = api.getTransResult(line, "auto", "en");
+                                                        if (!line.equals(en)) {
+                                                            System_out.println(en);
+                                                            speech_wraper.speech(en, java_cpp.english);
+                                                        }
+                                                    }
+                                                } else {
+                                                    System_out.println(line);
+                                                    speech_wraper.speech(line, java_cpp.english);
+                                                    String zh = api.getTransResult(line, "auto", "zh");
+                                                    if (!zh.equals(line)) {
+                                                        System_out.println(zh);
+                                                        speech_wraper.speech(zh, java_cpp.chinese);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        if (true) {
+                                            if (false)
+                                                speech_wraper.speech(new_text, java_cpp.english);
+                                            String zh = api.getTransResult(new_text, "auto", "zh");
+                                            zh = zh.replace("_", " ");
+                                            System_out.println(zh_feng_ci.printLine(zh));
+                                            speech_wraper.speech(zh, java_cpp.chinese);
+                                        } else {
+                                            String lines[] = line_split.split(new_text);
+                                            for (String line : lines) {
+
+                                                if (containsHanScript.containChinese(line)) {
+                                                    System_out.println(line);
+                                                    speech_wraper.speech(line, java_cpp.chinese);
+                                                    String en = api.getTransResult(line, "auto", "en");
+                                                    if (!line.equals(en)) {
+                                                        System_out.println(en);
+                                                        speech_wraper.speech(en, java_cpp.english);
+                                                    }
+                                                } else {
+                                                    System_out.println(line);
+                                                    speech_wraper.speech(line, java_cpp.english);
+                                                    String zh = api.getTransResult(line, "auto", "zh");
+                                                    if (!zh.equals(line)) {
+                                                        System_out.println(zh);
+                                                        speech_wraper.speech(zh, java_cpp.chinese);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                prev_text = new_text;
+                                prev_text = text;
+                                prev_time = System.currentTimeMillis();
+                                // read_text_under_mouse_loop.speak_.speak(text);
+                                // System_out.println(text);
+                                if (changed.endsWith("myFile.txt")) {
+                                    // System_out.println("My file has changed");
+                                }
+                            }
+                            boolean valid = wk.reset();
+                            if (!valid) {
+                                // System_out.println("Key has been unregisterede");
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    static String prev_text = "";
+    public static TransApi api = null;
+    static long prev_time = System.currentTimeMillis();
+
+    public static void speak(String dstData) {
+        try {
+            System_out.println();
+            dstData = java_cpp.replace(dstData);
+            prev_text = dstData;
+            if (api == null) {
+                api = TransApi.getTransApi();
+            }
+            if (containsHanScript.containChinese(dstData)) {
+                // System_out.println(""+dstData);
+                if (true && read_text_under_mouse_loop.beta_版_使用Unicode_utf8提供全球语言支持) {
+                    java_cpp.speech_(dstData, java_cpp.chinese);
+                } else {
+                    java_cpp.speech1_(dstData.getBytes(), java_cpp.chinese);
+                }
+                if (1 != 1) {
+                    String dstData_en = api.getTransResult(dstData, "auto", "en");
+                    // System_out.println(dstData_en);
+                    java_cpp.speech1_(dstData_en.getBytes(), java_cpp.english);
+                }
+                // TransApi.zh_to_en_speach(dstData);
+            } else {
+                boolean read = false;
+                try {
+                    if (false) {
+
+                        String dstData_zh = api.getTransResult(dstData, "auto", "zh");
+                        // System_out.println(""+dstData_zh);
+                        if (true && read_text_under_mouse_loop.beta_版_使用Unicode_utf8提供全球语言支持) {
+                            java_cpp.speech_(dstData_zh, java_cpp.chinese);
+                        } else {
+                            java_cpp.speech1_(dstData_zh.getBytes(), java_cpp.chinese);
+                        }
+                    }
+
+                    read = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                try {
+                    boolean read_text_under_mouse_loop_en_zh = true;
+                    try {
+                        // read_text_under_mouse_loop_en_zh = FileUtils.readFileToString(new File(
+                        // "D:\\gitHub\\java_ubuntu_windows\\bat\\read_text_under_mouse_loop_en_zh.txt"),
+                        // "utf8").equals("1");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (read_text_under_mouse_loop_en_zh || !read) {
+                        // System_out.println(dstData);
+                        if (true && read_text_under_mouse_loop.beta_版_使用Unicode_utf8提供全球语言支持) {
+                            java_cpp.speech_(dstData, java_cpp.english);
+                        } else {
+                            java_cpp.speech1_(dstData.getBytes(), java_cpp.english);
+                        }
+                        read = true;
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            prev_time = System.currentTimeMillis();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System_out.println("");
+    }
+
+}

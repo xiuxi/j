@@ -1,0 +1,5 @@
+package j;
+
+public class watch_mpc_hc_sound_srt_zh extends watch_mpc_hc_sound_srt {
+
+}

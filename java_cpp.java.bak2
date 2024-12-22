@@ -1,0 +1,505 @@
+package j;
+//import java.lang.annotation.Native;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.common.base.Utf8;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.bouncycastle.util.encoders.UTF8;
+
+public class java_cpp {
+	static byte[] thread1_text = null;
+	static int thread1_language = 0;
+	public static Thread thread1 = new Thread(new Runnable() {
+		public void run() {
+			speech1(thread1_text, thread1_language);
+		};
+	});
+
+	public static void speech1_new_thread(byte[] text, int len) {
+		try {
+			thread1.stop();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		thread1_text = text;
+		thread1_language = len;
+		thread1.start();
+		;
+		// speech1(text.getBytes(), len);
+	}
+
+	// @Native
+	public static native void speech(String text, int en_zh);
+
+	public static native void speech1(byte[] text, int en_zh);
+
+	static String prev_text = "";
+	public static boolean use_translate = false;
+
+	public static void speech_(String text, int en_zh) {
+		if (containsHanScript.containChinese(text)) {
+			en_zh = java_cpp.chinese;
+		} else {
+			en_zh = java_cpp.english;
+		}
+		try {
+			if (prev_text.equals(text)) {
+				return;
+			}
+			prev_text = text;
+			// throw new Exception("aa"+text);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		pin_yin_chinese2pinyin.fromCmd = false;
+		if (!is_show_horizantal) {
+			pin_yin_chinese2pinyin.main(new String[] { text });
+		}
+		if (text.contains("，")) {
+			text = text.replace("，", "\n");
+		}
+		if (false) {
+			text = text.replace("【", "\n");
+			text = text.replace("】", "\n");
+			text = text.replace("！", "\n");
+			text = text.replace("\"", "\n");
+			text = text.replace("：", "\n");
+			text = text.replace("？", "\n");
+			text = text.replace("；", "\n");
+			text = text.replace("。", "\n");
+			text = text.replace("，", "，\n");
+			text = text.replace("(", "，\n");
+			text = text.replace(")", "，\n");
+			text = text.replace("（", "\n");
+			text = text.replace("）", "\n");
+			text = text.replace("|", "\n");
+			text = text.replace("？", "\n");
+			text = text.replace("「", "\n");
+			text = text.replace("」", "\n");
+			text = text.replace(":", "\n");
+			text = text.replace("\"", "\n");
+			text = text.replace("@", "\n");
+			text = text.replace("?", "\n");
+			text = text.replace("!", "\n");
+			text = text.replace(" “", "\n");
+			text = text.replace(" ”", "\n");
+			text = text.replace("“", "\n");
+			text = text.replace("”", "\n");
+			text = text.replace("？", "\n");
+			// text = text.replace("，", "，\n");
+			// text = text.replace("，", "，\n");
+			// text = text.replace("，", "，\n");
+			// text = text.replace("，", "，\n");
+			// text = text.replace("，", "，\n");
+		}
+		String[] lines = new String[] { text };
+		if (text.contains("\n")) {
+			lines = text.split("\n");
+		} else if (text.contains("`")) {
+			lines = text.split("`");
+		}
+		boolean cmd_SW_MAXIMIZE_MIN = false;
+		if (false) {
+			// cmd_c.executer(
+			// class_dir.get_path("D:\\gitHub\\java_ubuntu_windows\\cmd_c\\cmd_SW_SHOWMINIMIZED.exe"));
+			try {
+				cmd_SW_MAXIMIZE_MIN = FileUtils
+						.readLines(new File("D:\\gitHub\\java_ubuntu_windows\\cmd_c\\cmd_SW_MAXIMIZE_MIN.txt"), "utf8")
+						.get(0)
+						.equals("1");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (cmd_SW_MAXIMIZE_MIN) {
+				cmd_c.executer(
+						class_dir.get_path("D:\\gitHub\\java_ubuntu_windows\\cmd_c\\cmd_SW_MAXIMIZE.exe"));
+			}
+			cmd_c.executer(
+					class_dir.get_path("D:\\gitHub\\java_ubuntu_windows\\cmd_c\\cmd_position.exe.bat"));
+		}
+		for (String line : lines) {
+			line = line.trim();
+			if (line.length() > 0) {
+
+				if (containsHanScript.containChinese(line)) {
+					// System_out.println(line);
+					line = replace(line);
+					speech_bak(line, java_cpp.chinese);
+					zh_detail.speak(line);
+				} else {
+					boolean zh_read = false;
+					boolean show_read_en = true;
+					try {
+						show_read_en = FileUtils.readLines(class_dir.get_path(new File(
+								"D:\\gitHub\\java_ubuntu_windows\\bat\\read_zh_en_srt_checkbox.txt")),
+								"utf8").get(0).equals("1");
+
+						String dstData_zh = TransApi.getTransApi().getTransResult(line, "auto", "zh");
+						// System_out.println(dstData_zh);
+						dstData_zh = replace(dstData_zh);
+						speech_bak(dstData_zh, java_cpp.chinese);
+						zh_detail.speak(dstData_zh);
+						zh_read = true;
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if (show_read_en || !zh_read) {
+						// System_out.println(line);
+						line = replace(line);
+						speech_bak(line, java_cpp.english);
+					}
+				}
+			}
+		}
+		if (false) {
+			if (cmd_SW_MAXIMIZE_MIN) {
+				cmd_c.executer(
+						class_dir.get_path("D:\\gitHub\\java_ubuntu_windows\\cmd_c\\cmd_SW_SHOWMINIMIZED.exe"));
+			}
+		}
+	}
+
+	public static boolean is_show_horizantal = true;
+
+	public static String replace(String line) {
+		line = replace.replace_(line);
+		return line;
+	}
+
+	public static void speech_bak(String text, int en_zh) {
+
+		try {
+			text = text.replace("[音乐", "");
+			text = text.replace("[ 音乐", "");
+			text = replace(text);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (false) {
+			System_out.println(
+					// "speech_"+
+					text);
+			// System_out.println("speech_ en_zh="+en_zh);
+		}
+		String space_taxt = text;
+		if (containsHanScript.containChinese(space_taxt)) {
+			en_zh = java_cpp.chinese;
+			space_taxt = zh_feng_ci.printLine(text); // 中文分词
+			space_taxt = space_taxt.replace("  ", " ");
+			space_taxt = space_taxt.replace("  ", " ");
+			space_taxt = space_taxt.replace("  ", " ");
+			space_taxt = space_taxt.replace("  ", " ");
+			space_taxt = space_taxt.replace("  ", " ");
+			space_taxt = space_taxt.replace("  ", " ");
+			space_taxt = space_taxt.replace("  ", " ");
+		} else {
+			en_zh = java_cpp.english;
+		}
+		if (is_show_horizantal) {
+
+			// space_taxt = reverse(space_taxt);
+			if (false) {
+				space_taxt = StringUtils.center(space_taxt, 50);
+				show_horizantal(space_taxt);
+			}
+		} else {
+			space_taxt = reverse(space_taxt);
+			space_taxt = StringUtils.center(space_taxt, 164);
+			System_out.println(space_taxt);
+		}
+
+		space_taxt = "\n" +
+				space_taxt;
+		boolean read_text_under_mouse_loop_show = false;
+		try {
+			// throw new Exception("");
+			read_text_under_mouse_loop_show = FileUtils.readLines(
+					new java.io.File(
+							class_dir.get_path(
+									"D:\\gitHub\\java_ubuntu_windows\\c#_dotnet\\read_text_under_mouse_loop\\read_text_under_mouse_loop_show.txt")),
+					"utf8").get(0).equals("1");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		space_taxt = space_taxt.replace("\"", "'");
+		String[] args = { "\"" + space_taxt.trim() + "\"" };
+		if (read_text_under_mouse_loop_show) {
+			CmdExcuter.executerNewThread(
+					class_dir.get_path(
+							"D:\\gitHub\\java_ubuntu_windows\\c#_dotnet\\read_text_under_mouse_loop\\bin\\Debug\\read_text_under_mouse_loop_show.exe")
+					// "D:\\gitHub\\java_ubuntu_windows\\c#_dotnet\\read_text_under_mouse_loop\\read_text_under_mouse_loop.bat
+					// "
+					// + "\""+ space_taxt+"\""
+					, args);
+		}
+		// FileUtils.readFileToString(
+		// "", "utf8");
+		try {
+
+			if (FileUtils.readFileToString(
+					class_dir.get_path(
+							new File("D:\\gitHub\\java_ubuntu_windows\\src\\main\\java\\j\\java_cpp_speech.txt")),
+					StandardCharsets.UTF_8).equals("1")) {
+				// srt_zh_text_ajust_by_dot_for_youtube.should_pause = true;
+				if (srt_zh_text_ajust_by_dot_for_youtube.should_pause) {
+					CmdExcuter.executer(
+							class_dir.get_path(
+									"D:\\gitHub\\java_ubuntu_windows\\c#_dotnet\\autohotkey_read_screen\\space.exe"));
+				}
+				if (false) {
+					cmd_c.executer(
+							class_dir.get_path("D:\\gitHub\\java_ubuntu_windows\\cmd_c\\cmd_SW_MAXIMIZE.exe"));
+				}
+				speech_wraper.speech(text, en_zh);
+				// TransApi.zh_to_en_speach(text);
+				if (srt_zh_text_ajust_by_dot_for_youtube.should_pause) {
+					CmdExcuter.executer(
+							class_dir.get_path(
+									"D:\\gitHub\\java_ubuntu_windows\\c#_dotnet\\autohotkey_read_screen\\space.exe"));
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (read_text_under_mouse_loop_show) {
+			CmdExcuter.executer(class_dir.get_path(
+					"D:\\gitHub\\java_ubuntu_windows\\c#_dotnet\\read_text_under_mouse_loop\\read_text_under_mouse_loop_show_kill.bat"));
+		}
+	}
+
+	private static void show_horizantal(String space_taxt) {
+		if (false) {
+			return;
+		}
+		// CmdExcuter.executer("D:\\gitHub\\java_ubuntu_windows\\bat\\java_cls.bat");
+		// for (int i = 0; i < 150; i++) {
+		// // System_out.println("\n");
+		// }
+		// System_out.print("\033[H\033[2J");
+		// System_out.flush();
+		try {
+			// Runtime.getRuntime().exec("clear");
+			// new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+			if (false) {
+				new ProcessBuilder("cmd", "/c", "java_cls.bat").inheritIO().start().waitFor();
+				new ProcessBuilder("cmd", "/c",
+						class_dir.get_path("D:\\gitHub\\java_ubuntu_windows\\g\\cls\\hide_cursor.exe")).inheritIO()
+						.start().waitFor();
+				new ProcessBuilder("cmd", "/c", class_dir.get_path("D:\\gitHub\\java_ubuntu_windows\\g\\cls\\cls.exe"))
+						.inheritIO().start().waitFor();
+
+			}
+			// if (false)
+			// if (false)
+			if (false) {
+				new ProcessBuilder("cmd", "/c",
+						class_dir.get_path("D:\\gitHub\\java_ubuntu_windows\\g\\cls\\cls_cpp.exe")).inheritIO().start()
+						.waitFor();
+			}
+			// System_out.flush();
+			// System_out.print("\033\143");
+			// for(int clear = 0; clear < 1000; clear++)
+			// {
+			// System_out.println("\b") ;
+			// }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		space_taxt = space_taxt.trim();
+		int new_line = (34 - space_taxt.length()) / 2;
+		for (int i = 0; i < new_line; i++) {
+			System_out.println();
+		}
+		// System_out.println(space_taxt.length());
+		char prev_char = 0;
+
+		for (int i = 0; i < space_taxt.length(); i++) {
+			if (space_taxt.charAt(i) == '，') {
+				continue;
+			}
+			// if ((space_taxt.charAt(i)+"").equals("\n")) {
+			// System_out.print("\n");
+			// }
+			if (space_taxt.charAt(i) == ' ' && prev_char == ' ') {
+				prev_char = space_taxt.charAt(i);
+				// continue;
+			}
+			prev_char = space_taxt.charAt(i);
+			if (containsHanScript.containChinese(space_taxt.charAt(i) + "")
+					|| (space_taxt.charAt(i) == ' ')
+					|| 1 == 1) {
+				String start = "";
+				if (space_taxt.length() < 50 && i == 0) {
+					// start = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+				}
+				System_out.println(start + get_space() + " "
+						+ space_taxt.charAt(i)
+				// +i
+				);
+
+			}
+		}
+	}
+
+	public static String get_space() {
+		String space = "";
+		for (int i = 0; i <
+		// 15
+				2; i++) {
+			space += "   ";
+		}
+		// space = "";
+		return space;
+	}
+
+	private static String reverse(String space_text) {
+		space_text = space_text.replace("  ", " ");
+		StringBuffer sb = new StringBuffer();
+		if (false) {
+			if (space_text.contains(" ")) {
+				String[] split = space_text.split(" ");
+				for (int i = split.length - 1; i >= 0; i--) {
+					sb.append(split[i] + " ");
+				}
+				return sb.toString();
+			} else {
+				return space_text;
+			}
+		} else {
+			for (int i = space_text.length() - 1; i >= 0; i--) {
+				sb.append(space_text.charAt(i));
+			}
+			return sb.toString();
+		}
+	}
+
+	public static void speech1_(byte[] text, int en_zh) {
+		System_out.println(
+				// "speech1_"+
+				new String(text));
+		speech1(text, en_zh);
+	}
+
+	static {
+		System.load(class_dir.get_path("D:/gitHub/java_ubuntu_windows/dotnet/java_cpp1/x64/Debug/java_cpp1.dll"));
+		// D:\\gitHub\\java_ubuntu_windows\\dotnet\\java_cpp1\\Debug\\
+		// D:/gitHub/java_ubuntu_windows/dotnet/java_cpp1/Debug/
+		// D:\gitHub\java_ubuntu_windows\dotnet\java_cpp1\x64\Debug
+	}
+
+	public static int chinese = 1;
+	public static int english = 0;
+
+	public static void main(String[] args) throws Exception {
+		System_out.println("begin");
+		long begin = System.currentTimeMillis();
+		String s = "中";
+		byte[] bytes = s.getBytes();
+		String ba = bytesToHex(bytes);
+		System_out.println(ba);
+		System_out.println(new String(bytes));
+
+		speech1(bytes, chinese);
+
+		speech_wraper.speech(new String("中".getBytes("utf8")), chinese);
+		if (1 == 1) {
+			return;
+		}
+		long end = System.currentTimeMillis();
+		System_out.println((end - begin) * 1.0 / 1000);
+		for (int i = 0; i < 4; i++) {
+			begin = end;
+			speech_wraper.speech("test " + (i + 3), english);
+			end = System.currentTimeMillis();
+			System_out.println((end - begin) * 1.0 / 1000);
+		}
+		System_out.println("ok");
+	}
+
+	private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
+
+	public static String bytesToHex(byte[] bytes) {
+		char[] hexChars = new char[bytes.length * 2];
+		for (int j = 0; j < bytes.length; j++) {
+			int v = bytes[j] & 0xFF;
+			hexChars[j * 2] = HEX_ARRAY[v >>> 4];
+			hexChars[j * 2 + 1] = HEX_ARRAY[v & 0x0F];
+		}
+		return new String(hexChars);
+	}
+
+	public static boolean use_translate() {
+		try {
+			return FileUtils.readLines(new File(
+					class_dir.get_path("D:\\gitHub\\java_ubuntu_windows\\bat\\use_translate.txt")), "utf8")
+					.get(0)
+					.equals("1");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static void speech_parent(String text, int en_zh) {
+		text = text.trim();
+		if (text.length() == 0) {
+			return;
+		}
+		// File file = new File("D:\\speech_parent.txt");
+		// File file2 = new File("D:\\speech_parent2.txt");
+		// try {
+		// String speech_parent = FileUtils.readFileToString(file, "utf8");
+		// if (speech_parent.equals(text)) {
+		// return;
+		// }
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
+		// if (array_buf.contains(text)) {
+		// return;
+		// }
+		if (text.length() % 2 == 0) {
+			String str1 = text.substring(0, text.length() / 2);
+			String str2 = text.substring(text.length() / 2);
+			if (str1.equals(str2)) {
+				text = str1;
+			}
+		}
+		if (read_text_under_mouse_loop.beta_版_使用Unicode_utf8提供全球语言支持) {
+			if (en_zh==chinese) {
+				speech(text, en_zh);
+			} else {
+				speech(text, en_zh);
+			}
+			
+		} else {
+			if (en_zh==chinese) {
+				speech1(text.getBytes(), en_zh);
+			} else {
+				speech1(text.getBytes(), en_zh);
+			}		
+		}
+		
+		// try {
+		// FileUtils.write(file, text, "utf8");
+		// FileUtils.write(file2, text + "\n", "utf8", true);
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
+	}
+
+}
+// "C:\Program Files\Java\jdk1.7.0_80\bin\javac" java_cpp.java
+// "C:\Program Files\Java\jdk1.7.0_80\bin\javah.exe" java_cpp
+// javac -h . java_cpp.java

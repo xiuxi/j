@@ -1,0 +1,1476 @@
+
+package j;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.*;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import org.apache.commons.io.FileUtils;
+
+import com.luhuiguo.chinese.ChineseUtils;
+import java.util.concurrent.atomic.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
+
+import org.apache.commons.io.FileUtils;
+
+public class watch_mpc_hc_sound_srt_one {
+    static boolean pause = false;
+    static List<String> srt_list = new ArrayList<>();
+    static int read_zh_en = 1;
+    static List<String> dirs = new ArrayList<>();
+    static String prev_text = "";
+    static AtomicBoolean is_reading_en = new AtomicBoolean(false);
+    static AtomicBoolean is_reading_zh = new AtomicBoolean(false);
+    static List<String> history_read = new ArrayList<>();
+    static List<String> history_read_parts = new ArrayList<>();
+    static void code_center() {
+        try {
+            if (false) {
+                CmdExcuter.executer(
+                        class_dir.get_path(
+                                "D:/gitHub/java_ubuntu_windows/bat/notepad++/code_center.exe"));
+            }
+        } catch (Exception e2) {
+            write.throw_(e2);
+            e2.printStackTrace();
+        }
+    }
+    public static void speak2(String text) {
+        while (all_list.size() > 2) {
+            all_list.remove(0);
+        }
+
+        if (history_read.contains(text)) {
+            return;
+        }
+        if (text.length() > 3) {
+            if (text.charAt(1) == ':') {
+                return;
+            }
+        }
+        // write.throw_(text);
+        history_read.add(text);
+        while (history_read.size() > 3) {
+            history_read.remove(0);
+        }
+        while (history_read_parts.size() > 10) {
+            history_read_parts.remove(0);
+        }
+        // write.throw_(text);
+        text = text.trim();
+        if (text.equals("c window s system32 cmd exe")) {
+            return;
+        }
+        // write.text(text);
+        if (text.startsWith("o ")) {
+            text = text.substring(2);
+        }
+        if (text.startsWith("//@o ")) {
+            text = text.substring("//@o ".length());
+        }
+        {
+            int index = text.indexOf("//@");
+            if (index > 0) {
+                String[] parts = text.split("//@");
+                if (parts.length == 2) {
+                    String part1 = parts[0];
+                    String part2 = parts[1];
+                    if (containsHanScript.containChinese(part2) && !containsHanScript.containChinese(part1)) {
+                        text = part2 + "//@" + part1;
+                    }
+                }
+            }
+        }
+        text = text.replaceAll("\\.+", ".");
+        text = text.toLowerCase();
+        text = text.replace("c++", " ");
+        text = text.replace(".done", "");
+        text = text.replace('@', ' ');
+        text = replace.one_space(text);
+        String[] lines = text.split("//", -1);
+        String new_str = "";
+        for (String zh__ : lines) {
+            //write.text("__" + zh__);
+            if (containsHanScript
+                    .containChinese(zh__)) {
+                
+                zh__ = zh__.trim();
+                String zh3 = replace.remove_number(zh__).replace('.', ' ').trim();
+                if (zh3.equals("选项")
+                        || zh3.equals("示例")
+                        || zh3.equals("例子")) {
+                    continue;
+                }
+                //write.text(zh3);
+                if (zh__.length() > 0) {
+                    if (true) {
+                        String ens = "";
+                        String zhs = "";
+                        for (int i = 0; i < zh__.length(); i++) {
+                            char ch = zh__.charAt(i);
+                            String c = "" + ch;
+                            String en_ = c.replaceAll("[^A-Za-z]", " ");
+                            if (containsHanScript.containChinese(c)) {
+                                zhs += c;
+                            } else {
+                                zhs += " ";
+                            }
+                            ens += en_;
+                        }
+                        String zh = "";
+                        String en = "";
+                        boolean en_contains = false;
+
+                        int zh_start = 0;
+                        for (int i = 0; i < ens.length(); i++) {
+
+                            if (ens.charAt(i) == ' ' && zhs.charAt(i) == ' ') {
+                                en += " ";
+                                continue;
+                            }
+                            if (ens.charAt(i) != ' ') { // 包含英文
+                                en += "" + ens.charAt(i);
+                                zh_start = i;
+                                if (zh.length() > 0) {
+                                    //write.throw_(zh);
+                                    // new_str += "z:"+zh+"\n";
+                                    if (!all_list.contains(zh)) {
+                                        new_str += "z:"+zh+"\n";
+                                    }
+                                    all_list.add(zh);
+                                    if (false)
+                                    java_cpp.speech1zh(
+                                            zh.getBytes(),
+                                            java_cpp.chinese,
+                                            4, 100);
+                                    // System.out.println(zh);
+                                }
+
+                                zh = "";
+                            } else {
+                                zh += "" + zhs.charAt(i);
+                                if (en.length() > 0) {
+                                    // System.out.println(en);
+                                    //write.throw_(en);
+                                    // new_str += "e:"+en+"\n";
+                                    if (!all_list.contains(en)) {
+                                        new_str += "e:"+en+"\n";
+                                    }
+                                    all_list.add(en);
+                                    if (false)
+                                    java_cpp.speech1zh(
+                                            en.getBytes(),
+                                            java_cpp.english,
+                                            4, 100);
+                                }
+                                en = "";
+                            }
+                        }
+                        if (en.trim().length() > 0) {
+                            //write.throw_(en);
+                            // new_str += "e:"+en+"\n";
+                            if (!all_list.contains(en)) {
+                                new_str += "e:"+en+"\n";
+                            }
+                            all_list.add(en);
+                            if (false)
+                            java_cpp.speech1zh(
+                                    en.getBytes(),
+                                    java_cpp.english,
+                                    4, 100);
+                        }
+                        if (zh.trim().length() > 0) {
+                            //write.throw_(zh);
+                            // new_str += "z:"+zh+"\n";
+                            if (!all_list.contains(zh)) {
+                                new_str += "z:"+zh+"\n";
+                            }
+                            all_list.add(zh);
+                            if (false)
+                            java_cpp.speech1zh(
+                                    zh.getBytes(),
+                                    java_cpp.chinese,
+                                    4, 100);
+                        }
+                    } else {
+                        String zh2 = zh__;
+                        zh__ = replace.remove_number(zh__);
+                        //write.throw_(zh__);
+                        // new_str += "z:"+zh__+"\n";
+                        if (!all_list.contains(zh__)) {
+                            new_str += "z:"+zh__+"\n";
+                        }
+                        all_list.add(zh__);
+                        if (false)
+                        java_cpp.speech1zh(
+                                zh__.getBytes(),
+                                java_cpp.chinese,
+                                4, 100);
+                        String en = zh2.replaceAll("[^A-Za-z]", " ");
+                        //write.throw_(en);
+                        // new_str += "e:"+en+"\n";
+                        if (!all_list.contains(en)) {
+                            new_str += "e:"+en+"\n";
+                        }
+                        all_list.add(en);
+                        if (false)
+                        java_cpp.speech1zh(
+                                en.getBytes(),
+                                java_cpp.english,
+                                4, 100);
+                    }
+                }
+                
+            } else {
+                zh__ = replace.remove_number(zh__);
+                zh__ = zh__.trim();
+                if ("options".equals(zh__)
+                        || zh__.equals("examples")
+                        || zh__.equals("example")) {
+                    continue;
+                }
+                if (zh__.trim().length() > 0) {
+                    //write.throw_(zh__);
+                    // new_str += "e:"+zh__+"\n";
+                    if (!all_list.contains(zh__)) {
+                        new_str += "e:"+zh__+"\n";
+                    }
+                    all_list.add(zh__);
+                    if(false)
+                    java_cpp.speech1zh(
+                            zh__.getBytes(),
+                            java_cpp.english,
+                            4, 100);
+                }
+            }
+        }
+        if (new_str.length() > 0) {
+            if (from_mp4) {
+                new_str = new_str.replaceAll("[0-9A-Za-z_\\\\*]", " ");
+                new_str = new_str.replace('\n', ' ');
+                new_str = new_str.trim();
+                if (new_str.length() <= 0) {
+                    return;
+                }
+                new_str = "z:"+new_str;
+                new_str = new_str.trim();
+            }
+            java_cpp.speech1zhen(
+                        new_str.getBytes(),
+                        java_cpp.chinese,
+                        4, 100);
+        }
+    }
+    static boolean from_mp4 = false;
+    static List<String> all_list = new ArrayList<>();
+
+    static void code_exe_read_next_line_exe() {
+        try {
+            if (false) {
+                CmdExcuter.executer(
+                        class_dir.get_path(
+                                "D:/gitHub/java_ubuntu_windows/bat/notepad++/notepad++_read_next_line.exe"));
+            }
+        } catch (Exception e2) {
+            write.throw_(e2);
+            e2.printStackTrace();
+        }
+        try {
+            CmdExcuter.executer(
+                    class_dir.get_path(
+                            "D:/gitHub/java_ubuntu_windows/bat/notepad++/code.exe_read_next_line.exe"));
+        } catch (Exception e2) {
+            write.throw_(e2);
+            e2.printStackTrace();
+        }
+        try {
+            if (false) {
+                CmdExcuter.executer(
+                        class_dir.get_path(
+                                "D:/gitHub/java_ubuntu_windows/bat/notepad++/eclipse.exe_read_next_line.exe"));
+            }
+        } catch (Exception e2) {
+            write.throw_(e2);
+            e2.printStackTrace();
+        }
+    }
+
+    static AtomicBoolean has_read_english = new AtomicBoolean();
+    static String text2 = "";
+    static  WatchKey wk = null;
+    public static AtomicReference<Long> update_time = new AtomicReference<>();
+    static AtomicReference<Long> tryCount = new AtomicReference<>();
+    public static void main(String[] args) throws Exception {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(2000);
+                        long pass = System.currentTimeMillis() - update_time.get();
+                        if (pass > 30 * 1000) {
+                            if (wk != null) {
+                                // System.out.println("reset");
+                                wk.reset();
+                            }
+                        }
+                        if (pass > 3 * 60 * 1000) {
+                            
+                            FileUtils.write(new File("C:\\mpc-hc\\srt_tmp\\time.txt"), ""+pass, "utf8");
+                            if (tryCount.get() > 2) {
+                                System.out.println(pass);
+                                System1.exit(0);
+                            }
+                            tryCount.set(tryCount.get()+1);
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+            }
+        }).start();
+        main1(args);
+        main2(args);
+    }
+    public static void main2(String[] args) throws Exception {
+        update_time.set(System.currentTimeMillis());
+        tryCount.set(new Long(0));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(2000);
+                        long pass = System.currentTimeMillis() - update_time.get();
+                        if (pass > 30 * 1000) {
+                            if (wk != null) {
+                                // System.out.println("reset");
+                                wk.reset();
+                            }
+                        }
+                        if (pass > 3 * 60 * 1000) {
+                            
+                            FileUtils.write(new File("C:\\mpc-hc\\srt_tmp\\time.txt"), ""+pass, "utf8");
+                            if (tryCount.get() > 2) {
+                                System.out.println(pass);
+                                System1.exit(0);
+                            }
+                            tryCount.set(tryCount.get()+1);
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+            }
+        }).start();
+        init.init(watch_mpc_hc_sound_srt_one.class);
+        list_dirs(new File(("C:\\mpc-hc\\srt\\")));
+        String[] dirs1 = new String[dirs.size()];
+        for (int i = 0; i < dirs.size(); i++) {
+            dirs1[i] = dirs.get(i);
+        }
+        String prev_text = "";
+        while (true) {
+            try {
+                String dir1 = ("C:\\mpc-hc\\srt\\");
+                final Path path =
+
+                        FileSystems.getDefault().getPath(
+                                dir1);
+                int prev_text_index = 0;
+                AtomicReference<String> atomic_text = new AtomicReference<>("");
+                AtomicReference<String> atomic_text_prev = new AtomicReference<>("");
+                AtomicReference<String> prev_atomic_text = new AtomicReference<>("");
+                Map<String, List<String>> srt_lines_map = new HashMap<>();
+                try (final WatchService watchService = FileSystems.getDefault().newWatchService()) {
+                    path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+                    while (true) {
+                        // final WatchKey wk = watchService.take();
+                        wk = watchService.take();
+                        for (WatchEvent<?> event : wk.pollEvents()) {
+                            try {
+                                tryCount.set(new Long(0));
+                                update_time.set(System.currentTimeMillis());
+                                final Path changed = (Path) event.context();
+                                {
+                                    from_mp4 = false;
+                                    String changed_file = changed.toString();
+                                    if (!changed_file.equals("srt_line.txt")) {
+                                        if (changed_file.equals("clipboard.txt")) {
+                                            File file1 = new File(dir1, changed.toString());
+                                            // List<String> lines = FileUtils.readLines(file1, "utf8");
+                                            // for (String line : lines) {
+                                            //     speech3(line);
+                                            // }
+                                            text2 = FileUtils.readFileToString(file1, "utf8");
+                                            if (!prev_text.equals(text2)) {
+                                                cmd_cls.cls();
+                                                if (text2.endsWith("_@_")) {
+                                                    try {
+                                                        atomic_text.set(text2);
+                                                        if (!prev_atomic_text.get().equals(atomic_text.get())
+                                                                && !containsHanScript.containChinese(text2)) {
+                                                            if (!is_reading_en.get()) {
+                                                                is_reading_en.set(true);
+                                                                new Thread(new Runnable() {
+                                                                    @Override
+                                                                    public void run() {
+                                                                        try {
+                                                                            if (//!is_reading_en.get() &&
+                                                                            !is_reading_zh
+                                                                                    .get()) {
+
+                                                                                String zh = text2;//GoogleTranslateUtil.to_zh(text);
+                                                                                if (zh.length() - "_@_".length() >= 0) {
+                                                                                    zh = zh.substring(0,
+                                                                                        zh.length() - "_@_".length());
+                                                                                }
+                                                                                zh = zh.replace("_", " ");
+                                                                                zh = zh.replace('*', ' ');
+                                                                                // speech(zh);
+                                                                                if (read_english.True()) {
+                                                                                    speak2(zh);
+                                                                                }
+                                                                            }
+                                                                        } catch (Exception e) {
+                                                                            write.throw_(e);
+                                                                            e.printStackTrace();
+                                                                        } finally {
+                                                                            is_reading_en.set(false);
+                                                                        }
+                                                                    }
+                                                                }).start();
+
+                                                            }
+
+                                                            new Thread(new Runnable() {
+
+                                                                @Override
+                                                                public void run() {
+                                                                    try {
+                                                                        String en = text2;
+                                                                        if (en.length() - "_@_".length() >= 0) {
+                                                                            en = en.substring(0,
+                                                                            en.length() - "_@_".length());
+                                                                        }
+                                                                        
+                                                                        String zh = GoogleTranslateUtil.to_zh(en);
+                                                                        /*while (is_reading_en.get()) {
+                                                                            Thread.sleep(20);
+                                                                        }*/
+                                                                        if (!is_reading_en.get() && !is_reading_zh
+                                                                                .get()) {
+                                                                            // speech(zh);
+                                                                            is_reading_zh.set(true);
+                                                                            zh = zh.replace('*', ' ');
+                                                                            speak2(zh);
+                                                                        }
+                                                                    } catch (Exception e) {
+                                                                         write.throw_(e);
+                                                                        e.printStackTrace();
+                                                                    } finally {
+                                                                        is_reading_zh.set(false);
+                                                                    }
+                                                                }
+                                                            }).start();
+                                                        }
+                                                        prev_atomic_text.set(text2);
+                                                    } catch (Exception e) {
+                                                        write.throw_(e);
+                                                        e.printStackTrace();
+                                                    }
+                                                    boolean valid = wk.reset();
+                                                    continue;
+                                                } else if (text2.indexOf("_@2_") >= 0) {
+                                                    code_center();
+                                                    if (text2.length() > 0
+                                                            && (text2.charAt(0) == '@'
+                                                                    || text2.replace("_@2_", "").indexOf('@') >= 0
+                                                                    || text2.endsWith("//@"))
+                                                            || auto_read_next()) {
+                                                        try {
+                                                            
+                                                            atomic_text.set(text2);
+                                                            String zh = text2;
+                                                            int index = zh.indexOf("_@2_");
+                                                            if (index >= 0) {
+                                                                zh = zh.substring(0, index);
+                                                            }
+                                                            speak2(zh);
+
+                                                        } finally {
+
+                                                            is_reading_zh.set(false);
+                                                            code_exe_read_next_line_exe();
+
+                                                        }
+                                                    } else {
+                                                        try {
+                                                            // String text2 = text2;
+                                                            // write.throw_("3=" + text2);
+                                                            atomic_text.set(text2);
+
+                                                            if (!prev_atomic_text.get().equals(atomic_text.get())
+                                                            // && 
+                                                            ) {
+                                                                if (!containsHanScript.containChinese(text2)) {
+                                                                    boolean is_empty_read = false;
+                                                                    {
+                                                                        int index4 = text2.indexOf("_@2_");
+                                                                        String en = text2;
+                                                                        if (index4>=0) {
+                                                                            text2.substring(0, index4);
+                                                                        }
+                                                                        en = en.replace("(", " ");
+                                                                        en = en.replace(")", " ");
+                                                                        en = en.replace("{", " ");
+                                                                        en = en.replace("}", " ");
+                                                                        en = en.replace(";", " ");
+                                                                        en = en.replace(":", " ");
+                                                                        en = en.replace(",", " ");
+                                                                        en = en.trim();
+                                                                        if (en.equals("\r\n")
+                                                                                // || en.equals("\r\n")
+                                                                                || en.trim().length() < 3
+
+                                                                        ) {
+                                                                            code_exe_read_next_line_exe();
+                                                                            is_empty_read = true;
+                                                                            atomic_text_prev.set(text2);
+                                                                        }
+                                                                    }
+                                                                    has_read_english.set(false);
+                                                                    if (!is_empty_read) {
+                                                                        new Thread(new Runnable() {
+                                                                            @Override
+                                                                            public void run() {
+                                                                                try {
+                                                                                    if (text2.indexOf(
+                                                                                            "code-runner.executorMapByGlob") >= 0) {
+                                                                                        return;
+                                                                                    }
+                                                                                    if (text2.equals(
+                                                                                            atomic_text_prev.get())) {
+                                                                                        atomic_text_prev.set(text2);
+                                                                                        return;
+                                                                                    }
+                                                                                    atomic_text_prev.set(text2);
+                                                                                    text2 = text2.replace("xxx", "");
+                                                                                    // String en = text.substring(0, text.length() - "_@2_".length());
+                                                                                    int index4 = text2.indexOf("_@2_");
+                                                                                    String en = text2;
+                                                                                    if (index4 >=0) {
+                                                                                        en = en.substring(0,
+                                                                                                index4);
+                                                                                    }
+                                                                                    String str1 = en;
+                                                                                    en = replace.replace_en(en);
+                                                                                    en = en.replace("\r\n", "\n");
+                                                                                    if (en.endsWith("\n")) {
+                                                                                        en = en.substring(0,
+                                                                                                en.length() - 1);
+                                                                                    }
+                                                                                    if (en.trim().length() > 0) {
+                                                                                        en = en.replace("_", " ");
+                                                                                        en = upper_add_space
+                                                                                                .addSpace(en);
+                                                                                        en = en.replace("::", " ");
+                                                                                        en = en.replace("<<", " ");
+                                                                                        en = en.replace("<", " ");
+                                                                                        en = en.replace(">", " ");
+                                                                                        en = en.replace("(", " ");
+                                                                                        en = en.replace(")", " ");
+                                                                                        en = en.replace("{", " ");
+                                                                                        en = en.replace("}", " ");
+                                                                                        en = en.replace('.', ' ');
+                                                                                        en = en.replace('*', ' ');
+                                                                                        en = en.replace(";", " ; ");
+                                                                                        String zh = GoogleTranslateUtil
+                                                                                                .to_zh(en);
+                                                                                        /*while (is_reading_en.get()) {
+                                                                                            Thread.sleep(20);
+                                                                                        }*/
+                                                                                        if (!is_reading_en.get()
+                                                                                                && !is_reading_zh
+                                                                                                        .get()) {
+                                                                                            // speech(zh);
+                                                                                            is_reading_zh.set(true);
+                                                                                            zh = zh.replace('*', ' ');
+                                                                                            // FileUtils.write(
+                                                                                            //         new File("d:\\aaa.txt"),
+                                                                                            //         zh, "utf8", true);
+                                                                                            if (zh.indexOf(
+                                                                                                    "code-runner.executorMapByGlob") > 0) {
+                                                                                                return;
+                                                                                            }
+                                                                                            if (!has_read_english
+                                                                                                    .get()) {
+                                                                                                // str1 = str1.replace('/',
+                                                                                                //         ' ');
+                                                                                                if (read_english
+                                                                                                        .True()) {
+                                                                                                    speak2(str1);
+                                                                                                }
+                                                                                                has_read_english
+                                                                                                        .set(true);
+                                                                                            }
+
+                                                                                            speak2(zh);
+                                                                                        }
+                                                                                    }
+                                                                                } catch (Exception e) {
+                                                                                    write.throw_(e);
+                                                                                    e.printStackTrace();
+                                                                                } finally {
+
+                                                                                    is_reading_zh.set(false);
+                                                                                    code_exe_read_next_line_exe();
+
+                                                                                }
+                                                                            }
+                                                                        }).start();
+                                                                        new Thread(new Runnable() {
+                                                                            @Override
+                                                                            public void run() {
+                                                                                try {
+                                                                                    if (text2.indexOf(
+                                                                                            "code-runner.executorMapByGlob") >= 0) {
+                                                                                        return;
+                                                                                    }
+                                                                                    if (!is_reading_en.get()
+                                                                                            && !is_reading_zh
+                                                                                                    .get()) {
+                                                                                        is_reading_en.set(true);
+                                                                                        text2 = text2.replace("xxx",
+                                                                                                "");
+                                                                                        String zh = text2;//GoogleTranslateUtil.to_zh(text);
+                                                                                        // zh = zh.substring(0, zh.length() - "_@2_".length());
+                                                                                        int index4 = text2
+                                                                                                .indexOf("_@2_");
+                                                                                        if (index4 > 0) {
+                                                                                            zh = zh.substring(0, index4);
+                                                                                        }
+                                                                                        zh = replace.replace_en(zh);
+                                                                                        zh = zh.replace("_", " ");
+                                                                                        zh = zh.replace('*', ' ');
+                                                                                        // speech(zh);
+                                                                                        // FileUtils.write(new File("d:\\aaa.txt"),
+                                                                                        //         zh, "utf8", true);
+                                                                                        if (zh.indexOf(
+                                                                                                "code-runner.executorMapByGlob") > 0) {
+                                                                                            return;
+                                                                                        }
+                                                                                        if (!has_read_english.get()) {
+                                                                                            has_read_english.set(true);
+                                                                                            // zh = zh.replace('/', ' ');
+                                                                                            if (read_english.True()) {
+                                                                                                speak2(zh);
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                } catch (Exception e) {
+                                                                                    write.throw_(e);
+                                                                                    e.printStackTrace();
+                                                                                } finally {
+                                                                                    is_reading_en.set(false);
+                                                                                }
+                                                                            }
+                                                                        }).start();
+                                                                    }
+
+                                                                } else {
+                                                                    if (text2.startsWith("空空行")) {
+                                                                        text2 = text2.substring("空空行".length());
+                                                                    }
+                                                                    new Thread(new Runnable() {
+                                                                        @Override
+                                                                        public void run() {
+                                                                            try {
+                                                                                if (text2.indexOf(
+                                                                                        "code-runner.executorMapByGlob") >= 0) {
+                                                                                    return;
+                                                                                }
+                                                                                // write.text("2=" + text2);
+                                                                                String zh = text2;
+                                                                                int index4 = text2.indexOf("_@2_");
+                                                                                if (index4 >= 0) {
+                                                                                    zh = zh.substring(0, index4);
+                                                                                }
+                                                                                if (zh.indexOf(
+                                                                                        "code-runner.executorMapByGlob") > 0) {
+                                                                                    return;
+                                                                                }
+                                                                                int zh_en_index = zh.indexOf("`");
+                                                                                if (zh_en_index > 0) {
+                                                                                    String en = zh
+                                                                                            .substring(zh_en_index);
+                                                                                    zh = zh.substring(0, zh_en_index);
+                                                                                    speak2(zh);
+                                                                                    zh = en;
+                                                                                    speak2(zh);
+
+                                                                                } else {
+                                                                                    // write.text("1=" + zh);
+                                                                                    speak2(zh);
+                                                                                }
+
+                                                                            } catch (Exception e2) {
+                                                                                write.throw_(e2);
+                                                                                e2.printStackTrace();
+                                                                            } finally {
+                                                                                is_reading_zh.set(false);
+
+                                                                                code_exe_read_next_line_exe();
+                                                                            }
+                                                                        }
+
+                                                                    }).start();
+                                                                }
+                                                            } else {
+                                                                if (false) {
+                                                                    System.out.println("a");
+                                                                }
+                                                            }
+                                                            prev_atomic_text.set(text2);
+                                                        } catch (Exception e) {
+                                                            write.throw_(e);
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
+                                                    boolean valid = wk
+                                                            .reset();
+                                                    continue;
+                                                }
+                                                if (false) {
+                                                    System.out.println(pin_yin_chinese2pinyin2.to_pin_yin(text2));
+                                                    System.out.println(
+                                                            zh_feng_ci.printLine(ChineseUtils.toTraditional(text2)));
+                                                }
+                                                prev_text = text2;
+                                            }
+
+                                        }
+                                        // code_center();
+                                        boolean valid = wk
+                                                .reset();
+                                        continue;
+                                    }
+                                }
+                                if (false) {
+                                    play();
+                                } else {
+                                    CmdExcuter.executer(class_dir
+                                            .get_path("D:/gitHub/java_ubuntu_windows/autohotkey/mpc-hc.exe.pause.exe"));
+                                }
+                                File file1 = new File(dir1, changed.toString());
+                                List<String> lines = FileUtils.readLines(file1, "gbk");
+                                srt_list.clear();
+                                if (lines.size() >= 2) {
+                                    String srt_path = lines.get(0);
+
+                                    if (srt_path.trim().length() == 0) {
+                                        String all_text = lines.get(2);
+                                        srt_list.add(all_text);
+                                        speech(all_text);
+
+                                    } else {
+                                        if (srt_path.endsWith(".txt")) {
+                                            srt_path = srt_path.substring(0, srt_path.length() - ".txt".length());
+                                        }
+                                        List<String> srt_lines_ = srt_lines_map.get(srt_path);
+                                        if (srt_lines_ == null) {
+                                            List<String> srt_lines___ = new ArrayList<>();
+                                            List<String> srt_lines__ = FileUtils.readLines(new File(srt_path), "utf8");
+                                            for (int i = 0; i < srt_lines__.size(); i++) {
+                                                String line = srt_lines__.get(i);
+                                                if (srt.srt(line) && i + 1 < srt_lines__.size()) {
+                                                    srt_lines___.add(srt_lines__.get(i + 1));
+                                                }
+                                            }
+                                            srt_lines_map.put(srt_path, srt_lines___);
+                                            srt_lines_ = srt_lines___;
+                                            prev_text_index = 0;
+                                        }
+                                        if (srt_lines_ != null) {
+                                            String all_text = "";
+                                            int current_index = Integer.parseInt(lines.get(1));
+                                            if (prev_text_index == 0) {
+                                                prev_text_index = current_index;
+                                            }
+                                            String text = srt_lines_.get(current_index);
+                                            if (current_index - prev_text_index > 1) {
+                                                prev_text_index = current_index - 1;
+                                            }
+                                            if (prev_text_index < current_index) {
+                                                for (int i = prev_text_index; i < current_index
+                                                        && i < srt_lines_.size(); i++) {
+                                                    String txt = srt_lines_.get(i);
+                                                    srt_list.add(txt);
+                                                    int index = txt.indexOf("`");
+                                                    if (index > 0 && false) {
+                                                        txt = txt.substring(0, index);
+                                                    }
+                                                    all_text += txt + "\n";
+                                                }
+                                            }
+                                            srt_list.add(text);
+                                            int index = text.indexOf("`");
+                                            if (index > 0 && false) {
+                                                text = text.substring(0, index);
+                                            }
+                                            all_text += text;
+                                            prev_text_index = current_index;
+                                            prev_text_index += 1;
+                                            // write.text("a1=" + all_text);
+                                            if (false) {
+                                                speech(all_text);
+                                            } else {
+                                                from_mp4 = true;
+                                                speak2(all_text);
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                                write.throw_(e);
+                                e.printStackTrace();
+                            }
+
+                            play();
+                            wk.reset();
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                write.throw_(e);
+                wk.reset();
+                System.out.println("error");
+                e.printStackTrace();
+            }
+        }
+    
+    }
+    public static void main1(String[] args) throws Exception {
+        update_time.set(System.currentTimeMillis());
+        tryCount.set(new Long(0));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(2000);
+                        long pass = System.currentTimeMillis() - update_time.get();
+                        if (pass > 30 * 1000) {
+                            if (wk != null) {
+                                // System.out.println("reset");
+                                wk.reset();
+                            }
+                        }
+                        if (pass > 3 * 60 * 1000) {
+                            
+                            FileUtils.write(new File("C:\\mpc-hc\\srt_tmp\\time.txt"), ""+pass, "utf8");
+                            if (tryCount.get() > 2) {
+                                System.out.println(pass);
+                                System1.exit(0);
+                            }
+                            tryCount.set(tryCount.get()+1);
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+            }
+        }).start();
+        init.init(watch_mpc_hc_sound_srt_one.class);
+        list_dirs(new File(("C:\\mpc-hc\\srt\\")));
+        String[] dirs1 = new String[dirs.size()];
+        for (int i = 0; i < dirs.size(); i++) {
+            dirs1[i] = dirs.get(i);
+        }
+        String prev_text = "";
+        while (true) {
+            try {
+                String dir1 = ("C:\\mpc-hc\\srt\\");
+                final Path path =
+
+                        FileSystems.getDefault().getPath(
+                                dir1);
+                int prev_text_index = 0;
+                AtomicReference<String> atomic_text = new AtomicReference<>("");
+                AtomicReference<String> atomic_text_prev = new AtomicReference<>("");
+                AtomicReference<String> prev_atomic_text = new AtomicReference<>("");
+                Map<String, List<String>> srt_lines_map = new HashMap<>();
+                try (final WatchService watchService = FileSystems.getDefault().newWatchService()) {
+                    path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+                    while (true) {
+                        // final WatchKey wk = watchService.take();
+                        wk = watchService.take();
+                        for (WatchEvent<?> event : wk.pollEvents()) {
+                            try {
+                                tryCount.set(new Long(0));
+                                update_time.set(System.currentTimeMillis());
+                                final Path changed = (Path) event.context();
+                                {
+                                    from_mp4 = false;
+                                    String changed_file = changed.toString();
+                                    if (!changed_file.equals("srt_line.txt")) {
+                                        if (changed_file.equals("clipboard.txt")) {
+                                            File file1 = new File(dir1, changed.toString());
+                                            // List<String> lines = FileUtils.readLines(file1, "utf8");
+                                            // for (String line : lines) {
+                                            //     speech3(line);
+                                            // }
+                                            text2 = FileUtils.readFileToString(file1, "utf8");
+                                            if (!prev_text.equals(text2)) {
+                                                cmd_cls.cls();
+                                                if (text2.endsWith("_@_")) {
+                                                    try {
+                                                        atomic_text.set(text2);
+                                                        if (!prev_atomic_text.get().equals(atomic_text.get())
+                                                                && !containsHanScript.containChinese(text2)) {
+                                                            if (!is_reading_en.get()) {
+                                                                is_reading_en.set(true);
+                                                                new Thread(new Runnable() {
+                                                                    @Override
+                                                                    public void run() {
+                                                                        try {
+                                                                            if (//!is_reading_en.get() &&
+                                                                            !is_reading_zh
+                                                                                    .get()) {
+
+                                                                                String zh = text2;//GoogleTranslateUtil.to_zh(text);
+                                                                                if (zh.length() - "_@_".length() >= 0) {
+                                                                                    zh = zh.substring(0,
+                                                                                        zh.length() - "_@_".length());
+                                                                                }
+                                                                                zh = zh.replace("_", " ");
+                                                                                zh = zh.replace('*', ' ');
+                                                                                // speech(zh);
+                                                                                if (read_english.True()) {
+                                                                                    speak2(zh);
+                                                                                }
+                                                                            }
+                                                                        } catch (Exception e) {
+                                                                            write.throw_(e);
+                                                                            e.printStackTrace();
+                                                                        } finally {
+                                                                            is_reading_en.set(false);
+                                                                        }
+                                                                    }
+                                                                }).start();
+
+                                                            }
+
+                                                            new Thread(new Runnable() {
+
+                                                                @Override
+                                                                public void run() {
+                                                                    try {
+                                                                        String en = text2;
+                                                                        if (en.length() - "_@_".length() >= 0) {
+                                                                            en = en.substring(0,
+                                                                            en.length() - "_@_".length());
+                                                                        }
+                                                                        
+                                                                        String zh = GoogleTranslateUtil.to_zh(en);
+                                                                        /*while (is_reading_en.get()) {
+                                                                            Thread.sleep(20);
+                                                                        }*/
+                                                                        if (!is_reading_en.get() && !is_reading_zh
+                                                                                .get()) {
+                                                                            // speech(zh);
+                                                                            is_reading_zh.set(true);
+                                                                            zh = zh.replace('*', ' ');
+                                                                            speak2(zh);
+                                                                        }
+                                                                    } catch (Exception e) {
+                                                                         write.throw_(e);
+                                                                        e.printStackTrace();
+                                                                    } finally {
+                                                                        is_reading_zh.set(false);
+                                                                    }
+                                                                }
+                                                            }).start();
+                                                        }
+                                                        prev_atomic_text.set(text2);
+                                                    } catch (Exception e) {
+                                                        write.throw_(e);
+                                                        e.printStackTrace();
+                                                    }
+                                                    boolean valid = wk.reset();
+                                                    continue;
+                                                } else if (text2.indexOf("_@2_") >= 0) {
+                                                    code_center();
+                                                    if (text2.length() > 0
+                                                            && (text2.charAt(0) == '@'
+                                                                    || text2.replace("_@2_", "").indexOf('@') >= 0
+                                                                    || text2.endsWith("//@"))
+                                                            || auto_read_next()) {
+                                                        try {
+                                                            
+                                                            atomic_text.set(text2);
+                                                            String zh = text2;
+                                                            int index = zh.indexOf("_@2_");
+                                                            if (index >= 0) {
+                                                                zh = zh.substring(0, index);
+                                                            }
+                                                            speak2(zh);
+
+                                                        } finally {
+
+                                                            is_reading_zh.set(false);
+                                                            code_exe_read_next_line_exe();
+
+                                                        }
+                                                    } else {
+                                                        try {
+                                                            // String text2 = text2;
+                                                            // write.throw_("3=" + text2);
+                                                            atomic_text.set(text2);
+
+                                                            if (!prev_atomic_text.get().equals(atomic_text.get())
+                                                            // && 
+                                                            ) {
+                                                                if (!containsHanScript.containChinese(text2)) {
+                                                                    boolean is_empty_read = false;
+                                                                    {
+                                                                        int index4 = text2.indexOf("_@2_");
+                                                                        String en = text2;
+                                                                        if (index4>=0) {
+                                                                            text2.substring(0, index4);
+                                                                        }
+                                                                        en = en.replace("(", " ");
+                                                                        en = en.replace(")", " ");
+                                                                        en = en.replace("{", " ");
+                                                                        en = en.replace("}", " ");
+                                                                        en = en.replace(";", " ");
+                                                                        en = en.replace(":", " ");
+                                                                        en = en.replace(",", " ");
+                                                                        en = en.trim();
+                                                                        if (en.equals("\r\n")
+                                                                                // || en.equals("\r\n")
+                                                                                || en.trim().length() < 3
+
+                                                                        ) {
+                                                                            code_exe_read_next_line_exe();
+                                                                            is_empty_read = true;
+                                                                            atomic_text_prev.set(text2);
+                                                                        }
+                                                                    }
+                                                                    has_read_english.set(false);
+                                                                    if (!is_empty_read) {
+                                                                        new Thread(new Runnable() {
+                                                                            @Override
+                                                                            public void run() {
+                                                                                try {
+                                                                                    if (text2.indexOf(
+                                                                                            "code-runner.executorMapByGlob") >= 0) {
+                                                                                        return;
+                                                                                    }
+                                                                                    if (text2.equals(
+                                                                                            atomic_text_prev.get())) {
+                                                                                        atomic_text_prev.set(text2);
+                                                                                        return;
+                                                                                    }
+                                                                                    atomic_text_prev.set(text2);
+                                                                                    text2 = text2.replace("xxx", "");
+                                                                                    // String en = text.substring(0, text.length() - "_@2_".length());
+                                                                                    int index4 = text2.indexOf("_@2_");
+                                                                                    String en = text2;
+                                                                                    if (index4 >=0) {
+                                                                                        en = en.substring(0,
+                                                                                                index4);
+                                                                                    }
+                                                                                    String str1 = en;
+                                                                                    en = replace.replace_en(en);
+                                                                                    en = en.replace("\r\n", "\n");
+                                                                                    if (en.endsWith("\n")) {
+                                                                                        en = en.substring(0,
+                                                                                                en.length() - 1);
+                                                                                    }
+                                                                                    if (en.trim().length() > 0) {
+                                                                                        en = en.replace("_", " ");
+                                                                                        en = upper_add_space
+                                                                                                .addSpace(en);
+                                                                                        en = en.replace("::", " ");
+                                                                                        en = en.replace("<<", " ");
+                                                                                        en = en.replace("<", " ");
+                                                                                        en = en.replace(">", " ");
+                                                                                        en = en.replace("(", " ");
+                                                                                        en = en.replace(")", " ");
+                                                                                        en = en.replace("{", " ");
+                                                                                        en = en.replace("}", " ");
+                                                                                        en = en.replace('.', ' ');
+                                                                                        en = en.replace('*', ' ');
+                                                                                        en = en.replace(";", " ; ");
+                                                                                        String zh = GoogleTranslateUtil
+                                                                                                .to_zh(en);
+                                                                                        /*while (is_reading_en.get()) {
+                                                                                            Thread.sleep(20);
+                                                                                        }*/
+                                                                                        if (!is_reading_en.get()
+                                                                                                && !is_reading_zh
+                                                                                                        .get()) {
+                                                                                            // speech(zh);
+                                                                                            is_reading_zh.set(true);
+                                                                                            zh = zh.replace('*', ' ');
+                                                                                            // FileUtils.write(
+                                                                                            //         new File("d:\\aaa.txt"),
+                                                                                            //         zh, "utf8", true);
+                                                                                            if (zh.indexOf(
+                                                                                                    "code-runner.executorMapByGlob") > 0) {
+                                                                                                return;
+                                                                                            }
+                                                                                            if (!has_read_english
+                                                                                                    .get()) {
+                                                                                                // str1 = str1.replace('/',
+                                                                                                //         ' ');
+                                                                                                if (read_english
+                                                                                                        .True()) {
+                                                                                                    speak2(str1);
+                                                                                                }
+                                                                                                has_read_english
+                                                                                                        .set(true);
+                                                                                            }
+
+                                                                                            speak2(zh);
+                                                                                        }
+                                                                                    }
+                                                                                } catch (Exception e) {
+                                                                                    write.throw_(e);
+                                                                                    e.printStackTrace();
+                                                                                } finally {
+
+                                                                                    is_reading_zh.set(false);
+                                                                                    code_exe_read_next_line_exe();
+
+                                                                                }
+                                                                            }
+                                                                        }).start();
+                                                                        new Thread(new Runnable() {
+                                                                            @Override
+                                                                            public void run() {
+                                                                                try {
+                                                                                    if (text2.indexOf(
+                                                                                            "code-runner.executorMapByGlob") >= 0) {
+                                                                                        return;
+                                                                                    }
+                                                                                    if (!is_reading_en.get()
+                                                                                            && !is_reading_zh
+                                                                                                    .get()) {
+                                                                                        is_reading_en.set(true);
+                                                                                        text2 = text2.replace("xxx",
+                                                                                                "");
+                                                                                        String zh = text2;//GoogleTranslateUtil.to_zh(text);
+                                                                                        // zh = zh.substring(0, zh.length() - "_@2_".length());
+                                                                                        int index4 = text2
+                                                                                                .indexOf("_@2_");
+                                                                                        if (index4 > 0) {
+                                                                                            zh = zh.substring(0, index4);
+                                                                                        }
+                                                                                        zh = replace.replace_en(zh);
+                                                                                        zh = zh.replace("_", " ");
+                                                                                        zh = zh.replace('*', ' ');
+                                                                                        // speech(zh);
+                                                                                        // FileUtils.write(new File("d:\\aaa.txt"),
+                                                                                        //         zh, "utf8", true);
+                                                                                        if (zh.indexOf(
+                                                                                                "code-runner.executorMapByGlob") > 0) {
+                                                                                            return;
+                                                                                        }
+                                                                                        if (!has_read_english.get()) {
+                                                                                            has_read_english.set(true);
+                                                                                            // zh = zh.replace('/', ' ');
+                                                                                            if (read_english.True()) {
+                                                                                                speak2(zh);
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                } catch (Exception e) {
+                                                                                    write.throw_(e);
+                                                                                    e.printStackTrace();
+                                                                                } finally {
+                                                                                    is_reading_en.set(false);
+                                                                                }
+                                                                            }
+                                                                        }).start();
+                                                                    }
+
+                                                                } else {
+                                                                    if (text2.startsWith("空空行")) {
+                                                                        text2 = text2.substring("空空行".length());
+                                                                    }
+                                                                    new Thread(new Runnable() {
+                                                                        @Override
+                                                                        public void run() {
+                                                                            try {
+                                                                                if (text2.indexOf(
+                                                                                        "code-runner.executorMapByGlob") >= 0) {
+                                                                                    return;
+                                                                                }
+                                                                                // write.text("2=" + text2);
+                                                                                String zh = text2;
+                                                                                int index4 = text2.indexOf("_@2_");
+                                                                                if (index4 >= 0) {
+                                                                                    zh = zh.substring(0, index4);
+                                                                                }
+                                                                                if (zh.indexOf(
+                                                                                        "code-runner.executorMapByGlob") > 0) {
+                                                                                    return;
+                                                                                }
+                                                                                int zh_en_index = zh.indexOf("`");
+                                                                                if (zh_en_index > 0) {
+                                                                                    String en = zh
+                                                                                            .substring(zh_en_index);
+                                                                                    zh = zh.substring(0, zh_en_index);
+                                                                                    speak2(zh);
+                                                                                    zh = en;
+                                                                                    speak2(zh);
+
+                                                                                } else {
+                                                                                    // write.text("1=" + zh);
+                                                                                    speak2(zh);
+                                                                                }
+
+                                                                            } catch (Exception e2) {
+                                                                                write.throw_(e2);
+                                                                                e2.printStackTrace();
+                                                                            } finally {
+                                                                                is_reading_zh.set(false);
+
+                                                                                code_exe_read_next_line_exe();
+                                                                            }
+                                                                        }
+
+                                                                    }).start();
+                                                                }
+                                                            } else {
+                                                                if (false) {
+                                                                    System.out.println("a");
+                                                                }
+                                                            }
+                                                            prev_atomic_text.set(text2);
+                                                        } catch (Exception e) {
+                                                            write.throw_(e);
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
+                                                    boolean valid = wk
+                                                            .reset();
+                                                    continue;
+                                                }
+                                                if (false) {
+                                                    System.out.println(pin_yin_chinese2pinyin2.to_pin_yin(text2));
+                                                    System.out.println(
+                                                            zh_feng_ci.printLine(ChineseUtils.toTraditional(text2)));
+                                                }
+                                                prev_text = text2;
+                                            }
+
+                                        }
+                                        // code_center();
+                                        boolean valid = wk
+                                                .reset();
+                                        continue;
+                                    }
+                                }
+                                if (false) {
+                                    play();
+                                } else {
+                                    CmdExcuter.executer(class_dir
+                                            .get_path("D:/gitHub/java_ubuntu_windows/autohotkey/mpc-hc.exe.pause.exe"));
+                                }
+                                File file1 = new File(dir1, changed.toString());
+                                List<String> lines = FileUtils.readLines(file1, "gbk");
+                                srt_list.clear();
+                                if (lines.size() >= 2) {
+                                    String srt_path = lines.get(0);
+
+                                    if (srt_path.trim().length() == 0) {
+                                        String all_text = lines.get(2);
+                                        srt_list.add(all_text);
+                                        speech(all_text);
+
+                                    } else {
+                                        if (srt_path.endsWith(".txt")) {
+                                            srt_path = srt_path.substring(0, srt_path.length() - ".txt".length());
+                                        }
+                                        List<String> srt_lines_ = srt_lines_map.get(srt_path);
+                                        if (srt_lines_ == null) {
+                                            List<String> srt_lines___ = new ArrayList<>();
+                                            List<String> srt_lines__ = FileUtils.readLines(new File(srt_path), "utf8");
+                                            for (int i = 0; i < srt_lines__.size(); i++) {
+                                                String line = srt_lines__.get(i);
+                                                if (srt.srt(line) && i + 1 < srt_lines__.size()) {
+                                                    srt_lines___.add(srt_lines__.get(i + 1));
+                                                }
+                                            }
+                                            srt_lines_map.put(srt_path, srt_lines___);
+                                            srt_lines_ = srt_lines___;
+                                            prev_text_index = 0;
+                                        }
+                                        if (srt_lines_ != null) {
+                                            String all_text = "";
+                                            int current_index = Integer.parseInt(lines.get(1));
+                                            if (prev_text_index == 0) {
+                                                prev_text_index = current_index;
+                                            }
+                                            String text = srt_lines_.get(current_index);
+                                            if (current_index - prev_text_index > 1) {
+                                                prev_text_index = current_index - 1;
+                                            }
+                                            if (prev_text_index < current_index) {
+                                                for (int i = prev_text_index; i < current_index
+                                                        && i < srt_lines_.size(); i++) {
+                                                    String txt = srt_lines_.get(i);
+                                                    srt_list.add(txt);
+                                                    int index = txt.indexOf("`");
+                                                    if (index > 0 && false) {
+                                                        txt = txt.substring(0, index);
+                                                    }
+                                                    all_text += txt + "\n";
+                                                }
+                                            }
+                                            srt_list.add(text);
+                                            int index = text.indexOf("`");
+                                            if (index > 0 && false) {
+                                                text = text.substring(0, index);
+                                            }
+                                            all_text += text;
+                                            prev_text_index = current_index;
+                                            prev_text_index += 1;
+                                            // write.text("a1=" + all_text);
+                                            if (false) {
+                                                speech(all_text);
+                                            } else {
+                                                from_mp4 = true;
+                                                speak2(all_text);
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                                write.throw_(e);
+                                e.printStackTrace();
+                            }
+
+                            play();
+                            wk.reset();
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                write.throw_(e);
+                wk.reset();
+                System.out.println("error");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static boolean auto_read_next() {
+        try {
+            return FileUtils
+                    .readFileToString(new File(
+                            "D:\\gitHub\\java_ubuntu_windows\\bat\\notepad++\\code.exe_read_next_line.txt"),
+                            "utf8")
+                    .equals("1");
+        } catch (Exception e) {
+            write.throw_(e);
+        }
+        return false;
+    }
+
+    public static void play() {
+        try {
+            CmdExcuter.executer(
+                    class_dir.get_path(
+                            "D:/gitHub/java_ubuntu_windows/autohotkey/mpc-hc.exe.play.exe"));
+        } catch (Exception e) {
+            write.throw_(e);
+            e.printStackTrace();
+        }
+    }
+
+    private static void speech(String all_text) {
+        if (prev_text.equals(all_text)) {
+            return;
+        }
+        cmd_cls.cls();
+        prev_text = all_text;
+        String text = "";
+        for (String line : srt_list) {
+            int index = line.indexOf("`");
+            if (index > 0) {
+                line = line.replace("`", "`\n");
+            }
+            text += line + "\n";
+        }
+        String[] lines = text.split("\n");
+        String prev_text1 = "";
+        String en_all = "";
+        for (String line : lines) {
+            line = line.trim();
+            if (line.length() > 0) {
+                if (line.equals(prev_text1)) {
+                    continue;
+                }
+                prev_text1 = line;
+                if (false) {
+                    System.out.println(zh_feng_ci.printLine(ChineseUtils.toTraditional(line)));
+                }
+                if (!containsHanScript.containChinese(line)) {
+                    en_all += line + " ";
+                }
+            }
+
+        }
+        en_all = en_all.trim();
+        for (String line : lines) {
+            line = line.trim();
+            if (line.length() > 0) {
+                if (line.equals(prev_text1)) {
+                    continue;
+                }
+                prev_text1 = line;
+                if (containsHanScript.containChinese(line)) {
+                    if (true) {
+                        speak2(line);
+                    }
+                }
+            }
+        }
+    }
+
+    private static void list_dirs(File file) {
+        if (file.isDirectory()) {
+            if (file.getName().charAt(0) == '.') {
+                return;
+            } else {
+                if (!("D:\\gitHub\\java_ubuntu_windows").equals(file.toString())) {
+                    dirs.add(file.toString());
+                }
+            }
+            File[] sub_files = file.listFiles();
+            for (File sub_file : sub_files) {
+                list_dirs(sub_file);
+            }
+        }
+    }
+}

@@ -1,0 +1,222 @@
+package j;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.jsoup.nodes.*;
+import org.jsoup.select.*;
+
+import test.TransApi;
+
+import org.apache.commons.io.FileUtils;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.time.Clock;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+
+import org.jsoup.*;
+//D:\gitHub\java_ubuntu_windows\pdf\pdf_srt_list_everything_es.txt
+public class pdf_2_txt_2_srt_2_zh_speek {
+    public static String dir = Paths.get("").toAbsolutePath().toString();
+    static int currentPage = 1;
+    static int prev_currentPage = 1;
+    public static void updateCurrentPage() {
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(500);
+                        Runtime.getRuntime().exec("D:\\gitHub\\java_ubuntu_windows\\autohotkey\\pdf_current_page.exe", 
+                            null, new File("D:\\gitHub\\java_ubuntu_windows\\autohotkey\\"));
+                        List<String> pdf_current_page_lines = FileUtils.readLines(
+                            new File("D:\\gitHub\\java_ubuntu_windows\\autohotkey\\pdf_current_page.txt"), 
+                            // "utf8"
+                            "gbk"
+                            );
+                        if (pdf_current_page_lines.size() > 0) {
+                            String pdf_current_page = pdf_current_page_lines.get(0);
+                            for (int i = 0; i < pdf_current_page_lines.size(); i++) {
+                                String line = pdf_current_page_lines.get(i);
+                                if ("AVQuickToolsTopBarCluster".equals(line)) {
+                                    pdf_current_page = pdf_current_page_lines.get(i+1);
+                                    // System.out.println("pdf_current_page="+pdf_current_page);
+                                    //break;
+                                }
+                                if (line.contains(".pdf")) {
+                                    pdfName = line;
+                                    pdfName = pdfName.substring(0, pdfName.indexOf(".pdf"))+".pdf.txt";
+                                    if (!prevPdfName.equals(pdfName)) {
+                                        System.out.println("pdf="+pdfName);
+                                    }
+                                    prevPdfName = pdfName;
+                                    
+                                    
+                                }
+                                
+                            }
+                            currentPage = Integer.parseInt(pdf_current_page);
+                            if (prev_currentPage == currentPage) {
+                                Thread.sleep(500);
+                                if (prev_nextVideoTime == 0) {
+                                    prev_nextVideoTime = System.currentTimeMillis();
+                                }
+                                if (auto_play && System.currentTimeMillis() - prev_nextVideoTime > nextVideoTime) {
+                                    Runtime.getRuntime().exec("D:\\gitHub\\java_ubuntu_windows\\autohotkey\\AcrobatSDIWindow_up_down.exe", 
+                                        null, new File("D:\\gitHub\\java_ubuntu_windows\\autohotkey\\"));
+                                    prev_nextVideoTime = System.currentTimeMillis();
+                                }
+                                continue;
+                            }
+                            prev_nextVideoTime = System.currentTimeMillis();
+                            prev_currentPage = currentPage;
+                            speek();
+                            Thread.sleep(800);
+                        }
+                    } catch (Exception e) {
+                        try {
+                            prev_currentPage = 0;
+                            String error = "e.printStackTrace(); " + "87";
+                            if (!prevString.equals(error)) {
+                                System.out.println(error);
+                            }
+                            prevString = error;
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+    static boolean auto_play = false;
+    static boolean isFirst = true;
+    static long prev_nextVideoTime = 0;
+    static long nextVideoTime = 20*1000;
+    static String prevPdfName = "";
+    static String prevString = "";
+    static String pdfName = "";
+    static String[] args;
+    public static void speek() throws IOException, InterruptedException {
+        System.out.println("pdfName="+pdfName);
+        String f_name = "The Way to Go OnlyGill - 中文（简体）.srt";
+        String fileFullName = "";
+        for (int i = 0; i < pdf_txt_list.size(); i++) {
+            String pdf_txt = pdf_txt_list.get(i);
+            if (pdf_txt.endsWith(pdfName)) {
+                fileFullName = pdf_txt;
+                FileUtils.write(new File("D:\\gitHub\\java_ubuntu_windows\\pdf\\", "history.txt"), 
+                    "\n"+pdf_txt+"|"+currentPage, "utf8", true);
+                break;
+            }
+        }
+        int number = currentPage - 1;
+        
+        if (args.length >= 1) {
+            f_name = args[0];
+        }
+        if (number >= 0) {
+            number = number + 2;
+        }
+        File file = new File(dir, f_name);
+        if (fileFullName.length() > 0) {
+            System.out.println("fileFullName="+fileFullName);
+            
+            file = new File(fileFullName);
+            if (fileFullName.endsWith(".pdf.txt")) {
+                String fileFullName1 = fileFullName.substring(0, fileFullName.length() 
+                    - ".txt".length())+".srt";
+                File file1 = new File(fileFullName1);
+                System.out.println(file1);
+                if (file1.exists()) {
+                    file = file1;
+                }
+            }
+        }
+        {
+            String base_txt = file.toString();
+            base_txt = base_txt.substring(0, base_txt.length() - ".pdf.srt".length());
+            base_txt = base_txt + ".base.txt";
+            File base_txt_file = new File(base_txt);
+            if (base_txt_file.exists()) {
+                try {
+                    List<String> base_txt_lines = FileUtils.readLines(base_txt_file, "utf8");
+                    if (base_txt_lines.size() > 0) {
+                        number = Integer.parseInt(base_txt_lines.get(0))+number;
+                        System.out.println("new_index="+number);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        List<String> readLines = FileUtils.readLines(file, "utf8");
+        for (int i = 0; i < readLines.size(); i++) {
+            String line = readLines.get(i);
+            if (line.contains(" -->") && line.length() == "00:00:44,000 --> 00:00:44,100".length()) {
+                int index = Integer.parseInt(readLines.get(i-1));
+                if (index >= number) {
+                    System.out.println("i="+i);
+                    String page = (index-1)+"";// +
+                    page = "接下来朗读第,"+(index-1)+",页";
+                    
+                    String content = readLines.get(i+1);
+                    System.out.println(content+"\n\n");
+                    content = content.replaceAll("尚硅谷", "");
+                    content = content.replaceAll("\\$", " ");
+                    content = content.replaceAll("\\%", " ");
+                    content = content.replaceAll("\\*", " ");
+                    content = content.replaceAll("\\#", " ");
+                    content = content.replaceAll("\\+", " ");
+                    content = content.replaceAll("\\-", " ");
+                    content = content.replaceAll("\\(", " ");
+                    content = content.replaceAll("\\)", " ");
+                    content = content.replaceAll("\\<", " ");
+                    content = content.replaceAll("\\>", " ");
+                    content = content.replaceAll("\\=", " ");
+                    content = content.replaceAll("\\/", " ");
+                    content = content.replaceAll("\\_", " ");
+                    content = content.replaceAll("  ", " ");
+                    
+
+                    nextVideoTime = content.length() * 140;//+1000*10     ;
+                    System.out.println("nextVideoTime="+(nextVideoTime*1.0/1000.0));
+                    Speech.speech(content);
+                    Thread.sleep(1000);
+                    break;
+                }
+            }
+        }
+    }
+    static List<String> pdf_txt_list = null;
+    public static void main(String[] args1) throws IOException, InterruptedException {
+        System.out.println("请运行:pdf_srt_list_everything_es.bat");
+        pdf_txt_list = FileUtils.readLines(new File("D:\\gitHub\\java_ubuntu_windows\\pdf\\pdf_srt_list_everything_es.txt"), "utf8");
+        
+        args = args1;
+        updateCurrentPage();
+        
+    }
+    
+}

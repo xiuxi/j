@@ -1,0 +1,32 @@
+
+// package j;
+
+// public class html_remove_link {
+
+//     public static String remove(String text) {
+//         int index = text.indexOf("<link");
+//         StringBuffer sb = new StringBuffer();
+//         // System.out.println("aa" + index);
+//         if (index > 0) {
+//             while (true) {
+//                 index = text.indexOf("<link");
+//                 if (index <= 0) {
+//                     break;
+//                 }
+//                 sb.append(text.substring(0, index));
+//                 System.out.println(text.substring(0, index));
+//                 text = text.substring(index);
+//                 index = text.indexOf(">");
+//                 if (index > 0) {
+//                     text = text.substring(index + ">".length());
+//                 }
+//             }
+//             sb.append(text);
+//             // System.out.println(sb.toString());
+//         } else {
+//             sb.append(text);
+//         }
+//         return sb.toString();
+//     }
+
+// }

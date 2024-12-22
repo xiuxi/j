@@ -1,0 +1,89 @@
+
+package j;
+
+import java.io.*;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+
+public class stackoverflow_com_remove_text {
+    public static void main(String[] args) {
+        init.init(stackoverflow_com_remove_text.class);
+        list(Dir.dir);
+    }
+
+    static String ends[] = { ".htm", ".html" };
+
+    public static void list(File file) {
+        if (file.isDirectory()) {
+            File[] sub_files = file.listFiles();
+            for (File sub_file : sub_files) {
+                list(sub_file);
+            }
+        } else {
+            String name = file.getName();
+            // String end = ".htm";
+            for (String end : ends) {
+
+                if (name.endsWith(end) && !name.endsWith(".noscript" + end)) {
+                    try {
+                        if (false) {
+                            List<String> lines = FileUtils.readLines(file, "utf8");
+                            StringBuffer sb = new StringBuffer();
+                            for (int i = 0; i < lines.size(); i++) {
+                                String line = lines.get(i);
+                                line = line.replace("<script", "<!--<script");
+                                line = line.replace("</script>", "</script>-->");
+                                sb.append(line + "\n");
+                            }
+                            String new_name = file.toString();
+                            new_name = new_name.substring(0, new_name.length() - end.length()) + ".noscript" + end;
+                            FileUtils.write(new File(new_name), sb.toString(), "utf8");
+                        }
+                        String text = FileUtils.readFileToString(file, "utf8");
+                        if (false) {
+
+                            text = text.replace("setTimeout", "setTimeou1");
+                            text = text.replace("#content_views", "#content_view1");
+                            text = html_remove_script.remove(text);
+
+                            text = html_remove_link.remove(text);
+                        }
+                        int index = text.indexOf("<aside class=\"bb p12 d-flex flex__center\"");
+                        if (index > 0) {
+                            String new_text = text.substring(0, index);
+                            String tmp_text = text;
+                            tmp_text = tmp_text
+                                    .substring(index + "<aside class=\"bb p12 d-flex flex__center\"".length());
+                            index = tmp_text.indexOf("</aside>");
+                            if (index > 0) {
+                                new_text += tmp_text.substring(index + "</aside>".length());
+                                text = new_text;
+                            }
+                        }
+                        index = text.indexOf(
+                                "<div class=\"ff-sans ps-fixed z-nav-fixed ws4 sm:w-auto p32 sm:p16 bg-black-750 fc-white bar-lg b16 l16 r16 js-consent-banner\">");
+                        if (index > 0) {
+                            String tmp_text = text;
+                            String new_text = tmp_text.substring(0, index);
+                            tmp_text = tmp_text
+                                    .substring(index);
+                            index = tmp_text.indexOf("<div id=\"onetrust-consent-sdk\" class=\"d-none\">");
+                            if (index > 0) {
+                                new_text += tmp_text.substring(index);
+                                text = new_text;
+                            }
+
+                        }
+                        // String new_name = file.toString();
+                        // new_name = new_name.substring(0, new_name.length() - end.length()) + ".noscript" + end;
+                        // FileUtils.write(new File(new_name), text, "utf8");
+                        FileUtils.write(file, text, "utf8");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+}

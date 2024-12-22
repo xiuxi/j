@@ -1,0 +1,152 @@
+
+package j;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
+
+import org.apache.commons.io.FileUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+public class Vtt_to_Srt {
+
+	static String dir = "C:\\gitHub\\LearnEnglishWithRebeccaEngVid_vtt\\vtt";
+	static ArrayList<String> downloadUrls_bat = new ArrayList<String>();
+
+	public static void main(String[] args) throws IOException {
+		init.init(Vtt_to_Srt.class);
+		System.out.println("hello");
+		//		playlist_to_urls();
+		// downloadVtt();
+		//		vtt_to_srt();
+
+	}
+
+	private static void downloadVtt() throws IOException {
+		File file = new File(dir, "downloadVtt.bat");
+		String all_lines = "";
+		List<String> youtube_ids = FileUtils.readLines(new File(dir, "downloadUrls.bat"), "utf8");
+		for (String youtube_id : youtube_ids) {
+			String line = "if not exist *" + youtube_id + ".en.vtt  (\r\n"
+					+ "    C:/youtube-dl --sub-lang en --write-auto-sub --sub-format srt --skip-download https://www.youtube.com/watch?v="
+					+ youtube_id + "\r\n"
+					+ ")\r\n";
+			line += "if not exist *" + youtube_id + ".zh-Hans.vtt  (\r\n"
+					+ "    C:/youtube-dl --sub-lang zh-Hans --write-auto-sub --sub-format srt --skip-download https://www.youtube.com/watch?v="
+					+ youtube_id + "\r\n"
+					+ ")\r\n";
+			all_lines += line;
+		}
+		FileUtils.write(file, all_lines, "utf8");
+	}
+
+	static ArrayList<String> youtube_ids = new ArrayList<String>();
+
+	private static void playlist_to_urls() {
+		try {
+			// https://www.youtube.com/watch?v=k-KUwWNLxEU&list=UUJtBaL1PPmTc1ff0nsihR0g
+			// https://www.youtube.com/playlist?list=UUJtBaL1PPmTc1ff0nsihR0g
+			String url = "https://www.youtube.com/watch?v=k-KUwWNLxEU&list=UUJtBaL1PPmTc1ff0nsihR0g";
+			if (url.contains("list=")) {
+				String newUrl = url.substring(url.indexOf("list=") + "list=".length()).substring(0,
+						"UUJtBaL1PPmTc1ff0nsihR0g".length());
+				newUrl = "https://www.youtube.com/playlist?list=" + newUrl;
+				newUrl = "C:\\youtube-dl.exe -j --flat-playlist " + newUrl;//+ " > " + dir+"\\playlist.txt";
+				//				System.out.println(newUrl);
+				ArrayList<String> result = CmdExcuter.executer(newUrl);
+				String youtube_ids = "";
+				for (String line : result) {
+					JsonObject jsonObject = new JsonParser().parse(line).getAsJsonObject();
+					String youtube_id = jsonObject.get("id").getAsString();
+					youtube_ids += youtube_id + "\r\n";
+					//					String youtube_url = "https://www.youtube.com/watch?v="+youtube_id;
+					//					System.out.println(youtube_url);
+				}
+				FileUtils.write(new File(dir, "downloadUrls.bat"), youtube_ids, "utf8");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private static void vtt_to_srt() {
+
+		File[] files = new File(dir).listFiles();
+		for (File file : files) {
+			String fileName = file.getName();
+			if (file.isFile() && fileName.endsWith(".vtt")) {
+				File srtFile = new File(file.getParent(),
+						fileName.substring(0, fileName.length() - ".vtt".length()) + ".srt");
+				if (!srtFile.exists()) {
+					// ffmpeg -y -i "%%f" "%%~nf.srt"
+					String ffmpegCmd = "C:\\Windows\\ffmpeg_nolog.exe -y -i \"" + file.toString() + "\" \""
+							+ srtFile.toString() + "\"";
+					CmdExcuter.executer(ffmpegCmd);
+				}
+			}
+		}
+	}
+
+	private static void batchDownloadVtt() {
+		try {
+			ExecutorService executor = Executors.newFixedThreadPool(5);
+			;
+			String lines = "";
+			String[] list = new File(dir).list();
+			for (String l : list) {
+				lines += l;
+			}
+
+			List<String> readLines = FileUtils.readLines(new File(dir, "downloadUrls.bat"), "utf8");
+			for (String line : readLines) {
+				try {
+					String base =
+							//"cmd /c \"" + 
+							//							"cmd cd /d C:\\gitHub\\LearnEnglishWithRebeccaEngVid_vtt\\vtt\\ && " +
+							"";
+					if (!lines.contains(line + ".zh-Hans.vtt")) {
+						//						System.out.println(line);
+						String cmd = base
+								+ "C:/youtube-dl.exe --sub-lang zh-Hans --write-auto-sub --sub-format srt --skip-download https://www.youtube.com/watch?v="
+								+
+								line;
+						CmdExcuter.executer(cmd
+						//+"\""
+						);
+						//						executor.execute(new WorkerThread(cmd + "\""));
+					}
+					if (!lines.contains(line + ".en.vtt")) {
+						//						System.out.println(line);
+						String cmd = base
+								+ "C:/youtube-dl.exe --sub-lang en --write-auto-sub --sub-format srt --skip-download https://www.youtube.com/watch?v="
+								+
+								line;
+						CmdExcuter.executer(cmd
+						//+ "\""
+						);
+						//						executor.execute(new WorkerThread(cmd + "\""));
+					}
+					Thread.sleep(1000 * 60);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				executor.shutdown();
+				while (!executor.isTerminated()) {
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}

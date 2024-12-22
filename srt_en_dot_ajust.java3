@@ -1,0 +1,253 @@
+package j;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+
+import com.itextpdf.text.pdf.parser.LineSegment;
+
+public class srt_en_dot_ajust {
+    public static void main(String[] args) {
+        list(Dir.file);
+    }
+
+    private static void list(File file) {
+        if (file.isDirectory()) {
+            File[] sub_files = file.listFiles();
+            for (File sub_file : sub_files) {
+                list(sub_file);
+            }
+        } else {
+            String name = file.getName();
+            if (name.endsWith(".en.srt")) {
+                try {
+                    String new_name = file.toString();
+                    new_name = new_name.substring(0, new_name.length() - ".en.srt".length()) + ".en.srt";
+                    File new_file = new File(new_name);
+                    if (new_file.exists()) {
+                        // return;
+                    }
+                    System.err.println(file.toString());
+                    String min_line = // "without actually executing them. This is particularly valuable while
+                            // writing";
+                            "• Even though regex notation makes greedy operators the default";
+                    List<String> text_lines = FileUtils.readLines(file, "utf8");
+                    List<String> text_lines_ = new ArrayList<>();
+                    List<Integer> text_ids = new ArrayList<>();
+                    for (int i = 0; i < text_lines.size(); i++) {
+                        String line = text_lines.get(i);
+                        if (srt.srt(line)) {
+                            text_lines.set(i, "");
+                            text_lines.set(i - 1, "");
+                        }
+                        line = text_lines.get(i);
+                        line = line.trim();
+                        if (line.length() > 0) {
+                            try {
+                                Integer.parseInt(line);
+                                text_lines.set(i, "");
+                            } catch (Exception e) {
+
+                            }
+                        }
+                    }
+                    for (int i = 0; i < text_lines.size(); i++) {
+                        String line = text_lines.get(i);
+                        line = line.trim();
+                        if (line.length() > 2) {
+                            text_lines_.add(line);
+                            text_ids.add(i);
+                        }
+                    }
+                    text_lines = text_lines_;
+                    List<String> old_lines = FileUtils.readLines(file, "utf8");
+
+                    // System.out.println("aaa");
+                    for (int i = 0; i < text_lines.size(); i++) {
+                        String line_tmp = text_lines.get(i);
+                        String line_tmp2 = text_lines.get(i);
+                        if (i + 1 < text_lines.size()) {
+                            line_tmp2 = text_lines.get(i + 1);
+                        }
+                        String line = text_lines.get(i);
+                        line = line.trim();
+                        text_lines.set(i, line);
+                        if (line.endsWith("-") && line.length() > min_line.length()) {
+                            if (i + 1 < text_lines.size()) {
+                                String line2 = text_lines.get(i + 1);
+                                int first_index = firstIndex(line2);
+                                if (first_index >= 0) {
+                                    String part1 = line.substring(0, line.length() - 1) +
+                                            line2.substring(0, first_index + 1);
+                                    String part2 = line2.substring(first_index + 1);
+                                    text_lines.set(i, part1);
+                                    text_lines.set(i + 1, part2);
+                                    line = part1;
+                                }
+                            }
+                        }
+                        if (line.contains(" . . . . . . . . . ")) {
+                            continue;
+                        }
+                        if (line.contains("...........")) {
+                            continue;
+                        }
+                        if (ends_dot(line)) {
+                            continue;
+                        }
+                        if (line.startsWith("• ")
+                                || line.startsWith("#")) {
+                            continue;
+                        }
+                        if (i > 0 && i < text_lines.size() - 1) {
+                            String prev = text_lines.get(i - 1);
+                            String next = text_lines.get(i + 1);
+                            if ("".equals(prev) && "".equals(next)) {
+                                continue;
+                            }
+                        }
+                        if (line.length() > 0) {
+                            if (ends_dot(line)) {
+                                continue;
+                            }
+                        }
+                        if (line.length() > min_line.length()) {
+                            int last_index = lastIndex(line);
+
+                            if (last_index > 0) {
+                                if (last_index > (line.length() * 1.0) / 2) {
+                                    if (i < text_lines.size() - 1) {
+                                        String part1 = line.substring(0, last_index + 1);
+                                        String part2 = line.substring(last_index + 1);
+                                        part2 = part2.trim() + " ";
+                                        text_lines.set(i, part1);
+                                        if (i + 1 < text_lines.size()) {
+                                            String line2 = part2 + text_lines.get(i + 1);
+                                            text_lines.set(i + 1, line2);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        line = text_lines.get(i);
+                        if (!ends_dot(line)) {
+                            int index = lastIndex(line);
+                            if (index > 0) {
+                                String part1 = line.substring(0, index + 1);
+                                String part2 = line.substring(index + 1);
+                                part2 = part2.trim() + " ";
+                                text_lines.set(i, part1);
+                                if (i + 1 < text_lines.size()) {
+                                    text_lines.set(i + 1, part2.trim() + " " + text_lines.get(i + 1).trim());
+                                }
+                            }
+                        }
+
+                        line = text_lines.get(i);
+                        if (!ends_dot(line)) {
+                            if (i + 1 < text_lines.size()) {
+                                String line2 = text_lines.get(i + 1);
+                                int index = firstIndex(line2);
+                                if (i == 11122) {
+                                    // System.out.println(line + "index=" + index);
+                                }
+                                if (index >= 0) {
+                                    String part1 = line + " " + line2.substring(0, index + 1);
+                                    String part2 = line2.substring(index + 1);
+                                    text_lines.set(i, part1);
+                                    if (i + 1 < text_lines.size()) {
+
+                                        text_lines.set(i + 1, part2);
+                                    }
+                                }
+                            }
+                        }
+                        line = text_lines.get(i);
+                        if (!ends_dot(line)) {
+                            if (i + 1 < text_lines.size()) {
+                                String line2 = text_lines.get(i + 1);
+                                String part1 = ".";
+                                String part2 = line.trim() + " " + line2;
+                                text_lines.set(i, part1);
+                                if (i + 1 < text_lines.size()) {
+                                    text_lines.set(i + 1, part2);
+                                }
+                            }
+                        }
+                    }
+
+                    StringBuffer sb = new StringBuffer();
+                    for (int i = 0; i < old_lines.size(); i++) {
+                        Integer text_id = text_ids.indexOf(i);
+                        if (text_id != -1) {
+                            // System.out.println(old_lines.get(i) + "\n" + text_lines.get(text_id));
+                            // System.out.println("");
+                            String new_text = text_lines.get(text_id);
+                            if (new_text != null) {
+                                old_lines.set(i, new_text);
+                            }
+                        }
+                        String line = old_lines.get(i);
+                        line = line.trim();
+                        sb.append(line + "\n");
+                    }
+
+                    FileUtils.write(new_file, sb.toString(), "utf8");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static List<String> splits = new ArrayList<>();
+    static {
+        splits.add(".");
+        splits.add(",");
+        splits.add("?");
+        splits.add(":");
+        splits.add(";");
+    }
+
+    public static int lastIndex(String line) {
+        List<Integer> dot = new ArrayList<>();
+        for (String split : splits) {
+            int index = line.lastIndexOf(split);
+            if (index >= 0) {
+                dot.add(index);
+            }
+        }
+        if (dot.size() > 0) {
+            Collections.sort(dot);
+            return dot.get(dot.size() - 1);
+        }
+        return -1;
+    }
+
+    public static int firstIndex(String line) {
+        List<Integer> dot = new ArrayList<>();
+        for (String split : splits) {
+            int index = line.indexOf(split);
+            if (index >= 0) {
+                dot.add(index);
+            }
+        }
+        if (dot.size() > 0) {
+            Collections.sort(dot);
+            return dot.get(0);
+        }
+        return -1;
+    }
+
+    private static boolean ends_dot(String line) {
+        return line.endsWith(".")
+                || line.endsWith(",")
+                || line.endsWith(";")
+                || line.endsWith(":")
+                || line.endsWith("?");
+    }
+}

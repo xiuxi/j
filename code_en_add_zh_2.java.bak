@@ -1,0 +1,248 @@
+package j;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
+
+import org.apache.commons.io.FileUtils;
+
+public class code_en_add_zh_2 {
+    public static AtomicReference<Long> update_time = new AtomicReference<>();
+    static GoogleTranslateUtil trans;
+
+    public static void main(String[] args) {
+        init.init(code_en_add_zh_2.class);
+        // proxy.init();
+        update_time.set(System.currentTimeMillis());
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(2000);
+                        long pass = System.currentTimeMillis() - update_time.get();
+                        System.out.println(pass);
+                        if (pass > 20 * 1000) {
+                            System1.exit(0);
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+            }
+        });//.start();
+        trans = new GoogleTranslateUtil();
+        list(Dir.file);
+    }
+
+    static int total = 0;
+    static int count1 = 0;
+
+    private static void list(File file) {
+        if (file.isDirectory()) {
+            File[] sub_files = file.listFiles();
+            for (File sub_file : sub_files) {
+                list(sub_file);
+            }
+        } else {
+            String name = file.getName();
+            if (name.endsWith(".zh_en.txt")) {
+                String txt_name = name;
+                txt_name = txt_name.substring(0, txt_name.length() - ".zh_en.txt".length()) + ".txt";
+                File new_file = new File(txt_name);
+                if (new_file.exists()) {
+                    // new_file.delete();
+                }
+            }
+            if (name.endsWith(".zh_en.txt") || name.endsWith(".blb2.txt")) {
+                count1++;
+                File down = new File(name + ".done");
+                if (!down.exists()) {
+                    try {
+                        List<String> lines = FileUtils.readLines(file, "utf8");
+                        // System.out.println(file.toString());
+                        if (total > 0)
+                            System.out.println("\n" + file.toString() + " %" + ((int) (100 * count1 / total)));
+                        StringBuffer en_sb = new StringBuffer();
+                        // StringBuffer zh = new StringBuffer();
+                        List<Integer> id_list = new ArrayList<>();
+                        for (int i = 0; i < lines.size(); i++) {
+                            String line = lines.get(i);
+                            line = line.trim();
+                            if (line.indexOf('`') >= 0) {
+                                continue;
+                            }
+                            if (true || (en_sb.length() + line.length() > 3000 || i == lines.size() - 1)) {
+                                if (false && line.length() > 0) {
+
+                                    System.out
+                                            .println(
+                                                    "-------------------------------------------------------------------");
+                                    System.out.println(line.length());
+                                }
+                                if (true || i == lines.size() - 1 && line.length() > 0) {
+                                    en_sb.append(line + "\n");
+                                    id_list.add(i);
+                                    update_time.set(System.currentTimeMillis());
+                                }
+                                if (en_sb.length() > 1) {
+                                    String zh___ = trans.to_zh(en_sb.toString());
+                                    // System.out.println(
+                                    //         i + "        " + ((i * 100.0) / lines.size()) + "      "
+                                    //                 + file.getName() + "          " + lines.size());
+                                    System.out.println(
+                                            // String.format("%5.0f", (double) i) + "        " +
+                                            String.format("%8.0f", (double) zh___.length())
+
+                                                    + "      "
+                                                    // + file.getName()
+                                                    // + "     " + lines.size() + " "
+                                                    + String.format("%3.0f", ((i * 100.0) / lines.size())));
+                                    String[] en_1 = en_sb.toString().split("\n");
+                                    String[] zh_1 = zh___.toString().split("\n");
+                                    if (en_1.length == zh_1.length && id_list.size() <= en_1.length) {
+                                        for (int i1 = 0; i1 < en_1.length; i1++) {
+                                            String zh_en = zh_1[i1] + "`" + en_1[i1];
+                                            lines.set(id_list.get(i1), zh_en);
+                                        }
+                                        save(file, lines);
+                                        update_time.set(System.currentTimeMillis());
+                                    }
+                                }
+                                if (true || line.length() > 0) {
+                                    en_sb = new StringBuffer();
+                                    id_list.clear();
+                                }
+                            } else {
+                                if (line.length() > 0) {
+                                    en_sb.append(line + "\n");
+                                    id_list.add(i);
+                                }
+                            }
+                        }
+                        if (true)
+                            FileUtils.write(down, "", "utf8");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    public static void main1(String[] args) {
+        // proxy.init();
+        update_time.set(System.currentTimeMillis());
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(2000);
+                        long pass = System.currentTimeMillis() - update_time.get();
+                        System.out.println(pass);
+                        if (pass > 20 * 1000) {
+                            System1.exit(0);
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+            }
+        }).start();
+        System.out.println("java j.gutenberg_org_txt_ajust_dot");
+        GoogleTranslateUtil trans = new GoogleTranslateUtil();
+
+        File[] files = Dir.dir.listFiles();
+        for (File file : files) {
+            String name = file.getName();
+            if (name.endsWith(".zh_en.txt")) {
+                String txt_name = name;
+                txt_name = txt_name.substring(0, txt_name.length() - ".zh_en.txt".length()) + ".txt";
+                File new_file = new File(txt_name);
+                if (new_file.exists()) {
+                    // new_file.delete();
+                }
+            }
+            if (name.endsWith(".zh_en.txt")) {
+                File down = new File(name + ".done");
+                if (!down.exists()) {
+                    try {
+                        List<String> lines = FileUtils.readLines(file, "utf8");
+                        System.out.println(file.toString());
+                        StringBuffer en_sb = new StringBuffer();
+                        // StringBuffer zh = new StringBuffer();
+                        List<Integer> id_list = new ArrayList<>();
+                        for (int i = 0; i < lines.size(); i++) {
+                            String line = lines.get(i);
+                            line = line.trim();
+                            if (line.indexOf('`') >= 0) {
+                                continue;
+                            }
+                            if (true || (en_sb.length() + line.length() > 3000 || i == lines.size() - 1)) {
+                                if (false && line.length() > 0) {
+
+                                    System.out
+                                            .println(
+                                                    "-------------------------------------------------------------------");
+                                    System.out.println(line.length());
+                                }
+                                if (true || i == lines.size() - 1 && line.length() > 0) {
+                                    en_sb.append(line + "\n");
+                                    id_list.add(i);
+                                    update_time.set(System.currentTimeMillis());
+                                }
+                                if (en_sb.length() > 1) {
+                                    String zh___ = trans.to_zh(en_sb.toString());
+                                    System.out.println(
+                                            i + "        " + ((i * 100.0) / lines.size()) + "      "
+                                                    + file.getName() + "          " + lines.size());
+                                    String[] en_1 = en_sb.toString().split("\n");
+                                    String[] zh_1 = zh___.toString().split("\n");
+                                    if (en_1.length == zh_1.length && id_list.size() <= en_1.length) {
+                                        for (int i1 = 0; i1 < en_1.length; i1++) {
+                                            String zh_en = zh_1[i1] + "`" + en_1[i1];
+                                            lines.set(id_list.get(i1), zh_en);
+                                        }
+                                        save(file, lines);
+                                        update_time.set(System.currentTimeMillis());
+                                    }
+                                }
+                                if (true || line.length() > 0) {
+                                    en_sb = new StringBuffer();
+                                    id_list.clear();
+                                }
+                            } else {
+                                if (line.length() > 0) {
+                                    en_sb.append(line + "\n");
+                                    id_list.add(i);
+                                }
+                            }
+                        }
+                        if (false)
+                            FileUtils.write(down, "", "utf8");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    private static void save(File file, List<String> lines) {
+        StringBuffer sb = new StringBuffer();
+        for (String line : lines) {
+            sb.append(line + "\n");
+        }
+        try {
+            FileUtils.write(file, sb.toString(), "utf8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+}

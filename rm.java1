@@ -1,0 +1,35 @@
+package j;
+
+import java.io.File;
+
+public class rm {
+    public static void main(String[] args) {
+        File[] files = new File(
+            "D:\\gitHub\\中文英文句子翻译模板\\srt_zh_en_chinese_english_subtitle\\srt\\").listFiles();
+        for (File file : files) {
+            String name = file.getName();
+            if (
+                name.endsWith(".sup")
+                || name.endsWith(".jar")
+                || name.endsWith(".zip")
+                || name.endsWith(".ttf")
+                || name.endsWith(".TTF")
+                // || name.endsWith(".rar")
+                || name.endsWith(".otf")
+                || name.endsWith(".lua")
+                || name.endsWith(".ssr")
+                || name.endsWith(".docx")
+                || name.endsWith(".mp4")
+                || name.endsWith(".raw")
+                || name.endsWith(".crdownload")
+                || name.endsWith(".exo")
+            ) {
+                try {
+                    file.delete();
+                } catch (Exception e) { 
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}

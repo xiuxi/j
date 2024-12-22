@@ -1,0 +1,63 @@
+
+package j;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
+public class charset {
+    //
+    public static String get(String text) {
+        String ret = "";
+        try {
+            File file = new File("C:\\a.txt");
+            FileUtils.write(file, text);
+            ret = FileUtils.readFileToString(file, "utf8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
+    public static List<String> charsets = new ArrayList<>();
+    static {
+        charsets.add(StandardCharsets.ISO_8859_1.name());
+        charsets.add(StandardCharsets.US_ASCII.name());
+        charsets.add(StandardCharsets.UTF_16.name());
+        charsets.add(StandardCharsets.UTF_16BE.name());
+        charsets.add(StandardCharsets.UTF_16LE.name());
+        charsets.add(StandardCharsets.UTF_8.name());
+        charsets.add("gbk");
+        charsets.add("GB2312");
+        charsets.add("utf8");
+        charsets.add("Unicode");
+        charsets.add("UTF");
+        charsets.add(StandardCharsets.UTF_8.toString());
+        charsets.add("GB2312");
+        charsets.add("utf8");
+        charsets.add("utf8");
+        charsets.add("utf8");
+        charsets.add("utf8");
+    }
+
+    public static void main(String[] args) {
+        init.init(charset.class);
+        print("中文");
+    }
+
+    public static void print(String text) {
+        for (String charset : charsets) {
+            try {
+                String target = new String(text.getBytes(charset));
+                System.out.println(charset + "=" + target);
+            } catch (Exception e) {
+                // e.printStackxTrace();
+            }
+        }
+    }
+}

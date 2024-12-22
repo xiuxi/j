@@ -1,0 +1,21 @@
+/*
+package j;
+
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.FixedValue;
+
+// https://www.baeldung.com/cglib
+public class cglib_ {
+    public static void main(String[] args) {
+        init.init(cglib_.class);
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(cglib.class);
+        enhancer.setCallback((FixedValue) () -> "Hello Tom!");
+        cglib proxy = (cglib) enhancer.create();
+
+        String res = proxy.sayHello(null);
+        System.out.println(res);
+        // assertEquals("Hello Tom!", res);
+    }
+}
+*/

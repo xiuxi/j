@@ -1,0 +1,2 @@
+source_dir=D:\go\parts
+dest_dir=D:\go\basic_cpp_2.0_ffmpeg_build_golang.zip\parts

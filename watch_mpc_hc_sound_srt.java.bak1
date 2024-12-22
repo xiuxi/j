@@ -1,0 +1,340 @@
+package j;
+
+import java.io.File;
+import java.nio.file.FileSystems;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.autoconfigure.web.ConditionalOnEnabledResourceChain;
+
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.io.File;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.time.Clock;
+
+import com.itextpdf.text.pdf.parser.LineSegment;
+import com.luhuiguo.chinese.ChineseUtils;
+
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+
+public class watch_mpc_hc_sound_srt {
+    static boolean pause = false;
+
+    public static void main(String[] args) throws Exception {
+        if (args.length >= 1) {
+            pause = args[0].equals("1");
+        }
+        TransApi api = new TransApi();
+        String prev_line2 = "";
+        // List<String> readLines = FileUtils.readLines(new File("D:\\go\\g.txt"),
+        // "utf8");
+        // for (String line : readLines) {
+        // System.out.println(line);
+        // if (containsHanScript.containChinese(line)) {
+        // java_cpp.speech1(line.getBytes(), java_cpp.chinese);
+        // } else {
+        // java_cpp.speech1(line.getBytes(), java_cpp.english);
+        // }
+        // }
+        list_dirs(new File(("C:\\mpc-hc\\srt\\")));
+        String[] dirs1 = new String[dirs.size()];
+        for (int i = 0; i < dirs.size(); i++) {
+            dirs1[i] = dirs.get(i);
+            // System.out.println(dirs1[i]);
+        }
+        while (true) {
+            try {
+                // System.out.println("aaa");
+
+                // System.exit(0);
+                String dir1 = ("C:\\mpc-hc\\srt\\");
+                final java.nio.file.Path path =
+
+                        FileSystems.getDefault().getPath(
+                                // System.getProperty("user.home"),
+                                // "Desktop"
+                                // "D:\\gitHub\\java_ubuntu_windows\\"
+                                dir1
+                        // ,dirs1
+
+                        );
+                File srt_lines = new File("C:\\mpc-hc\\srt_tmp\\srt_lines.txt");
+                List<String> srt_lines_list = new ArrayList<>();
+                long prev_srt_lines_length = 0;
+                long prev_srt_index = -1;
+                String prev_line1 = "";
+                String prev_stop_text_line = "";
+                // System.out.println(path);
+                try (final WatchService watchService = FileSystems.getDefault().newWatchService()) {
+                    final WatchKey watchKey = path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+                    while (true) {
+                        // System.out.println(1);
+                        final WatchKey wk = watchService.take();
+                        for (WatchEvent<?> event : wk.pollEvents()) {
+                            // System.out.println(2);
+                            // we only register "ENTRY_MODIFY" so the context is always a Path.
+                            final java.nio.file.Path changed = (java.nio.file.Path) event.context();
+                            File file1 = new File(dir1, changed.toString());
+                            String stop_text_line = FileUtils.readFileToString(file1, "gbk");
+                            if (stop_text_line.equals(prev_line1)) {
+                                continue;
+                            }
+                            if (srt_lines.length() != prev_srt_lines_length) {
+                                srt_lines_list = FileUtils.readLines(srt_lines, "gbk");
+                                prev_srt_lines_length = srt_lines.length();
+                                for (int i = 0; i < srt_lines_list.size(); i++) {
+                                    String new_line = srt_lines_list.get(i);
+                                    int index = new_line.indexOf("`");
+                                    if (index > 0) {
+                                        new_line = new_line.substring(0, index);
+                                    }
+                                    srt_lines_list.set(i, new_line);
+                                }
+                                prev_srt_index = -1;
+                            }
+                            if (false) {
+
+                                List<String> srt_all_lines = FileUtils
+                                        .readLines(new File("C:\\mpc-hc\\srt_tmp\\srt_lines.txt"), "gbk");
+                                int start = srt_all_lines.size() - 4;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                boolean begin = false;
+                                String readFileToString2 = "";
+                                for (int i = start; i < srt_all_lines.size(); i++) {
+                                    String line = srt_all_lines.get(i);
+                                    if (line.equals(prev_line1)) {
+                                        begin = true;
+                                        continue;
+                                    }
+                                    if (line.trim().length() == 0) {
+                                        continue;
+                                    }
+                                    if (begin) {
+                                        readFileToString2 += line + "\n";
+                                    }
+
+                                }
+
+                                prev_line1 = stop_text_line;
+                                stop_text_line = stop_text_line.trim();
+                                System.out.println(readFileToString2);
+                                if (srt_all_lines.size() > 1000) {
+                                    File file = new File("C:\\mpc-hc\\srt_tmp\\srt_line.txt");
+                                    file.delete();
+                                    file.createNewFile();
+                                }
+                            }
+                            String readFileToString2 = "";
+                            boolean start = false;
+                            int stop_index = srt_lines_list.indexOf(stop_text_line);
+                            // for (int i = 0; i < srt_lines_list.size(); i++) {
+                            // String line = srt_lines_list.get(i);
+                            // if (readFileToString.equals(line)) {
+                            // stop_index = i;
+                            // break;
+                            // }
+                            // }
+                            // int readFileToString2_count = 0;
+                            // int start_index = 0;
+                            // if (stop_index > 4 && srt_lines_list.size() > 10) {
+                            // start_index = stop_index - 4;
+                            // }
+                            int i = stop_index - 5;
+                            if (i < 0) {
+                                i = 0;
+                            }
+                            if (prev_stop_text_line.length() > 0) {
+                                int prev_index = srt_lines_list.indexOf(prev_stop_text_line);
+                                if (prev_index < stop_index && prev_index + 5 > stop_index) {
+                                    i = prev_index;
+                                }
+                            }
+                            prev_stop_text_line = stop_text_line;
+                            for (; i < stop_index + 1 && i < srt_lines_list.size(); i++) {
+                                String line = srt_lines_list.get(i);
+
+                                if (stop_text_line.equals(line)) {
+                                    prev_srt_index = i;
+                                    readFileToString2 += line + "\n";
+                                    break;
+                                }
+                                if (line.equals(prev_line1)) {
+                                    start = true;
+                                    continue;
+
+                                }
+                                if (start) {
+                                    readFileToString2 += line + "\n";
+                                }
+                            }
+                            prev_line1 = stop_text_line;
+                            boolean pause1 = false;
+                            if (pause1) {
+                                CmdExcuter.executer(
+                                        class_dir.get_path(
+                                                "D:/gitHub/java_ubuntu_windows/autohotkey/mpc-hc.exe.pause.exe"));
+                            }
+                            if (pause) {
+                                CmdExcuter.executer(
+                                        class_dir.get_path(
+                                                "D:/gitHub/java_ubuntu_windows/autohotkey/mpc-hc.exe.pause.bat"));
+                            }
+                            System.out.println(readFileToString2);
+                            if (containsHanScript.containChinese(readFileToString2)) {
+                                java_cpp.speech1(readFileToString2.getBytes(), java_cpp.chinese);
+                            } else {
+                                java_cpp.speech1(readFileToString2.getBytes(), java_cpp.english);
+
+                            }
+                            if (pause1) {
+                                CmdExcuter.executer(
+                                        class_dir.get_path(
+                                                "D:/gitHub/java_ubuntu_windows/autohotkey/mpc-hc.exe.play.exe"));
+                            }
+                            if (pause) {
+                                CmdExcuter.executer(
+                                        class_dir.get_path(
+                                                "D:/gitHub/java_ubuntu_windows/autohotkey/mpc-hc.exe.play.bat"));
+                            }
+                            if (true) {
+
+                                continue;
+                            }
+                            List<String> lines = FileUtils.readLines(file1, "gbk");
+                            System.out.println(lines);
+
+                            if (lines.size() >= 2) {
+                                String line2 = lines.get(1).trim();
+                                if (prev_line2.equals(line2)) {
+                                    continue;
+                                }
+                                line2 = line2;
+                                if (line2.length() > 0
+                                        && !line2.startsWith("D:")
+                                        && !line2.startsWith("C:")
+                                        && !line2.startsWith("E:")) {
+                                    File source_file = new File(lines.get(0));
+                                    if (source_file.exists()) {
+                                        String line1 = lines.get(1);
+                                        if (line1.contains("行") && line1.contains("列")
+                                                && line1.contains("，")) {
+                                            String str1 = line1.split("，")[0].replace("行", "").trim();
+                                            int number = Integer.parseInt(str1) - 1;
+                                            List<String> readLines = FileUtils.readLines(source_file, "utf8");
+                                            if (readLines.size() >= number) {
+                                                String line = readLines.get(number);
+                                                File file2 = new File(
+                                                        ("D:\\gitHub\\java_ubuntu_windows\\c#_dotnet\\autohotkey_read_screen\\read_text_under_mouse_loop.ahk.txt"));
+                                                String dstData = line;
+
+                                                if (containsHanScript.containChinese(dstData)) {
+
+                                                    java_cpp.speech1(dstData.getBytes(), java_cpp.chinese);
+                                                } else {
+                                                    boolean read = false;
+                                                    try {
+                                                        String dstData_zh = api.getTransResult(dstData, "auto", "zh");
+                                                        System.out.println(dstData_zh);
+                                                        java_cpp.speech1(dstData_zh.getBytes(), java_cpp.chinese);
+                                                        read = true;
+                                                    } catch (Exception e1) {
+                                                        e1.printStackTrace();
+                                                        System.out.println("error 1");
+                                                    }
+                                                    try {
+                                                        boolean read_text_under_mouse_loop_en_zh = true;
+                                                        try {
+                                                            read_text_under_mouse_loop_en_zh = FileUtils
+                                                                    .readFileToString(new File(
+                                                                            ("D:\\gitHub\\java_ubuntu_windows\\bat\\read_text_under_mouse_loop_en_zh.txt")),
+                                                                            "utf8")
+                                                                    .equals("1");
+                                                        } catch (Exception e) {
+                                                            e.printStackTrace();
+                                                            System.out.println("error 2");
+                                                        }
+                                                        if (read_text_under_mouse_loop_en_zh || !read) {
+                                                            java_cpp.speech1(dstData.getBytes(), java_cpp.english);
+                                                            read = true;
+                                                        }
+
+                                                    } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                        System.out.println("error 3");
+
+                                                        // java_cpp.speech1(dstData.getBytes(), java_cpp.english);
+                                                    }
+
+                                                }
+                                                // FileUtils.write(file2, line, "utf8");
+                                                System.out.println(line);
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                            // for (int i = 0; i < lines.size(); i++) {
+                            // System.out.println(lines.get(i));
+                            // }
+                            // System.out.println();
+                            // System.out.println(changed.toFile().getAbsolutePath());
+                            // System.exit(0); // 文件修改
+                            if (changed.endsWith("myFile.txt")) {
+                                System.out.println("My file has changed");
+                            }
+                        }
+
+                        // System.out.println("a");
+                        // reset the key
+                        boolean valid = wk.reset();
+                        if (!valid) {
+                            // System.out.println("Key has been unregisterede");
+                        }
+                    }
+                }
+                // FileUtils.readFileToByteArray(new File(
+                // "D:\\gitHub\\java_ubuntu_windows\\g\\demo.go"));
+            } catch (Exception e) {
+                System.out.println("error");
+                e.printStackTrace();
+                // System.out.println(e.getLocalizedMessage());
+            }
+        }
+
+    }
+
+    static List<String> dirs = new ArrayList<>();
+
+    private static void list_dirs(File file) {
+        if (file.isDirectory()) {
+            String full_name = file.toString();
+            if (file.getName().charAt(0) == '.') {
+                return;
+            } else {
+                if (!("D:\\gitHub\\java_ubuntu_windows").equals(file.toString())) {
+                    dirs.add(file.toString());
+                }
+            }
+            File[] sub_files = file.listFiles();
+            for (File sub_file : sub_files) {
+                list_dirs(sub_file);
+            }
+        } else {
+
+        }
+    }
+}

@@ -1,0 +1,111 @@
+
+package j;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.io.FileUtils;
+
+public class srt_split_zh {
+    public static String dir = srt_join.dir;
+
+    public static void main(String[] args) throws IOException {
+        init.init(srt_split_zh.class);
+        //dir = "C:\\尚硅谷\\srt\\1\\";
+        File[] listFiles = new File(
+                dir).listFiles();
+        List<String> enSrtList = new ArrayList<>();
+
+        for (File file : listFiles) {
+            String name = file.toString();
+            if (file.isFile() && name.endsWith(".zh-Hans.srt")) {
+                name = name.substring(0, name.length() - ".zh-Hans.srt".length()) + ".en.srt";
+                enSrtList.add(name);
+            }
+        }
+        File file = new File(dir, "zh.txt");
+
+        List<String> readLines = FileUtils.readLines(file, "utf8");
+        for (int i = 1; i < readLines.size(); i++) {
+            String line = readLines.get(i);
+            String line_i_1 = readLines.get(i - 1);
+            if (line_i_1.contains("file_end__")
+                    && line.contains("file_end__")) {
+                line_i_1 = line_i_1.replace("file_end__", "");
+                readLines.set(i - 1, line_i_1);
+            }
+        }
+        int index = 0;
+        String lineText = "";
+        int srtIndex = 1;
+        for (int i = 0; i < readLines.size(); i++) {
+            String line = readLines.get(i);
+            if (line.contains("file_end__")) {
+                srtIndex = 1;
+            }
+            if ("00:00:54,528 --> 00:00:55,552".length() == line.length()
+                    && line.contains(" --> ")) {
+                readLines.set(i - 1, srtIndex + "");
+                srtIndex++;
+            }
+
+        }
+        for (int i = 0; i < readLines.size(); i++) {
+            String line = readLines.get(i);
+            lineText += line + "\n";
+            if (line.contains("file_end__")) {
+                // System.out.println(line);
+                lineText = lineText.replaceAll("file_end__", "");
+
+                FileUtils.write(new File(enSrtList.get(index)),
+                        lineText, "utf8");
+
+                index++;
+                srtIndex = 1;
+                lineText = "";
+            }
+        }
+        for (int i = 0; i < enSrtList.size(); i++) {
+            String zhSrtName = enSrtList.get(i);
+            String enSrtName = zhSrtName.substring(0, zhSrtName.length() - ".en.srt".length()) + ".zh-Hans.srt";
+            File enFile = new File(enSrtName);
+            Map<String, String> map1 = new HashMap();
+            if (enFile.exists()) {
+                List<String> readLines2 = FileUtils.readLines(enFile, "utf8");
+                for (int i1 = 0; i1 < readLines2.size(); i1++) {
+                    String line1 = readLines2.get(i1);
+                    if (line1.length() == "00:00:54,528 --> 00:00:55,552".length()
+                            && line1.contains(" --> ")) {
+                        map1.put(readLines2.get(i1 - 1) + "", line1);
+                    }
+                }
+            }
+            File zhSrtFile = new File(zhSrtName);
+            if (zhSrtFile.exists()) {
+                List<String> readLines3 = FileUtils.readLines(zhSrtFile, "utf8");
+                for (int i3 = 0; i3 < readLines3.size(); i3++) {
+                    String line = readLines3.get(i3);
+                    if (line.length() == "00:00:54,528 --> 00:00:55,552".length()
+                            && line.contains(" --> ")) {
+                        String index2 = readLines3.get(i3 - 1);
+                        String v1 = map1.get(index2);
+                        if (v1 != null && v1.length() > 0) {
+                            readLines3.set(i3, v1);
+                        }
+
+                    }
+                }
+                String line3 = "";
+                for (String l3 : readLines3) {
+                    line3 += l3 + "\n";
+                }
+                FileUtils.write(zhSrtFile, line3, "utf8");
+            }
+        }
+    }
+
+}
