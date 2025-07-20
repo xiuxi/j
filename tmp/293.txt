@@ -1,0 +1,41 @@
+8.3 Converting an ASCII String to a 2’s Complement Integer 293
+; atodproc(source)
+; Procedure to scan data segment starting at source address, interpreting
+; ASCII characters as an integer value that is returned in EAX.
+; Leading blanks are skipped.  A leading – or + sign is acceptable.
+; Digit(s) must immediately follow the sign (if any).
+; Memory scan is terminated by any nondigit, and the address of
+; the terminating character is in ESI.
+; The following flags are affected:
+;   AF is undefined
+;   PF, SF, and ZF reflect sign of number returned in EAX.
+;   CF reset to 0
+;   OF set to indicate error.  Possible error conditions are:
+;     – no digits in input
+;     – value outside range –2,147,483,648 to 2,147,483,647
+;   (EAX) will be 0 if OF is set.
+atodproc    PROC   NEAR32
+push   ebp                 ; save base pointer
+mov    ebp, esp            ; establish stack frame
+sub    esp, 4              ; local space for sign
+push   ebx                 ; Save registers
+push   ecx
+push   edx
+pushf                      ; save flags
+mov    esi,[ebp+8]         ; get parameter (source addr)
+WhileBlankD:cmp    BYTE PTR [esi],' '  ; space?
+jne    EndWhileBlankD      ; exit if not
+inc    esi                 ; increment character pointer
+jmp    WhileBlankD         ; and try again
+EndWhileBlankD:
+mov    eax,1               ; default sign multiplier
+IfPlusD:    cmp    BYTE PTR [esi],'+'  ; leading + ?
+je     SkipSignD           ; if so, skip over
+IfMinusD:   cmp    BYTE PTR [esi],'-'  ; leading – ?
+jne    EndIfSignD          ; if not, save default +
+mov    eax,–1              ; –1 for minus sign
+SkipSignD:  inc    esi                 ; move past sign
+EndIfSignD:
+(continued)
+Figure 8.9 ASCII to doubleword integer conversion
+TEAM LinG - Live, Informative, Non-cost and Genuine!

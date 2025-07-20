@@ -1,0 +1,30 @@
+230 Procedures
+AddrList    DWORD  OFFSET Value1   ; address of parameter 1
+DWORD  OFFSET Value2   ; address of parameter 2
+DWORD  OFFSET Double1  ; address of parameter 3
+...
+lea    ebx,AddrList    ; get address of AddrList
+call   Proc1
+Note that the parameters do not need to be in consecutive storage locations, but their addresses are in consecutive words at AddrList. Give
+code to show how the values of the three parameters can be accessed
+from within procedure Proc1.
+2. Describe what happens if you attempt a recursive procedure call using
+the system described in this section.
+Chapter Summary
+This chapter has discussed techniques for implementing procedures in the
+80x86 architecture. The stack serves several important purposes in procedure implementation. When a procedure is called, the address of the next
+instruction is stored on the stack before control transfers to the first instruction of the procedure. A return instruction retrieves this address from the
+stack in order to transfer control back to the correct point in the calling
+program. Argument values or their addresses can be pushed onto the stack
+to pass them to a procedure; when this is done, the base pointer EBP and
+based addressing provide a convenient mechanism for accessing the values
+in the procedure. The stack can be used to provide space for a procedure’s
+local variables. The stack is also used to “preserve the environment”—for
+example, register contents can be pushed onto the stack when a procedure
+begins and popped off before returning to the calling program so that the
+calling program does not need to worry about what registers might be
+altered by the procedure.
+Recursive algorithms arise naturally in many computing applications. Recursive procedures are no more difficult than nonrecursive procedures to implement in the 80x86 architecture.
+Some computer architectures do not have a hardware stack. Nonrecursive procedures can be implemented using registers to store addresses,
+and memory to save registers when one procedure calls another.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

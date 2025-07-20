@@ -1,0 +1,35 @@
+9.3 Macro Definition and Expansion 325
+might expand to the code
+LOCAL  endIfMin
+; put smaller of two doublewords in the EAX register
+mov    eax, [ebx]
+cmp    eax, ecx
+jle    ??000C
+mov    eax, ecx
+??000C:
+Here endIfMin has been replaced the two places it appears within the macro definition
+by ??000C in the expansion. Another expansion of the same macro would use a different
+number after the question marks.
+The MASM assembler has several directives that control how macros and other
+statements are shown in .LST files. The most useful are
+• .LIST that causes statements to be included in the listing file
+• .NOLIST that completely suppresses the listing of all statements, and
+• .NOLISTMACRO that selectively suppresses macro expansions while
+allowing the programmer’s original statements to be listed
+The file IO.H ends starts with a .NOLIST directive so that macro definitions do not clutter the listing. Similarly IO.H ends with .NOLISTMACRO and .LIST directives so that
+macro expansion listings do not obscure the programmer’s code, but original statements
+are listed.
+Exercises 9.3
+1. Using the macro definition for add2 given in Fig. 9.8, show the sequence
+of statements to which each of the following macro calls expands.
+(a) add2  25, ebx
+(b) add2  ecx, edx
+(c) add2            ; no argument
+(d) add2  value1, value2, value3
+(Hint: the third argument is ignored since it has no matching parameter.)
+2. Using the macro definition for swap given in Fig. 9.9, show the sequence
+of statements to which each of the following macro calls expands.
+(a) swap  value1, value2
+(b) swap  temp, [ebx]
+(c) swap  value
+TEAM LinG - Live, Informative, Non-cost and Genuine!

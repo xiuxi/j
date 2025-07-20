@@ -1,0 +1,31 @@
+6.1 The 80x86 Stack 199
+push  edx      ; save variable
+cdq            ; extend dividend to quadword
+idiv  Divisor  ; divide
+pop   edx      ; restore variable
+This example assumes that you don’t need the remainder the division operation puts in
+EDX. If you do need the remainder, it could be copied somewhere else before popping
+the value stored on the stack back to EDX.
+As the above example shows, push and pop instructions are often used in pairs.
+When we examine how the stack is used to pass parameters to procedures, you will see a
+way to discard values from the stack without copying them to a destination location.
+In addition to the ordinary push and pop instructions, special mnemonics push
+and pop flag registers. These mnemonics are pushf (pushfd for the extended flag register) and popf (popfd for the extended flag register). These are summarized in Fig. 6.3.
+They are often used in procedure code. Obviously popf and popfd instructions change
+flag values; these are the only push or pop instructions that change flags.
+The 80x86 architecture has instructions that push or pop all general purpose
+registers with a single instruction. The pushad instruction pushes EAX, ECX, EDX,
+EBX, ESP, EBP, ESI and EDI, in this order. The value pushed for ESP is the address it
+contains before any of the registers are pushed. The popad instruction pops the same
+registers in the opposite order, except that the value for ESP is discarded. Popping the
+registers in the reverse order ensures that if these instructions are used in a pushadpopad pair, each register (except ESP) will get back its original value. Figure 6.4 shows
+the push all and pop all instructions, including the pusha and popa instructions that
+push and pop the 16-bit registers.
+Clock Cycles Number
+Instruction 386 486 Pentium of Bytes Opcode
+pushf 4 4 3 1 9C
+pushfd
+popf 5 9 4 1 9D
+popfd
+Figure 6.3 pushf and popf instructions
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,29 @@
+5.6 Something Extra: Pipelining 189
+5.6 Something Extra: Pipelining
+Chapter 2 discussed the central processing unit’s basic operation cycle:
+• fetch an instruction from memory
+• decode the instruction
+• execute the instruction
+A CPU must have circuitry to perform each of these functions. One of the things that
+computer designers have done to speed up CPU operation is to design CPUs with stages
+that can carry out these (and other) operations almost independently.
+The first stage of the CPU might have the job of fetching the next instruction
+from memory, perhaps doing just enough decoding to recognize the number of bytes
+the instruction has and update the program counter PC. The first stage passes on
+information to the second stage whose job might be to finish decoding the instruction,
+perhaps also computing some operand addresses. Meanwhile the first stage can be
+fetching the next instruction from memory. The second stage could pass a fullydecoded instruction to the third stage for execution. Meanwhile, the first stage could
+have passed on its second instruction to stage two, so that the first stage can be
+fetching a third instruction. This sort of design is called a pipeline. If the pipeline is
+kept full, the resulting throughput of the CPU is three times faster than if it had to finish the complete fetch-decode-execute process for each instruction before proceeding
+to the next one.
+Figure 5.11 illustrates the operation of a pipeline. The instructions being
+processed are shown as horizontal strips of three boxes labeled with 1, 2, and 3 to indicate stages. The horizontal axis shows time. You can see that at any given time parts of
+three instructions are being executed.
+CPU Stage Instruction being processed
+1 1 2 3 4 5 6 7 8 9 10 11
+2 1 2 3 4 5 6 7 8 9 10
+3 1 2 3 4 5 6 7 8 9
+Time interval 1 2 3 4 5 6 7 8 9 10 11
+Figure 5.11 Instructions in a pipeline
+TEAM LinG - Live, Informative, Non-cost and Genuine!

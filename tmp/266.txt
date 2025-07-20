@@ -1,0 +1,6 @@
+computer (RISC) architectures implement fewer and simpler instructions
+and have more limited addressing options. Even though RISC computers
+take more instructions to accomplish a task, they are usually quite fast
+since they execute their simple instructions very rapidly.
+266 String Operations
+TEAM LinG - Live, Informative, Non-cost and Genuine!

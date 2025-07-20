@@ -1,0 +1,26 @@
+1.3 2’s Complement Representation for Signed Integers 11
+tunately the situation is more complicated than that. That is, you cannot simply change
+the leading bit from 0 to 1 to get the negative version of a number.
+A hex calculator makes it easy to convert a negative decimal number to 2’s
+complement form. For instance, if the decimal display shows 565 and the convert-tohex key is pressed, a typical calculator will display FFFFFFFDCB (perhaps with a different number of leading F’s). For a word-size representation, ignore all but the last four hex
+digits; the answer is
+or 1111 1101 1100 1011 in binary. (Note the leading 1 bit for a negative number.) The
+doubleword representation is
+which is almost too long to write in binary.
+The 2’s complement representation of a negative number can also be found
+without a calculator. One method is to first express the unsigned number in hex, and
+then subtract this hex number from 1000016 to get the word length representation. The
+number you subtract from is, in hex, a 1 followed by the number of 0’s in the length of the
+representation; for example, 10000000016 to get the doubleword length representation.
+(What would you use for a byte-length 2’s complement representation? For a quadwordlength 2’s complement representation?) In binary, the number of zeros is the length in
+binary digits. This binary number is a power of two, and subtraction is sometimes called
+“taking the complement,” so this operation is the source of the term “2’s complement.”
+FF FF FD CB
+FD CB
+Example
+The word-length 2’s complement representation of the decimal number 76 is
+found by first converting the unsigned number 76 to its hex equivalent 4C, then
+by subtracting 4C from 10000.
+1 0 0 0 0
+– 4 C
+TEAM LinG - Live, Informative, Non-cost and Genuine!

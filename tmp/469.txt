@@ -1,0 +1,29 @@
+APPENDIXE
+80x86 Instructions 
+(by Opcode)
+Number Timing Timing Timing
+Opcode Mnemonic Operand(s) Flags affected of bytes 386 486 Pentium
+00 add mem8,reg8 SF,ZF,OF,CF,PF,AF 2+ 7 3 3
+01 add mem16,reg16 SF,ZF,OF,CF,PF,AF 2+ 7 3 3
+mem32,reg32
+02 add reg8,reg8 SF,ZF,OF,CF,PF,AF 2 2 1 1
+02 add reg8,mem8 SF,ZF,OF,CF,PF,AF 2+ 6 2 2
+03 add reg16,reg16 SF,ZF,OF,CF,PF,AF 2 2 1 1
+reg32,reg32
+03 add reg16,mem16 SF,ZF,OF,CF,PF,AF 2+ 6 2 2
+reg32,mem32
+04 add AL,imm8 SF,ZF,OF,CF,PF,AF 2 2 1 1
+05 add AX,imm16 SF,ZF,OF,CF,PF,AF 3 2 1 1
+EAX,imm32 5
+06 push ES none 1 2 3 1
+07 pop ES none 1 7 3 3
+08 or mem8,reg8 SF,ZF,OF,CF,PF,AF 2+ 7 3 3
+09 or mem16,reg16 SF,ZF,OF,CF,PF,AF 2+ 7 3 3
+mem32,reg32
+0A or reg8,reg8 SF,ZF,OF,CF,PF,AF 2 2 1 1
+0A or reg8,mem8 SF,ZF,OF,CF,PF,AF 2+ 6 2 2
+0B or reg16,reg16 SF,ZF,OF,CF,PF,AF 2 2 1 1
+reg32,reg32
+0B or reg16,mem16 SF,ZF,OF,CF,PF,AF 2+ 6 2 2
+reg32,mem32
+TEAM LinG - Live, Informative, Non-cost and Genuine!

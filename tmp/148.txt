@@ -1,0 +1,32 @@
+148 Branching and Looping
+Examples 3, 5, 7, and 9 have operand1 < operand2 as signed numbers. What characterizes this situation is that SF≤OF. In the remaining examples, SF=OF, and operand1 ≥
+operand2 are signed numbers. Strict inequality for unsigned numbers is characterized by
+SF=OF and ZF=0, that is operand1 ≥ operand2 and operand1 ≤ operand2.
+The cmp instructions are listed in Fig. 5.4. Looking back at Fig. 4.5, one sees that
+the entries in the various columns are almost all the same as for sub instructions. When
+the first operand is in memory, the cmp instructions require fewer clock cycles than correClock Cycles Number
+Destination Operand Source Operand 386 486 Pentium of Bytes Opcode
+register 8 immediate 8 2 1 1 3 80
+register 16 immediate 8 2 1 1 3 83
+register 32 immediate 8 2 1 1 3 83
+register 16 immediate 16 2 1 1 4 81
+register 32 immediate 32 2 1 1 6 81
+AL immediate 8 2 1 1 2 3C
+AX immediate 16 2 1 1 3 3D
+EAX immediate 32 2 1 1 5 3D
+memory byte immediate 8 5 2 2 3+ 80
+memory word immediate 8 5 2 2 3+ 83
+memory doubleword immediate 8 5 2 2 3+ 83
+memory word immediate 16 5 2 2 4+ 81
+memory doubleword immediate 32 5 2 2 6+ 81
+register 8 register 8 2 1 1 2 38
+register 16 register 16 2 1 1 2 3B
+register 32 register 32 2 1 1 2 3B
+register 8 memory byte 6 2 2 2+ 3A
+register 16 memory word 6 2 2 2+ 3B
+register 32 memory doubleword 6 2 2 2+ 3B
+memory byte register 8 5 2 2 2+ 38
+memory word register 16 5 2 2 2+ 39
+memory doubleword register 32 5 2 2 2+ 39
+Figure 5.4 cmp instructions
+TEAM LinG - Live, Informative, Non-cost and Genuine!

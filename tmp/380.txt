@@ -1,0 +1,32 @@
+380 Floating-Point Arithmetic
+the result. The sign is computed with using an exclusive or of the operands’ signs. Addition of the exponents is straightforward. Multiplication of the fractions is followed by
+shifting off the low-order 23 bits; recall that each fraction is logically a 1, followed by a
+binary point, followed by 23 binary fraction bits. Multiplying two such fractions gives 46
+fraction bits, and the extra 23 must be discarded.
+The macros used by fMultProc are shown in previous figures. Although macros
+are convenient here, note that there are some dangers. You could not, for instance, use
+the statements
+mov     eax, [ebp+8]   ; address for result
+combine [eax], sign3, exponent3, fraction3
+to combine the result pieces. The reason is that the combine macro uses the EAX register internally. It would have been safer to implement each of expand, combine, and normalize as procedures rather than macros.
+Next we implement an algorithm for floating-point addition. This is somewhat
+more difficult than multiplication, but again follows the same sort of procedure that you
+would use to add two numbers in scientific notation, namely to adjust them to have the
+same exponent, and then add the fractions. One additional complication is that for a
+negative number, the fraction must be negated prior to adding it to the other fraction.
+The following algorithm is implemented in the code in Fig. 10.22.
+expand each number into sign, exponent, and fraction components;
+mov     eax, fraction1 ; multiply fractions
+mul     fraction2
+shrd    eax, edx, 23   ; discard extra bits
+mov     fraction3, eax ; and save
+normalize sign3, exponent3, fraction3
+mov     edx, [ebp+8]   ; address for result
+combine [edx], sign3, exponent3, fraction3
+pop    edx             ; restore registers
+pop    eax
+pop    ebp             ; restore base pointer
+ret    12              ; return, removing parameters
+fMultProc  ENDP
+Figure 10.21 (continued)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

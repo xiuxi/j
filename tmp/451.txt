@@ -1,0 +1,37 @@
+Number Timing Timing Timing
+Mnemonic Operand(s) Flags affected Opcode of Bytes 386 486 Pentium
+and AX,imm16 SF,ZF,OF,CF,PF,AF 25 3 2 1 1
+EAX,imm32 5
+and reg8,imm8 SF,ZF,OF,CF,PF,AF 80 3 2 1 1
+and reg16,imm16 SF,ZF,OF,CF,PF,AF 81 4 2 1 1
+reg32,imm32 6
+and reg16,imm8 SF,ZF,OF,CF,PF,AF 83 3 2 1 1
+reg32,imm8
+and mem8,imm8 SF,ZF,OF,CF,PF,AF 80 3+ 7 3 3
+and mem16,imm16 SF,ZF,OF,CF,PF,AF 81 4+ 7 3 3
+mem32,imm32 6+
+and mem16,imm8 SF,ZF,OF,CF,PF,AF 83 3+ 7 3 3
+mem32,imm8
+and reg8,reg8 SF,ZF,OF,CF,PF,AF 22 2 2 1 1
+and reg16,reg16 SF,ZF,OF,CF,PF,AF 23 2 2 1 1
+reg32,reg32
+and reg8,mem8 SF,ZF,OF,CF,PF,AF 22 2+ 6 2 2
+and reg16,mem16 SF,ZF,OF,CF,PF,AF 23 2+ 6 2 2
+reg32,mem32
+and mem8,reg8 SF,ZF,OF,CF,PF,AF 20 2+ 7 3 3
+and mem16,reg16 SF,ZF,OF,CF,PF,AF 21 2+ 7 3 3
+mem32,reg32
+call rel32 none E8 5 7+ 3 1
+call reg32 none FF 2 7+ 5 2
+(near indirect)
+call mem32 none FF 2+ 10+ 5 2
+(near indirect)
+call far direct none 9A 7 17+ 18 4
+call far indirect none FF 6 22+ 17 5
+cbw none none 98 1 3 3 3
+cdq none none 99 1 2 3 2
+clc none CF F8 1 2 2 2
+cld none DF FC 1 2 2 2
+cmc none CF F5 1 2 2 2
+80x86 Instructions 451
+TEAM LinG - Live, Informative, Non-cost and Genuine!

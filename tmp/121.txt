@@ -1,0 +1,27 @@
+4.4 Division Instructions 121
+In the second and third examples, the dividend  100 is represented as the 32 bit number FF FF FF 9C in the DX and AX registers.
+Finally, here are two examples to help illustrate the difference between signed
+and unsigned division.
+Example
+Before Instruction executed After
+AX: FE 01 idiv  bl
+BL: E0
+AX: FE 01 div   bl
+BL: FF
+AX 00 FF
+AX E1 0F
+DX:  FF FF idiv  cx
+AX:  FF 9C
+CX:  00 0D
+DX:  FF FF idiv  cx
+AX:  FF 9C
+CX:  FF F3
+AX 00 07
+DX FF F7
+AX FF F9
+DX FF F7
+With the signed division,  511 is divided by  32, giving a quotient of 15 and a remainder of  31. With the unsigned division, 65025 is divided by 255, giving a quotient of 255
+and a remainder of 0.
+With multiplication, the double length destination in each single-operand format guarantees that the product will fit in the destination location—nothing can go
+wrong during a single-operand multiplication operation. There can be errors during division. One obvious cause is an attempt to divide by zero. A less obvious reason is a quotient that is too large to fit in the single-length destination; if, say, 00 02 46 8A is divided
+TEAM LinG - Live, Informative, Non-cost and Genuine!

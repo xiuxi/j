@@ -1,0 +1,33 @@
+5.2 Conditional Jumps, Compare Instructions, and if Structures 149
+sponding sub instructions since the result need not be stored. There are alternative
+opcodes for some operand combinations—the ones listed are those chosen by MASM 6.11.
+A few reminders are in order about immediate operands. These can be coded in
+your choice of bases or as characters. Assuming that pattern references a word in the
+data segment, each of the following is allowable.
+cmp   eax, 356
+cmp   pattern, 0d3a6h
+cmp   bh, '$'
+Note that an immediate operand must be the second operand. The instruction
+cmp   100, total     ; illegal
+is not acceptable since the first operand is immediate.
+Finally it is time to list the conditional jump instructions; they are shown in Fig.
+5.5. Many of these have alternative mnemonics that generate exactly the same machine
+code; these describe the same set of conditions a different way. Often one mnemonic is
+more natural than the other for implementation of a given design.
+Conditional jump instructions always compare the first operand to the second
+operand. For example, for the instruction jg, “jump if greater” means to jump if operand1
+> operand2.
+Appropriate for use after comparison of unsigned operands
+opcode
+mnemonic description flags to jump short near
+ja jump if above CF=0 and ZF=0 77 OF 87
+jnbe jump if not below or equal
+jae jump if above or equal CF=0 73 OF 83
+jnb jump if not below
+jb jump if below CF=1 72 OF 82
+jnae jump if not above or equal
+jbe jump if below or equal CF=1 or ZF=1 76 OF 86
+jna jump if not above
+(continued)
+Figure 5.5 Conditional jump instructions
+TEAM LinG - Live, Informative, Non-cost and Genuine!

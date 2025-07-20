@@ -1,0 +1,23 @@
+Chapter Summary 191
+and assigns flag values. The comparison is done by subtracting the second operand from the first. The difference is not retained as it is with a
+sub instruction. Compare instructions often precede conditional jump
+instructions.
+Loop structures like while, until, and for loops can be implemented using compare, jump, and conditional jump instructions. The
+loop instruction provides another way to implement many for loops. To
+use the loop instruction, a counter is placed in the ECX register prior to
+the start of the loop. The loop instruction itself is at the bottom of the
+loop body; it decrements the value in ECX and transfers control to a destination (normally the first statement of the body) if the new value in
+ECX is not zero. This results in the body of the loop being executed the
+number of times originally placed in the ECX register. The conditional
+jump jecxz instruction can be used to guard against executing such a
+loop when the initial counter value is zero.
+Storage for an array can be reserved using the DUP directive in the
+data segment of a program. The elements of an array can be sequentially
+accessed by putting the address of the first element of the array in a register and adding the size of an array element repeatedly to get to the next
+element. The current element is referenced using register indirect addressing. The lea (load effective address) instruction is commonly used to load
+the initial address of the array.
+Pipelining is done by a CPU with multiple stages that work on
+more than one instruction at a time, doing such tasks as fetching one, while
+decoding another, while executing a third. This can greatly speed up CPU
+operation.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

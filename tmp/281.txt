@@ -1,0 +1,41 @@
+8.2 Shift and Rotate Instructions 281
+BX:  A9 D7 sar bx,1
+ace: A9 D7 sal ace,4
+DX:  A9 D7 shr dx,4
+AX: A9 D7 sar ax,cl
+CL: 04 AX
+SF 1  ZF 0
+CF 0   OF ?
+FA 9D
+1010 1001 1101 0111
+1111 1010 1001 1101
+DX
+SF 0    ZF 0
+CF 0   OF ?
+0A 9D
+1010 1001 1101 0111
+0000 1010 1001 1101
+ace
+SF 1    ZF 0
+CF 0   OF ?
+9D 70
+1010 1001 1101 0111
+1001 1101 0111 0000
+BX
+SF 1   ZF 0
+CF 1   OF 0
+D4 EB
+1010 1001 1101 0111
+1101 0100 1110 1011
+Figure 8.6 gives the number of clock cycles and number of bytes required using
+various operand types in shift instructions. All four types of shifts discussed so far, as
+well as the rotate instructions discussed below, share opcodes. The size of the destination and the type of the count operand are implied by the opcode. As with some other
+instructions, the second byte of the object code is used to choose among the different
+types of shifts and rotates, as well as between register and memory destinations. Notice
+that the single-bit shifts are faster than the multiple-bit shifts—often it is more time-efficient to use several single-bit shifts than one multiple-bit shift.
+The shift instructions are quite primitive, but they have many applications. One
+of these is to do some multiplication and division operations. In fact, for processors without multiplication instructions, shift instructions are a crucial part of routines to do multiplication. Even with the 80x86 architecture, some products are computed more rapidly
+with shift operations than with multiplication instructions.
+In a multiplication operation where the multiplier is 2, a single-bit left shift of
+the multiplicand results in the product in the original location. The product will be correct unless the overflow flag OF is set. It is easy to see why this works for unsigned
+TEAM LinG - Live, Informative, Non-cost and Genuine!

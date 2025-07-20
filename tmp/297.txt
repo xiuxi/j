@@ -1,0 +1,28 @@
+8.3 Converting an ASCII String to a 2’s Complement Integer 297
+flag values are then pushed back on the stack with another pushf to be recovered by
+the normal popf in the exit code. The test instruction leaves AF undefined; this is why
+the comments at the beginning of the procedure mention AF.
+Exercises 8.3
+1. The code for atodproc includes
+TooBigD?:   test   eax,eax ; check sign flag
+jns    okD    ; will be set if number > 2^32 – 1
+An alternative sequence would be
+TooBigD?:   cmp    eax,80000000h      ; EAX < 2,147,483,648
+jb     okD                ; OK if so
+Compare the number of clock cycles and number of bytes of object code
+for the test and the cmp instructions.
+2. The procedure atodproc checks for zero digits in the number it is converting, but not for too many digits. Show why this is unnecessary by
+tracing the code for 100,000,000,000, the smallest possible 11-digit number. (Another valid reason not to limit the number of digits is that any
+number of leading zeros would be valid.)
+Programming Exercises 8.3
+1. Write a NEAR32 procedure hexToInt that has a single parameter passed
+on the stack, the address of a string. This procedure will be similar to
+atodproc except that it will convert a string of characters representing
+an unsigned hexadecimal number to a doubleword-length 2’s complement integer in EAX. The procedure should skip leading blanks and
+then accumulate a value until a character that does not represent a hex
+digit is encountered. (Valid characters are 0 through 9, A through F, and
+a through f.) If there are no hex digits or the result is too large to fit in
+EAX, then return 0 and set OF; these are the only possible errors. Clear
+OF if no error occurs. In all cases set SF, ZF, and PF according to the
+value returned in EAX and clear CF.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

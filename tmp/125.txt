@@ -1,0 +1,25 @@
+4.4 Division Instructions 125
+Clock Cycles Number Opcode
+Destination Source 386 486 Pentium of Bytes movsx movzx
+register 16 register 8 3 3 3 3 0F BE 0F B6
+register 32 register 8 3 3 3 3 0F BE 0F B6
+register 32 register 16 3 3 3 3 0F BF 0F B7
+register 16 memory byte 6 3 3 3+ 0F BE 0F B6
+register 32 memory byte 6 3 3 3+ 0F BE 0F B6
+register 32 memory word 6 3 3 3+ 0F BF 0F B7
+Figure 4.19 movsx and movzx instructions
+Data about these instructions is in Fig. 4.19. With either instruction the source operand
+can be in a register or in memory. Neither instruction changes any flag value.
+Here are a few examples showing how these instructions work.
+Example
+Before Instruction executed After
+word at value:  07 0D movsx  ecx,value
+word at Value:  F7 0D movsx  ecx,value
+word at Value:  07 0D movzx  ecx,value
+word at Value:  F7 0D movzx  ecx,value ECX 00 00 F7 0D
+ECX 00 00 07 0D
+ECX FF FF F7 0D
+ECX 00 00 07 0D
+This section concludes with another simple program, this one to convert Celsius (centigrade) temperatures to Fahrenheit. Figure 4.20 gives the source code. The formula implemented is
+F = (9/5) * C + 32
+TEAM LinG - Live, Informative, Non-cost and Genuine!

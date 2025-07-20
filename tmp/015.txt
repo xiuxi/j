@@ -1,0 +1,32 @@
+1.4 Addition and Subtraction of 2’s Complement Numbers 15
+6. Find the decimal integer that is represented by each of these bytelength 2’s complement numbers:
+(a) E1
+(b) 7C
+(c) FF
+7. Find the range of decimal integers that can be stored in 2’s complement
+form in a byte.
+8. Find the range of decimal integers that can be stored in 2’s complement
+form in a doubleword.
+9. This section showed how to take the 2’s complement of a number by
+subtracting it from an appropriate power of 2. An alternative method is
+to write the number in binary (using the correct number of bits for the
+length of the representation), change each 0 bit to 1 and each 1 bit to
+zero (this is called “taking the 1’s complement”), and then adding 1 to
+the result (discarding any carry into an extra bit). Show that these two
+methods are equivalent.
+1.4 Addition and Subtraction of 2’s Complement
+Numbers
+One of the reasons that the 2’s complement representation scheme is commonly used to
+store signed integers in computers is that addition and subtraction operations can be
+easily and efficiently implemented in computer hardware. This section discusses addition and subtraction of 2’s complement numbers and introduces the concepts of carry
+and overflow that will be needed later.
+To add two 2’s complement numbers, simply add them as if they were unsigned
+binary numbers. The 80x86 architecture uses the same addition instructions for
+unsigned and signed numbers. The following examples use word-size representations.
+First, 0A07 and 01D3 are added. These numbers are positive whether they are
+interpreted as unsigned numbers or as 2’s complement numbers. The decimal version of
+the addition problem is given on the right.
+0A07 2567
++ 01D3 + 467
+0BDA 3034
+TEAM LinG - Live, Informative, Non-cost and Genuine!

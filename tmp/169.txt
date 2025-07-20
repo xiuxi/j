@@ -1,0 +1,38 @@
+5.3 Implementing Loop Structures 169
+3. Each part of this problem contains a design with a for loop. Assume
+that sum references a doubleword in the data segment and that the
+value of count is in the ECX register. Give a fragment of 80x86 code that
+implements the design.
+(a) sum := 0;
+for count := 1 to 100 loop
+add count to sum;
+end for;
+(b) sum := 0;
+for count := –10 to 50 loop
+add count to sum;
+end for;
+(c) sum := 1000;
+for count := 100 downto 50 loop
+subtract 2*count from sum;
+end for;
+Programming Exercises 5.3
+1. Write a complete 80x86 assembly language program that will accept
+numbers from the keyboard and report the minimum and maximum of
+the numbers. Implement the following design, adding appropriate
+labels to output.
+display "First number?  ";
+input number;
+minimum := number;
+maximum := number;
+while (response to "Another number? " is 'Y' or 'y') loop
+input number;
+if (number < minimum)
+then
+minimum := number;
+end if;
+if (number > maximum)
+then
+maximum := number;
+end if;
+end while;
+TEAM LinG - Live, Informative, Non-cost and Genuine!

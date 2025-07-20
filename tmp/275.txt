@@ -1,0 +1,31 @@
+8.1 Logical Operations 275
+The test instruction can also be used to get information about a value in a register. For example,
+test   cx, cx    ; set flags for value in CX
+“ands” the value in the CX register with itself, resulting in the original value. (“Anding”
+any bit with itself gives the common value.) The flags are set according to the value in
+CX. The instruction
+and   cx, cx     ; set flags for value in CX
+will accomplish the same goal and is equally efficient. However, using test makes it
+clear that the only purpose of the instruction is testing.
+The various forms of the test instruction are listed in Fig. 8.4. They are almost
+the same as for and, or, and xor instructions. Only the accumulator can be the destination when the source is in memory, but MASM lets you specify any register as the destination and transposes the operands to have the memory operand first, one of the
+allowable formats.
+Destination Source Clock Cycles Number
+Operand Operand 386 486 Pentium of Bytes Opcode
+register 8 immediate 8 2 1 1 3 F6
+register 16 immediate 16 2 1 1 4 F7
+register 32 immediate 32 2 1 1 6 F7
+AL immediate 8 2 1 1 2 A8
+AX immediate 16 2 1 1 3 A9
+EAX immediate 32 2 1 1 5 A9
+memory byte immediate 8 5 2 2 3+ F6
+memory word immediate 16 5 2 2 4+ F7
+memory doubleword immediate 32 5 2 2 6+ F7
+register 8 register 8 2 1 1 2 84
+register 16 register 16 2 1 1 2 85
+register 32 register 32 2 1 1 2 85
+memory byte register 8 5 2 2 2+ 84
+memory word register 16 5 2 2 2+ 85
+memory doubleword register 32 5 2 2 2+ 85
+Figure 8.4 test instructions
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,31 @@
+12.1 Console I/O Using the Kernel32 Library 427
+mov    ecx, [ebp+8]        ; string length
+mov    strLength, ecx
+mov    esi, [ebp+12]       ; source address
+mov    strAddr, esi
+INVOKE ReadFile,
+hStdIn,                  ; file handle for keyboard
+strAddr,                  ; address of string
+strLength,                ; length of string
+NEAR32 PTR read,          ; bytes read
+0                         ; overlapped mode
+mov    ecx, read           ; number of bytes read
+mov    BYTE PTR [esi+ecx–2],0 ; replace CR/LF by trailing null
+popfd                      ; restore flags
+popad                      ; restore registers
+pop    ebp
+ret    8                   ; exit, discarding parameters
+inproc      ENDP
+Figure 12.4 (continued)
+At this point there is nothing surprising in the input/output code in IO.ASM. It
+starts with the same directives that appeared in the previous two examples. The data
+area does not include an input buffer since this will be in the user’s calling program. It
+does have the variable strAddr to locally store the input or output buffer address that is
+passed as a parameter. The output procedure outproc expects this to be the address of a
+null-terminated string. After standard procedure entry code, it computes the length of
+that string. It then gets the handle for the console and writes to the console, exactly as in
+the earlier example in Fig. 12.1.
+The input procedure inproc is also simple. After standard procedure entry code,
+it gets the handle for the console and copies the two parameters (length and string
+address) to local variables. A ReadFile call does the actual input. The only complication
+TEAM LinG - Live, Informative, Non-cost and Genuine!

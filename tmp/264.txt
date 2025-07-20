@@ -1,0 +1,31 @@
+264 String Operations
+7.5 Other Architectures: CISC versus RISC Designs
+Early digital computers had very simple instruction sets. When designers began to use
+microcode to implement instructions in the 1960s, it became possible to have much
+more complex instructions. At the same time high-level programming languages were
+becoming popular, but language compilers were fairly primitive. This made it desirable
+to have machine language statements that almost directly implemented high-level language statements, increasing the pressure to produce computer architectures with
+many complex instructions.
+The Intel 80x86 machines use complex instruction set computer (CISC)
+designs. Instructions such as the string instructions discussed in this chapter would never
+have appeared in early computers. CISC machines also have a variety of memory addressing modes, and the 80x86 family is typical in this respect, although you have only seen a
+few of its modes so far. Often CISC instructions take several clock cycles to execute.
+Reduced instruction set computer (RISC) designs began to appear in the
+1980s. These machines have relatively few instructions and few memory addressing
+modes. Their instructions are so simple that any one can be executed in a single clock
+cycle. As compiler technology improved, it became possible to produce efficient code for
+RISC machines. Of course, it often takes many more instructions to implement a given
+high-level language statement on a RISC than on a CISC machine, but the overall operation is often faster because of the speed with which individual instructions execute.
+In RISC architectures, instructions are all the same format; that is, the same
+number of bytes are encoded in a common pattern. This is not the case with CISC architectures. If the 80x86 chips were RISC designs, then this book would have no questions
+asking “How many clock cycles?” or “How many bytes?” When we look at the many 80x86
+instruction formats in Chapter 9, you may wish for the simplicity of a RISC machine.
+One unusual feature of many RISC designs is a relatively large collection of registers (sometimes over 500), of which only a small number (often 32) are visible at one
+time. Registers are used to pass parameters to procedures, and the registers that are
+used to store arguments in the calling program overlap the registers that are used to
+receive the parameter values in the procedure. This provides a simple but very efficient
+method of communication between a calling program and a procedure.
+There are proponents of both CICS and RISC designs. At this point in time it is
+not obvious that one is clearly better than the other. However, the popular Intel 80x86
+and Motorola 680x0 families are both CISC designs, so we will be dealing with CISC systems at least in the near future.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

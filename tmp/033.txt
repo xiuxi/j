@@ -1,0 +1,33 @@
+2.2 PC Hardware: The CPU 33
+of memory where most data is stored. The SS register contains the segment number of the
+stack segment, where the stack is maintained. The ES register contains the segment number of the extra data segment that could have multiple uses. The FS and GS registers were
+added with the 80386 and make possible easy access to two additional data segments.
+With the flat 32-bit memory model we will use, the segment registers become
+essentially irrelevant to the programmer. The operating system will give each of CS, DS,
+ES, and SS the same value. Recall that this is a pointer to table entry that includes the
+actual starting address of the segment. That table also includes the size of your program,
+so that the operating system can indicate an error if your program accidentally or deliberately attempts to write in another area. However, all of this is transparent to the programmer who can just think in terms of 32-bit addresses.
+The 32-bit instruction pointer, or EIP register, cannot be directly accessed by
+an assembly language programmer. The CPU has to fetch instructions to be executed
+from memory, and EIP keeps track of the address of the next instruction to be fetched. If
+this were a older, simpler computer architecture, the next instruction to be fetched
+would also be the next instruction to be executed. However, an 80x86 CPU actually
+fetches instructions to be executed later while it is still executing prior instructions,
+making the assumption (usually correct) that the instructions to be executed next will
+follow sequentially in memory. If this assumption turns out to be wrong, for example if a
+procedure call is executed, then the CPU throws out the instructions it has stored, sets
+EIP to contain the offset of the procedure, and then fetches its next instruction from the
+new address.
+In addition to prefetching instructions, an 80x86 CPU actually starts execution
+of an instruction before it finishes execution of prior instructions. This use of pipelining
+increases effective processor speed.
+The final register is called the flags register. The name EFLAGS refers to this
+register, but this mnemonic is not used in instructions. Some of its 32 bits are used to set
+some characteristic of the 80x86 processor. Other bits, called status flags, indicate the
+outcome of execution of an instruction. Some of the flag register’s 32 bits are named, and
+the names we will use most frequently are given in Fig. 2.2.
+Bit 11 is the overflow flag (OF). It is set to 0 following an addition in which no
+overflow occurred, and to 1 if overflow did occur. Similarly, bit 0, the carry flag (CF), indicates the absence or presence of a carry out from the sign position after an addition. Bit
+7, the sign flag, contains the left bit of the result after some operations. Since the left bit
+is 0 for a nonnegative two’s complement number and 1 for a negative number, SF indicates the sign. Bit 6, the zero flag (ZF) is set to 1 if the result of some operation is zero,
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,31 @@
+70 Elements of Assembly Language
+One of the points of the previous examples is that different operands can result in the same
+stored value. For instance, note that the WORD directives with operands 65535 and  1 both
+generate words containing FFFF. This value can be thought of as either the unsigned number 65,535 or the signed number  1, depending on the context in which it is used.
+As previously stated, the bytes of a word or doubleword are actually stored
+backwards so that, for example, the initial value of word6 previous is actually 18FC. This
+book will concentrate on the logical values rather than the way that they are stored.
+The BYTE directive allows character operands with a single character or string
+operands with many characters. Either apostrophes (') or quotation marks (") can be used
+to designate characters or delimit strings. They must be in pairs; you can not put an apostrophe on the left and a quotation mark on the right. A string delimited with apostrophes
+can contain quotation marks, and one delimited with quotation marks can contain apostrophes, making it possible to have strings containing these special characters. Unless
+there is reason to do otherwise, this book will follow the convention of putting single characters between apostrophes and strings of characters between quotation marks.
+Each of the following BYTE directives is allowable.
+char1      BYTE   'm'      ; value is 6D
+char2      BYTE   6dh      ; value is 6D
+string1    BYTE   "Joe"    ; value is 4A 6F 65
+string2    BYTE   "Joe's"  ; value is 4A 6F 65 27 73
+If you are trying to store the letter m rather than the number 6D16, then there is no reason
+to look up the ASCII code and enter it as in char2—the assembler has a built-in ASCII
+chart! Notice that the delimiters, the apostrophes or quotation marks on the ends of the
+character or string, are not themselves stored.
+The assembler allows restricted usage of character operands in DWORD or WORD
+directives. However, there is little reason to do this.
+You have already seen examples of BYTE directives with multiple operands separated by commas. DWORD and WORD directives also allows multiple operands. The directive
+words      WORD    10, 20, 30, 40
+reserves four words of storage with initial values 000A, 0014, 001E, and 0028. The DUP
+operator can be used to generate multiple bytes or words with known values as well as
+uninitialized values. Its use is limited to BYTE, DWORD, WORD, and other directives that
+reserve storage. The directive
+DblArray   DWORD   100 DUP(999)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,35 @@
+140 Branching and Looping
+dtoa   value,ebx        ; convert count to ASCII
+output countLabel       ; display label for count
+output value            ; display count
+dtoa   value,sum        ; convert sum to ASCII
+output sumLabel         ; display label for sum
+output value            ; display sum
+mov    eax,sum          ; get sum
+cdq                     ; extend sum to 64 bits
+idiv   ebx              ; sum / count
+dtoa   value,eax        ; convert average to ASCII
+output avgLabel         ; display label for average
+output value            ; output average
+output nextPrompt       ; skip down, start next prompt
+jmp    forever          ; repeat
+PUBLIC _start                       ; make entry point public
+END
+Figure 5.1 (continued)
+This program must store values for count and sum, and all registers except EBX
+and ECX are used by the input/output macros and/or the division instruction. The value
+of count is kept in EBX, and sum is stored in a doubleword reserved in the data segment.
+Note that sum could have been initialized to zero by the DWORD directive instead of by
+the mov statement; as implemented, the code is more consistent with the design, but is
+slightly wasteful of time and space since sum only needs to be initialized once.
+This program has several faults. One slight shortcoming is that it does not
+round the average. The major fault, however, is that it contains a forever loop with no
+way to get out. In fact, the usual termination code for a program is not even included
+since it could not be reached anyway. Fortunately there is a way to stop this program
+without turning off or resetting the computer; simply press control-C when the prompt
+for a number appears. This works because the input macro uses a Kernel32 service for
+input, and this function gives special treatment to control-C. Figure 5.2 shows a sample
+run of this program.
+The one jmp in the program in Fig. 5.1 transfers control to a point that precedes
+the jmp statement itself. This is called a backward reference. The code
+TEAM LinG - Live, Informative, Non-cost and Genuine!

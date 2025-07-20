@@ -1,0 +1,35 @@
+146 Branching and Looping
+elseIfZero, then the balance must be non-negative. The design checks to see if the
+balance is zero; the instruction
+elseIfZero: jnz   elsePos
+jumps to elsePos if the zero flag ZF=0. The last instruction that set flags is the add at the
+beginning, so the jump occurs of the balance was not zero. The code for the (balance=0)
+case must again end with an unconditional jump to endBalanceCheck. Finally, the code
+that corresponds to the else in the design is at elsePos. This last block of code does not
+need a jump to endBalanceCheck since execution will fall through to this point.
+The 80x86 code above directly corresponds to the order of statements in the
+design. If you are actually doing production coding in assembly language, a good technique is to initially code following a careful design and then reexamine the code to see if
+there are places where you can make it more efficient if there is a need to do so. This
+corresponds to what happens in many high-level language compilers. Most initially produce machine language that corresponds to the order of the high-level language statements being translated. Some compilers may then optimize the code, rearranging some
+statements for efficiency.
+In the previous code, the label endBalanceCheck is on a line by itself. Technically this label will reference the address of whatever statement follows it, but it is far
+simpler to treat it as the part of the current design structure without worrying about what
+comes next. If what comes after this structure is changed, the code for this structure can
+remain the same. If the next statement requires another label, that is perfectly okay—
+multiple labels can reference the same spot in memory. Labels are not part of object code,
+so extra labels do not add to the length of object code or to execution time.
+When writing code to mirror a design, one often wants to use labels like if, then,
+else, and endif. Unfortunately, IF, ELSE, and ENDIF are MASM directives, so they cannot
+be used as labels. In addition, IF1, IF2, and several other desirable labels are also reserved for
+use as directives. One solution is to use long descriptive labels like elseIfZero in the above
+example. Since no reserved word contains an underscore, another solution is to use labels
+like if_1 and endif_2 that parallel keywords in the original design.
+The terms set a flag and reset a flag are often used to mean “give the value 1”
+to a flag and “give the value 0” to a flag, respectively. (Sometimes the word clear is used
+instead of reset.) As you have seen, many instructions set or reset flags. However, the
+cmp (compare) instructions are probably the most common way to establish flag values.
+Each cmp instruction compares two operands and sets or resets AF, CF, OF, PF,
+SF, and ZF. The only job of a cmp instruction is to fix flag values; this is not just a side
+effect of some other function. Each has the form
+cmp    operand1, operand2
+TEAM LinG - Live, Informative, Non-cost and Genuine!

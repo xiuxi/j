@@ -1,0 +1,31 @@
+4.4 Division Instructions 129
+4. Write a complete 80x86 assembly language program to prompt for four
+pairs of grades and weighting factors. Each weighting factor indicates
+how many times the corresponding grade is to be counted in the sum.
+The weighted sum is
+WeightedSum =  Grade1 * Weight1
++ Grade2 * Weight2
++ Grade3 * Weight3
++ Grade4 * Weight4
+and the sum of the weights is
+SumOfWeights = Weight1 + Weight2 + Weight3 + Weight4
+Display the weighted sum, the sum of the weights, and the weighted
+average (WeightedSum/SumOfWeights).
+A sample run might look like
+grade 1?  88
+weight 1?  1
+grade 2?  77
+weight 2?  2
+grade 3?  94
+weight 3?  1
+grade 4?  85
+weight 4?  3
+weighted sum:   591
+sum of weights:     7
+weighted average:    84
+5. Write a complete 80x86 assembly language program to prompt for four
+grades, and then display the sum and the average (sum/4) of the grades
+in ddd.dd format (exactly three digits before and two digits after a decimal point).
+6. Write a short program that causes a division by zero to discover how
+the interrupt handler in your 80x86 system responds.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

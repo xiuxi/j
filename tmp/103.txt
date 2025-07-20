@@ -1,0 +1,32 @@
+4.2 Integer Addition and Subtraction Instructions 103
+Example
+Before Instruction executed After
+BX:  01 A2 neg  bx
+DH:  F5 neg  dh
+word at Flag:  00 01 neg  Flag
+EAX:  00 00 00 00 neg   eax EAX
+SF 0  ZF 1 
+00 00 00 00
+Flag
+SF 1  ZF 0 
+FF FF
+DH
+SF 0  ZF 0  
+0B
+BX
+SF 1  ZF 0  
+FE 5E
+This section ends with an example of a complete, if unexciting, program that uses
+these new instructions. The program inputs values for three numbers, x, y and z, evaluates
+the expression   (x + y   2z + 1) and displays the result. The design implemented is
+prompt for and input value for x;
+convert x from ASCII to 2’s complement form;
+expression := x;
+prompt for and input value for y;
+convert y from ASCII to 2’s complement form;
+add y to expression, giving x + y;
+prompt for and input value for z;
+convert z from ASCII to 2’s complement form;
+calculate 2*z as (z + z);
+subtract 2*z from expression, giving x + y   2*z;
+TEAM LinG - Live, Informative, Non-cost and Genuine!

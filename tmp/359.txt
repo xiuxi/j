@@ -1,0 +1,32 @@
+For the next two parts, also give the contents of the stack following
+execution of the instructions.
+(e) fcomp
+(f) fcompp
+10.2 Programming with Floating-Point Instructions
+This section gives three examples of coding with floating-point instructions. The first is
+a program that calculates the square root of the sum of the squares of two numbers.
+Although we do not yet have any procedures to facilitate input/output of floating-point
+values, FPU operations can be viewed through Windbg. The second and third examples
+show procedure to facilitate input/output of floating-point numbers.
+Figure 10.11 has a listing of the first example. Floating-point values are assembled at value1 and value2. The first instruction copies value1 from memory to ST. The
+second instruction copies it from ST to ST, pushing down the first stack entry to ST(1).
+The third instruction gives value1*value1 in ST, with “nothing” in ST(1). (Of course,
+there is always some value in each floating-point register.) The same sequence of
+instructions is repeated for value2. Figure 10.12 shows Windbg’s view of the CPU just
+before the second fmul is executed. At this point, there are copies of value2 in both ST
+and ST(1) and value1*value1 in ST(2). After the result is calculated in ST, it is stored in
+sqrt and popped from the stack, leaving the stack in its original state.
+10.2 Programming with Floating-Point Instructions 359
+; find the sum of the squares of two floating-point numbers
+; Author:  R. Detmer
+; Date:    4/98
+.386
+.MODEL FLAT
+.STACK  4096             ; reserve 4096-byte stack
+.DATA                    ; reserve storage for data
+value1  REAL4   0.5
+value2  REAL4   1.2
+sqrt    REAL4   ?
+(continued)
+Figure 10.11 Floating-point computations
+TEAM LinG - Live, Informative, Non-cost and Genuine!

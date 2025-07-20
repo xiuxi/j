@@ -1,0 +1,30 @@
+132 Basic Instructions
+Clock Number
+Instruction Operation Cycles of Bytes Opcode
+clc clear carry flag 2 1 F8
+(CF := 0)
+stc set carry flag 2 1 F9
+(CF := 1)
+cmc complement carry flag 2 1 F5
+(if CF = 0 then CF := 1 else CF := 0)
+Figure 4.22 Control of carry flag CF
+columns for the number of clock cycles on different processors since these instructions
+take two clock cycles on each of 30386, 80486, and Pentium processors.
+Multiplication and division operations with longer numbers are even more
+involved than addition and subtraction. Often techniques for adding and subtracting
+longer numbers are used to implement algorithms that are similar to grade school multiplication and division procedures for decimal numbers.
+If one really needs to use longer numbers, it takes more than a set of arithmetic
+procedures. One may also need procedures like itoa and atoi in order to convert long
+numbers to and from ASCII character format.
+Exercises 4.5
+1. Suppose that two 96 bit long numbers are to be added.
+(a) Show how storage for three such numbers can be reserved in the
+data segment of a program.
+(b) Give a fragment of 80x86 code that will add the second number to the
+first, storing the sum at the locations reserved for the first number.
+(c) Give a fragment of 80x86 code that will add the second number to the
+first, storing the sum at the locations reserved for the third number.
+2. Suppose that two 64 bit numbers are stored as shown in the example in
+this section. Give a fragment of 80x86 code that will subtract Nbr2 from
+Nbr1, storing the difference at the locations reserved for Nbr1.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

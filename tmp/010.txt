@@ -1,0 +1,23 @@
+10 Representing Data in a Computer
+3 Other computer architectures use a word size different than 16 bits.
+Most central processing units can do arithmetic on binary numbers having a few chosen
+lengths. For the Intel 80x86 family, these lengths are 8 bits (a byte), 16 bits (a word),3 32
+bits (a doubleword), and 64 bits (a quadword).
+As an example, look at the word-length binary representation of 697.
+69710 = 10101110012 = 00000010101110012
+Leading zeros have been added to make 16 bits. Writing this in hex in a word, you have
+This illustrated convention will be followed throughout this book. Strips of boxes will represent sequences of bytes. The contents of a single byte will be represented in hex, with
+two hex digits in each byte since a single hex digit corresponds to four bits. The doubleword representation of 697 simply has more leading zeros.
+What we now have is a good system of representing nonnegative, or unsigned,
+numbers. This system cannot represent negative numbers. Also, for any given length, there
+is a largest unsigned number that can represented, for example FF16 or 25510 for byte length.
+The 2’s complement system is similar to the above scheme for unsigned numbers, but it allows representation of negative numbers. Numbers will be a fixed length, so
+that you might find the “word-length 2’s complement representation” of a number. The 2’s
+complement representation for a nonnegative number is almost identical to the unsigned
+representation; that is, you represent the number in binary with enough leading zeros to fill
+up the desired length. Only one additional restriction exists—for a positive number, the leftmost bit must be zero. This means, for example, that the most positive number that can be
+represented in word-size 2’s complement form is 01111111111111112 or 7FFF16 or 3276710.
+As you have probably already guessed, the leftmost bit is always one in the 2’scomplement representation of a negative number. You might also guess that the rest of
+the representation is just the same as for the corresponding positive number, but unfor00 00 02 B9
+02 B9
+TEAM LinG - Live, Informative, Non-cost and Genuine!

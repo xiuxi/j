@@ -1,0 +1,32 @@
+10.3 Floating-Point Emulation 383
+if fraction3 < 0
+then
+sign3 := minus;
+negate fraction3;
+end if;
+normalize sign3, exponent3, fraction3;
+combine sign3, exponent3, fraction3 into result;
+Programming Exercises 10.3
+Each of the exercises below are to be programmed without using floating-point instructions.
+1. Write a NEAR32 procedure fDivProc that has three parameters,
+Operand1, Operand2, and Result. Each of the operands is a 32-bit floating point value and Result gives the address for a 32-bit floating-point
+result. If Operand2 ( 0.0, put the value of Operand1/Operand2 in the
+address given by Result. If the second operand is zero, then use the
+IEEE representation for plus or minus infinity as the result (plus or
+minus will depend on the sign of Operand1). The procedure will remove
+parameters from the stack and will change no register.
+2. Write a NEAR32 procedure fSubProc that has three parameters,
+Operand1, Operand2, and Result. Each of the operands is a 32-bit floating-point value and Result gives the address for a 32-bit floating-point
+result. Put the value of Operand1—Operand2 in the address given by
+Result. The procedure will remove parameters from the stack and will
+change no register. (Although you could do this by calling fAddProc,
+write a complete procedure instead.)
+3. Write a NEAR32 procedure fNegProc that has two parameters, Operand
+and Result. Operand is a 32-bit floating-point value and Result gives the
+address for a 32-bit floating-point result. Put the value of Operand1 in
+the address given by Result. The procedure will remove parameters
+from the stack and will change no register.
+4. Write a NEAR32 procedure fCmpProc that has two parameters,
+Operand1 and Operand2. Each of the operands is a 32-bit floating-point
+value. This procedure will compare the values of Operand1 and
+TEAM LinG - Live, Informative, Non-cost and Genuine!

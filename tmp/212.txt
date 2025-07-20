@@ -1,0 +1,33 @@
+212 Procedures
+parameters associate a parameter identifier with an argument that is a single variable
+and can be used to pass a value either to the procedure from the caller or from the procedure back to the caller. A common technique for passing parameters is discussed in this
+section. This technique can be used to pass word-size or doubleword-size values for in
+parameters, or addresses of data in the calling program for in-out parameters.
+Although simple procedures can be written using only registers to pass parameters, most procedures use the stack to pass parameters. The stack is also frequently
+used to store local variables. As you will see, the techniques for using the stack for
+parameters and for local variables are closely related.
+We start with a simple example to show how the stack is used to pass parameters. Suppose that the job of a NEAR32 procedure Add2 is to add two doubleword-size
+integers, returning the sum in EAX. If the calling program passes these parameters by
+pushing them on the stack, then its code might look like
+push   Value1      ; first argument value
+push   ecx         ; second argument value
+call   Add2        ; call procedure to find sum
+add    esp,8       ; remove parameters from stack
+Before we look at how the parameter values are accessed from the stack, notice how
+they are removed from the stack following the call. There is no need to pop them off the
+stack to some destination; we simply add eight to the stack pointer to move ESP above
+the parameters. It is important to remove parameters from the stack since otherwise
+repeated procedure calls might exhaust the stack space. Even more serious, if procedure
+calls are nested and the inside call leaves parameters on the stack, then the outside
+return will not find the correct return address on the stack. An alternative to adding n to
+the stack pointer in the calling program is to use ret n in the procedure, the version of
+the return instruction that adds n to ESP after popping the return address. Both forms
+will be illustrated in this book.
+Figure 6.12 shows how the procedure Add2 can retrieve the two parameter
+values from the stack. The procedure code uses the based addressing mode. In this
+mode, a memory address is calculated as the sum of the contents of a base register and
+a displacement built into the instruction. The Microsoft assembler accepts several alternative notations for a based address; this book will use [register+number], for
+example, [ebp+6]. Any general register (e.g., EAX, EBX, ECX, EDX, ESI, EDI, EBP, or
+ESP) can be used as the base register; EBP is the normal choice for accessing values in
+the stack.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

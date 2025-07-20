@@ -1,0 +1,33 @@
+4.3 Multiplication Instructions 117
+there are six multiplications and three additions/subtractions. An equivalent form, based on Horner’s scheme for evaluation of polynomials, is
+((5*x   7)*x + 3)*x   10
+This has only three multiplications.
+Suppose that the value of x is in the EAX register.
+(a) Write 80x86 assembly language statements that will evaluate p(x)
+the “obvious” way, putting the result in EAX.
+(b) Write 80x86 assembly language statements that will evaluate p(x)
+using Horner’s scheme, again putting the result in EAX.
+(c) Assuming a Pentium system, compare the number of clock cycles
+for execution and the number of bytes of object code required for
+the code fragments in (a) and in (b) above.
+7. The 80x86 architecture has distinct instructions for multiplication of
+signed and unsigned numbers. It does not have separate instructions
+for addition of signed and unsigned numbers. Why are different instructions needed for multiplication but not for addition?
+Programming Exercises 4.3
+1. Write a complete 80x86 assembly language program to prompt for the
+length, width, and height of a box and to display its volume (length *
+width * height).
+2. Write a complete 80x86 assembly language program to prompt for the
+length, width, and height of a box and to display its surface area
+2*(length*width + length*height + width*height).
+3. Suppose that someone has a certain number of coins (pennies, nickels,
+dimes, quarters, fifty-cent pieces, and dollar coins) and wants to know
+the total value of the coins, as well as how many coins there are. Write
+a program to help. Specifically, follow the design below.
+prompt for and input the number of pennies;
+total := number of pennies;
+numberOfCoins := number of pennies;
+prompt for and input the number of nickels;
+total := total + 5 * number of nickels;
+add number of nickels to numberOfCoins;
+TEAM LinG - Live, Informative, Non-cost and Genuine!

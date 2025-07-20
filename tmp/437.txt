@@ -1,0 +1,32 @@
+4. Write a program that will process a collection of fixed format records from
+the file RECORDS.DAT. Each line of the file will consist of ASCII data with
+• a person’s name in columns 1–20
+• an integer right-justified in columns 21–25
+Each line of the file will be terminated by a carriage return and a linefeed character so that the total line length is 27 characters. Such a file
+can be produced by a standard text editor. The program must echo the
+lines of data and then report
+• the number of records
+• the sum of the numbers
+• the person with the largest number
+Use only input/output functions from the kernel32 library, not macros
+from IO.H. The atod and dtoa macros from IO.H may be used.
+12.3 Lower-Level Input/Output
+Earlier in this book input and output have been done using macros in IO.H. In this chapter, input and output have been done using function calls from the kernel32 library, a
+somewhat lower-level approach. You have probably also done higher-level I/O using
+high-level programming languages. This section discusses I/O at a level lower than that
+offered by the kernel32 library, covering the Intel 80x86 and other architectures. Since
+low-level I/O is increasingly restricted to the operating system, this section does not
+show actual code.
+As discussed in Chapter 2, the Intel 80x86 architecture has memory addresses
+from 0000000016 to FFFFFFFF16. It also has a separate I/O address space, with port
+addresses ranging from 000016 to FFFF16. Memory addresses have been used by many of
+the instructions covered in this book. However, port addresses are used by only a few
+instructions, the most common of which are the in and out instructions that move data
+from the addressed port to or from the accumulator (e.g., AL, AX, or EAX). In this sense,
+they are like limited mov instructions.
+In an IBM-compatible PC, common I/O devices normally have standard port
+assignments. For example, the parallel printer port known as LPT1 uses three port
+addresses: 0378, 0379, and 037A. The first of these ports is used to send characters to a
+printer, the second to determine its status, and the third to send control information to
+12.3 Lower-Level Input/Output 437
+TEAM LinG - Live, Informative, Non-cost and Genuine!

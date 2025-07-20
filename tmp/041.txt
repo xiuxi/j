@@ -1,0 +1,23 @@
+CHAPTER 3
+3.1 Assembly language
+statements
+3.2 A complete example
+3.3 How to assemble, link,
+and run a program
+3.4 The assembler listing
+file
+3.5 Constant operands
+3.6 Instruction operands
+3.7 Input/output using
+macros defined in IO.H
+Elements of Assembly
+Language
+Chapter 3 explains how to write assembly language
+programs. The first part describes the types and
+formats of statements that are accepted by MASM,
+the Microsoft Macro Assembler. Then follows an
+example of a complete assembly language program, with instructions on how to assemble, link,
+and execute this and other programs. The last portion of the chapter fills in details about constructs
+that have been illustrated in the example, laying
+the groundwork for programs in future chapters.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

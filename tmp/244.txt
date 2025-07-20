@@ -1,0 +1,32 @@
+244 String Operations
+The forever loop is exactly what is done by the repeated string instruction repe cmpsb.
+Since the loop is terminated when either ECX = 0 or when ZF = 0, it is necessary to be
+sure that the last pair of characters compared were the same; this is the reason for the
+extra if structure at the end of the design. Figure 7.8 shows a complete program that
+implements this design.
+The scan string instruction scas is used to scan a string for the presence or
+absence of a particular string element. The string that is examined is a destination
+string; that is, the address of the element being examined is in the destination index register EDI. With a scasb instruction, the element searched for is the byte in the AL register; with a scasw, it is the word in the AX register; and with a scasd, it is the
+doubleword in the EAX register. The scasb, scasw, and scasd instructions use no
+; program to search for one string embedded in another
+; author:  R. Detmer     revised:  10/97
+.386
+.MODEL FLAT
+ExitProcess PROTO NEAR32 stdcall, dwExitCode:DWORD
+INCLUDE io.h
+cr          EQU    0dh   ; carriage return character
+Lf          EQU    0ah   ; linefeed character
+.STACK  4096             ; reserve 4096-byte stack
+.DATA
+prompt1     BYTE  "String to search?  ", 0
+prompt2     BYTE  cr, Lf, "Key to search for?  ", 0
+target      BYTE  80 DUP (?)
+key         BYTE  80 DUP (?)
+trgtLength  DWORD ?
+keyLength   DWORD ?
+lastPosn    DWORD ?
+failure     BYTE  cr,Lf,Lf,"The key does not appear in the string.",cr,Lf,0
+success     BYTE  cr,Lf,Lf,'The key appears at position'
+(continued)
+Figure 7.8 String search program
+TEAM LinG - Live, Informative, Non-cost and Genuine!

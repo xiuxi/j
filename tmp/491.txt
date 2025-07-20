@@ -1,0 +1,166 @@
+for imul instructions, 110
+inc and dec instructions, 100
+loop instructions, 174
+movsx and movzx instructions,
+125
+neg instructions, 102
+not instruction, 270
+pop instructions, 197
+push all and pop all instructions,
+200
+for push instructions, 195
+and reduced instruction set
+computer designs, 264
+rep movs instructions, 241
+ret instructions, 208
+scas instructions, 247
+shift and rotate instructions, 
+282
+stos instructions, 249
+test instructions, 275
+xchg instruction, 93
+Clock speeds, 88
+CloseHandle function, 429, 432
+cmc instructions, 135
+cmp (compare) instructions, 146, 147,
+148, 190, 191
+CMPP instructions, 416
+cmps (compare string) instructions,
+232
+cmps instructions, 242, 265
+COBOL language, 39
+packed decimal types/operations
+supported by, 417
+Code
+in-line assembly, 384-385, 386
+relocatable, 306
+.CODE directive, 202
+Coding
+with floating-point instructions,
+359-373
+Colons, 43, 138
+combine macro, 377, 380
+Command line, 40
+Command line interface, 37
+Commas, 43
+in macro calls, 320, 323
+Comments, 42
+assembly language, 82
+for assembly language program,
+45, 48
+Compilers, 38, 39
+Complementing the number, 11-12
+Complex circuits, 298
+Complex instruction set computer
+designs, 265
+reduced instruction set
+computer designs versus,
+264
+Computer system parts, 27-40
+CPU, 30-34
+input/output devices, 36-37
+language translators and linker,
+38-39
+memory, 28-29
+operating system, 37-38
+text editors, 38
+Conditional assembly, 326-333, 338
+directives, 329
+Conditional if statements
+and Boolean values, 268
+Conditional jump instructions, 144,
+149, 176, 190, 191, 356
+timing and size of, 151
+Console I/O
+using kernel32 functions, 421,
+422-424
+using Kernel32 library, 420-428
+Constant operands, 68-71
+Continuation condition, 159
+Control characters, 7, 8
+Control word, floating-point unit, 341
+Conversion
+between bases, 2-3. See also
+ASCII
+Copying
+data, 85, 86-94
+fixed number of characters of
+string, 240
+Counter
+and dollar sign symbol, 256
+count, 140
+count operands, 207
+double shift instructions, 287
+shift and rotate instructions, 
+282
+versions of, 279
+CPU. See Central processing unit
+CR. See Carriage return
+CreateFileA function, 429, 431, 432
+CREATE_NEW, 432
+CS register, 32
+cwde instructions, 123, 124
+cwd instructions, 123, 124, 135
+CX register, 32
+D
+daa (decimal adjust after addition)
+instructions, 396, 397, 417
+das (decimal adjust after subtraction)
+instructions, 396, 398, 417
+Data
+changing size of, 92
+copying, 85, 86-94
+.DATA directive, 48, 219
+Data registers, 30
+Data representation in computer, 1-26
+addition/subtraction of 2’s
+complement numbers, 15-20
+binary and hexadecimal
+numbers, 2-5
+character codes, 6-8
+other systems for representing
+numbers, 21-25
+2’s complement representation
+for signed integers, 9-14
+Debuggers, 39, 40
+dec idi instructions, 248
+Decimal arithmetic, 387-417
+packed BCD instructions,
+396-403
+packed BCD representations,
+388-394
+unpacked BCD representations
+and instructions, 404-412
+VAX packed decimal
+instructions, 416-417
+Decimal numbers, 3, 26
+binary numbers converted to, 4
+converting to hex equivalent, 4
+converting to IEEE single format,
+23-24, 25
+converting to octal numbers, 5
+converting 2’s complement
+representation to, 12
+dec instructions, 95, 100, 134
+execution of, 101
+Delete, 8
+Destination index, 32
+Destination operands, 79
+adc and sbb instructions, 131
+add and sub instructions, 99
+additional mov instructions, 90
+and, or, and xor instructions, 270
+cmp instructions, 148
+double shift instructions, 287
+immediate-to-memory mov
+instructions, 89
+immediate-to-register mov
+instructions, 87
+imul instructions, 110
+inc and dec instructions, 100
+neg instructions, 102
+not instructions, 270
+shift and rotate instructions, 282
+test instructions, 275
+Index 491
+TEAM LinG - Live, Informative, Non-cost and Genuine!

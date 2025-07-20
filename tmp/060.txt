@@ -1,0 +1,31 @@
+60 Elements of Assembly Language
+3.4 The Assembler Listing File
+The ML assembler can produce a listing file as part of the assembly process. This .LST
+file shows the source code, the object code to which it is translated, and additional information. Examination of the listing file can help you understand the assembly process.
+When your source file contains errors, this .LST file displays error messages at the points
+of the errors, helping to locate the offending statements.
+Suppose that we modify the example program EXAMPLE.ASM from Fig. 3.1,
+changing
+atod    string          ; convert to integer
+mov     number1, eax    ; store in memory
+to
+atod    eax, string     ; convert to integer
+mov     number1, ax     ; store in memory
+This introduces two errors: The atod macro only allows one operand, and the source and
+destination operands for the mov instruction are different sizes. Suppose that this
+revised file is stored in EXAMPLE1.ASM.
+An additional switch, /Fl (uppercase F, lowercase letter l), is needed to generate
+a listing file during assembly
+ml /c /coff /Fl example1.asm
+When this command is entered at a DOS prompt, the console shows
+Assembling: example1.asm
+example1.asm(32): error A2022: instruction operands must be the
+same size
+example1.asm(31): error A2052: forced error : extra operand(s) in
+ATOD
+atod(7): Macro Called From
+example1.asm(31): Main Line Code
+These error messages are fairly helpful—they indicate errors on lines 32 and 31 of the
+source file and describe the errors. However, if you look at the corresponding part of
+EXAMPLE1.LST, you see
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,15 @@
+40 Parts of a Computer System
+stored in memory. Objects in memory can be addressed by 32-bit
+addresses. In a flat memory model, such addresses are effectively actual
+addresses. In a segmented memory model, addresses are calculated from
+a starting address determined from a segment number and an offset
+within the segment.
+Input/output at the hardware level uses a separate collection of
+addresses called ports. Input/output is often done through operating systems utilities.
+An operating system is a vital software component. Through a
+command line or a graphical user interface, it interprets the user’s requests
+to carry out commands or to load and execute programs.
+A text editor, an assembler, and a linker are necessary software
+tools for the assembly language programmer. These may be separate programs or available as part of an integrated development environment. A
+debugger is also a useful programmer’s tool.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

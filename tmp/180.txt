@@ -1,0 +1,33 @@
+180 Branching and Looping
+(c) sum := 0;
+for count := 1 to 50 loop
+add (2*count   1) to sum;
+display count, sum;
+end for;
+Programming Exercises 5.4
+1. Write a complete 80x86 program to input a positive integer value N and
+to display a table of integers from 1 to N and their squares. Use a twocolumn format such as
+number     square
+1          1
+2          4
+3          9
+4         16
+5         25
+2. A Pythagorean triple consists of three positive integers A, B, and C
+such that A2 + B2 = C2. For example, the numbers 3, 4, and 5 form a
+Pythagorean triple since 9 + 16 = 25. Write a complete 80x86 program to
+input a value for C and then display all possible Pythagorean triples
+with this value for C, if any. For example, if 5 is entered for the value of
+C, then the output might be
+A          B          C
+3          4          5
+4          3          5
+5.5 Arrays
+Programs frequently use arrays to store collections of data values. Loops are commonly
+used to manipulate the data in arrays. This section shows one way to access 1-dimensional arrays in 80x86 assembly language; other techniques will appear in Chapter 9 with
+discussion of additional memory addressing modes.
+This section contains a complete program to implement the design below. The
+program first accepts a collection of positive numbers from the keyboard, counting them
+and storing them in an array. It then calculates the average of the numbers by going
+back through the numbers stored in the array, accumulating the total in sum. Finally the
+TEAM LinG - Live, Informative, Non-cost and Genuine!

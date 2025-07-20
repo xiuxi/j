@@ -1,0 +1,35 @@
+5.3 Implementing Loop Structures 171
+then
+add 1 to ACount;
+elseif (grade ≥ 80)
+then
+add 1 to BCount;
+elseif (grade ≥ 70)
+then
+add 1 to CCount;
+elseif (grade ≥ 60)
+then
+add 1 to DCount;
+else
+add 1 to FCount;
+end if;
+end while;
+display "Number of As", ACount;
+display "Number of Bs", BCount;
+display "Number of Cs", CCount;
+display "Number of Ds", DCount;
+display "Number of Fs", FCount;
+4. The greatest common divisor of two non-negative integers is the
+largest integer that evenly divides both numbers. The following algorithm will find the greatest common divisor of number1 and number2.
+gcd := number1;
+remainder := number2;
+until (remainder = 0) loop
+dividend := gcd;
+gcd := remainder;
+remainder := dividend mod gcd;
+end until;
+Write a complete 80x86 assembly language program that implements the
+following design, with appropriate prompts for input and labels for output.
+until (number1 > 0) loop
+input number1;
+TEAM LinG - Live, Informative, Non-cost and Genuine!

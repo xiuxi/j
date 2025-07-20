@@ -1,0 +1,45 @@
+A few examples illustrate the actions of and the differences between these
+instructions. Assume that the directive
+intValue  DWORD ?
+is coded in the data segment. Suppose that the floating-point register stack contains
+The left diagram below shows the resulting stack if fist intValue is executed and
+the right diagram shows the resulting stack if fistp intValue is executed. In both
+cases, the contents of intValue will be 0000000A, the doubleword length 2’s complement
+integer version of the floating-point number 10.0.
+ST
+ST(1)
+ST(2)
+ST(3)
+ST(4)
+ST(5)
+ST(6)
+ST(7)
+10.0
+20.0
+30.0
+40.0
+ST
+ST(1)
+ST(2)
+ST(3)
+ST(4)
+ST(5)
+ST(6)
+ST(7)
+20.0
+30.0
+40.0
+ST
+ST(1)
+ST(2)
+ST(3)
+ST(4)
+ST(5)
+ST(6)
+ST(7)
+10.0
+20.0
+30.0
+40.0
+10.1 80x86 Floating-Point Architecture 347
+TEAM LinG - Live, Informative, Non-cost and Genuine!

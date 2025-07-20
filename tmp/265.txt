@@ -1,0 +1,31 @@
+Chapter Summary 265
+Chapter Summary
+The word string refers to a collection of consecutive bytes, words, or doublewords in memory. The 80x86 instruction set includes five instructions for
+operating on strings: movs (to move or copy a string from a source to a destination location), cmps (to compare two strings), scas (to scan a string for
+a particular element), stos (to store a given value in a string), and lods (to
+copy a string element into EAX, AX, or AL). Each of these has mnemonic
+forms ending with b, w, or d to give the size of the string element.
+A string instruction operates on one string element at a time.
+When a source string is involved, the source index register ESI contains the
+address of the string element. When a destination string is involved, the
+destination index register EDI contains the address of the string element.
+An index register is incremented or decremented after the string element is
+accessed, depending on whether the direction flag DF is reset to zero or set
+to one; the cld and std instructions are used to give the direction flag a
+desired value.
+Repeat prefixes rep, repe (repz), and repne (repnz) are used with
+some string instructions to cause them to repeat automatically. The number
+of times to execute a primitive instruction is placed in the ECX register. The
+conditional repeat forms use the count in ECX but will also terminate
+instruction execution if the zero flag gets a certain value; these are appropriate for use with the cmps and scas instructions that set or reset ZF.
+The xlat instruction is used to translate the characters of a string.
+It requires a 256-byte-long translation table that starts with the destination
+byte to which the source byte 00 is translated and ends with the destination byte to which the source byte FF is translated. The xlat instruction can
+be used for such applications as changing ASCII codes to EBCDIC codes or
+for changing the case of letters within a given character coding system.
+The itoa macro expands to code that calls a procedure itoaproc.
+Basically this procedure works by repeatedly dividing a non-negative number by 10 and using the remainder to get the rightmost character of the
+destination string.
+The 80x86 chips are examples of complex instruction set computer (CISC) architecture. They include many complex instructions and
+offer many different addressing modes. Reduced instruction set
+TEAM LinG - Live, Informative, Non-cost and Genuine!

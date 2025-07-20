@@ -1,0 +1,30 @@
+122 Basic Instructions
+Clock Cycles Number
+Operand 386 486 Pentium of Bytes Opcode
+register 8 19 19 22 2 F6
+register 16 27 27 30 2 F7
+register 32 43 43 48 2 F7
+memory byte 22 20 22 2 + F6
+memory word 30 28 30 2 + F7
+memory doubleword 46 44 48 2 + F7
+Figure 4.16 idiv instructions
+Clock Cycles Number
+Operand 386 486 Pentium of Bytes Opcode
+register 8 14 16 17 2 F6
+register 16 22 24 25 2 F7
+register 32 38 40 41 2 F7
+memory byte 17 16 17 2 + F6
+memory word 25 24 25 2 + F7
+memory doubleword 41 40 41 2 + F7
+Figure 4.17 div instructions
+by 2, the quotient 1 23 45 is too large to fit in the AX register. If an error occurs during the
+division operation, the 80x86 generates an exception. The routine, or interrupt handler,
+that services this exception may vary from system to system. Windows 95 on the author’s
+Pentium system pops up a window with the message “This program has performed an
+illegal operation and will be shut down.” When the Details button is pressed, it displays
+“TEST caused a divide error...” The 80x86 leaves the destination registers undefined following a division error.
+Figure 4.16 lists the allowable operand types for idiv instructions and Fig. 4.17
+lists the allowable operand types for div instructions. The only differences in the two
+tables are in the number of clock cycles columns; div operations are slightly faster than
+idiv operations.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

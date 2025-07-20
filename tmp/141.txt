@@ -1,0 +1,27 @@
+5.1 Unconditional Jumps 141
+As you input numbers one at a time, this
+program will report the count of numbers so far,
+the sum so far, and the average.
+number?  75
+count          1       sum         75       average         75
+next number?  93
+count          2       sum        168       average         84
+next number?  78
+count          3       sum        246       average         82
+next number? (control-C pressed)
+Figure 5.2 Sample run of program
+jmp    quit                    ; exit from program
+.
+.
+quit:  INVOKE ExitProcess, 0   ; exit with return code 0
+illustrates a forward reference.
+There are several 80x86 jmp instructions, in two major groups. All work by
+changing the value in the instruction pointer register EIP, so that the next instruction to
+be executed comes from a new address rather than from the address immediately following the current instruction. Jumps can be intersegment, changing the code segment
+register CS as well as EIP. However, this does not happen with flat memory model programming, so these instructions will not be covered. The intrasegment jumps are summarized in Fig. 5.3; the first two are the most commonly used.
+Each relative jump instruction contains the displacement of the target from the
+jmp statement itself. This displacement is added to the address of the next instruction to
+find the address of the target. The displacement is a signed number, positive for a forward reference and negative for a backward reference. For the relative short version of
+the instruction, only a single byte of displacement is stored; this is changed to a signextended to a doubleword before the addition. The relative near format includes a 32-bit
+displacement.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

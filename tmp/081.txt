@@ -1,0 +1,28 @@
+3.7 Input/Output Using Macros Defined in IO.H 81
+and the code segment macro
+input     response1, 10
+(a) What ASCII codes will be stored in the data segment if
+–578<Enter>
+is typed at run time?
+(b) If the macro
+atod      response1
+follows the above input macro, what will be in the EAX register
+and what will be the values of the OF, SF, and ZF flags?
+4. Given the data segment definition
+response2 BYTE     10 DUP(?)
+and the code segment macro
+input     response2, 10
+(a) what ASCII codes will be stored in the data segment if
+123456<Enter>
+is typed at run time?
+(b) If the macro
+atoi      response2
+follows the above input macro, what will be in the AX register and
+what will be the values of the OF, SF, and ZF flags?
+5. Suppose a program contains the data segment definitions
+value1    DWORD    ?
+result1   BYTE     11 DUP(?)
+BYTE     ' sum', 0dh, 0ah, 0
+and the code segment macro
+dtoa      result1, value1
+TEAM LinG - Live, Informative, Non-cost and Genuine!

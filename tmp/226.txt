@@ -1,0 +1,40 @@
+226 Procedures
+.CODE
+Move        PROC NEAR32
+; procedure Move(NbrDisks : integer; { number of disks to move }
+;          Source, Dest, Spare : character { spindles to use }  )
+; parameters are passed in words on the stack
+push   ebp           ; save base pointer
+mov    ebp,esp       ; copy stack pointer
+push   eax           ; save registers
+push   ebx
+cmp    WORD PTR [ebp+14],1  ; NbrDisks = 1?
+jne    elseMore      ; skip if more than 1
+mov    bx,[ebp+12]   ; Source
+mov    source,bl     ; copy character to output
+mov    bx,[ebp+10]   ; destination
+mov    dest,bl       ; copy character to output
+output message       ; print line
+jmp    endIfOne      ; return
+elseMore:   mov    ax,[ebp+14]   ; get NbrDisks
+dec    ax            ; NbrDisks – 1
+push   ax            ; parameter 1: NbrDisks–1
+pushw  [ebp+12]      ; parameter 2: source does not change
+pushw  [ebp+8]       ; parameter 3: old spare is new destination
+pushw  [ebp+10]      ; parameter 4: old destination is new spare
+call   Move          ; Move(NbrDisks–1,Source,Spare,Destination)
+add    esp,8         ; remove parameters from stack
+pushw  1             ; parameter 1: 1
+pushw  [ebp+12]      ; parameter 2: source does not change
+pushw  [ebp+10]      ; parameter 3: destination unchanged
+pushw  [ebp+8]       ; parameter 4: spare unchanged
+call   Move          ; Move(1,Source,Destination,Spare)
+add    esp,8         ; remove parameters from stack
+push   ax            ; parameter 1: NbrDisks–1
+pushw  [ebp+8]       ; parameter 2: source is original spare
+pushw  [ebp+10]      ; parameter 3: original destination
+pushw  [ebp+12]      ; parameter 4: original source is spare
+call   Move          ; Move(NbrDisks–1,Spare,Destination,Source)
+(continued)
+Figure 6.20 (continued)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

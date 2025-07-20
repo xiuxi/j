@@ -1,0 +1,38 @@
+Number Timing Timing Timing
+Mnemonic Operand(s) Flags affected Opcode of Bytes 386 486 Pentium
+movsx reg32,reg16 none 0F BF 3 3 3 3
+movsx reg32,mem16 none 0F BF 3+ 6 3 3
+movzx reg16,reg8 none 0F B6 3 3 3 3
+reg32,reg8
+movzx reg16,mem8 none 0F B6 3+ 6 3 3
+reg32,mem8
+movzx reg32,reg16 none 0F B7 3 3 3 3
+movzx reg32,mem16 none 0F B7 3+ 6 3 3
+mul reg8 OF,CF F6 2 9-14 13-18 11
+SF,ZF, PF,AF ?
+mul reg16 OF,CF F7 2 9-22 13-26 11
+reg32 SF,ZF, PF,AF ? 9-38 13-42 10
+mul mem8 OF,CF F6 2+ 12-17 13-18 11
+SF,ZF, PF,AF ?
+mul mem16 OF,CF F7 2+ 12-25 13-26 11
+mem32 SF,ZF, PF,AF ? 12-41 13-42 10
+neg reg8 SF,ZF,OF,CF,PF,AF F6 2 2 1 1
+neg reg16 SF,ZF,OF,CF,PF,AF F7 2 2 1 1
+reg32
+neg mem8 SF,ZF,OF,CF,PF,AF F6 2+ 2 1 1
+neg mem16 SF,ZF,OF,CF,PF,AF F7 2+ 2 1 1
+mem32
+not reg8 none F6 2 2 1 1
+not reg16 none F7 2 2 1 1
+reg32
+not mem8 none F6 2+ 6 3 3
+not mem16 none F7 2+ 6 3 3
+mem32
+or AL,imm8 SF,ZF,OF,CF,PF,AF 0C 2 2 1 1
+or AX,imm16 SF,ZF,OF,CF,PF,AF 0D 3 2 1 1
+EAX,imm32 5
+or reg8,imm8 SF,ZF,OF,CF,PF,AF 80 3 2 1 1
+or reg16,imm16 SF,ZF,OF,CF,PF,AF 81 4 2 1 1
+reg32,imm32 6
+80x86 Instructions 459
+TEAM LinG - Live, Informative, Non-cost and Genuine!

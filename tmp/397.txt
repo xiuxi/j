@@ -1,0 +1,36 @@
+11.2 Packed BCD Instructions 397
+Although each answer is correct as the sum of two unsigned binary integers,
+only the first result is correct as a BCD value. The second and third sums contain bit patterns that are not used in BCD representations, C16 in the second example and B16 in the
+third. The last two sums contain no invalid digit—they are simply wrong as decimal sums.
+The daa instruction is used after an addition instruction to convert a binary
+sum into a packed BCD sum. The instruction has no operand; the sum to be converted
+must be in the AL register. A daa instruction examines and sets both the carry flag CF
+and the auxiliary carry flag AF (bit 4 of the EFLAGS register). Recall that the carry flag is
+set to 1 during addition of two eight bit numbers if there is a carry out of the leftmost
+position. The AF flag similarly is set to 1 by add or adc instructions if there is a carry
+resulting from addition of the low-order four bits of the two operands. One way of thinking of this is that the sum of the two low-order hex digits is greater than F16.
+A daa instruction first examines the right hex digit of the binary sum in AL. If
+this digit is over 9 (that is, A through F), then 6 is added to the entire sum and AF is set
+to 1. Notice that this would correct the result in the second example above since 5C + 6
+= 62, the correct packed BCD sum of 37 and 25. The same correction is applied if AF=1
+when the daa instruction is executed. Thus in the fourth example, 61 + 6 = 67.
+After correcting the right digit, daa examines the left digit in AL. The action is
+similar: If the left digit is over 9 or CF=1, then 6016 is added to the entire sum. The carry flag
+CF is set to 1 if this correction is applied. In the third example, B8 + 60 = 18 with a carry of 1.
+Both digits must be corrected in the last example, 12 + 6 = 18 and 18 + 60 = 78
+(since CF=1). The chart below completes the above examples, assuming that both of the
+following instructions are executed.
+add  al, bl
+daa
+Before After add After daa
+AL: 34 AL: 59 AL: 59
+BL: 25 AF: 0   CF: 0 AF: 0   CF: 0
+AL: 37 AL: 5C AL: 62
+BL: 25 AF: 0   CF: 0 AF: 1   CF: 0
+AL: 93 AL: B8 AL: 18
+BL: 25 AF: 0   CF: 0 AF: 0   CF: 1
+AL: 28 AL: 61 AL: 67
+BL: 39 AF: 1   CF: 0 AF: 1   CF: 0
+AL: 79 AL: 12 AL: 78
+BL: 99 AF: 1   CF: 1 AF: 1   CF: 1
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,37 @@
+9.2 80x86 Instruction Coding 317
+procedure binarySearch(arr : array, nbr: integer, keyValue : integer) : integer
+topIndex := nbr;
+bottomIndex := 0;
+while (bottomIndex ≤ topIndex) loop
+midIndex := (bottomIndex + topIndex) div 2;
+if (keyValue = arr[midIndex])
+then
+return midIndex;
+elseif (keyValue < arr[midIndex])
+then
+topIndex := midIndex—1;
+else
+bottomIndex := midIndex + 1;
+end if;
+end loop;
+return  1;
+Implement this design as an 80x86 NEAR32 procedure binarySearch
+with three parameters, (1) the address of an array of doublewords, (2) a
+doubleword nbr, and (3) a doubleword keyValue. Return the appropriate
+result in EAX. The procedure will change no register other than EAX,
+and it will be responsible for removing parameters from the stack. Use
+scaled and indexed addressing appropriately to address array elements.
+Write a short test driver program to test your procedure binarySearch.
+2. The first nbrElts values in an array a[1..maxIndex] can be sorted into
+increasing order using the selection sort algorithm.
+procedure selectionSort(arr : array, nbr: integer)
+for position := 1 to nbrElts–1 loop
+smallSpot := position;
+smallValue := a[position];
+for i := position+1 to nbrElts loop
+if a[i] < smallValue
+then
+smallSpot := i;
+smallValue := a[i];
+end if;
+TEAM LinG - Live, Informative, Non-cost and Genuine!

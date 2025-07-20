@@ -1,0 +1,30 @@
+80 Elements of Assembly Language
+Problems may arise when the atod macro is used. The macro may find no digit
+code; this would be the case if a space character were between a minus sign and the first
+digit of a number, or if the source string began with the code for a letter. The decimal number could be too large to store in doubleword-length 2’s complement form. If any of these
+things occurs, a value of 00000000 is placed in EAX and the overflow flag OF is set to 1.
+If atod is able to successfully convert a string of ASCII characters, then the
+overflow flag OF is set to 0. In all cases, the SF, ZF, and PF flags are set according to the
+value returned in EAX as follows:
+• SF is 1 if the number is negative, and 0 otherwise
+• ZF is 1 if the number is 0, and 0 if the number is nonzero
+• PF reflects the parity of the number returned in EAX
+In addition, CF is 0 and DF is unchanged. No registers other than EAX and the flag register are changed.
+The atod macro will typically be used immediately after the input macro. The
+input macro produces a string of ASCII codes, including a trailing null character. When
+atod is applied to this string, the null character serves as a terminating character for the
+scan. If atod is applied to a string that comes from some source other than input, the
+programmer must ensure that it has some trailing nondigit character to prevent atod
+from scanning too far.
+The atoi (ASCII to integer) and itoa (integer to ASCII) macros are the wordlength versions of atod and dtoa. The atoi macro scans a string of characters and produces the corresponding word-length 2’s complement value in AX. The itoa macro
+takes the 2’s complement value stored in a word-length source and produces a string of
+exactly six characters representing this value in decimal. These macros are useful if you
+are dealing with values in the range  32,768 to 32,767.
+Exercises 3.7
+1. Why wasn’t the dtoa macro designed to produce a smaller number of
+ASCII codes? What is important about the number 11?
+2. Why wasn’t the itoa macro designed to produce a smaller number of
+ASCII codes? What is important about the number six?
+3. Given the data segment definition
+response1 BYTE     10 DUP(?)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

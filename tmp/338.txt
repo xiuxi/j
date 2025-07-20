@@ -1,0 +1,20 @@
+338 The Assembly Process
+Macros are defined using MACRO and ENDM directives. Macros may
+use parameters that are associated with corresponding arguments in macro
+calls. A call is expanded at assembly time. The statements in the expansion
+of a macro call appear in the macro definition, with arguments substituted
+for parameters. A macro definition may declare local labels that MASM
+expands to different symbols for different macro calls.
+Conditional assembly may be used in regular code or in macro definitions to generate different statements, based on conditions that can be
+checked at assembly time. The IFB and IFNB directives are used in macros
+to check for the absence or presence of arguments. Several other conditional assembly directives are also available, including IF, IFE, IFDEF, and
+IFNDEF. An ELSE directive may be used to provide two alternative blocks of
+code, and the ENDIF directive ends a conditional assembly block.
+If the assembler encounters an EXITM directive when expanding a
+macro definition, it immediately terminates expansion of the macro. The
+.ERR directive triggers a forced error so that MASM displays an error message and produces no .OBJ file for the assembly.
+The file IO.H contains definitions for a collection of input/output
+macros, and a few directives. These macro definitions use conditional
+assembly to check for missing or extra arguments and generate code that
+calls external procedures.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

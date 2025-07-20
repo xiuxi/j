@@ -1,0 +1,24 @@
+224 Procedures
+disks are moved to the spare spindle, the largest one is moved to the destination, and
+finally the (NbrDisks–1) smaller disks are moved from the spare spindle to the destination. Each time (NbrDisks–1) disks are moved, exactly the same procedure is followed,
+except that different spindles have the roles of source, destination, and spare. Figure
+6.19 expresses the algorithm in pseudocode.
+Figure 6.18 Towers of Hanoi puzzle
+Spindle A Spindle B Spindle C
+procedure Move(NbrDisks, Source, Destination, Spare);
+begin
+if NbrDisks = 1
+then
+display “Move disk from “, Source, “ to “, Destination
+else
+Move(NbrDisks – 1, Source, Spare, Destination);
+Move(1, Source, Destination, Spare);
+Move(NbrDisks – 1, Spare, Destination, Source);
+end if;
+end procedure Move;
+begin {main program}
+prompt for and input Number;
+Move(Number, ‘A’, ‘B’, ‘C’);
+end;
+Figure 6.19 Pseudocode for Towers of Hanoi Solution
+TEAM LinG - Live, Informative, Non-cost and Genuine!

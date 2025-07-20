@@ -1,0 +1,30 @@
+32 Parts of a Computer System
+The EBX, ECX, and EDX registers also have low-order words BX, CX, and DX,
+which are divided into high-order and low-order bytes BH and BL, CH and CL, and DH
+and DL. Each of these parts can be changed without altering other bits. It may be a surprise that there are no comparable names for the high-order words in EAX, EBX, ECX,
+and EDX—you cannot reference bits 16–31 independently by name.
+The 8086 through 80286 processors had four 16-bit general registers called
+AX, BX, CX, and DX. The “E” was added for “extended” with the 32-bit 80386 registers. However, the 80386 and later architectures effectively include the older 16-bit
+architecture.
+There are four additional 32-bit registers that Intel also calls general, ESI,
+EDI, ESP, and EBP. In fact, you can use these registers for operations like arithmetic,
+but normally you should save them for their special purposes. The ESI and EDI registers are index registers, where SI stands for source index and DI stands for destination index. One of their uses is to indicate memory addresses of the source and
+destination when strings of characters are moved from one place to another in memory. They can also be used to implement array indexes. The names SI and DI can be
+used for the low-order words of ESI and EDI, respectively, but we will have little occasion to do this.
+The ESP register is the stack pointer for the system stack. It is rarely changed
+directly by a program, but is changed when data is pushed onto the stack or popped
+from the stack. One use for the stack is in procedure (subroutine) calls. The address of
+the instruction following the procedure call instruction is stored on the stack. When it is
+time to return, this address is retrieved from the stack. You will learn much more about
+the stack and the stack pointer register in Chapter 6. The name SP can be used for the
+low-order word of ESP, but this will not be done in this book.
+The EBP register is the base pointer register. Normally the only data item
+accessed in the stack is the one that is at the top of the stack. However, the EBP register
+is often used to mark a fixed point in the stack other than the stack top, so that data near
+this point can be accessed. This is also used with procedure calls, particularly when
+parameters are involved.
+There are six 16-bit segment registers: CS, DS, ES, FS, GS, and SS. In the older
+16-bit segmented memory model, the CS register contains the segment number of the code
+segment, the area of memory where the instructions currently being executed are stored.
+Since a segment is 64K long, the length of a program’s collection of instructions is often limited to 64K; a longer program requires that the contents of CS be changed while the program is running. Similarly DS contains the segment number of the data segment, the area
+TEAM LinG - Live, Informative, Non-cost and Genuine!

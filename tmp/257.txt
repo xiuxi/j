@@ -1,0 +1,28 @@
+7.3 Character Translation 257
+Each ASCII code is translated to another ASCII code by this program. Uppercase letters are translated to lowercase, lowercase letters and digits are unchanged, and
+all other characters are translated to spaces. Construction of such a table involves looking at a table of ASCII codes (see Appendix A). For this program the translation table is
+defined by
+table       BYTE   48 DUP (' '), '0123456789', 7 DUP (' ')
+BYTE   'abcdefghijklmnopqrstuvwxyz', 6 DUP (' ')
+BYTE   'abcdefghijklmnopqrstuvwxyz', 133 DUP (' ')
+Careful counting will show that exactly 256 bytes are defined. Recall that a BYTE directive stores the ASCII code of each character operand. Each of the first 48 bytes of the
+table will contain the ASCII code for a space (i.e., blank), 2016. Therefore if the code in the
+AL register represents any of the first 48 ASCII characters—a control character, or one of
+the printable characters from 2016 (space) to 2F16 (/)—it will be translated to a space.
+Note that it is legal to translate a character to itself. Indeed, this is what will
+happen for digits; the ASCII codes 3016 to 3916 for digits 0 through 9 appear at offsets 3016
+to 3916. The codes for the seven characters : through @ are next in an ASCII chart; each
+of these will be translated to a space. The next ASCII characters are the uppercase letters and the next entries in the table are codes for the lowercase letters. For example, the
+table contains 6116 at offset 4116, so an uppercase A (ASCII code 4116) will be translated
+to a lower case a (ASCII code 6116). The next six blanks are at the offsets 9116 ([) through
+9616 (‘), so that each of these characters is translated to a blank. The ASCII code for each
+lowercase letter is assembled at an offset equal to its value, so each lowercase letter is
+translated to itself. Finally, the translation table contains 133 ASCII codes for blanks;
+these are the destinations for {, |, }, ~, DEL, and each of the 128 bit patterns starting with
+a one, none of them codes for ASCII characters.
+Figure 7.14 shows the output of the program in Fig. 7.13. Notice that “strange”
+characters are not deleted, they are replaced by blanks.
+Original string   ->This is a #!$& STRING
+Translated string ->this is a      string
+Figure 7.14 Output from translation program
+TEAM LinG - Live, Informative, Non-cost and Genuine!

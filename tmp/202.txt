@@ -1,0 +1,33 @@
+202 Procedures
+Many high-level languages distinguish between a procedure that performs an
+action and a function that returns a value. A function is similar to a procedure except
+that it is called by using its name and argument list in an expression. It returns a value
+associated with its name; this value is then used in the expression. All subprograms in
+the C/C++ language are technically functions in this sense, but the language allows for
+functions that return no value.
+In assembly language and in some high-level languages the term procedure is
+used to describe both types of subprograms, those that return values and those that do
+not. The term procedure will be used in both senses in this book.
+Procedures are valuable in assembly language for the same reasons as in highlevel languages. They help divide programs into manageable tasks and they isolate code
+that can be used multiple times within a single program or that can be saved and reused
+in several programs.
+This section describes how to write 80x86 procedures, as well as how to assemble and link them using Microsoft software. Information is included on how to define a
+procedure, and how to transfer execution control to a procedure and back to the calling
+program. We show how the stack is used to save register contents, so that a procedure
+returns to the caller with almost all registers unchanged. Other important concepts to be
+considered with procedures are how to pass arguments to a procedure and how to
+implement local variables in a procedure body; these topics are covered in later sections.
+The code for a procedure always follows a .CODE directive. The body of each procedure is bracketed by two directives, PROC and ENDP. Each of these directives has a label
+that gives the name of the procedure. With the Microsoft Macro Assembler, the PROC
+directive allows several attributes to be specified; we are only going to use one, NEAR32.
+This attribute says that the procedure will be located in the same code segment as the calling code and that 32-bit addresses are being used. These choices are normal for flat 32-bit
+memory model programming. Figure 6.5 shows relevant parts of a program that incorporates a procedure named Initialize. The job of the procedure is to initialize several variables; the calling program is sketched, but the code for the procedure itself is complete.
+In Fig. 6.5 the procedure Initialize is bracketed by PROC and ENDP. The distance
+attribute NEAR32 declares this to be a near procedure. Although this example shows the
+procedure body prior to the main code, it could also have been placed afterwards. Recall
+that execution of a program does not necessarily begin at the first statement of the code
+segment; the statement identified by the label _start marks the first instruction to be
+executed.
+Most of the statements of procedure Initialize are ordinary mov instructions.
+These could have been used in the main program at the two places that the call
+TEAM LinG - Live, Informative, Non-cost and Genuine!

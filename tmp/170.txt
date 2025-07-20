@@ -1,0 +1,34 @@
+170 Branching and Looping
+display the minimum value;
+display the maximum value;
+2. Write a complete 80x86 assembly language program that will accept
+numbers from the keyboard and report the sum and average of the
+numbers. The count of numbers is not known in advance; use the value
+ 999999 as a sentinel to terminate input. Implement the following
+design, adding appropriate prompts for input and labels for output.
+sum := 0;
+count := 0;
+while (number entered from keyboard ≤ –999999) loop
+add number to sum;
+add 1 to count;
+end while;
+if (count = 0)
+then
+display "No numbers entered";
+else
+average := sum/count;
+display sum and average;
+end if;
+3. Write a complete 80x86 assembly language program to help your overworked instructor analyze examination grades. The program will input
+an unknown number of examination grades, using any negative grade
+as a sentinel, and then report the number of As (90–100), Bs (80–89), Cs
+(70–79), Ds (60–69), and Fs (under 60). Implement the following design.
+Prompt for input as appropriate.
+ACount := 0;
+BCount := 0;
+CCount := 0;
+DCount := 0;
+FCount := 0;
+while (grade entered at keyboard ≥ 0) loop
+if (grade ≥ 90)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

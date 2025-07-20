@@ -1,0 +1,33 @@
+50 Elements of Assembly Language
+with the name sum. Even though the last BYTE directive has no label, it reserves three
+initialized bytes of memory immediately following the 11 for sum.
+The next segment of the program contains executable statements. It begins
+with the directive
+.CODE
+The line of code with only the label
+_start:
+marks the entry point of the program, the address of the first statement to be executed.
+The name used is the programmer’s choice, but we will consistently use _start for
+this purpose.
+Finally we come to the statements that really do something! Since this program
+performs mostly input and output, the bulk of its statements are macros to perform these
+functions. The macro
+output  prompt1
+displays characters stored at the address referenced by prompt1, using a null (00) byte
+to terminate the display. In this program, the user will be prompted to enter the first
+number. Since there is no carriage return or line feed character at the end of the prompt,
+the cursor will remain on the line following the colon and the two blanks. The statement
+input   string, 40       ; read ASCII characters
+is a macro that functionally causes the computer to pause and wait for characters to
+be entered at the keyboard until the user presses the Enter key to terminate the input.
+The first operand (string) identifies where the ASCII codes for these characters will
+be stored. The second operand (40) identifies the maximum number of characters
+that can be entered. Notice that 40 uninitialized bytes were reserved at address
+string. More details about the input macro are in Section 3.6, but for now just note
+that you want to be fairly generous with the number of bytes you reserve in an input
+area.
+The input macro inputs ASCII codes, but the CPU does arithmetic with numbers in 2’s complement form. The atod (for “ASCII to double”) macro scans memory at
+the address specified by its single operand and converts the ASCII codes there to the
+corresponding 2’s complement doubleword; the result is stored in EAX. In this program
+atod    string          ; convert to integer
+TEAM LinG - Live, Informative, Non-cost and Genuine!

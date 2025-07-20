@@ -1,0 +1,36 @@
+4.3 Multiplication Instructions 115
+that the program uses mul rather than imul for finding the product; lengths and widths
+are positive numbers. Interesting errors occur in this program if a negative length or
+width is entered, or if a large width and length (say 200 and 300) are entered. Why? Such
+errors are unfortunately common in software.
+As you have seen in this section, the 80x86 architecture includes multiplication
+instructions in three formats. You may have noted that the destination of the product
+cannot be a memory operand. This may sound restrictive, but some processors have
+even greater limitations. In fact, most 8-bit microprocessors, including the Intel 8080, had
+no multiplication instruction; any multiplication had to be done using a software routine.
+Exercises 4.3
+1. For each part of this problem, assume the “before” values when the
+given instruction is executed. Give the requested “after” values.
+Before Instruction After
+(a) EAX:  FF FF FF E4
+EBX:  00  00  00  02 mul  ebx EAX, EDX, CF, OF
+(b) AX:  FF E4
+word at Value:  FF 3A mul  Value AX, DX, CF, OF
+(c) AX:  FF FF mul  ax AX, DX, CF, OF
+(d) AL:  0F
+BH:  4C mul  bh AX, CF, OF
+(e) AL:  F0
+BH:  C4 mul  bh AX, CF, OF
+(f) AX:  00 17
+CX:  00 B2 imul  cx AX, DX, CF, OF
+(g) EAX:  FF FF FF E4
+EBX:  00 00 04 C2 imul  ebx EAX, EDX, CF, OF
+(h) AX:  FF E4
+word at Value:  FF 3A imul  Value AX, DX, CF, OF
+(i) EAX:  FF FF FF FF imul  eax EAX, EDX, CF, OF
+(j) AL:  0F
+BH:  4C imul  bh AX, CF, OF
+(k) AL:  F0
+BH:  C4 imul  bh AX, CF, OF
+2. Give the opcode for each instruction in Exercise 1.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

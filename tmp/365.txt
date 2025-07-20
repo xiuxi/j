@@ -1,0 +1,31 @@
+10.2 Programming with Floating-Point Instructions 365
+; test driver for atofproc
+; Author:  R. Detmer
+; Date:    4/98
+.386
+.MODEL FLAT
+ExitProcess PROTO NEAR32 stdcall, dwExitCode:DWORD
+EXTRN atofproc:NEAR32
+.STACK  4096             ; reserve 4096-byte stack
+.DATA                    ; reserve storage for data
+String      BYTE    "435.75", 0
+.CODE                           ; program code
+_start:
+pushd  NEAR32 PTR String
+call   atofproc
+INVOKE ExitProcess, 0
+PUBLIC _start
+END
+Figure 10.15 Test driver for atofproc
+Finally we come to a procedure to convert a floating-point parameter to “E notation.” The procedure generates a 12-byte long ASCII string consisting of
+• a leading minus sign or a blank
+• a digit
+• a decimal point
+• five digits
+• the letter E
+• a plus sign or a minus sign
+• two digits
+This string represents the number in base 10 scientific notation. For example, for the
+decimal value 145.8798, the procedure would generate the string b1.45880E+02, where b
+represents a blank. Notice that the ASCII string has a rounded value.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,30 @@
+252 String Operations
+stosb
+loop  for6
+endFor6:
+Assuming that ESI starts at 00010000 and EDI starts at 00010005, what
+will be the values stored in ESI and EDI following the for loop? What
+will be stored in ECX? What will be stored in the destination string?
+7. Suppose that the following instructions are executed:
+lea   esi, source
+lea   edi, dest
+cld
+mov   ecx, 3
+rep   movsb
+Assuming that ESI starts at 00010000 and EDI starts at 00010005, what
+will be the values stored in ESI and EDI following the rep movsb
+instruction? What will be stored in ECX? What will be stored in the destination string?
+8. Suppose that the following instructions are executed:
+lea   esi, source+4
+lea   edi, dest+4
+std
+mov   ecx, 3
+rep   movsb
+Assuming that ESI starts at 00010010 and EDI starts at 00010015, what
+will be the values stored in ESI and EDI following the rep movsb
+instruction? What will be stored in ECX? What will be stored in the destination string?
+Programming Exercises 7.2
+1. Write a NEAR32 procedure index to find the position of the first occurrence of a character in a null-terminated string. Specifically, the procedure must have two parameters: (1) a character and (2) the address of a
+string in the data segment. Use the stack to pass the parameters: For the
+character, use an entire word with the character in the low-order byte.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

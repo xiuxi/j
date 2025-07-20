@@ -1,0 +1,29 @@
+4.3 Multiplication Instructions 111
+4.10. Even the opcodes are the same for mul and single-operand imul instructions, with
+a field in the second byte of the instruction distinguishing the two.
+The second imul format is
+imul   register, source
+Here the source operand can be in a register, in memory, or immediate. The other factor
+is in the register, which also serves as the destination. Operands must be words or doublewords, not bytes. The product must “fit” in same size as the factors; if it does, CF and
+OF are cleared to 0, if not they are set to 1.
+Figure 4.12 summarizes two-operand imul instructions. Note that some of
+these instructions have two byte long opcodes. Immediate operands can be either the
+size of the destination register or a single byte. Single-byte operands are signextended before multiplication—that is, the sign bit is copied to leading bit positions,
+giving a 16 or 32-bit value that represents the same signed integer as the original 8bit operand.
+The third imul format is
+imul   register, source, immediate
+With this version, the first operand, a register, is only the destination for the product; the
+two factors are the contents of the register or memory location given by source and the
+immediate value. Operands register and source are the same size, both 16-bit or both
+Clock Cycles Number
+Operand 1 Operand 2 386 486 Pentium of Bytes Opcode
+register 16 register 16 9–22 13–26 11 3 0F AF
+register 32 register 32 9–38 13–42 10 3 0F AF
+register 16 memory word 12–25 13–26 11 3 + 0F AF
+register 32 memory doubleword 12–41 13–42 10 3 + 0F AF
+register 16 immediate byte 9–14 13–18 11 3 6B
+register 16 immediate word 9–22 13–26 11 4 69
+register 32 immediate byte 9–14 13–18 11 3 6B
+register 32 immediate doubleword 9–38 13–42 10 6 69
+Figure 4.12 imul instructions (two-operand format)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,21 @@
+CHAPTER 12
+12.1 Console I/O Using the
+Kernel32 Library
+12.2 Sequential File I/O
+Using the Kernel32
+Library
+12.3 Lower-level
+Input/Output
+Input/Output
+Programs in previous chapters have used the input
+macro to input data from the PC console keyboard
+and the output macro to output data to the console display. Input and output from an assembly
+language program have been limited to the keyboard and the monitor. This chapter examines the
+underlying operating system calls that are used by
+the input and output macros. It then examines
+similar operating system calls that make it possible
+to read and write sequential files to secondary
+storage. Next it looks at the 80x86 instructions
+that actually do input and output and discusses
+alternative I/O schemes, including memorymapped and interrupt-driven I/O.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

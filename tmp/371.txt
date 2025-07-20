@@ -1,0 +1,41 @@
+10.2 Programming with Floating-Point Instructions 371
+endwhileLess:
+endifBigger:
+endifZero:
+fadd round            ; add rounding value
+fcom ten              ; value > 10?
+fstsw ax              ; status word to AX
+and  ax, C3 or C2 or C0  ; C3=C2=C0=0? (value > 10?)
+jnz  endifOver        ; skip if not
+fdiv ten              ; value := value/10
+inc  exponent         ; add 1 to exponent
+endifOver:
+; at this point 1.0 <= value < 10.0
+fist digit            ; store integer part
+mov  bx, digit        ; copy integer to BX
+or   bx, 30h          ; convert digit to character
+mov  BYTE PTR [edi], bl  ; store character in destination
+inc  edi              ; point at next destination byte
+mov  BYTE PTR [edi], '.'     ; decimal point
+inc  edi              ; point at next destination byte
+mov  ecx, 5           ; count of remaining digits
+forDigit: fisub digit           ; subtract integer part
+fmul ten              ; multiply by 10
+fist digit            ; store integer part
+mov  bx, digit        ; copy integer to BX
+or   bx, 30h          ; convert digit to character
+mov  BYTE PTR [edi], bl  ; store character in destination
+inc  edi              ; point at next destination byte
+loop forDigit         ; repeat 5 times
+mov  BYTE PTR [edi], 'E'  ; exponent indicator
+inc  edi              ; point at next destination byte
+mov  ax, exponent     ; get exponent
+cmp  ax, 0            ; exponent >= 0 ?
+jnge NegExp
+mov  BYTE PTR [edi], '+'  ; non-negative exponent
+jmp  endifNegExp
+NegExp:   mov  BYTE PTR [edi], '-'  ; negative exponent
+neg  ax               ; change exponent to positive
+(continued)
+Figure 10.17 (continued)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,33 @@
+398 Decimal Arithmetic
+The das instruction (decimal adjust after subtraction) is used after a sub or sbb
+instruction. It acts like the daa except that 6 or 6016 is subtracted from rather than added
+to the value in AL. The following examples show how das works following sub al,bl.
+In the first example, both CF and AF are set to 1 since the subtraction requires borrows
+in both digit positions. When 6 and 6016 are subtracted from BC, the result is 56, and
+both CF and AF remain set to 1. This is the correct answer since 25 – 69 = 56 (borrowing
+1 to change 25 into 125.)
+Before After sub After das
+AL: 25 AL: BC AL: 56
+BL: 69 AF: 1   CF: 1 AF: 1   CF: 1
+AL: 37 AL: 12 AL: 12
+BL: 25 AF: 0   CF: 0 AF: 0   CF: 0
+AL: 93 AL: 6E AL: 68
+BL: 25 AF: 1   CF: 0 AF: 1   CF: 1
+AL: 92 AL: 59 AL: 53
+BL: 39 AF: 1   CF: 0 AF: 1   CF: 0
+AL: 79 AL: E4 AL: 84
+BL: 95 AF: 0   CF: 1 AF: 0   CF: 1
+Each of the daa and das instructions encodes in a single byte. The daa instruction has opcode 27 and the das instruction has opcode 2F. Each requires three clock
+cycles to execute on a Pentium. In addition to modifying AF and CF, the SF, ZF and PF
+flags are set or reset by daa or das instructions to correspond to the final value in AL.
+The overflow flag OF is undefined and other flags are not affected.
+The first BCD arithmetic procedure in this section adds two non-negative 10-byte
+numbers. This procedure will have two parameters, addresses of destination and source
+values, respectively. Each will serve as an operand, and the destination will be replaced by
+the sum, consistent with the way that ordinary addition instructions use the destination
+operand. We will not be concerned about setting flags; the exercises specify a more complete procedure that assigns appropriate values to SF, ZF, and CF. A design for the procedure is given below. This design is implemented in the procedure addBcd1 (see Fig. 11.3).
+point at first source and destination bytes;
+for count := 1 to 9 loop
+copy destination byte to AL;
+add source byte to AL;
+TEAM LinG - Live, Informative, Non-cost and Genuine!

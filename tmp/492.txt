@@ -1,0 +1,162 @@
+Destination strings, 232
+DI. See Destination index
+Digital computers
+and logic gates, 298, 300
+Direction bit, 315
+Direction flag (DF)
+EDI register, 265
+and string processing, 233
+Directives, 42, 43, 82
+for assembly language program,
+45
+for macros/statements in .LST
+files, 325
+for reserving storage, 71
+strings defined with, 232
+Direct memory addressing, 312
+mode, 74, 83
+Direct operands, 89
+Disk drives, 27, 36
+Disk operating system, 37
+Displacement bytes, 312
+Displacement doubleword, 312
+Displacement field, 308
+Displacements
+and jump instructions, 141
+Display devices, 27
+Dividend, 119
+div instructions, 122, 411, 417
+Division
+errors, 122
+floating-point instructions, 354
+of larger numbers, 132
+of unpacked BCD numbers, 413
+Division instructions, 118-127, 134,
+135
+operands/results for 80x86, 119
+Divisor, 119
+div operations, 119
+DIVP instructions, 416
+Dollar sign symbol ($), 44, 256, 306
+DOS. See Disk operating system
+Double-length dividend, 118, 119,
+134-135
+Double operands
+instructions with, 315
+Double shift instructions, 286, 287, 300
+Doubleword, 10, 11
+Doubleword integer conversion
+ASCII to, 293-295
+Double-word length divisor, 119, 120
+Doublewords
+in assembly language program,
+49
+multiplication of, 108
+Doubleword-size dividend, 123
+Double-word strings, 233
+DS register, 32
+DT directive, 388-389
+dtoa macro, 51, 79, 83, 231, 259
+in file IO.H, 337
+DUP directive, 191
+DwExitCode, 46, 52
+DWORD directives, 48, 61, 83
+constant operands in, 68, 69, 70
+DX register, 32
+E
+EAX register, 30, 31, 34, 39, 43, 51, 67,
+75, 91
+EBCDIC. See Extended Binary Coded
+Decimal Information Code
+EBP base pointer
+for register indirect addressing,
+75
+EBX register, 30, 31, 32
+in program using array, 182
+for register indirect addressing,
+75
+ECX register, 30, 31, 32
+and loop instruction, 191
+for register indirect addressing,
+75
+EDI register
+for register indirect addressing,
+75
+and strcopy procedure, 236
+and string elements, 232, 265
+Edit, 38, 53
+EDIT instructions, 416
+EDX register, 30, 31, 32
+for register indirect addressing,
+75
+EFLAGS bits, 34
+EFLAGS register, 88, 190
+flag updating in, 96
+80x86. See Intel 80x86
+EIP register, 204
+ELSE directive, 329, 330, 332, 338
+ELSEIF directive, 329
+elseIfZero, 145, 146
+endBalanceCheck, 146
+END directive, 52
+ENDIF directive, 329, 332, 338
+endif, 190
+ENDM directive, 338
+ENDP directive, 202
+endWhile, 159, 160
+E-notation, 386
+floating point parameter
+converted to, 365
+enter instruction 
+syntax for, 221
+Entry code, for procedure, 215, 218
+EQU directives, 48, 61
+.ERR directive, 332, 337, 338
+Errors
+and assemblers, 305
+and assembly listing file, 60-61
+division, 122, 135
+and .ERR directive, 332
+ESC. See Extra services control
+ESI register
+for register indirect addressing,
+75
+and strcopy procedure, 236
+and string elements, 232, 265
+ESP register
+and push instructions, 195, 196
+ESP stack pointer
+for register indirect addressing,
+75
+ES register, 32
+EXAMPLE.EXE
+execution of, 54
+EXAMPLE.LST listing file, 62-65
+Examples
+decimal-to-hex algorithm, 4-5
+80x86 instruction, 314
+logical instructions, 271
+pop instructions, 198
+push instructions, 195-196
+shift instructions execution,
+280-281
+word-length 2’s complement
+number, 13
+word-length 2’s complement
+representation, 11-12. See
+also Programs
+Exceptions, 122
+exclusive or instruction, 272
+exclusive or operation, 267, 268, 269
+Exit code
+for procedure, 218
+exit loop, 166-167
+EXITM directive, 329, 330, 332, 338
+ExitProcess function, 46
+ExitProcess procedure, 52, 221
+expand macro, 375, 376
+Extended Binary Coded Decimal
+Information Code, 8
+External procedures code, 209
+492 Index
+TEAM LinG - Live, Informative, Non-cost and Genuine!

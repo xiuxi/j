@@ -1,0 +1,30 @@
+8.2 Shift and Rotate Instructions 285
+for count := 8 downto 1 loop
+copy EAX to EDX;
+mask off all but last 4 bits in EDX;
+if value in EDX ≤ 9
+then
+convert value in EDX to a character 0 through 9;
+else
+convert value in EDX to a letter A through F;
+end if;
+store character in memory at address in EBX;
+decrement EBX to point at next position to the left;
+shift value in EAX right four bits;
+end for;
+To implement this design, the instruction
+and    edx,0000000fh    ; zero all but last hex digit
+masks off all but the last four bits in EDX. The if is implemented by
+cmp    edx,9            ; digit?
+jnle   elseLetter       ; letter if not
+or     edx,30h          ; convert to character
+jmp    endifDigit
+elseLetter: add    edx,'A'–10       ; convert to letter
+endifDigit:
+A value from 0 to 9 is converted to the ASCII code for a digit using the or instruction;
+add edx,30h would work just as well here. To convert numbers 0A to 0F to the corresponding ASCII codes 41 to 46 for letters A to F, the value 'A'–10 is added to the number. This actually adds the decimal number 55, but the code used is clearer than add
+edx,55. The shr instruction shifts the value in EAX right four bits, discarding the hex
+digit that was just converted to a character.
+Programming Exercise 2 of Section 7.4 asked for a procedure to do a job similar to
+that done by the program in Fig. 8.7. That procedure was to use the remainder upon division
+TEAM LinG - Live, Informative, Non-cost and Genuine!

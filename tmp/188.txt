@@ -1,0 +1,35 @@
+188 Branching and Looping
+else
+display keyValue, "is element", count;
+exit loop;
+end if;
+display "Search for another number?  ";
+input response;
+end until;
+3. There are many ways to determine prime numbers. Here is a design for
+one way to find the first 100 primes. Implement this design in 80x86
+assembly language.
+prime[1] := 2; { first prime number }
+prime[2] := 3; { second prime number }
+primeCount := 2;
+candidate := 4; { first candidate for a new prime }
+while primeCount < 100 loop
+index := 1;
+while (index ≤ primeCount)
+and (prime[index] does not evenly divide candidate) loop
+add 1 to index;
+end while;
+if (index > primeCount)
+then {no existing prime evenly divides the candidate, so it is a new prime}
+add 1 to primeCount;
+prime[primeCount] := candidate;
+end if;
+add 1 to candidate;
+end while;
+display "Prime Numbers";
+for index := 1 to 100 loop {display the numbers 5 per line }
+display prime[index];
+if index is divisible by 5 then skip to a new line; 
+end if;
+end for;
+TEAM LinG - Live, Informative, Non-cost and Genuine!

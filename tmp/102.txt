@@ -1,0 +1,31 @@
+102 Basic Instructions
+Destination Clock Cycles Number
+Operand 386 486 Pentium of Bytes Opcode
+register 8 2 1 1 2 F6
+register 16 2 1 1 2 F7
+register 32 2 1 1 2 F7
+memory byte 6 3 3 2 + F6
+memory word 6 3 3 2 + F7
+memory doubleword 6 3 3 2 + F7
+Figure 4.7 neg instructions
+The inc and dec instructions are especially useful for incrementing and
+decrementing counters. They sometimes take fewer bytes of code and execute in fewer
+clock cycles than corresponding addition or subtraction instructions. For example, the
+instructions
+add   cx, 1        ; increment loop counter
+and
+inc   cx           ; increment loop counter
+are functionally equivalent. The add instruction requires three bytes (three bytes instead
+of four since the immediate operand will fit in one byte), while the inc instruction
+requires one byte. Either executes in two clock cycles on an 80386 machine or in one
+clock cycle on an 80486 or Pentium, so execution times are identical.
+In Fig. 4.6, note the fast, single-byte inc and dec instructions for word or doubleword-size operands stored in registers. A register is the best place to keep a counter,
+if one can be reserved for this purpose.
+A neg instruction negates, or finds the 2’s complement of, its single operand.
+When a positive value is negated the result is negative; a negative value will become
+positive. Zero remains zero. Each neg instruction has the form
+neg   destination
+Figure 4.7 shows allowable operands for neg instructions.
+Following are four examples illustrating how the neg instructions operate. In
+each case the “after” value is the 2’s complement of the “before” value.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

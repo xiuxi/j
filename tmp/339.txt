@@ -1,0 +1,24 @@
+CHAPTER 10
+10.1 80x86 Floating-point
+Architecture
+10.2 Programming with
+Floating-point
+Instructions
+10.3 Floating-point
+Emulation
+10.4 Floating point and Inline Assembly
+Floating-Point Arithmetic
+This book has concentrated on integer representations of numbers, primarily 2’s complement since
+all 80x86 microprocessors have a variety of instructions to manipulate 2’s complement numbers.
+Many 80x86 microprocessor systems—including all
+Pentium systems, systems with a 486DX, and other
+systems equipped with a floating-point coprocessor—also have the capability to manipulate numbers stored in floating-point format.
+Section 1.5 described the IEEE format used
+to store floating-point values in 32 bits. The MASM
+assembler has directives that accept decimal
+operands and initialize storage using the IEEE format. There are two ways to do floating-point arithmetic with a PC. If you have a microprocessor with
+a floating-point unit built in or a floating-point
+coprocessor, then you can simply use the floatingpoint instructions. Otherwise, you can employ a
+collection of procedures that implement arithmetic
+operations such as addition and multiplication.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

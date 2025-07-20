@@ -1,0 +1,29 @@
+406 Decimal Arithmetic
+to mask the high-order four bits. Conversions between ASCII and unpacked BCD are
+even simpler if they are done “in place” (see Exercise 3).
+The 80x86 architecture includes four instructions to facilitate arithmetic with
+unpacked BCD representations. Each mnemonic begins with “aa” for “ASCII adjust”—
+Intel uses the word ASCII to describe unpacked BCD representations, even though the
+ASCII representation for a digit has 0011 in the left half byte and the unpacked representation has 0000. The four instructions are aaa, aas, aam, and aad. Information about
+these instructions is given in Fig. 11.6.
+The aaa and aas instructions are similar to their packed BCD counterparts daa
+and das. For addition, bytes containing unpacked BCD operands are combined using an
+add or adc instruction, yielding a sum in the AL register. An aaa instruction then corrects
+the value in AL if necessary. An aaa instruction sets flags and may also affect AH; recall
+that a daa affects only AL and flags. The following algorithm describes how aaa works.
+if (right digit in AL > 9) or (AF=1)
+then
+add 6 to AL;
+increment AH;
+AF := 1;
+end if;
+CF := AF;
+left digit in AL := 0;
+Number Clocks
+Instruction Mnemonic of bytes Opcode (Pentium)
+ASCII adjust after addition aaa 1 37 3
+ASCII adjust for subtraction aas 1 3F 3
+ASCII adjust after multiplication aam 2 D4 0A 18
+ASCII adjust before division aad 2 D5 0A 10
+Figure 11.6 Unpacked BCD instructions
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,39 @@
+Number Timing Timing Timing
+Opcode Mnemonic Operand(s) Flags affected of bytes 386 486 Pentium
+8B mov reg16,reg16 none 2 2 1 1
+reg32,reg32
+8B mov reg16,mem16 none 2+ 4 1 1
+reg32,mem32
+8C mov reg16, sreg none 2 2 3 1
+8C mov mem16,sreg none 2+ 2 3 1
+8D lea reg32,mem32 none 2+ 2 1 1
+8E mov sreg, reg16 none 2 2 3 1
+8E mov sreg,mem16 none 2+ 2 3* 2*
+8F pop mem16 none 2+ 5 6 3
+mem32
+91 xchg AX, CX none 1 3 3 2
+EAX, ECX
+92 xchg AX, DX none 1 3 3 2
+EAX, EDX
+93 xchg AX, BX none 1 3 3 2
+EAX, EBX
+94 xchg AX, SP none 1 3 3 2
+EAX, ESP
+95 xchg AX, BP none 1 3 3 2
+EAX, EBP
+96 xchg AX, SI none 1 3 3 2
+EAX, ESI
+97 xchg AX, DI none 1 3 3 2
+EAX, EDI
+98 cbw none none 1 3 3 3
+98 cwde none none 1 3 3 3
+99 cdq none none 1 2 3 2
+99 cwd none none 1 2 3 2
+9A call far direct none 7 17+ 18 4
+9C pushf none none 1 4 4 3
+pushfd
+9D popf none none 1 5 9 4
+popfd
+A0 mov AL, direct none 5 4 1 1
+480 Appendix E
+TEAM LinG - Live, Informative, Non-cost and Genuine!

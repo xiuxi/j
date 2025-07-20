@@ -1,0 +1,32 @@
+248 String Operations
+label1      BYTE   cr, Lf, Lf, "The rest of the string is—", 0
+crlf        BYTE   cr, Lf, 0
+.CODE
+_start:     output prompt1        ; prompt for string
+input  string,80      ; get string
+lea    eax, string    ; find length of string
+push   eax            ; length parameter
+call   strlen
+mov    ecx, eax       ; save length of string
+inc    ecx            ; include null in string length
+output prompt2        ; prompt for character
+input  char,5         ; get character
+mov    al, char       ; character to AL
+lea    edi, string    ; offset of string
+cld                   ; forward movement
+repne scasb           ; scan while character not found
+dec    edi            ; back up to null or matching character
+output label1         ; print label
+output [edi]          ; output string
+output crlf           ; skip to new line
+INVOKE  ExitProcess, 0  ; exit with return code 0
+END
+Figure 7.10 (continued)
+After the search, the destination index EDI will be one greater than desired
+since a string instruction always increments index registers whether or not flags were
+set. If the search succeeded, EDI will contain the address of the character following the
+one that matched with AL, or the address of the character after the end of the string if
+ECX was decremented to zero. The dec edi instruction takes care of both cases, backing up to the position of the matching character if there was one, or to the null byte at
+the end of the string otherwise. The string length was incremented so that the null character would be included in the search. The output macro displays the last portion of the
+string, whose address is in EDI.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,33 @@
+Number Timing Timing Timing
+Mnemonic Operand(s) Flags affected Opcode of Bytes 386 486 Pentium
+xchg reg8,mem8 none 86 2+ 5 5 3
+xchg reg16,reg16 none 87 2 3 3 3
+reg32,mem32
+xchg reg16,mem16 none 87 2+ 5 5 3
+reg32,mem32
+xlat none none D7 1 5 4 4
+xor AL,imm8 SF,ZF,OF,CF,PF,AF 34 2 2 1 1
+xor AX,imm16 SF,ZF,OF,CF,PF,AF 35 3 2 1 1
+EAX,imm32 5
+xor reg8,imm8 SF,ZF,OF,CF,PF,AF 80 3 2 1 1
+xor reg16,imm16 SF,ZF,OF,CF,PF,AF 81 4 2 1 1
+reg32,imm32 6
+xor reg16,imm8 SF,ZF,OF,CF,PF,AF 83 3 2 1 1
+reg32,imm8
+xor mem8,imm8 SF,ZF,OF,CF,PF,AF 80 3+ 7 3 3
+xor mem16,imm16 SF,ZF,OF,CF,PF,AF 81 4+ 7 3 3
+mem32,imm32 6+
+xor mem16,imm8 SF,ZF,OF,CF,PF,AF 83 3+ 7 3 3
+mem32,imm8
+xor reg8,reg8 SF,ZF,OF,CF,PF,AF 32 2 2 1 1
+xor reg16,reg16 SF,ZF,OF,CF,PF,AF 33 2 2 1 1
+reg32,reg32
+xor reg8,mem8 SF,ZF,OF,CF,PF,AF 32 2+ 6 2 2
+xor reg16,mem16 SF,ZF,OF,CF,PF,AF 33 2+ 6 2 2
+reg32,mem32
+xor mem8,reg8 SF,ZF,OF,CF,PF,AF 30 2+ 7 3 3
+xor mem16,reg16 SF,ZF,OF,CF,PF,AF 31 2+ 7 3 3
+mem32,reg32
+* timing varies
+468 Appendix D
+TEAM LinG - Live, Informative, Non-cost and Genuine!

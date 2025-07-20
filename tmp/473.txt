@@ -1,0 +1,39 @@
+Number Timing Timing Timing
+Opcode Mnemonic Operand(s) Flags affected of bytes 386 486 Pentium
+23 and reg16,mem16 SF,ZF,OF,CF,PF,AF 2+ 6 2 2
+reg32,mem32
+24 and AL,imm8 SF,ZF,OF,CF,PF,AF 2 2 1 1
+25 and AX,imm16 SF,ZF,OF,CF,PF,AF 3 2 1 1
+EAX,imm32 5
+27 daa none SF,ZF,PF,AF 1 4 2 3
+OF ?
+28 sub mem8,reg8 SF,ZF,OF,CF,PF,AF 2+ 7 3 3
+29 sub mem16,reg16 SF,ZF,OF,CF,PF,AF 2+ 7 3 3
+mem32,reg32
+2A sub reg8,reg8 SF,ZF,OF,CF,PF,AF 2 2 1 1
+2A sub reg8,mem8 SF,ZF,OF,CF,PF,AF 2+ 6 2 2
+2B sub reg16,reg16 SF,ZF,OF,CF,PF,AF 2 2 1 1
+reg32,reg32
+2B sub reg16,mem16 SF,ZF,OF,CF,PF,AF 2+ 6 2 2
+reg32,mem32
+2C sub AL,imm8 SF,ZF,OF,CF,PF,AF 2 2 1 1
+2D sub AX,imm16 SF,ZF,OF,CF,PF,AF 3 2 1 1
+EAX,imm32 5
+2F das none SF,ZF,PF,AF 1 4 2 3
+OF ?
+30 xor mem8,reg8 SF,ZF,OF,CF,PF,AF 2+ 7 3 3
+31 xor mem16,reg16 SF,ZF,OF,CF,PF,AF 2+ 7 3 3
+mem32,reg32
+32 xor reg8,reg8 SF,ZF,OF,CF,PF,AF 2 2 1 1
+32 xor reg8,mem8 SF,ZF,OF,CF,PF,AF 2+ 6 2 2
+33 xor reg16,reg16 SF,ZF,OF,CF,PF,AF 2 2 1 1
+reg32,reg32
+33 xor reg16,mem16 SF,ZF,OF,CF,PF,AF 2+ 6 2 2
+reg32,mem32
+34 xor AL,imm8 SF,ZF,OF,CF,PF,AF 2 2 1 1
+35 xor AX,imm16 SF,ZF,OF,CF,PF,AF 3 2 1 1
+EAX,imm32 5
+37 aaa none AF,CF 1 4 3 3
+SF,ZF,OF,PF ?
+80x86 Instructions 473
+TEAM LinG - Live, Informative, Non-cost and Genuine!

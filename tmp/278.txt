@@ -1,0 +1,69 @@
+278 Bit Manipulation
+• bit 2 is 1 if the point is above the region (y > y
+max
+)
+• bit 3 is 1 if the point is below the region (y < y
+min
+)
+The previous diagram shows the outcodes for each of the nine regions
+of the plane.
+(a) Suppose that the outcode for point (x
+1
+,y
+1
+) is in the low order four
+bits of AL, that the outcode for point (x
+2
+,y
+2
+) is in the low order four
+bits of BL, and that other bits of these registers are reset to 0. Give
+a single 80x86 statement that will set ZF to 1 if the two points are
+both inside the rectangular region and to 0 otherwise. The value in
+AL or BL may be changed.
+(b) Suppose that the outcode for point (x
+1
+,y
+1
+) is in the low order four bits
+of AL, that the outcode for point (x
+2
+,y
+2
+) is in the low order four bits of
+BL, and that other bits of these registers are reset to 0. Give a single
+80x86 statement that will set ZF to 0 if the two points are both on
+the same side of the rectangular region. (“Both on the same side”
+means both right of x=x
+max
+, both left of x=x
+min
+, both above y=y
+max
+, or
+both below y=y
+min
+.) The value in AL or BL may be changed.
+(c) Write a NEAR32 procedure setcode that returns the outcode for a
+point (x,y). Specifically, setcode has six word-size integer parameters: x, y, x
+min
+, x
+max
+, y
+min
+, and y
+max
+that are passed on the stack in
+the order given. Return the outcode in the low order four bits of the
+AL register, assigning 0 to each of the higher order bits in EAX.
+8.2 Shift and Rotate Instructions
+The logical instructions introduced in the previous section enable the assembly language programmer to set or clear bits in a word or byte stored in a register or memory.
+Shift and rotate instructions enable the programmer to change the position of bits within
+a doubleword, word, or byte. This section describes the shift and rotate instructions and
+gives examples of some ways they are used.
+Shift instructions slide the bits in a location given by the destination operand to
+the left or to the right. The direction of the shift can be determined from the last character of the mnemonic—sal and shl are left shifts; sar and shr are right shifts. Shifts are
+also categorized as logical or arithmetic—shl and shr are logical shifts; sal and sar
+are arithmetic shifts. The difference between arithmetic and logical shifts is explained
+below. The table in Fig. 8.5 summarizes the mnemonics.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

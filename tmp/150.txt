@@ -1,0 +1,31 @@
+150 Branching and Looping
+Appropriate for use after comparison of signed operands
+opcode
+mnemonic description flags to jump short near
+jg jump if greater SF=OF and ZF=0 7F OF 8F
+jnle jump if not less or equal
+jge jump if greater or equal SF=OF 7D OF 8D
+jnl jump if not less
+jl jump if less SF≤OF 7C OF 8C
+jnge jump if not greater or equal
+jle jump if less or equal SF≤OF or ZF=1 7E OF 8E
+jng jump if not greater
+Other conditional jumps
+opcode
+mnemonic description flags to jump short near
+je jump if equal ZF=1 74 OF 84
+jz jump if zero
+jne jump if not equal ZF=0 75 OF 85
+jnz jump if not zero
+js jump if sign SF=1 78 OF 88
+jns jump if not sign SF=0 79 OF 89
+jc jump if carry CF=1 72 0F 82
+jnc jump if not carry CF=0 73 0F 83
+jp jump if parity PF=1 7A OF 8A
+jpe jump if parity even
+jnp jump if not parity PF=0 7B OF 8B
+jpo jump if parity odd
+jo jump if overflow OF=1 70 OF 80
+jno jump if not overflow OF=0 71 OF 81
+Figure 5.5 (continued)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,29 @@
+6.1 The 80x86 Stack 197
+Clock Cycles Number
+Operand 386 486 Pentium of Bytes Opcode
+register 4 1 1 1
+EAX or AX 58
+ECX or CX 59
+EDX or DX 5A
+EBX or BX 5B
+ESP or SP 5C
+EBP or BP 5D
+ESI or SI 5E
+EDI or DI 5F
+segment register 7 3 3
+DS 1 1F
+ES 1 07
+SS 1 17
+FS 2 0F A1
+GS 2 0F A9
+memory word 5 6 3 2+ 8F
+memory doubleword 5 6 3 2+ 8F
+Figure 6.2 pop instructions
+Pop instructions do the opposite job of push instructions. Each pop instruction
+has the format
+pop destination
+where destination can reference a word or doubleword in memory, any register 16, any
+register 32, or any segment register except CS. (The push instruction does not exclude
+CS.) The pop instruction gets a word-size value from the stack by copying the word at
+the address in ESP to the destination, then incrementing ESP by 2. Operation for a doubleword value is similar, except that ESP is incremented by 4. Figure 6.2 gives information about pop instructions for different destination operands.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

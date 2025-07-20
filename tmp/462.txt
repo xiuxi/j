@@ -1,0 +1,41 @@
+Number Timing Timing Timing
+Mnemonic Operand(s) Flags affected Opcode of Bytes 386 486 Pentium
+push imm8 none 6A 2 2 1 1
+push imm16 none 68 3 2 1 1
+imm32 5
+pusha none none 60 1 18 11 5
+pushad
+pushf none none 9C 1 4 4 3
+pushfd
+rep none none F3 1
+repz (string instruction 
+repe prefix)
+rep none none F3 A4 2 7+4n 12+3n 13+4n
+movsb
+rep none none F3 A5 2 7+4n 12+3n 13+4n
+movsw
+rep
+movsd
+rep stosb none none F3 A6 2 5+5n 7+4n 9n
+rep stosw none none F3 A7 2 5+5n 7+4n 9n
+rep stosd
+repe none none F3 A6 2 5+9n 7+7n 9+4n
+cmpsb
+repe none none F3 A7 2 5+9n 7+7n 9+4n
+cmpsw
+repe
+cmpsd
+repe none none F3 AE 2 5+8n 7+5n 9+4n
+scasb
+repe none none F3 AF 2 5+8n 7+5n 9+4n
+scasw
+repe
+scasd
+repne none none F2 A6 2 5+9n 7+7n 9+4n
+cmpsb
+repne none none F2 A7 2 5+9n 7+7n 9+4n
+cmpsw
+repne
+cmpsd
+462 Appendix D
+TEAM LinG - Live, Informative, Non-cost and Genuine!

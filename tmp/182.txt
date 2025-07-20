@@ -1,0 +1,35 @@
+182 Branching and Looping
+through an array. The 80x86 feature which makes this possible is register indirect
+addressing, first discussed in Chapter 3. The example will use the EBX register to contain the address of the word currently being accessed; then [ebx] references the doubleword at the address in the EBX register rather than the doubleword in the register itself.
+In the 80x86 architecture any of the general registers EAX, EBX, ECX, and EDX or the
+index registers EDI and ESI are appropriate for use as a “pointer.” The ESI and EDI registers are often reserved for use with strings, which are usually arrays of characters. String
+operations are covered in Chapter 7. The program listing appears in Fig. 5.10.
+; input a collection of numbers
+; report their average and the numbers which are above average
+; author:  R. Detmer
+; date:  revised 9/97
+.386
+.MODEL FLAT
+INCLUDE io.h
+ExitProcess PROTO NEAR32 stdcall, dwExitCode:DWORD
+cr          EQU    0dh   ; carriage return character
+Lf          EQU    0ah   ; linefeed character
+maxNbrs     EQU    100   ; size of number array
+.STACK      4096
+.DATA
+directions  BYTE     cr, Lf, 'You may enter up to 100 numbers'
+BYTE     ' one at a time.',cr,Lf
+BYTE     'Use any negative number to terminate 
+input.',cr,Lf,Lf
+BYTE     'This program will then report the average and 
+list',cr,Lf
+BYTE     'those numbers which are above the 
+average.',cr,Lf,Lf,Lf,0
+prompt      BYTE     'Number?  ',0
+number      BYTE     20 DUP (?)
+nbrArray    DWORD    maxNbrs DUP (?)
+nbrElts     DWORD    ?
+avgLabel    BYTE     cr,Lf,Lf,'The average is'
+(continued)
+Figure 5.10 Program using array
+TEAM LinG - Live, Informative, Non-cost and Genuine!

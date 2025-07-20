@@ -1,0 +1,37 @@
+5.4 for Loops in Assembly Language 179
+(b)
+mov  ecx, 1
+forB:  .
+.             ; body of loop
+.
+loop forB
+(c)
+mov  ecx, 0
+forC:  .
+.             ; body of loop
+.
+loop forC
+(d)
+mov  ecx, –1
+forD:  .
+.             ; body of loop
+.
+loop forD
+2. Each part of this problem contains a design with a for loop. Assume
+that sum references a doubleword in the data segment. Give a fragment
+of 80x86 code that uses a loop statement to implement the design. Use
+the dtoa and output macros for display, assuming that the data segment contains
+ASCIIcount   BYTE  11 DUP (?)
+ASCIIsum     BYTE  11 DUP (?)
+BYTE  13, 10, 0    ; carriage return, linefeed
+(a) sum := 0;
+for count := 50 downto 1 loop
+add count to sum;
+display count, sum;
+end for;
+(b) sum := 0;
+for count := 1 to 50 loop
+add count to sum;
+display count, sum;
+end for;
+TEAM LinG - Live, Informative, Non-cost and Genuine!

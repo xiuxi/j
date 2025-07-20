@@ -1,0 +1,161 @@
+MOVP instructions, 416
+movsb instructions, 233, 234
+movsd instructions, 234
+movs instructions, 232, 233, 237, 265 
+ESI and EDI, 234
+rep prefix used with, 240
+movsw instructions, 233, 234
+movsx instructions, 125
+movzx instructions, 124, 125
+MS-DOS, 37
+mul instructions, 108
+example, 109-110
+MULP instructions, 416
+Multiple-bit shifts, 280, 300
+Multiplication
+floating-point instructions, 354
+of floating-point numbers, 374,
+379
+in floating-point routines, 340
+instructions, 108-115, 134, 135,
+281
+of larger numbers, 132
+of unpacked BCD numbers, 409,
+410
+MulUnp1 procedure, 409, 410, 411
+N
+Name field, 43
+Names
+in assembly language, 44
+NaN (not a number), 375
+NEAR32 attribute, 202
+near call instructions, 204
+Near conditional jumps, 151
+Near indirect calls, 207
+Near procedures, 206
+Near relative procedures, 206
+NEAR32 procedure, 215, 225
+Negative numbers
+representation for, 10, 11
+neg instructions, 96, 102, 134
+nestingLevel, 221
+.NOLIST directive, 48, 61, 325
+.NOLISTMACRO directive, 325, 333
+Non-negative packed BCD numbers
+adding, 398, 399
+subtracting, 400, 401
+Nonrecursive procedures, 230
+normalize macro, 378
+Notepad, 38, 53
+not instructions, 270, 299
+not operations, 267
+and 80x86, 269
+and logic gates, 298
+Null bytes, 394
+Null character, 78
+Numbers
+character codes for representing,
+7
+Number systems
+suffixes used in, 68
+O
+Object code (machine code), 42, 301
+and assembler, 302
+relocatable, 306
+.OBJ file, 208
+Octal number system, 5
+OF. See Overflow flag
+Offset, 29
+One-pass assembler, 302
+1’s complement numbers, 26
+1’s complement system, 21, 22
+Opcodes (operation codes), 39, 66, 67,
+199, 337
+adc and sbb instructions, 131
+additional mov instructions, 90
+and, or, and xor instructions, 270
+and byte-size operands, 308
+call instructions, 206
+cld and std instructions, 233
+cmp instructions, 148
+cmps instructions, 242
+conditional jump instructions,
+149-150
+div instructions, 122
+double shift instructions, 287
+idiv instructions, 122
+immediate-to-memory mov
+instructions, 89
+immediate-to-register mov
+instructions, 87
+imul instructions, 110
+inc and dec instructions, 100
+loop instructions, 174
+movsx and movzx instructions,
+125
+neg instructions, 102
+not instructions, 270
+pop instructions, 197
+push all and pop all instructions,
+200
+push instructions, 195
+reg field for specified, 309
+rep movs instructions, 241
+ret instructions, 208
+shift and rotate instructions, 282
+stos instructions, 249
+sub instructions, 314
+test instructions, 275
+xchg instructions, 92, 93
+Open code, 326
+Operand(s)
+call instructions, 206
+constant, 68-71
+instruction, 73-76
+pop instructions, 197
+push instructions, 195
+size byte, 308
+Operating system, 37-38, 40
+or circuit, 298
+or instructions, 270, 272, 274, 285, 299
+or operations, 267, 268, 274 
+and 80x86, 269
+and logic gates, 298
+or operator, 161, 162
+Outcode (region code), 277
+out instructions, 437
+outproc procedure, 427
+output macro, 78, 79, 83, 391, 419
+in file IO.H, 337
+and kernel32 functions, 422
+Overflow, 15, 18, 20
+in addition, 17
+Overflow flag (OF), 33, 80, 96, 98, 147,
+279, 439
+and Boolean instructions, 269
+and imul instructions, 113
+and mul instructions, 110
+and rotate instructions, 288, 289
+Overflow interrupt handler, 439
+P
+Packed BCD representations, 388-394,
+417
+to ASCII conversion, 390
+Packed decimal conversions
+and VAX architecture, 416
+Paging mechanism, 29
+Parallel printer port (LPT1), 437
+Parameter address list, 229
+Parameter passing, 193
+and procedures without stacks,
+229
+Parameters
+address, 220
+and local variables, 211-221
+locating in stack, 214
+passing, 211-212
+Parameter values
+accessing from stack, 212
+using those passed on stack, 213
+496 Index
+TEAM LinG - Live, Informative, Non-cost and Genuine!

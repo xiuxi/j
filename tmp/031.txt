@@ -1,0 +1,25 @@
+2.2 PC Hardware: The CPU 31
+(Full descriptions of the add instruction and others mentioned below will appear in
+Chapter 4.)
+Each of EAX, EBX, ECX, and EDX is 32 bits long. The Intel convention is to
+number bits right to left starting with 0 for the low-order bit, so that if you view one of
+these registers as four bytes, then the bits are numbered like this
+Parts of the EAX register can be addressed separately from the whole. The low-order
+word, bits 0–15, is known as AX.
+The instruction
+sub ax, 10
+subtracts 10 from the word stored in AX, without changing any of the high-order bits
+(16–31) of EAX.
+Similarly, the low-order byte (bits 0–7) and the high-order byte (bits 8–15) of AX
+are known as AL and AH, respectively.
+The instruction
+mov ah, '*'
+copies 2A, the ASCII code for an asterisk, to bits 8–15, without changing any of the other
+bits of EAX.
+EAX AH AL
+31 24 23 16 15 8 7 0
+EAX AX
+31 24 23 16 15 0
+EAX
+31 24 23 16 15 8 7 0
+TEAM LinG - Live, Informative, Non-cost and Genuine!

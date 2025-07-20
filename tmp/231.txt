@@ -1,0 +1,35 @@
+CHAPTER 7
+7.1 Using String
+Instructions
+7.2 Repeat Prefixes and
+More String
+Instructions
+7.3 Character Translation
+7.4 Converting a 2’s
+Complement Integer to
+an ASCII String
+7.5 Other Architectures:
+CISC versus RISC
+Designs
+String Operations
+Computers are frequently used to manipulate
+characters strings as well as numeric data. In data
+processing applications names, addresses, and so
+forth must be stored and sometimes rearranged.
+Text editor and word processor programs must be
+capable of searching for and moving strings of
+characters. An assembler must be able to separate
+assembly language statement elements, identifying those that are reserved mnemonics. Even
+when computation is primarily numerical, it is
+often necessary to convert either a character string
+to an internal numerical format when a number is
+entered at the keyboard or an internal format to a
+character string for display purposes.
+An 80x86 microprocessor has instructions
+to manipulate character strings. The same instructions can manipulate strings of doublewords or
+words. This chapter covers 80x86 instructions that
+are used to handle strings, with emphasis on character strings. A variety of applications are given,
+including procedures that are similar to those in
+some high-level languages and the procedure
+called by the dtoa macro.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,29 @@
+The original values have all been pushed down one register position on the stack. Starting
+with these values, if the instruction fld st(2) is executed, the register stack will contain
+Notice that the value 2.0 from ST(2) has been pushed onto the top of the stack, but not
+removed from the stack. Starting with these values, assume that the instruction fild
+intValue is executed. The new contents of the register stack will be
+ST
+ST(1)
+ST(2)
+ST(3)
+ST(4)
+ST(5)
+ST(6)
+ST(7)
+2.0
+10.0
+1.0
+2.0
+3.0
+ST
+1.0 ST(1)
+2.0 ST(2)
+3.0 ST(3)
+ST(4)
+ST(5)
+ST(6)
+ST(7)
+10.0
+10.1 80x86 Floating-Point Architecture 343
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,29 @@
+416 Decimal Arithmetic
+sum may be the same length as the longer operand, or one byte longer.
+Assume that sufficient space has been reserved in the destination field
+for the sum, even if operand1 is the shorter operand. The procedure will
+remove parameters from the stack.
+11.4 Other Architectures: VAX Packed Decimal
+Instructions
+Since the 80x86 architecture provides very limited support for packed decimal operations, a large procedure library is necessary to use packed decimal types. Some other
+architectures provide extensive hardware support for packed decimal. This section
+briefly examines packed decimal instructions defined in the VAX architecture, although
+not necessarily implemented in all VAX machines.
+The VAX architecture defines a packed decimal string by its length and starting address. The length gives the number of decimal digits stored in the string, not the
+number of bytes. The last four bits (half byte) are always a sign indicator, normally C16 for
+positive and D16 for negative. Since decimal digits are packed two per byte, the length
+(in bytes) of a packed decimal string is approximately half the number of digits. More
+precisely, for n decimal digits it is (n + 1)/2 if n is odd and (n + 2)/2 if n is even.
+The VAX architecture includes a complete set of instructions for performing
+packed decimal arithmetic: ADDP (add packed), DIVP (divide packed), MULP (multiply
+packed), and SUBP (subtract packed). Each of these has at least four operands to specify
+the length and address of each of the packed decimal strings involved. When just two
+strings are specified, one serves both as a source and the destination. All also have sixoperand formats where the sources are specified separately from the destination. (MULP
+and DIVP have only the six-operand formats.) The MOVP (move packed) instruction
+copies a packed decimal string from one address to another. The CMPP (compare packed)
+instruction compares two packed decimal strings, setting condition codes (flags).
+Recall the difficulty of converting packed decimal to or from other formats. The
+VAX architecture provides six different instructions for this purpose. There are functions
+to convert between packed decimal strings and 32-bit 2’s complement integers, and others to convert between packed decimal and numeric strings (including ASCII). There is
+also an EDIT instruction that converts a packed decimal string to a character string, performing many possible editing operations during the conversions. (Programming Exercises 11.1, #4, describes a similar, but much simpler, editing job.)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

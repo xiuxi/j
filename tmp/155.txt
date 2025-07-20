@@ -1,0 +1,32 @@
+5.2 Conditional Jumps, Compare Instructions, and if Structures 155
+The assembly language source code for the game program is shown in Fig.
+5.8. Note that screen is cleared by writing 24 line feed characters. The loop and selection structures in the program faithfully follow the design. Recall that an until loop is a
+; program to implement number guessing game
+; author:  R. Detmer
+; date:  revised 9/97
+.386
+.MODEL FLAT
+INCLUDE io.h
+ExitProcess PROTO NEAR32 stdcall, dwExitCode:DWORD
+cr          EQU    0dh   ; carriage return character
+Lf          EQU    0ah   ; linefeed character
+.STACK  4096             ; reserve 4096-byte stack
+.DATA                    ; reserve storage for data
+prompt1     BYTE   cr,Lf,Lf,"Player 1, please enter a number:  ", 0
+target      DWORD  ?
+clear       BYTE   24 DUP (Lf), 0
+prompt2     BYTE   cr,Lf,"Player 2, your guess?   ", 0
+stringIn    BYTE   20 DUP (?)
+lowOutput   BYTE   "too low", cr, Lf, 0
+highOutput  BYTE   "too high", cr, Lf, 0
+gotItOutput BYTE   "you got it", cr, Lf, 0
+countLabel  BYTE   Lf, "Number of guesses:"
+countOut    BYTE   6 DUP (?)
+BYTE   cr, Lf, Lf, Lf, "Do you want to play again?  ",0
+.CODE                               ; start of main program code
+_start:
+untilDone:  output prompt1          ; ask player 1 for target
+input  stringIn, 20     ; get number
+(continued)
+Figure 5.8 Game program
+TEAM LinG - Live, Informative, Non-cost and Genuine!

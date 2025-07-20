@@ -1,0 +1,28 @@
+74 Elements of Assembly Language
+Memory mode Location of data
+direct at a memory location whose address (offset) is built
+into the instruction
+register indirect at a memory location whose address is in a register
+Figure 3.9 Two 80x86 memory addressing modes
+2 One can write self-modifying code; that is, code that changes its own instructions as it executes. This
+is considered a very poor programming practice.
+For an immediate mode operand, the data to be used is built into the instruction before it is executed; once there it is constant.2 Normally the data is placed there by
+the assembler, although it can be inserted by the linker or loader, depending on the
+stage at which the value can be determined. The programmer writes an instruction
+including an actual value, or a symbol standing for a constant value. For a register
+mode operand, the data to be used is in a register. To indicate a register mode operand,
+the programmer simply codes the name of the register. A register mode operand can
+also specify a register as a destination, but an immediate mode operand cannot be a
+destination.
+In each of the following examples, the first operand is register mode and the
+second operand is immediate mode. The object code (taken from the assembler listing
+file) is shown as a comment. For the instruction
+mov   al, '/'   ; B0 2F
+the ASCII code 2F for the slash is the second byte of the instruction, and is placed there
+by the assembler. For the instruction
+add   eax, 135  ; 05 00000087
+the doubleword length 2’s complement version of 135 is assembled into the last four
+bytes of the instruction.
+Any memory mode operand specifies using data in memory or specifies a destination in memory. A direct mode operand has the 32-bit address built into the
+instruction. Usually the programmer will code a symbol that is associated with a BYTE,
+TEAM LinG - Live, Informative, Non-cost and Genuine!

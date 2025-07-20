@@ -1,0 +1,33 @@
+16 Representing Data in a Computer
+The answer is correct in this case since BDA16 = 303410.
+Next, 0206 and FFB0 are added. These are, of course, positive as unsigned
+numbers, but interpreted as 2’s complement signed numbers, 0206 is a positive number
+and FFB0 is negative. This means that there are two decimal versions of the addition
+problem. The signed one is given first, then the unsigned version.
+0206 518 518
++ FFB0 + (–80) + 65456
+101B6 438 65974
+There certainly appears to be a problem since it will not even fit in a word. In fact, since
+101B6 is the hex version of 65974, there is no way to represent the correct sum of
+unsigned numbers in a word. However, if the numbers are interpreted as signed and you
+ignore the extra 1 on the left, then the word 01B6 is the 2’s complement representation of
+the decimal number 438.
+Now FFE7 and FFF6 are added, both negative numbers in a signed interpretation. Again, both signed and unsigned decimal interpretations are shown.
+FFE7 (–25) 65511
++ FFF6 + (–10) + 65526
+1FFDD –35 131037
+Again, the sum in hex is too large to fit in two bytes, but if you throw away the extra 1,
+then FFDD is the correct word-length 2’s complement representation of 35.
+Each of the last two additions have a carry out of the usual high order position
+into an extra digit. The remaining digits give the correct 2’s complement representation.
+The remaining digits are not always the correct 2’s complement sum, however. Consider
+the addition of the following two positive numbers:
+483F 18495
++ 645A + 25690
+AC99 44185
+There was no carry out of the high order digit, but the signed interpretation is plainly
+incorrect since AC99 represents the negative number 21351. Intuitively, what went
+wrong is that the decimal sum 44185 is bigger than the maximal value 32767 that can be
+stored in the two bytes of a word. However, when these numbers are interpreted as
+unsigned, the sum is correct.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

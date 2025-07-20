@@ -1,0 +1,25 @@
+54 Elements of Assembly Language
+C:\AsmFiles>example
+Enter first number:  98
+Enter second number:  –35
+The sum is          63
+C:\AsmFiles>
+Figure 3.2 Execution of EXAMPLE.EXE
+This is entered as a single command, although it may wrap to a new line as you type.
+Again, assuming no errors, you will see
+Microsoft (R) 32-Bit Incremental Linker Version 5.10.7303
+Copyright (C) Microsoft Corp 1992–1997. All rights reserved.
+followed by a DOS prompt. This LINK command links together EXAMPLE.OBJ, IO.OBJ,
+and KERNEL32.LIB to produce the output file EXAMPLE.EXE. The switch /subsystem:console tells LINK to produce a console application, one that runs in a DOS window. The switch /entry:start identifies the label of the program entry point; notice
+that you do not use an underscore here even though _start was the actual label for the
+entry point.
+A program is executed by simply typing its name at the DOS prompt. Figure 3.2
+shows a sample run of EXAMPLE.EXE, with user input underlined. Once the executable
+file has been produced, you can run the program as many times as you wish without
+assembling or linking it again.
+This book’s software package includes Microsoft’s Windbg, a symbolic debugger that can be used to trace execution of an assembly language program. This is a useful tool for finding errors and for seeing how the computer works at the machine level.
+To use Windbg, you must add the /Zi switch (uppercase Z, lowercase i) to the
+assembly with ML. This causes the assembler to add debug information to its output.
+The assembly command now looks like
+ml /c /coff /Zi example.asm
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,159 @@
+IFDEF directive, 329, 338
+IF directive, 338
+IFE directive, 329, 338
+IFNB (if not blank) directive, 326, 327,
+337, 338
+IFNDEF directive, 329, 338
+if statements, 137, 190
+if structures, 144
+implementation of, 152-153
+if-then-else structures, 137, 190
+if-then structures, 137
+Illegal statements
+macro calls expanded to, 327-329
+Immediate mode, 73, 74, 83
+Immediate-to-memory mov
+instructions, 89
+Immediate-to-register moves, 89
+Immediate-to-register operation, 310
+Imul instructions, 1-8, 134, 296
+example, 112
+inc instructions, 95, 100, 134, 304, 315
+execution of, 101
+INCLUDE directive, 48, 61, 208, 333
+INCLUDE io.h directive, 46, 48
+inc statement, 306
+Indexes
+for arrays, 185
+Index registers, 32
+Indirect addressing register, 75
+in instructions, 437
+Initialize procedure, 202
+In-line assembly code, 384-385, 386
+In-line assembly language
+and floating-point instructions,
+384-385
+in-out parameters, 211, 212
+inproc procedure, 427, 428
+input macro, 50, 79, 80, 83, 419
+in file IO.H, 337
+and kernel32 functions, 422
+Input/output (I/O), 40, 419-440
+console, using Kernel32 library,
+420-428
+devices, 36-37
+lower-level, 437-439
+macros in IO.H, 77-80
+procedures in IO.ASM, 425-427
+sequential file, using Kernel32
+library, 428-435
+Institute of Electrical and Electronics
+Engineers, 24
+Instruction operands, 73-76, 83
+Instruction pointer register updates,
+92
+Instructions, 42, 43, 82, 85-135
+addition/subtraction of larger
+numbers, 130-132
+constants in, 68
+copying data, 86-94
+division, 118-127
+integer addition/subtraction,
+95-106
+and levels of abstraction, 133-134
+microcode, 133, 134
+multiplication, 108-115
+operands for, 73
+in pipeline, 189
+Integer square root
+finding, 208, 210
+Integer values
+representing, 26
+Integrated circuits, 28
+Integrated development
+environments, 39
+Intel 80x86, 264
+CPU, 27
+instruction encodings, 311-312
+instruction fields, 308
+instructions, 265, 267, 269, 274
+machine language description,
+307-314
+microprocessor assembly, 301
+operands and results for division
+instructions, 119
+register codes, 310
+repeat prefixes in string
+instructions, 239
+stacks, 194-200
+Intel 80x86 architecture, 228, 230
+floating-point, 340-356
+and lower-level input/output,
+437-439
+procedure call and return, 204208
+recursive procedure with, 223227
+stack, 194-200
+string in, 232
+Intel 80x86 instructions, 267, 269
+and bit manipulation, 299
+for strings, 231, 232
+Intel 80x86 processors
+add and sub instructions, 95, 96,
+98, 99, 100, 101, 102
+addressing modes, 73
+floating point formats used in, 24
+and mov instructions, 86, 87
+Intel 80x86 registers, 35, 243
+Interpreters, 38, 39
+Interrupt, 438, 439, 440
+handler, 122, 439
+procedure, 438, 439
+Interrupt-driven I/O, 419, 438, 440
+Intersegment jumps, 141
+int instruction, 439
+into instruction, 439
+Intrasegment jumps, 141
+INVOKE, 221
+IO.ASM
+file, 77
+input/output procedures in,
+425-427
+IO.H file, 301, 334-336, 338
+input/output macros defined in,
+77-80
+IO.OBJ
+and atodproc, 292
+IO.OBJ file
+and input/output macros, 83
+itoa macro, 80, 83, 259, 265
+in file IO.H, 337
+and larger numbers, 132
+itoaproc, 259, 260, 265
+J
+jcxz instructions, 176
+jecxz instructions, 191, 239
+conditional jump, 176
+jmp instructions, 141, 142, 190, 304
+jmp statements, 138
+jnle instructions, 304
+jnle statements, 306
+K
+kernel32 library, 439
+console I/O using, 420-428
+sequential file I/O using, 428-435
+kernel32 service, 140
+Keyboard, 27, 36
+L
+Labels, 44, 146, 152
+for loop, 175
+Language translators, 38
+lea (load effective address)
+instructions, 191, 246
+leave instructions, 221
+Left shifts, 278, 279, 283
+single-bit, 282
+Length operand, 79
+Line feed, 8
+character, 48, 58
+494 Index
+TEAM LinG - Live, Informative, Non-cost and Genuine!

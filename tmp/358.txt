@@ -1,0 +1,36 @@
+(q) fsubp  st(3),st
+(r) fmul   st, st(4)
+(s) fmul
+(t) fmul   fpValue
+(u) fdiv
+(v) fdivr
+(w) fidiv  intValue
+(x) fdivp  st(2),st
+(y) fchs
+(z) fsqrt
+2. Suppose that a program’s data segment contains
+fpValue    REAL4   1.5
+intValue   DWORD   9
+and that code executed so far by the program has not changed these
+values. Suppose also that the floating-point register stack contains
+Assume that these values are correct before each instruction below is
+executed. Give the contents of the status word flags C3, C2, and C0 following execution of the instruction.
+(a) fcom
+(b) fcom  st(3)
+(c) fcom  fpValue
+(d) ficom intValue
+ST
+ST(1)
+ST(2)
+ST(3)
+ST(4)
+ST(5)
+ST(6)
+ST(7)
+9.0
+12.0
+23.0
+24.0
+35.0
+358 Floating-Point Arithmetic
+TEAM LinG - Live, Informative, Non-cost and Genuine!

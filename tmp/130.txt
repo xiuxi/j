@@ -1,0 +1,33 @@
+130 Basic Instructions
+4.5 Addition and Subtraction of Larger Numbers
+The add and sub instructions covered in Section 4.2 work with byte-length, wordlength, or doubleword-length operands. Although the range of values that can be stored
+in a doubleword is large,  2,147,483,648 (8000000016) to 2,147,483,647 (7FFFFFFF16), it is
+sometimes necessary to do arithmetic with even larger numbers. Very large numbers
+can be added or subtracted a group of bits at a time.
+We will illustrate the technique for adding large numbers by adding two 64-bit
+long numbers. The idea is to start with the low-order 32 bits from each number and add
+them using an ordinary add instruction. This operation sets the carry flag CF to 1 if
+there is a carry out of the high order bit and to 0 otherwise. Now the next 32 bits are
+added using a special addition instruction adc (add with carry). The two high-order 32bit numbers are added as usual, but if CF is set to 1 from the prior addition, then 1 is
+added to their sum before it is sent to the destination location. The adc instruction also
+sets CF, so this process could be continued for as additional groups of bits.
+Assume that the two numbers to be added are in four doublewords in the
+data segment.
+Nbr1Hi  DWORD  ?     ; High order 32 bits of Nbr1
+Nbr1Lo  DWORD  ?     ; Low order 32 bits of Nbr1
+Nbr2Hi  DWORD  ?     ; High order 32 bits of Nbr2
+Nbr2Lo  DWORD  ?     ; Low order 32 bits of Nbr2
+The following code fragment adds Nbr2 to Nbr1, storing the sum at the doublewords
+reserved for Nbr1.
+mov  eax, Nbr1Lo     ; Low order 32 bits of Nbr1
+add  eax, Nbr2Lo     ; add Low order 32 bits of Nbr2
+mov  Nbr1Lo, eax     ; sum to destination
+mov  eax, Nbr1Hi     ; High order 32 bits of Nbr1
+adc  eax, Nbr2Hi     ; add High order 32 bits of Nbr2 & carry
+mov  Nbr1Hi, eax     ; sum to destination
+One thing making this code work is that the mov instructions that come between the
+add and adc instructions do not alter the carry flag. If an intervening instruction did
+change CF, then the sum could be incorrect.
+The adc instructions are identical to corresponding add instructions except
+that the extra 1 is added if CF is set to 1. For subtraction, sbb (subtract with borrow)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

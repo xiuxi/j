@@ -1,0 +1,17 @@
+386 Floating-Point Arithmetic
+Chapter Summary
+The Intel 80x86 floating-point unit (FPU) contains eight data 80-bit data
+registers, organized as a stack. It executes a variety of instructions from
+load and store to arithmetic to complex transcendental functions. Comparison instructions set bits in a FPU status register; this status word must be
+copied to AX or to memory to check the outcome of a comparison.
+Conversion between floating point and ASCII representations is
+similar to that previously done for integers. The easiest ASCII format to
+scan is a simple decimal format. The simplest ASCII format to produce is
+E-notation.
+Floating-point instructions can be emulated without a floatingpoint unit. The basic techniques involve separating floating-point representations into sign, exponent, and fraction components, manipulating these
+components, and then combining the resulting components back into a
+floating-point representation.
+Some high-level language compilers translate in-line assembly
+code. One application of this is with floating-point instructions, doing
+input/output in a language like C++ and computations in assembly language. However, in-line assembly is also useful in other critical or difficultto-implement applications.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

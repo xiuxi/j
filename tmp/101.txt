@@ -1,0 +1,32 @@
+4.2 Integer Addition and Subtraction Instructions 101
+inc  destination
+and
+dec   destination
+Like the add and sub instructions, these instructions are paired with respect to allowable operand types, clock cycles, and bytes of object code. They are summarized
+together in Fig. 4.6.
+The inc and dec instructions treat the value of the destination operand as an
+unsigned integer. They affect the OF, SF, and ZF flags just like addition or subtraction of
+one, but they do not change the carry flag CF. Here are examples showing the execution
+of a few increment and decrement instructions:
+Example
+Before Instruction executed After
+ECX:  00 00 01 A2 inc  ecx
+AL:  F5 dec  al
+word at Count:  00 09 inc  Count
+BX:  00 01 dec   bx
+EDX:  7F FF FF FF inc   edx EDX
+SF 1  ZF 0  OF 1
+80 00 00 00
+BX
+SF 0  ZF 1  OF 0
+00 00
+Count
+SF 0  ZF 0  OF 0
+00 0A
+AL
+SF 1  ZF 0  OF 0
+F4
+ECX
+SF 0  ZF 0  OF 0
+00 00 01 A3
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,25 @@
+3.2 A Complete Example 51
+scans memory starting at string, skips leading blanks, notes any plus (+) or minus ( )
+sign, and builds a number from ASCII codes for digits. The scan stops when any nondigit is encountered.
+The statement
+mov     number1, eax    ; store in memory
+is an instruction. The mnemonic mov stands for “move” but the instruction really performs a copy operation like an assignment statement in a high-level language. This particular instruction copies the value in the EAX register to the doubleword of memory at
+address number1.
+The next four statements
+output  prompt2         ; repeat for second number
+input   string, 40
+atod    string
+mov     number2, eax
+repeat the tasks just performed: prompt for the second number; input ASCII codes; convert the ASCII codes to a 2’s complement doubleword; and copy the doubleword to
+memory. Note that the input area is reused.
+The next two instructions add the numbers. Addition must be done in a register, so the first number is copied to the EAX register with the instruction
+mov     eax, number1    ; first number to AX
+and then the second is added to the first with the instruction
+add     eax, number2    ; add second number
+(Do you see a more efficient way to get the sum in EAX?)
+The sum is now in the EAX register in 2’s complement form. For display purposes we need a sequence of ASCII characters that represent this value. The dtoa
+(“double to ASCII”) macro takes the doubleword specified by its second operand and
+converts it to a string exactly 11 bytes long at the destination specified by the first
+operand. In this program, the macro
+dtoa    sum, eax        ; convert to ASCII characters
+TEAM LinG - Live, Informative, Non-cost and Genuine!

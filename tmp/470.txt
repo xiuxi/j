@@ -1,0 +1,40 @@
+Number Timing Timing Timing
+Opcode Mnemonic Operand(s) Flags affected of bytes 386 486 Pentium
+0C or AL,imm8 SF,ZF,OF,CF,PF,AF 2 2 1 1
+0D or AX,imm16 SF,ZF,OF,CF,PF,AF 3 2 1 1
+EAX,imm32 5
+0E push CS none 1 2 3 1
+0F 04 shld reg16,reg16,imm8 SF,ZF,CF,PF 4 3 2 4
+reg32,reg32,imm8 OF,AF ?
+0F 04 shld mem16,reg16,imm8 SF,ZF,CF,PF 4+ 7 4 4
+mem32,reg32,imm8 OF,AF ?
+0F 05 shld reg16,reg16,CL SF,ZF,CF,PF 3 3 3 4
+reg32,reg32,CL OF,AF ?
+0F 05 shld mem16,reg16,CL SF,ZF,CF,PF 3+ 7 4 5
+mem32,reg32,CL OF,AF ?
+0F 80 jo rel32 none 7+,3 3,1 1 6
+0F 81 jno rel32 none 7+,3 3,1 1 6
+0F 82 jb rel32 none 7+,3 3,1 1 6
+jnae
+0F 82 jc rel32 none 7+,3 3,1 1 6
+0F 83 jae rel32 none 7+,3 3,1 1 6
+jnb
+0F 83 jnc rel32 none 7+,3 3,1 1 6
+0F 84 je rel32 none 7+,3 3,1 1 6
+jz
+0F 85 jne rel32 none 7+,3 3,1 1 6
+jnz
+0F 86 jbe rel32 none 7+,3 3,1 1 6
+jna
+0F 87 ja rel32 none 7+,3 3,1 1 6
+jnbe
+0F 88 js rel32 none 7+,3 3,1 1 6
+0F 89 jns rel32 none 7+,3 3,1 1 6
+0F 8A jp rel32 none 7+,3 3,1 1 6
+jpe
+0F 8B jnp rel32 none 7+,3 3,1 1 6
+jpo
+0F 8C jl rel32 none 7+,3 3,1 1 6
+jnge
+470 Appendix E
+TEAM LinG - Live, Informative, Non-cost and Genuine!

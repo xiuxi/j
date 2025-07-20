@@ -1,0 +1,42 @@
+Number Timing Timing Timing
+Opcode Mnemonic Operand(s) Flags affected of bytes 386 486 Pentium
+4B dec BX SF,ZF,OF,PF,AF 1 2 1 1
+EBX
+4C dec SP SF,ZF,OF,PF,AF 1 2 1 1
+ESP
+4D dec BP SF,ZF,OF,PF,AF 1 2 1 1
+EBP
+4E dec SI SF,ZF,OF,PF,AF 1 2 1 1
+ESI
+4F dec DI SF,ZF,OF,PF,AF 1 2 1 1
+EDI
+50 push AX none 1 2 1 1
+EAX
+51 push CX none 1 2 1 1
+ECX
+52 push DX none 1 2 1 1
+EDX
+53 push BX none 1 2 1 1
+EBX
+54 push SP none 1 2 1 1
+ESP
+55 push BP none 1 2 1 1
+EBP
+56 push SI none 1 2 1 1
+ESI
+57 push DI none 1 2 1 1
+EDI
+58 pop AX none 1 4 1 1
+EAX
+59 pop CX none 1 4 1 1
+ECX
+5A pop DX none 1 4 1 1
+EDX
+5B pop BX none 1 4 1 1
+EBX
+5C pop SP none 1 4 1 1
+ESP
+5D pop BP none 1 4 1 1
+EBP
+80x86 Instructions 475
+TEAM LinG - Live, Informative, Non-cost and Genuine!

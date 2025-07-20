@@ -1,0 +1,39 @@
+Notice that the value 1.2 is shown in Fig. 10.12 as 1.2000000476837158e+0000.
+The reason that there are nonzero digits after the decimal point is that 1.2 does not have
+an exact representation as a floating point number. The approximation used by the 32bit REAL4 directive translates back to the number shown in 17-decimal-digit precision.
+You can get a better approximation by using a REAL8 or a REAL10 directive, but at the
+cost of extra bytes of storage.
+The second example is an implementation of a simple ASCII to floating-point
+conversion algorithm. This algorithm, given in Fig. 10.13, is similar to the one used by
+10.2 Programming with Floating-Point Instructions 361
+value := 0.0;
+divisor := 1.0;
+point := false;
+minus := false;
+point at first character of source string;
+if source character = ‘-’
+then
+minus := true;
+point at next character of source string;
+end if;
+while (source character is a digit or a decimal point) loop
+if source character = ‘.’
+then
+point := true;
+else
+convert ASCII digit to 2’s complement digit;
+value := 10*value + float(digit);
+if point
+then
+multiply divisor by 10;
+end if;
+end if;
+point at next character of source string;
+end while;
+value := value/divisor;
+if minus
+then
+value := – value;
+end if;
+Figure 10.13 ASCII to floating-point algorithm
+TEAM LinG - Live, Informative, Non-cost and Genuine!

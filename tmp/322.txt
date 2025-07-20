@@ -1,0 +1,30 @@
+322 The Assembly Process
+The statement
+add2  value1, value2   ; value1 + value2
+expands to
+; put sum of two doubleword parameters in EAX
+mov    eax, value1
+add    eax, value2
+The macro call
+add2  eax, ebx     ; sum of two values
+expands to
+; put sum of two doubleword parameters in EAX
+mov    eax, eax
+add    eax, ebx
+The instruction mov eax,eax is legal, even if it accomplishes nothing.
+In each of these examples, the first argument is substituted for the first parameter nbr1 and the second argument is substituted for the second parameter nbr2. Each
+macro results in two mov instructions, but since the types of arguments differ, the object
+code will vary.
+If one of the parameters is missing the macro will still be expanded. For
+instance, the statement
+add2  value
+expands to
+; put sum of two doubleword parameters in EAX
+mov    eax, value
+add    eax,
+The argument value replaces nbr1 and an empty string replaces nbr2. The assembler will
+report an error, but it will be for the illegal add instruction that results from the macro
+expansion, not directly because of the missing argument.
+Similarly, the macro call
+add  , value
+TEAM LinG - Live, Informative, Non-cost and Genuine!

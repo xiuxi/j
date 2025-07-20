@@ -1,0 +1,31 @@
+190 Branching and Looping
+A pipelined CPU is not as simple as illustrated above. One problem may occur
+if, say, stage 2 needs to compute an address based on the contents of a register modified
+by stage 3 of the previous instruction; the register might not yet contain the correct
+address. A CPU can be designed to avoid such problems, usually at the cost of a “hole” in
+the pipeline.
+A more serious problem occurs when the CPU executes a conditional jump
+instruction. With a conditional jump the CPU cannot tell which of two possible
+sequences of instructions will be executed next until the condition itself is evaluated by
+the last stage. Earlier stages may be working on one instruction stream, only to be forced
+to discard all this work and refill the pipeline from the beginning with instructions from
+the alternative stream.
+Chapter Summary
+This chapter introduced 80x86 instructions that can be used to implement
+many high-level design or language features including if statements, various loops structures, and arrays.
+The jmp instruction unconditionally transfers control to a destination statement. It has several versions, including one that jumps to a short
+destination 128 bytes before or 127 bytes after the jmp and one that jumps
+to a near destination a 32-bit displacement away. The jmp instruction is
+used in implementing various loop structures, typically transferring control
+back to the beginning of the loop, and in the if-then-else structure at the
+end of the “then code” to transfer control to endif so that the else code is
+not also executed. A jmp statement corresponds directly to the goto statement that is available in most high-level languages.
+Conditional jump instructions examine the settings of one or more
+flags in the flag register and jump to a destination statement or fall
+through to the next instruction depending on the flag values. Conditional
+jump instructions have short and near displacement versions. There is a
+large collection of conditional jump instructions. They are used in if statements and loops, often in combination with compare instructions, to check
+Boolean conditions.
+The cmp (compare) instructions have the sole purpose of setting
+or resetting flags in the EFLAGS register. Each compares two operands
+TEAM LinG - Live, Informative, Non-cost and Genuine!

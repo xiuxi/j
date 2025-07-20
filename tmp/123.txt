@@ -1,0 +1,31 @@
+4.4 Division Instructions 123
+Clock Cycles Number
+Instruction 386 486 Pentium of Bytes Opcode
+cbw 3 3 3 1 98
+cwd 2 3 2 1 99
+cdq 2 3 2 1 99
+cwde 3 3 3 1 98
+Figure 4.18 cbw and cwd instructions
+When arithmetic is being done with operands of a given length, the dividend
+must be converted to double length before a division operation is executed. For
+unsigned division, a doubleword-size dividend must be converted to quadword size
+with leading zero bits in the EDX register. This can be accomplished many ways, two
+of which are
+mov   edx, 0
+and
+sub   edx, edx
+Similar instructions can be used to put a zero in DX prior to unsigned division by a word
+operand or to put a zero in AH prior to unsigned division by a byte operand.
+The situation is more complicated for signed division. A positive dividend
+must be extended with leading 0 bits, but a negative dividend must be extended with
+leading 1 bits. The 80x86 has three instructions for this task. The cbw, cwd, and cdq
+instructions are different from the instructions covered before in that these instructions
+have no operands. The cbw instruction always has AL as its source and AX as its destination, cwd always has AX as its source and DX and AX as its destination, and cdq
+always has EAX as its source and EDX and EAX as its destination. The source register
+is not changed, but is extended as a signed number into AH, DX, or EDX. These
+instructions are summarized together in Fig. 4.18, which also includes the cwde instruction that extends the word in AX to its signed equivalent in EAX, paralleling the job
+that cbw does.
+The cbw (convert byte to word) instruction extends the 2’s complement number
+in the AL register half to word length in AX. The cwd (convert word to double) instruction extends the word in AX to a doubleword in DX and AX. The cdq (convert double to
+quadword) instruction extends the word in EAX to a quadword in EDX and EAX. The
+TEAM LinG - Live, Informative, Non-cost and Genuine!

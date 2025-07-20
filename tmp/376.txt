@@ -1,0 +1,36 @@
+376 Floating-Point Arithmetic
+expand    MACRO  source, sign, exponent, fraction
+LOCAL  addOne, endAddOne
+; take the 32-bit floating-point value source and expand it into
+; separate pieces:
+;   sign: byte
+;   exponent: word (bias removed)
+;   fraction: doubleword (with leading 1)
+push eax             ; save EAX
+mov  eax, source     ; get source
+rol  eax, 1          ; sign to bit 0
+mov  sign, 0         ; clear sign
+mov  sign, al        ; get byte with sign bit
+and  sign, 1         ; mask all but sign bit
+rol  eax, 8          ; shift exponent to bits 0–7
+mov  exponent, ax    ; get word with biased exponent
+and  exponent, 0ffh  ; mask all but exponent
+sub  exponent, 127   ; subtract bias
+shr  eax, 9          ; shift fraction to right
+test eax, eax        ; is fraction zero?
+jnz  addOne          ; add leading 1 bit if nonzero
+cmp  exponent, –127  ; was original exponent 0?
+je   endAddOne       ; if so, leave fraction at zero
+AddOne:   or   eax, 800000h    ; add leading 1 bit
+endAddOne:
+mov  fraction, eax   ; store fraction
+pop  eax             ; restore EAX
+ENDM
+Figure 10.18 expand macro
+taining it, and then masking by 1 (=00000001b) to zero all bits except the sign bit. Then
+the additional eight exponent bits are rotated to the right end of EAX and saved as a
+word before the leading bits are masked off. The bias of 127 is subtracted to get the true
+signed exponent. Finally the fraction is shifted back to the right of EAX. Before it is
+saved, a check for the IEEE 0.0 representation is made. If the original number was not
+0.0, then the leading 1 bit of the scientific notation is inserted with the or operation.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

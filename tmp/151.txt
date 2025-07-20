@@ -1,0 +1,30 @@
+5.2 Conditional Jumps, Compare Instructions, and if Structures 151
+Each conditional jump instruction takes a single clock cycle for execution.
+No conditional jump instruction changes any flag value. Each instruction has a
+short version and a near version. Just as with short unconditional jump instructions, a
+short conditional jump encodes a single-byte displacement and can transfer control 128
+bytes before or 127 bytes after the address of the byte following the instruction itself. A
+short conditional jump requires two bytes of object code, one for the opcode and one for
+the displacement. A near conditional jump encodes a 32-bit displacement in addition to
+a two-byte opcode, giving a total length of six bytes. It can transfer control up to
+2,147,483,648 bytes backward or 2,147,483,647 forward. The number of bytes and number of clock cycles for conditional jump instructions is summarized in Fig. 5.6.
+One more pair of examples will illustrate the difference between the conditional
+jumps appropriate after comparison of signed and unsigned numbers. Suppose a value is
+stored in EAX and some action needs to be taken when that value is larger than 100. If
+the value is unsigned, one might code
+cmp     eax, 100
+ja      bigger
+The jump would be chosen for any value bigger than 0000006416, including values
+between 8000000016 and FFFFFFFF16, which represent both large unsigned numbers
+and negative 2’s complement numbers. If the value in EAX is interpreted as signed, then
+the instructions
+cmp     ax,100
+jg      bigger
+Clock Cycles Number
+386 486 Pentium of Bytes
+short conditional jump 7+, 3 3, 1 1 2
+near conditional jump 7+, 3 3, 1 1 6
+For the 80386 and 80486 the longer time is when the jump is executed; the
+shorter time is for no jump.
+Figure 5.6 Timing and size of conditional jump instructions
+TEAM LinG - Live, Informative, Non-cost and Genuine!

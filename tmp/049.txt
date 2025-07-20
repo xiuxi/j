@@ -1,0 +1,33 @@
+3.2 A Complete Example 49
+The directive
+number1 DWORD   ?
+reserves a single doubleword of storage, associating the symbolic name number1 with
+the address 00000000 since it is the first data item. The question mark (?) indicates that
+this doubleword will have no designated initial value, although actually MASM 6.1 will
+initialize it to zero. The statement
+number2 DWORD   ?
+reserves another doubleword of storage, associating the symbolic name number2 with
+the next available address, 00000004, since it follows the doubleword already reserved.
+The run-time addresses for number1 and number2 will be different than 00000000 and
+00000004, but these doublewords will be stored consecutively in memory.
+The directive
+prompt1 BYTE    "Enter first number:  ", 0
+has two operands, the string "Enter first number" and the number 0. It reserves
+one byte for each character inside the quotation marks and one byte for the number 0.
+For each character, the byte reserved is the ASCII code of the letter. For the number, it is
+simply its byte-length 2’s complement representation. This directive thus reserves 22
+bytes of memory containing 45 6E 74 65 72 20 66 69 72 73 74 20 6E 75 6D 62 65 72 3A 20
+20 00. The name prompt1 is associated with the address 00000008 since eight previous
+bytes have been allocated.
+The next BYTE directive reserves 23 bytes of memory, with the name prompt2
+associated with address 0000001E. Then the directive
+string  BYTE    40 DUP (?)
+reserves 40 uninitialized bytes of memory that will have the symbolic address string.
+The DUP operator says to repeat the item(s) in parentheses. The directive
+label1  BYTE    cr, Lf, "The sum is "
+has three operands and reserves 13 bytes of storage. The first two bytes contain 0D and
+0A since these are the values to which cr and Lf are equated. The next 11 bytes are the
+ASCII codes of the characters in quotation marks. Notice that there is no trailing 0
+operand for this BYTE directive or the next, so there will be no trailing 00 byte generated.
+The next-to-last BYTE directive reserves 11 uninitialized bytes with address associated
+TEAM LinG - Live, Informative, Non-cost and Genuine!

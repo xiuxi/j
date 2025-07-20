@@ -1,0 +1,44 @@
+10.2 Programming with Floating-Point Instructions 363
+mov  esi, [ebp+8]    ; address of first source character
+cmp  BYTE PTR [esi], '-'    ; leading minus sign?
+jne  endifMinus      ; skip if not
+mov  minus, true     ; minus sign found
+inc  esi             ; point at next source character
+endifMinus:
+whileOK:  mov  bl, [esi]       ; get next character
+cmp  bl, '.'         ; decimal point?
+jne  endifPoint      ; skip if not
+mov  point, true     ; found decimal point
+jmp  nextChar
+endifPoint:
+cmp  bl, '0'         ; character a digit?
+jl   endwhileOK      ; exit if lower than '0'
+cmp  bl, '9'
+jg   endwhileOK      ; exit if higher than '9'
+and  bx, 000fh       ; convert ASCII to integer value
+mov  digit, bx       ; put integer in memory
+fmul ten             ; value := value * 10
+fiadd digit          ; value := value + digit
+cmp  point, true     ; already found a decimal point?
+jne  endifDec        ; skip if not
+fxch                 ; put divisor in ST and value in ST(1)
+fmul ten             ; divisor := divisor * 10
+fxch                 ; value back to ST; divisor back to ST(1)
+endifDec:
+nextChar: inc  esi             ; point at next source character
+jmp  whileOK
+endwhileOK:
+fdivr                ; value := value / divisor
+cmp  minus, true     ; was there a minus sign?
+jne  endifNeg
+fchs                 ; value := -value
+endifNeg:
+pop  esi             ; restore registers
+pop  ebx
+pop  eax
+pop  ebp
+ret  4
+atofproc  ENDP
+END
+Figure 10.14 (continued)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

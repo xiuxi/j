@@ -1,0 +1,30 @@
+3.5 Constant Operands 71
+reserves 100 doublewords of storage, each initialized to 000003E7. This is an effective
+way to initialize elements of an array. If one needs a string of 50 asterisks, then
+stars      BYTE    50 DUP('*')
+will do the job. If one wants 25 asterisks, separated by spaces,
+starsAndSpaces BYTE 24 DUP("* "), '*'
+reserves these 49 bytes and assigns the desired initial values.
+An operand of a BYTE, DWORD, WORD, or other statement can be an expression
+involving arithmetic or other operators. These expressions are evaluated by the assembler at assembly time, not at run time, with the resulting value used for assembly. It is
+usually not helpful to use an expression instead of the constant of equivalent value, but
+sometimes it can contribute to clearer code. The following directives are equivalent,
+each reserving a word with an initial hex value of 0090.
+gross     WORD    144
+gross     WORD    12*12
+gross     WORD    10*15 – 7 + 1
+Each symbol defined by a BYTE, DWORD, or WORD directive is associated with
+a length. The assembler notes this length and checks to be sure that symbols are
+used appropriately in instructions. For example, the assembler will generate an error
+message if
+char       BYTE   'x'
+is used in the data segment and
+mov  ax, char
+appears in the code segment—the AX register is a word long, but char is associated
+with a single byte of storage.
+The Microsoft assembler recognizes several additional directives for reserving
+storage. These include QWORD for reserving a quadword, TBYTE for a 10-byte integer,
+REAL4, for reserving a 4-byte floating point number, REAL8 for 8-byte floating point, and
+REAL10 for 10-byte floating point. It also has directives to distinguish signed bytes,
+words, and doublewords from unsigned. We will rarely use these directives.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

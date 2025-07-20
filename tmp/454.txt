@@ -1,0 +1,39 @@
+Number Timing Timing Timing
+Mnemonic Operand(s) Flags affected Opcode of Bytes 386 486 Pentium
+imul reg16 OF,CF F7 2 9-22 13-26 11
+reg32 SF,ZF, PF,AF ? 9-38 13-42 10
+imul mem8 OF,CF F6 2+ 12-17 13-18 11
+SF,ZF, PF,AF ?
+imul mem16 OF,CF F7 2+ 12-25 13-26 11
+mem32 SF,ZF, PF,AF ? 12-41 13-42 10
+imul reg16,reg16 OF,CF 0F AF 3 9-22 13-26 11
+reg32,reg32 SF,ZF, PF,AF ? 9-38 13-42 10
+imul reg16,mem16 OF,CF 0F AF 3+ 12-25 13-26 11
+reg32,mem32 SF,ZF, PF,AF ? 12-41 13-42 10
+imul reg16,imm8 OF,CF 6B 3 9-14 13-18 10
+reg32,imm8 SF,ZF, PF,AF ?
+imul mem16 OF,CF F7 4 9-22 13-26 11
+mem32 SF,ZF, PF,AF ? 6 9-38 13-42 10
+imul reg16,reg16,imm8 OF,CF 6B 3 9-14 13-18 10
+reg32,reg32,imm8 SF,ZF, PF,AF ?
+imul reg16,reg16,imm16 OF,CF 69 4 9-22 13-26 10
+reg32,reg32,imm32 SF,ZF, PF,AF ? 6 9-38 13-42 10
+imul reg16,mem16,imm8 OF,CF 6B 3+ 9-17 13-18 10
+reg32,mem32,imm8 SF,ZF, PF,AF ?
+imul reg16,mem16,imm16 OF,CF 69 4+ 12-25 13-26 10
+reg32,mem32,imm32 SF,ZF, PF,AF ? 6+ 12-41 13-42 10
+inc reg8 SF,ZF,OF,PF,AF FE 2 2 1 1
+inc AX SF,ZF,OF,PF,AF 40 1 2 1 1
+EAX
+inc CX SF,ZF,OF,PF,AF 41 1 2 1 1
+ECX
+inc DX SF,ZF,OF,PF,AF 42 1 2 1 1
+EDX
+inc BX SF,ZF,OF,PF,AF 43 1 2 1 1
+EBX
+inc SP SF,ZF,OF,PF,AF 44 1 2 1 1
+ESP
+inc BP SF,ZF,OF,PF,AF 45 1 2 1 1
+EBP
+454 Appendix D
+TEAM LinG - Live, Informative, Non-cost and Genuine!

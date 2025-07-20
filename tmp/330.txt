@@ -1,0 +1,32 @@
+330 The Assembly Process
+directive, it immediately stops expanding the macro, ignoring any statements following
+EXITM in the macro definition. The design
+if condition
+then
+process assembly language statements for condition;
+else
+process statements for negation of condition;
+end if;
+and the alternative design
+if condition
+then
+process assembly language statements for condition;
+terminate expansion of macro;
+end if;
+process statements for negation of condition;
+are equivalent, assuming that no macro definition statements follow those sketched in
+the designs. These alternative designs can be implemented using
+IF... [operands]
+assembly language statements for condition
+ELSE
+assembly language statements for negation of condition
+ENDIF
+and
+IF... [operands]
+assembly language statements for condition
+EXITM
+ENDIF
+assembly language statements for negation of condition
+Notice that the EXITM directive is not needed when the ELSE directive is used. A macro
+definition using EXITM appears in Fig. 9.12 on the next page.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

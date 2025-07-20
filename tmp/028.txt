@@ -1,0 +1,107 @@
+28 Parts of a Computer System
+Figure 2.1 Logical picture of PC memory
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+0
+0
+0
+0
+0
+0
+2
+0
+0
+0
+0
+0
+0
+0
+3
+0
+0
+0
+0
+0
+0
+0
+4
+0
+0
+0
+0
+0
+0
+0
+5
+0
+0
+0
+0
+0
+0
+0
+6
+F
+F
+F
+F
+F
+F
+F
+D
+F
+F
+F
+F
+F
+F
+F
+E
+F
+F
+F
+F
+F
+F
+F
+F
+. . .
+2.1 PC Hardware: Memory
+The memory in an IBM PC or compatible microcomputer is logically a collection of
+“slots,” each of which can store one byte of instructions or data. Each memory byte has a
+32-bit numeric label called its physical address. A physical address can always be
+expressed as eight hex digits. The first address is 0000000016 and the last address can be
+as large as the unsigned number FFFFFFFF16. Figure 2.1 shows a logical picture of the
+possible memory in a PC. Since FFFFFFFF16 = 4,294,967,295, a PC can contain up to
+4,294,967,296 bytes of memory, or four gigabytes. In practice, the user memory in most
+PCs is smaller than this.
+Prior to the 80386 chip, the Intel 80x86 family of processors could only directly
+address 220 bytes of memory. They used 20-bit physical addresses, often expressed as 5hex-digit addresses ranging from 00000 to FFFFF.
+Physically a PC’s memory consists of integrated circuits (ICs). Many of these
+chips provide random access memory (RAM), which can be written to or read from by
+program instructions. The contents of RAM chips are lost when the computer’s power is
+turned off. Other ICs are read-only memory (ROM) chips, which permanently retain
+their contents and can be read from but not written to.
+The assembly language programs in this book will use a flat memory model.
+This means that the programs will actually encode 32-bit addresses to logically reference
+locations in a single memory space where data and instructions are stored.
+The Intel 80x86 architecture also provides for a segmented memory model. In
+the original 8086/8088 CPU, this memory model was the only one available. With the
+8086/8088, the PC’s memory is visualized as a collection of segments, each segment 64
+Kbytes long, starting on an address that is a multiple of 16. This means that one segment
+TEAM LinG - Live, Informative, Non-cost and Genuine!

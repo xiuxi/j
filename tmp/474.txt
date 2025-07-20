@@ -1,0 +1,40 @@
+Number Timing Timing Timing
+Opcode Mnemonic Operand(s) Flags affected of bytes 386 486 Pentium
+38 cmp reg8,reg8 SF,ZF,OF,CF,PF,AF 2 2 1 1
+38 cmp mem8,reg8 SF,ZF,OF,CF,PF,AF 2+ 5 2 2
+39 cmp mem16,reg16 SF,ZF,OF,CF,PF,AF 2+ 5 2 2
+mem32,reg32
+3A cmp reg8,mem8 SF,ZF,OF,CF,PF,AF 2+ 6 2 2
+3B cmp reg16,reg16 SF,ZF,OF,CF,PF,AF 2 2 1 1
+reg32,reg32
+3B cmp reg16,mem16 SF,ZF,OF,CF,PF,AF 2+ 6 2 2
+reg32,mem32
+3C cmp AL,imm8 SF,ZF,OF,CF,PF,AF 2 2 1 1
+3D cmp AX,imm16 SF,ZF,OF,CF,PF,AF 3 2 1 1
+EAX,imm32 5
+3F aas none AF,CF 1 4 3 3
+SF,ZF,OF,PF ?
+40 inc AX SF,ZF,OF,PF,AF 1 2 1 1
+EAX
+41 inc CX SF,ZF,OF,PF,AF 1 2 1 1
+ECX
+42 inc DX SF,ZF,OF,PF,AF 1 2 1 1
+EDX
+43 inc BX SF,ZF,OF,PF,AF 1 2 1 1
+EBX
+44 inc SP SF,ZF,OF,PF,AF 1 2 1 1
+ESP
+45 inc BP SF,ZF,OF,PF,AF 1 2 1 1
+EBP
+47 inc SI SF,ZF,OF,PF,AF 1 2 1 1
+ESI
+48 dec AX SF,ZF,OF,PF,AF 1 2 1 1
+EAX
+48 inc DI SF,ZF,OF,PF,AF 1 2 1 1
+EDI
+49 dec CX SF,ZF,OF,PF,AF 1 2 1 1
+ECX
+4A dec DX SF,ZF,OF,PF,AF 1 2 1 1
+EDX
+474 Appendix E
+TEAM LinG - Live, Informative, Non-cost and Genuine!

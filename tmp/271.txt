@@ -1,0 +1,39 @@
+8.1 Logical Operations 271
+expansions are shown in the examples. Most hex calculators perform the logical operations directly.
+Example
+Before Instruction Bitwise Operation After
+AX: E2 75 and ax,cx 1110 0010 0111 0101
+CX: A9 D7 1010 1001 1101 0111
+1010 0000 0101 0101
+DX: E2 75 or dx,value 1110 0010 0111 0101
+value: A9 D7 1010 1001 1101 0111
+1110 1011 1111 0111
+BX: E2 75 xor bx,0a9d7h 1110 0010 0111 0101
+1010 1001 1101 0111
+0100 1011 1010 0010
+AX: E2 75 not ax 1110 0010 0111 0101
+0001 1101 1000 1010
+AX 1D 8A
+BX
+SF 0      ZF 0
+4B A2
+DX
+SF 1      ZF 0
+EB F7
+AX
+SF 1      ZF 0
+A0 55
+Each of the logical instructions has a variety of uses. One application of the and
+instruction is to clear selected bits in a destination. Note that if any bit value is “anded”
+with 1, the result is the original bit. On the other hand, if any bit value is “anded” with 0,
+the result is 0. Because of this, selected bits in a byte or word can be cleared by “anding”
+the destination with a bit pattern that has 1s in positions that are not to be changed and
+0s in positions that are to be cleared.
+For example, to clear all but the last four bits in the EAX register, the following
+instruction can be used.
+and   eax, 0000000fh      ; clear first 28 bits of EAX
+If EAX originally contained 4C881D7B, this and operation would yield 0000000B:
+0100 1100 1000 1000 0001 1101 0111 1011 4C881D7B
+0000 0000 0000 0000 0000 0000 0000 1111 0000000F
+0000 0000 0000 0000 0000 0000 0000 1011 0000000B
+TEAM LinG - Live, Informative, Non-cost and Genuine!

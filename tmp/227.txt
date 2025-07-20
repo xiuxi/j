@@ -1,0 +1,48 @@
+6.4 Recursion 227
+add    esp,8         ; remove parameters from stack
+endIfOne:
+pop    ebx           ; restore registers
+pop    eax
+pop    ebp           ; restore base pointer
+ret                  ; return
+Move        ENDP
+_start:     output prompt       ; ask for number of disks
+input  number,16    ; read ASCII characters
+atoi   number       ; convert to integer
+push   ax           ; argument 1: Number
+mov    al,’A’       ; argument 2: ' A'
+push   ax
+mov    al,’B’       ; argument 3: ' B'
+push   ax
+mov    al,’C’       ; argument 4: ' C'
+push   ax
+call   Move         ; Move(Number,Source,Dest,Spare)
+add    esp,8        ; remove parameters from stack
+INVOKE  ExitProcess, 0  ; exit with return code 0
+PUBLIC _start                   ; make entry point public
+END                             ; end of source code
+Figure 6.20 (continued)
+Exercises 6.4
+1. What will go wrong in the Towers of Hanoi program if EAX is not saved
+at the beginning of procedure Move and restored at the end?
+2. Suppose that the Towers of Hanoi program is executed and 2 is
+entered for the number of disks. Trace the stack contents from the first
+push in the main program through the instruction add esp,8 in the
+main program.
+Programming Exercises 6.4
+1. The factorial function is defined for a non-negative integer argument n by
+factorial n
+n
+n factorial n n
+( ) =
+=
+× −( ) >
+
+
+
+
+1 if 
+ if 
+0
+1 0
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,31 @@
+254 String Operations
+7. Write a complete program that prompts for and inputs a sentence and
+two words. Construct a new sentence that is identical to the old one
+except that each occurrence of the first word is replaced by the second
+word. After you generate the new sentence in memory, display it.
+7.3 Character Translation
+Sometimes character data are available in one format but need to be in another format
+for processing. One instance of this occurs when characters are transmitted between
+two computer systems, one normally using ASCII character codes and the other normally
+using EBCDIC character codes. Another time character codes need to be altered is to
+transmit them to a device that cannot process all possible codes; it is sometimes easier
+to replace the unsuitable codes by acceptable codes than to delete them entirely.
+The 80x86 instruction set includes the xlat instruction to translate one character to another character. In combination with other string-processing instructions, it can
+easily translate all the characters in a string.
+The xlat instruction requires only one byte of object code, the opcode D7. It
+takes five clock cycles to execute on an 80386, and four clock cycles on an 80486 or a
+Pentium. Prior to execution, the character to be translated is in the AL register. The
+instruction works by using a translation table in the data segment to look up the translation of the byte in AL. This translation table normally contains 256 bytes of data, one for
+each possible 8-bit value in AL. The byte at offset zero in the table—the first byte—is the
+character to which 00 is translated. The byte at offset one is the character to which 01 is
+translated. In general xlat uses the character being translated as an offset into the
+table, and the byte at that offset then replaces the character in AL.
+The xlat instruction has no operand. The EBX register must contain the
+address of the translation table. 
+Figure 7.13 illustrates a short program which translates each character of string in
+place; that is, it replaces each character by its translation using the original location in
+memory. The heart of the program is the translation table and the sequence of instructions
+mov    ecx, strLength ; string length
+lea    ebx, table     ; address of translation table
+lea    esi, string    ; address of string
+TEAM LinG - Live, Informative, Non-cost and Genuine!

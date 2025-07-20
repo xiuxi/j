@@ -1,0 +1,32 @@
+6.2 Procedure Body, Call and Return 207
+tion. The transfer of control when a procedure is called is similar to the transfer of a relative jump, except that the old contents of EIP are pushed, of course.
+Near indirect calls encode a register 32 or a reference to a doubleword in memory. When the call is executed, the contents of that register or doubleword are used as
+the address of the procedure. This makes it possible for a call instruction to go to different procedures different times.
+All far calls must provide both new CS contents and new EIP contents. With far
+direct calls, both of these are coded in the instruction, adding six bytes to the opcode.
+With far indirect calls, these are located at a six-byte block in memory, and the address
+of that block is coded in the instruction.
+The return instruction ret is used to transfer control from a procedure body
+back to the calling point. Its basic operation is simple; it pops the address previously
+stored on the stack and loads it into the instruction pointer EIP. Since the stack contains
+the address of the instruction following the call, execution will continue at that point. A
+near return just has to restore EIP. A far return instruction reverses the steps of a far call,
+restoring both EIP and CS; both of these values are popped from the stack.
+There are two formats for the ret instruction. The more common form has no
+operand and is simply coded
+ret
+An alternative version has a single operand and is coded
+ret   count
+The operand count is added to the contents of ESP after completion of the other steps of
+the return process (restoring EIP and, for a far procedure, CS). This can be useful if other
+values (parameters in particular) have been saved on the stack just for the procedure call,
+and can be logically discarded when the procedure is exited. (Parameters are discussed
+further in the next section.) Figure 6.9 lists the various formats of ret instructions.
+If a procedure’s PROC directive has the operand NEAR32, then the assembler
+generates near calls to the procedure and near returns to exit from it. The Microsoft
+Macro Assembler also has retn (return near) and retf (return far) mnemonics to force
+near or far returns; we will not need these mnemonics.
+To construct building blocks for large programs, it is often desirable to assemble
+a procedure or group of procedures separately from the code that calls them; that is, with
+procedures and calling programs in separate files. There are a few additional steps
+TEAM LinG - Live, Informative, Non-cost and Genuine!

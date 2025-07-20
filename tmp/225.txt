@@ -1,0 +1,33 @@
+6.4 Recursion 225
+Figure 6.20 shows 80x86 code that implements the design. The stack is used to
+pass parameters to procedure Move, which is a NEAR32 procedure referencing the data
+segment for output only. A standard stack frame is established, and registers used by
+the procedure are saved and restored. The code is a fairly straightforward translation of
+the pseudocode design. The operator DWORD PTR is required in the statement
+cmp    DWORD PTR [bp+14],1
+so that the assembler knows whether to compare words or byte size operands. Similarly,
+the pushw mnemonic is used several places so that the assembler knows to push wordsize parameters. Notice that the recursive calls are implemented exactly the same way
+as the main program call, by pushing four parameters on the stack, calling procedure
+Move, then removing the parameters from the stack. However, in the main program the
+spindle parameters are constants, stored as the low order part of a word since single
+bytes cannot be pushed on the 80x86 stack.
+; program to print instructions for “Towers of Hanoi” puzzle
+; author:  R. Detmer   revised:  10/97
+.386
+.MODEL FLAT
+ExitProcess PROTO NEAR32 stdcall, dwExitCode:DWORD
+include io.h            ; header file for input/output
+cr      equ     0dh     ; carriage return character
+Lf      equ     0ah     ; line feed
+.STACK  4096            ; reserve 4096-byte stack
+.DATA                   ; reserve storage for data
+prompt      BYTE   cr,Lf,’How many disks?  ',0
+number      BYTE   16 DUP (?)
+message     BYTE   cr,Lf,’Move disk from spindle ’
+source      BYTE   ?
+BYTE   ' to spindle ’
+dest        BYTE   ?
+BYTE   '.’,0
+(continued)
+Figure 6.20 Towers of Hanoi solution
+TEAM LinG - Live, Informative, Non-cost and Genuine!

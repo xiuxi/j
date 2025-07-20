@@ -1,0 +1,34 @@
+11.3 Unpacked BCD Representations and Instructions 405
+describes how to define unpacked BCD numbers, how to convert this representation to
+and from ASCII, and how to use 80x86 instructions to do some arithmetic operations
+with unpacked BCD numbers.
+Unpacked BCD representations have no standard length. In this book each
+value will be stored in eight bytes, with high-order digits on the left and low-order digits
+on the right (opposite to the way a DT directive stores packed BCD numbers). No sign
+byte will be used, so only non-negative numbers will be represented. An ordinary BYTE
+directive can be used to initialize an unpacked BCD value. For example, the statement
+BYTE 0,0,0,5,4,3,2,8
+reserves eight bytes of storage containing 00 00 00 05 04 03 02 08, the unpacked BCD
+representation for 54328. The directive
+BYTE 8 DUP (?)
+establishes an eight-byte-long area that can be used to store an unpacked BCD value.
+It is simple to convert an unpacked BCD value to or from ASCII. Suppose that
+the data segment of a program includes the directives
+ascii      DB  8 DUP (?)
+unpacked   DB  8 DUP (?)
+If unpacked already contains an unpacked BCD value, the following code fragment will
+produce the corresponding ASCII representation at ascii.
+lea  edi, ascii            ; destination
+lea  esi, unpacked         ; source
+mov  ecx, 8                ; bytes to process
+for8: mov  al, [esi]             ; get digit
+or   al, 30h               ; convert to ASCII
+mov  [edi], al             ; store ASCII character
+inc  edi                   ; increment pointers
+inc  esi
+loop for8                  ; repeat for all bytes
+Converting from an ASCII string to an unpacked BCD representation is equally
+easy. The same loop structure can be used with the roles of EDI and ESI reversed, and
+with the or instruction replaced by
+and  al, 0fh       ; convert ASCII to unpacked BCD
+TEAM LinG - Live, Informative, Non-cost and Genuine!

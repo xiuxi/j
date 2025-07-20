@@ -1,0 +1,30 @@
+10.2 Programming with Floating-Point Instructions 373
+Since ST > operand results in all C3 = C2 = C0 = 0, all three control bits must be zero. The
+program masks with C3 or C2 or C0, a descriptive way of writing 0100010100000000.
+This or operation combines operands at assembly time, not at execution time.
+Conversion of the exponent to two ASCII characters uses a slightly new technique.
+The exponent in AX is non-negative and less than 40 when the following code is executed.
+div  byteTen          ; convert exponent to 2 digits
+or   ax, 3030h        ; convert both digits to ASCII
+mov  BYTE PTR [edi+1], ah  ; store characters in destination
+mov  BYTE PTR [edi], al
+Dividing by 10 puts the quotient (the high-order base ten digit) in AL and the remainder
+(the low-order digit) in AH. These are simultaneously converted to ASCII by the or
+instruction, and are then stored in the destination string.
+Programming Exercises 10.2
+1. Write a complete program that will prompt for and input a decimal
+value for the radius of a circle and will calculate and display (appropriately labeled) the circumference and the area of the circle. Use the input
+and output macros to input and output character strings, the atofproc
+and ftoaoproc procedures to convert between floating point and ASCII,
+and FPU instructions for floating-point operations.
+2. Write a NEAR32 procedure ftoaproc1 that will convert a floating-point
+number to an ASCII string in fixed point format. Specifically, the procedure must have four parameters pushed on the stack:
+• a 32-bit floating point value
+• the address of the destination string
+• a word containing the total number n of characters in the string to
+be generated
+• a word containing the number of digits d to be generated after the
+decimal point
+The output string will consist of a leading blank or minus sign, the integer part of the value in n-d–2 positions (with leading blanks as needed),
+a decimal point, and the fractional part of the value rounded to d positions. The procedure will preserve all registers and will remove parameters from the stack.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

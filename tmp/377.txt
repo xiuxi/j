@@ -1,0 +1,36 @@
+10.3 Floating-Point Emulation 377
+The plan is to take floating-point numbers apart into their sign-fraction-exponent
+forms, implement an operation by manipulating the parts, and then combine the resulting
+sign-fraction-exponent pieces back into a floating-point result. The combine operation
+will also be done with a macro, called combine. Code for this macro appears in Fig. 10.19.
+The design for the combine macro assumes that each of the pieces of representing a floating-point value is legal, with a zero fraction the only special case considered. With these assumptions, the fraction will be normalized; that is, bit 24 will be the
+one and no bit to the left will be one. The operations that we will do with floating-point
+combine  MACRO  destination, sign, exponent, fraction
+LOCAL  endZero
+; take the separate pieces:
+;   sign: byte
+;   exponent: word (bias removed)
+;   fraction: doubleword (with leading 1)
+; of a floating-point value and combine them into a 32-bit
+; IEEE result at destination
+push eax             ; save EAX
+push ebx             ;   and EBX
+mov  eax, 0          ; zero result
+cmp  fraction, 0     ; zero value?
+je   endZero         ; skip if so
+mov  al, sign        ; get sign
+ror  eax, 1          ; rotate sign into position
+mov  bx, exponent    ; get exponent
+add  bx, 127         ; add bias
+shl  ebx, 23         ; shift to exponent position
+or   eax, ebx        ; combine with sign
+mov  ebx, fraction   ; get fraction
+and  ebx, 7fffffh    ; remove leading 1 bit
+or   eax, ebx        ; combine with sign and exponent
+endZero:
+mov  destination, eax ;store result
+pop  ebx             ; restore registers
+pop  eax
+ENDM
+Figure 10.19 combine macro
+TEAM LinG - Live, Informative, Non-cost and Genuine!

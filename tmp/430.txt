@@ -1,0 +1,40 @@
+430 Input/Output
+written    DWORD  ?
+read       DWORD  ?
+fileName   BYTE   60 DUP (?)
+hStdOut    DWORD  ?
+hStdIn     DWORD  ?
+hFile      DWORD  ?
+buffer     BYTE   64 DUP (?)
+prompt     BYTE   "File name?  "
+.CODE
+_start:
+INVOKE GetStdHandle,       ; handle for console output
+STD_OUTPUT
+mov    hStdOut, eax
+INVOKE GetStdHandle,       ; handle for console input
+STD_INPUT
+mov    hStdIn, eax
+INVOKE WriteFile,
+hStdOut,                 ; file handle for screen
+NEAR32 PTR prompt,       ; address of prompt
+12,                      ; length of prmpt
+NEAR32 PTR written,      ; bytes written
+0                        ; overlapped mode
+INVOKE ReadFile,
+hStdIn,                  ; file handle for keyboard
+NEAR32 PTR fileName,     ; address for name
+60,                      ; maximum length
+NEAR32 PTR read,         ; bytes read
+0                        ; overlapped mode
+mov    ecx, read           ; number of bytes read
+mov    BYTE PTR fileName[ecx–2],0 ; add trailing null
+INVOKE CreateFileA,        ; open file
+NEAR32 PTR fileName,     ; file name
+GENERIC_READ,            ; access
+0,                       ; no sharing
+0,                       ; no predefined security
+OPEN_EXISTING,           ; open only if file exists
+(continued)
+Figure 12.5 (continued)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

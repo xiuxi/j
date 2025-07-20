@@ -1,0 +1,30 @@
+3.1 Assembly Language Statements 43
+A statement that is more than just a comment almost always contains a
+mnemonic that identifies the purpose of the statement, and may have three other fields:
+name, operand, and comment. These components must be in the following order:
+name  mnemonic  operand(s)  ;comment
+For example, a program might contain the statement
+ZeroCount:  mov  ecx, 0    ; initialize count to zero
+The name field always ends with a colon (:) when used with an instruction. When used
+with a directive, the name field has no colon. The mnemonic in a statement indicates a
+specific instruction, directive, or macro. Some statements have no operand, others have
+one, others have more. If there is more than one operand, they are separated by commas;
+spaces can also be added. Sometimes a single operand has several components with
+spaces between them, making it look like more than one operand.
+In the instruction
+add   eax, 158
+the mnemonic is add and the operands are eax and 158. The assembler recognizes add
+as a mnemonic for an instruction that will perform some sort of addition. The operands
+provide the rest of the information that the assembler needs. The first operand eax tells
+the assembler that the doubleword in the EAX register is to be one of the values added,
+and that the EAX register will be the destination of the sum. Since the second operand is
+a number (as opposed to another register designation or a memory designation), the
+assembler knows that it is the actual value to be added to the doubleword in the EAX
+register. The resulting object code is 05 00 00 00 9E, where 05 stands for “add the doubleword immediately following this byte in memory to the doubleword already in EAX.”
+The assembler takes care of converting the decimal number 158 to its doubleword length
+2’s complement representation 0000009E. The bytes of this doubleword are actually
+stored backwards in the object code, a fact that we can almost always ignore.
+One use for the name field is to label what will be symbolically, following assembly and linking of the program, an address in memory for an instruction. Other instructions can then easily refer to the labeled instruction. If the above add instruction needs
+to be repeatedly executed in a program loop, then it could be coded
+addLoop:   add  eax, 158
+TEAM LinG - Live, Informative, Non-cost and Genuine!

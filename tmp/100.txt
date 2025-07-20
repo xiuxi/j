@@ -1,0 +1,34 @@
+100 Basic Instructions
+Destination Clock Cycles Number Opcode
+Operand 386 486 Pentium of Bytes inc dec
+register 8 2 1 1 2 FE FE
+register 16 2 1 1 1
+AX 40 48
+CX 41 49
+DX 42 4A
+BX 43 4B
+SP 44 4C
+BP 45 4D
+SI 46 4E
+DI 47 4F
+register 32 2 1 1 1
+EAX 40 48
+ECX 41 49
+EDX 42 4A
+EBX 43 4B
+ESP 44 4C
+EBP 45 4D
+ESI 46 4E
+EDI 47 4F
+memory byte 6 3 3 2+ FE FE
+memory word 6 3 3 2+ FF FF
+memory doubleword 6 3 3 2+ FF FF
+Figure 4.6 inc and dec instructions
+operand is simply extended with one or three 00 bytes. In both cases this is equivalent to
+copying the original sign bit to the high order 8 or 24 bit positions.
+It may be surprising that some add and sub instructions have the same
+opcode. In such cases, one of the fields in the second instruction byte distinguishes
+between addition and subtraction. In fact, these same opcodes are used for additional
+instructions that are covered later in this book.
+The inc (increment) and dec (decrement) instructions are special-purpose addition and subtraction instructions, always using 1 as an implied source. They have the forms
+TEAM LinG - Live, Informative, Non-cost and Genuine!

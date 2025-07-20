@@ -1,0 +1,40 @@
+168 Branching and Looping
+while (sum < 1000) loop
+add count to sum;
+add 1 to count;
+end while;
+(b) sum := 0;
+count := 1;
+while (sum < 1000) and (count ( 50) loop
+add count to sum;
+add 1 to count;
+end while;
+(c) sum := 0;
+count := 100;
+while (sum < 1000) or (count ≥ 0) loop
+add count to sum;
+subtract 1 from count;
+end while;
+2. Each part of this problem contains a design with a until loop. Assume
+that sum references a doubleword in the data segment and that the
+value of count is in the ECX register. Give a fragment of 80x86 code that
+implements the design.
+(a) sum := 0;
+count := 1;
+until (sum > 5000) loop
+add count to sum;
+add 1 to count;
+end until;
+(b) sum := 0;
+count := 1;
+until (sum > 5000) or (count = 40) loop
+add count to sum;
+add 1 to count;
+end until;
+(c) sum := 0;
+count := 1;
+until (sum ≥ 5000) and (count > 40) loop
+add count to sum;
+add 1 to count;
+end until;
+TEAM LinG - Live, Informative, Non-cost and Genuine!

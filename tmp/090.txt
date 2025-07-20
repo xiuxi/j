@@ -1,0 +1,33 @@
+90 Basic Instructions
+Destination Clock Cycles Number
+Operand Source Operand 386 486 Pentium of Bytes Opcode
+register 8 register 8 2 1 1 2 8A
+register 16 register 16 2 1 1 2 8B
+register 32 register 32 2 1 1 2 8B
+register 8 memory byte 4 1 1 2–7 8A
+register 16 memory word 4 1 1 2–7 8B
+register 32 memory doubleword 4 1 1 2–7 8B
+AL direct memory byte 4 1 1 5 A0
+AX direct word 4 1 1 5 A1
+EAX direct doubleword 4 1 1 5 A1
+memory byte register 8 2 1 1 2–7 88
+memory word register 16 2 1 1 2–7 89
+memory doubleword register 32 2 1 1 2–7 89
+direct memory byte AL 2 1 1 5 A2
+direct word AX 2 1 1 5 A3
+direct doubleword EAX 2 1 1 5 A3
+segment register register 16 2 3 1 2 8E
+register 16 segment register 2 3 1 2 8C
+segment register memory word 2 3+ 2+ 2–7 8E
+memory word segment register 2 3 1 2–7 8C
+Figure 4.3 Additional mov instructions
+Note that sometimes the same opcode is used for what appear to be distinct
+instructions, for example for a register 8 to register 8 move and for a memory byte to register 8 move. In these cases the second byte of the instruction determines not only the
+destination register, it also encodes the source register or indicates the mode of a memory source byte. The structure of this byte will be considered more in Chapter 9.
+Two distinct instructions copy a memory operand to the accumulator. For
+example, either of opcodes A1 and 8B could be used to encode the instruction mov
+eax,Number. The difference is that the 8B instruction opcode can also be used to copy
+doublewords to other destination registers, while the A1 opcode is specific to the accumulator. An assembler normally uses the A1 version since it is one byte shorter.
+It is important to realize that, particularly with older processors, instructions that
+access memory are slower than instructions that use data in registers. It should also be
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,30 @@
+and that the floating-point register stack contains
+After the instruction
+fadd  st,st(3)
+is executed, the stack contains
+ST
+ST(1)
+ST(2)
+ST(3)
+ST(4)
+ST(5)
+ST(6)
+ST(7)
+50.0
+20.0
+30.0
+40.0
+ST
+ST(1)
+ST(2)
+ST(3)
+ST(4)
+ST(5)
+ST(6)
+ST(7)
+10.0
+20.0
+30.0
+40.0
+350 Floating-Point Arithmetic
+TEAM LinG - Live, Informative, Non-cost and Genuine!

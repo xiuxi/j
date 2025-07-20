@@ -1,0 +1,29 @@
+8.1 Logical Operations 273
+can be implemented as
+xor  flags, 01000000b      ; flag6 := not flag6
+A third application of logical instructions is to perform certain arithmetic operations. Suppose that the value in the EAX register is interpreted as an unsigned integer. The
+expression (value mod 32) could be computed using the following sequence of instructions.
+mov   edx,0       ; extend value to quadword
+mov   ebx,32      ; divisor
+div   ebx         ; divide value by 32
+Following these instructions, the remainder (value mod 32) will be in the EDX register.
+The following alternative sequence leaves the same result in the EDX register without,
+however, putting the quotient in EAX.
+mov   edx,eax         ; copy value to DX
+and   edx,0000001fh   ; compute value mod 32
+This choice is much more efficient than the first one (see Exercise 2). It works because
+the value in EDX is a binary number; as a sum it is
+Since each of these terms from bit31*231 down to bit5*25 is divisible by 32 (25), the
+remainder upon division by 32 is the bit pattern represented by the trailing five bits,
+those left after masking by 0000001F. Similar instructions will work whenever the second
+operand of mod is a power of 2.
+A fourth use of logical instructions is to manipulate ASCII codes. Recall that the
+ASCII codes for digits are 3016 for 0, 3116 for 1, and so forth, to 3916 for 9. Suppose that the
+AL register contains the ASCII code for a digit, and that the corresponding integer value
+is needed in EAX. If the value in the high-order 24 bits in EAX are known to be zero,
+then the instruction
+sub   eax, 00000030h       ; convert ASCII code to integer
+will do the job. If the high-order bits in EAX are unknown, then the instruction
+and   eax, 0000000fh       ; convert ASCII code to integer
+bit31*231 + bit30*230 + ... + bit2*22 + bit1*2 + bit0
+TEAM LinG - Live, Informative, Non-cost and Genuine!

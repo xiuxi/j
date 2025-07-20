@@ -1,0 +1,28 @@
+400 Decimal Arithmetic
+A subtraction procedure for 10-byte packed BCD numbers is more difficult.
+Even with the operands restricted to non-negative values, subtracting the source
+value (address in parameter 2) from the destination (address in parameter 1) will produce a negative result if the source is larger than the destination. A design for the procedure is below.
+point at first source and destination bytes;
+for count := 1 to 9 loop
+copy destination byte to AL;
+subtract source byte from AL;
+use das to convert difference to BCD;
+save AL in destination string;
+point at next source and destination bytes;
+end for;
+if source > destination
+then
+point at first destination byte;
+for count := 1 to 9 loop
+put 0 in AL;
+subtract destination byte from AL;
+use das to convert difference to BCD;
+save AL in destination string;
+increment DI;
+end for;
+move sign byte 80 to destination string;
+end if;
+The first part of this design is almost the same as the design for addition. The
+condition (source > destination) is true if the carry flag is set after the first loop, and the
+difference is corrected by subtracting it from zero. If this were not done, then, for example, 3   7 would produce 999999999999999996 instead of  4. This design is implemented as procedure subBcd1 in Fig. 11.4.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

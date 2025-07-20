@@ -1,0 +1,28 @@
+310 The Assembly Process
+CL. These codes are used any time information about a register is encoded in an instruction, whether in the reg field or other places.
+The mod field is also used to determine the type of operands an instruction has.
+Often the same opcode is used for an instruction that has two register operands or one
+register operand and one memory operand. The choice mod=11 means that the instruction is a register-to-register operation or an immediate-to-register operation. For a register-to-register operation, the destination register is coded in the reg field and the source
+register is coded in the r/m field. Both use the register codes shown in Fig. 9.4. For an
+immediate-to-register operation, the operation is coded as shown in Fig. 9.3 and the destination register is coded in the r/m field. The situation is complicated for the other possible mod values and depends on the r/m field as well as the mod field. For r/m=100, it
+also depends on the scaled index base (SIB) byte.
+The SIB byte consists of three fields, a two-bit scaling field, a three-bit index
+register field, and a three-bit base register field.
+The index and base register encodings are as shown in Fig. 9.4, except that 100 cannot
+appear in the index register field since ESP cannot be an index register. Figure 9.5
+shows the different encodings. The mod field in these formats tells how many bytes
+there are in the displacement. A value of 00 means that there is no displacement in the
+machine code, except when r/m=101 when there is only a displacement. This special
+case is for direct memory addressing, so is frequently used. A mod value of 01 means
+The scale values are 00 for 1, 01 for 2, 10 for 4, and 11 for 8.
+reg code register 32 register 16 register 8 segment register
+000 EAX AX AL ES
+001 ECX CX CL CS
+010 EDX DX DL SS
+011 EBX BX BL DS
+100 ESP SP AH FS
+101 EBP BP CH GS
+110 ESI SI DH
+111 EDI DI BH
+Figure 9.4 80x86 register codes
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,28 @@
+7.2 Repeat Prefixes and More String Instructions 241
+equal” and repz stands for “repeat while zero.” Similarly repne and repnz mean
+“repeat while not equal” and “repeat while not zero,” respectively. Each of these repeat
+prefixes is appropriate for use with the two string instructions cmps and scas, which
+affect the zero flag ZF.
+The names of these mnemonics partially describe their actions. Each instruction works the same as rep, iterating a primitive instruction while ECX is not zero. However, each also examines ZF after the string instruction is executed. The repe and repz
+continue iterating while ZF=1, as it would be following a comparison where two
+operands were equal. The repne and repnz continue iterating while ZF=0, as it would
+be following a comparison where two operands were different. Repeat prefixes themselves do not affect any flag. The three repeat prefixes are summarized in Fig. 7.5. Note
+that rep and repz (repe) generate exactly the same code.
+The repz and repnz prefixes do not quite produce true while loops with the
+conditions shown in Fig. 7.5. The value in ECX is checked prior to the first iteration of
+the primitive instruction, as it should be with a while loop. However, ZF is not checked
+until after the primitive instruction is executed. In practice, this is very convenient since
+the instruction is skipped for a zero count, but the programmer does not have to do anything special to initialize ZF prior to repeated instructions.
+Figure 7.6 shows how the repeat prefix rep combines with the movs instructions. In the clock cycles columns, there is a “set up” time plus a time for each iteration.
+Mnemonic Loop while Number of bytes Opcode
+rep ECX>0 1 F3
+repz/repe ECX>0 and ZF=1 1 F3
+repnz/repne ECX>0 and ZF=0 1 F2
+Figure 7.5 Repeat prefixes
+Element Clock Cycles Number
+Mnemonic size 386 486 Pentium of bytes Opcode
+rep movsb byte 7+4n 12+3n 13+4n 2 F3 A4
+rep movsw word F3 A5
+rep movsd doubleword F3 A5
+Figure 7.6 rep movs instructions
+TEAM LinG - Live, Informative, Non-cost and Genuine!

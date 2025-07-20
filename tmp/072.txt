@@ -1,0 +1,36 @@
+72 Elements of Assembly Language
+Exercises 3.5
+Find the initial values that the assembler will generate for each directive below.
+1. byte1     BYTE    10110111b
+2. byte2     BYTE    33q
+3. byte3     BYTE    0B7h
+4. byte4     BYTE    253
+5. byte5     BYTE    108
+6. byte6     BYTE    –73
+7. byte7     BYTE    'D'
+8. byte8     BYTE    'd'
+9. byte9     BYTE    "John's program"
+10. byte10    BYTE    5 DUP("<>")
+11. byte11    BYTE    61 + 1
+12. byte12    BYTE    'c' – 1
+13. dword1    DWORD   1000000
+14. dword2    DWORD   1000000b
+15. dword3    DWORD   1000000h
+16. dword4    DWORD   1000000q
+17. dword5    DWORD   –1000000
+18. dword6    DWORD   –2
+19. dword7    DWORD   –10
+20. dword8    DWORD   23B8C9A5h
+21. dword9    DWORD   0, 1, 2, 3
+22. dword10   DWORD   5 DUP(0)
+23. word1     WORD    1010001001011001b
+24. word2     WORD    2274q
+25. word3     WORD    2274h
+26. word4     WORD    0ffffh
+27. word5     WORD    5000
+28. word6     WORD    –5000
+29. word7     WORD    –5, –4, –3, –2, –1
+30. word8     WORD    8 DUP(1)
+31. word9     WORD    6 DUP(–999)
+32. word10    WORD    100/2
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,37 @@
+8.2 Shift and Rotate Instructions 291
+that the first value is no larger than 31 so that it has at most five significant bits and at least three leading 0 bits. Similarly assume that the second value is no larger than 15 (four significant bits) and the third value
+is no larger than 127 (seven bits).
+(a) Give code to pack all three of these numbers into a 16-bit word in
+the AX register, copying the low order five bits from value1 to bits
+11–15 of AX, the low order four bits from value2 to bits 7–10 of AX,
+and the low-order seven bits from value3 into bits 0–6 of AX.
+(b) Give code to unpack the 16 bit number in the AX register into fivebit, four-bit, and seven-bit numbers, padding each value with zeros
+on the left to make eight bits, and storing the resulting bytes at
+value1, value2, and value3 respectively.
+5. The instructions
+mov   ebx, eax     ; value
+shl   eax, 1       ; 2*value
+add   eax, ebx     ; 3*value
+multiplies the value in EAX by 3. Write similar code sequences that use
+shift and addition instructions to efficiently multiply by 5, 7, 9, and 10.
+Programming Exercises 8.2
+1. Write a NEAR32 procedure binaryString that converts a 32-bit integer to
+a string of exactly 32 characters representing its value as a binary number. The procedure will have two parameters, passed on the stack:
+(1) the number
+(2) the address of the destination string
+The procedure will remove parameters from the stack and must
+modify no register. Use a rotate instruction to extract the bits one at a
+time, left-to-right, recalling that jc or jnc instructions look at the carry
+bit. (This exercise is the same as Programming Exercise 3 in Section 7.4
+except for the method of producing the bits.)
+2. An eight-bit number can be represented using three octal digits. Bits 7
+and 6 determine the left octal digit, which is never larger than 4, bits 5,
+4, and 3 the middle digit, and bits 2, 1, and 0 the right digit. For
+instance, 11010110
+2
+is 11 010 110
+2
+or 326
+8
+. The value of a 16-bit number
+TEAM LinG - Live, Informative, Non-cost and Genuine!

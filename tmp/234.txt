@@ -1,0 +1,33 @@
+234 String Operations
+Element Clock Cycles Number
+Mnemonic size 386 486 Pentium of bytes Opcode
+movsb byte 7 7 4 1 A4
+movsw word 7 7 4 1 A5
+movsd doubleword 7 7 4 1 A5
+Figure 7.2 movs instructions (use ESI and EDI)
+DF is 1. The movs instruction does not affect any flag. It comes in movsb, movsw, and
+movsd versions; Fig. 7.2 gives information about each form.
+Figure 7.3 gives an example of a program that uses the movs instruction. The
+important part of the example is the procedure strcopy. This procedure has two parameters
+; test of "strcopy" procedure
+; author:  R. Detmer   revised:  10/97
+.386
+.MODEL FLAT
+ExitProcess PROTO NEAR32 stdcall, dwExitCode:DWORD
+INCLUDE io.h            ; header file for input/output
+cr      equ     0dh     ; carriage return character
+Lf      equ     0ah     ; line feed
+.STACK  4096            ; reserve 4096-byte stack
+.DATA                   ; reserve storage for data
+prompt      BYTE   cr, Lf, "Original string?  ",0
+stringIn    BYTE   80 DUP (?)
+display     BYTE   cr, Lf, "Your string was...", cr, Lf
+stringOut   BYTE   80 DUP (?)
+.CODE
+_start:     output prompt            ; ask for string
+input  stringIn, 80      ; get source string
+lea    eax, stringOut    ; destination address
+push   eax               ; first parameter
+(continued)
+Figure 7.3 String copy program
+TEAM LinG - Live, Informative, Non-cost and Genuine!

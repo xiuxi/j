@@ -1,0 +1,59 @@
+4.2 Integer Addition and Subtraction Instructions 97
+EAX: 00 00 00 75 sub  eax, ecx
+ECX: 00 00 01 A2
+AX: 77 AC add  ax, cx
+CX: 4B 35
+EAX: 00 00 00 75 sub  ecx, eax
+ECX: 00 00 01 A2
+BL:  4B add  bl, 4
+DX:  FF 20 sub  dx, Value
+word at value: FF 20
+EAX:  00 00 00 09 add  eax, 1
+doubleword at Dbl: sub   Dbl, 1
+00 00 01 00
+Dbl
+SF 0  ZF 0  CF 0  OF 0
+00 00 00 FF
+EAX
+SF 0  ZF 0  CF 0  OF 0
+00 00 00 0A
+DX
+Value
+SF 0  ZF 1  CF 0  OF 0
+00
+FF
+00
+20
+BL
+SF 0  ZF 0  CF 0  OF 0
+4F
+EAX
+ECX
+SF 0  ZF 0  CF 0  OF 0
+00
+00
+00
+00
+00
+01
+75
+2D
+AX
+CX
+SF 1  ZF 0  CF 0  OF 1
+C2
+4B
+E1
+35
+EAX
+ECX
+SF 1  ZF 0  CF 0  OF 0
+FF
+00
+FF
+00
+FE
+01
+D3
+A2
+TEAM LinG - Live, Informative, Non-cost and Genuine!

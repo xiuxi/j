@@ -1,0 +1,31 @@
+364 Floating-Point Arithmetic
+This implementation of the ASCII to floating-point algorithm uses ST(1) for divisor and ST for value except for one short segment where they are reversed in order to
+modify divisor. After the procedure entry code, the instructions
+fld1          ; divisor := 1.0
+fldz          ; value := 0.0
+initialize these two variables. Note that the value 1.0 for divisor ends up in ST(1) since it
+is pushed down by the fldz instruction.
+The design element
+value := 10*value + float(digit);
+is implemented by the code
+fmul ten         ; value := value * 10
+fiadd digit      ; value := value + digit
+Note that a word-length 2’s complement integer version of digit is stored in memory.
+The floating-point unit takes care of converting it to floating point as part of the fiadd
+instruction.
+To implement “multiply divisor by 10,” the number to be multiplied must be in
+ST. The instructions
+fxch           ; put divisor in ST and value in ST(1)
+fmul ten       ; divisor := divisor * 10
+fxch           ; value back to ST; divisor back to ST(1)
+take care of swapping divisor and value, carrying out the multiplication in ST, and then
+swapping back.
+When it is time to execute “value := value / divisor” the instruction
+fdivr          ; value := value / divisor
+pops value from ST and divisor from ST(1), computes the quotient, and pushes it back to ST.
+Notice that the fdiv version of this instruction would incorrectly compute “divisor/value.”
+After the division instruction, ST(1) is no longer in use by this procedure. The instruction
+fchs changes the sign of value if a leading minus sign was noted in the ASCII string.
+You can test atofproc with a simple test driver program such as the one shown
+in Fig. 10.15. The “output” of the procedure can be viewed using Windbg.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

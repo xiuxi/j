@@ -1,0 +1,27 @@
+CHAPTER 4
+4.1 Copying Data
+4.2 Integer Addition and
+Subtraction
+Instructions
+4.3 Multiplication
+Instructions
+4.4 Division Instructions
+4.5 Addition and
+Subtraction of Larger
+Numbers
+4.6 Something Extra:
+Levels of Abstraction
+and Microcode
+Basic Instructions
+This chapter covers instructions used to copy data
+from one location to another and instructions
+used for integer arithmetic. It specifies what types
+of operands are allowed for the various instructions. The concepts of time and space efficiency
+are introduced. Finally, some methods are given
+for accomplishing equivalent operations even
+when the desired operand types are not allowed.
+After studying this chapter you will know how to
+copy data between memory and CPU registers,
+and between two registers. You will also know
+how to use 80x86 addition, subtraction, multiplication, and division instructions, and how execution of these instructions affects flags.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

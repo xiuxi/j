@@ -1,0 +1,28 @@
+48 Elements of Assembly Language
+INCLUDE directive, but for purposes of the assembly, the lines of IO.H are inserted at the
+point of the INCLUDE directive. In order to be included, this file should be in the same
+directory/folder as your source program when the assembler is invoked.
+The file IO.H contains mostly definitions for macros that are described in Section 3.7. There are also several directives. The only statements from IO.H that you will
+see in your listing file are .NOLIST, .LIST, and a few comments. The .NOLIST directive, described above, suppresses listing most of the lines from IO.H. The last statement
+in IO.H is the directive .LIST that instructs the assembler to resume listing source
+statements. Another directive in IO.H tells the assembler to suppress listings of the
+statements into which a macro expands. This results in a shorter program listing.
+The next two statements
+cr          EQU    0dh   ; carriage return character
+Lf          EQU    0ah   ; linefeed character
+use the directive EQU to equate symbols to values. Following an EQU directive, the symbol can be used as a synonym for the value in subsequent source code. Using names
+rather than numbers can make clearer source code. In this example, cr is being equated
+to the hexadecimal number 0D, which is the ASCII code for a carriage return character;
+Lf is given the hex value 0A, the ASCII code for a linefeed character. An uppercase L
+has been used to avoid confusion with the number 1. Carriage return and linefeed characters are needed to move down to a new output line, and are frequently used in defining data to be displayed on a monitor or printed.
+In these EQU directives the assembler recognizes the values 0dh and 0ah as
+hexadecimal because each has a trailing h. Numeric values in assembly language statements are in decimal unless otherwise indicated in the source code. Suffixes that indicate types of values other than hex will be introduced in Section 3.5. A hexadecimal
+value must start with a digit, not one of the hex digits “a” through “f” so that the assembler can distinguish it from a name.
+The .STACK directive tells the assembler how many bytes to reserve for a runtime stack—4096 bytes is generous for the programs we will be writing. The stack is
+used primarily for procedure calls. Each macro in IO.H generates a procedure call to an
+associated procedure that actually does the task, and some of these procedures in turn
+call other procedures.
+The directive .DATA starts the data segment of the program, the portion of the
+code where memory space for variables is reserved. In this program, the BYTE and
+DWORD directives are used to reserve bytes and doublewords of storage, respectively.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

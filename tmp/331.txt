@@ -1,0 +1,31 @@
+9.4 Conditional Assembly 331
+Examples in the previous section showed macro calls that expanded to illegal
+statements as a result of missing arguments. Such illegal statements are detected by
+MASM during subsequent assembly rather than as the macro is expanded. The
+designer of a macro definition may wish to include safeguards to ensure that the correct number of arguments is included in a macro call, or that the call is valid in other
+ways. Conditional assembly directives make this possible. If, however, assembly errors
+are eliminated by avoiding generation of illegal statements, a user may not know
+when a macro call is faulty. It requires additional effort to inform the user of an error.
+min2      MACRO  value1,value2,extra
+LOCAL  endIfLess
+; put smaller of value1 and value2 in EAX
+IFB   <value1>
+.ERR  <first argument missing in min2 macro>
+EXITM
+ENDIF
+IFB   <value2>
+.ERR  <second argument missing in min2 macro>
+EXITM
+ENDIF
+IFNB   <extra>
+.ERR  <more than two arguments in min2 macro>
+EXITM
+ENDIF
+mov  eax, value1   ;; first value to EAX
+cmp  eax, value2   ;; value1 <= value2?
+jle  endIfLess     ;; done if so
+mov  eax, value2   ;; otherwise value2 smaller
+endIfLess:
+ENDM
+Figure 9.12 Improved min2 macro
+TEAM LinG - Live, Informative, Non-cost and Genuine!

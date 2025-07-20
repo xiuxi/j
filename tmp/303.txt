@@ -1,0 +1,29 @@
+9.1 Two-Pass and One-Pass Assembly 303
+and the corresponding line in the listing file (Fig. 3.7) is
+number2  . . . . . . . . . . . .    Dword    00000004 _DATA
+This shows that the size of number2 has been recorded as a doubleword. Having the size
+recorded enables MASM to detect incorrect usage of a symbol—with this definition of
+number2, MASM would indicate an error for the instruction
+mov   bh, number2
+since the BH register is byte size while the symbol table identifies number2 as doubleword size. In addition to the size, if a symbol is associated with multiple objects, a symbol table may contain the number of objects or the total number of bytes associated with
+the symbol. The MASM symbol listing does not show this.
+If a symbol is equated to a value, then the value is usually stored in the symbol
+table. When the assembler encounters the symbol in subsequent code, it substitutes the
+value recorded in the symbol table. In the example program, the source code line
+cr      EQU     0dh     ; carriage return character
+is reflected in the listing file line
+cr . . . . . . . . . . . . . . .     Number   0000000Dh
+If a symbol is a label for data or an instruction, then its location is entered in the
+symbol table. An assembler keeps a location counter to compute this value. With a typical assembler, the location counter is set to zero at the beginning of a program or at the
+beginning of each major subdivision of the program. The Microsoft Macro Assembler
+sets the location counter to zero at the beginning of each segment. As an assembler
+scans source code, the location of each datum or instruction is the value of the location
+counter before the statement is assembled. The number of bytes required by the statement is added to the location counter to give the location of the next statement. Again
+looking at the line
+number2 DWORD   ?
+the listing file shows
+number2  . . . . . . . . . . . .     Dword    00000004 _DATA
+with 00000004 in the Value column. This is the value of the location counter at the time
+number2 is encountered in the data segment. The value is 00000004 since the only item
+preceding number2 was number1, and it took four bytes.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

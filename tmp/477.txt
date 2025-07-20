@@ -1,0 +1,38 @@
+Number Timing Timing Timing
+Opcode Mnemonic Operand(s) Flags affected of bytes 386 486 Pentium
+78 js rel8 none 7+,3 3,1 1 2
+79 jns rel8 none 7+,3 3,1 1 2
+7A jp rel8 none 7+,3 3,1 1 2
+jpe
+7B jnp rel8 none 7+,3 3,1 1 2
+jpo
+7C jl rel8 none 7+,3 3,1 1 2
+jnge
+7D jge rel8 none 7+,3 3,1 1 2
+jnl
+7E jle rel8 none 7+,3 3,1 1 2
+jng
+7F jg rel8 none 7+,3 3,1 1 2
+jnle
+80 adc reg8,imm8 SF,ZF,OF,CF,PF,AF 3 2 1 1
+80 adc mem8,imm8 SF,ZF,OF,CF,PF,AF 3+ 7 3 3
+80 add reg8,imm8 SF,ZF,OF,CF,PF,AF 3 2 1 1
+80 add mem8,imm8 SF,ZF,OF,CF,PF,AF 3+ 7 3 3
+80 and reg8,imm8 SF,ZF,OF,CF,PF,AF 3 2 1 1
+80 and mem8,imm8 SF,ZF,OF,CF,PF,AF 3+ 7 3 3
+80 cmp reg8,imm8 SF,ZF,OF,CF,PF,AF 3 2 1 1
+80 cmp mem8,imm8 SF,ZF,OF,CF,PF,AF 3+ 5 2 2
+80 or reg8,imm8 SF,ZF,OF,CF,PF,AF 3 2 1 1
+80 or mem8,imm8 SF,ZF,OF,CF,PF,AF 3+ 7 3 3
+80 sbb reg8,imm8 SF,ZF,OF,CF,PF,AF 3 2 1 1
+80 sbb mem8,imm8 SF,ZF,OF,CF,PF,AF 3+ 7 3 3
+80 sub reg8,imm8 SF,ZF,OF,CF,PF,AF 3 2 1 1
+80 sub mem8,imm8 SF,ZF,OF,CF,PF,AF 3+ 7 3 3
+80 xor reg8,imm8 SF,ZF,OF,CF,PF,AF 3 2 1 1
+80 xor mem8,imm8 SF,ZF,OF,CF,PF,AF 3+ 7 3 3
+81 adc reg16,imm16 SF,ZF,OF,CF,PF,AF 4 2 1 1
+reg32,imm32 6
+81 adc mem16,imm16 SF,ZF,OF,CF,PF,AF 4+ 7 3 3
+mem32,imm32 6+
+80x86 Instructions 477
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,163 @@
+Assembly language program, 83
+assembling, linking, running,
+53-58
+complete example of, 45, 47
+sample run, 106
+source program listing, 104-105
+Assembly process, 301-338
+conditional assembly, 326-332
+80x86 instruction coding, 307315
+macro definition and expansion,
+319-325
+macros in IO.H, 333-337
+selection sort algorithm, 317
+two-pass and one-pass
+assembly, 302-306
+Assembly time, 305
+atod macro, 50, 58, 79, 80, 83, 164,
+283, 292, 300 
+in file IO.H, 337
+atodproc procedure, 300, 393
+and ASCII to 2’s complement
+integer conversion, 292
+atofproc procedure
+and ASCII to floating-point
+conversion algorithm, 362,
+364
+test driver for, 365
+atoi macro, 80, 83, 267, 292
+in file IO.H, 337
+and larger numbers, 132
+atopProc procedure
+design for, 393
+At sign (@)
+in assembly language, 44
+Auxiliary carry flag
+and binary addition for BCD
+operands, 396-397
+AX register, 32
+B
+Backspace, 8
+Backward for loops, 173, 176
+Backward reference, 140, 306
+Based addressing mode, 212
+Base pointer register, 32
+Bases
+conversion between, 2-3
+BASIC, 137
+Basic language, 38
+BCD. See Binary coded decimal
+BCD representations. See Binary
+coded decimal
+representations
+Bell character, 8
+Binary addition
+for BCD operands, 396
+Binary coded decimal, 21, 22, 26
+Binary coded decimal representations,
+23, 387. See also Packed
+BCD
+representations/instructions;
+Unpacked BCD
+representations/instructions
+Binary integers/numbers, 2, 3, 26
+converting to hexadecimal
+format, 4
+converting to octal numbers, 5
+Binary scientific notation, 24
+Binary values
+and logical operations, 272
+Bit manipulation, 267-300
+ASCII string converted to 2’s
+complement integer, 292-297
+logical operations, 268-275
+logic gates, 298-299
+shift and rotate instructions,
+278-289
+Bit pattern
+with packed BCD, 388
+Bits, 2, 7, 9, 26
+Blank lines
+in assembly language code, 45
+Blanks
+ASCII codes for, 257
+Boolean operations, 267, 299
+Boolean values, 268, 272
+Borrow, 19
+Branch and link instruction, 229
+Branching, 137
+Busy-waiting loop, 438
+BX register, 32
+BYTE directives, 48, 49, 50, 52, 66, 78,
+83
+constant operands in, 68, 69, 70
+Byte length divisor, 119, 120
+Byte(s), 9
+and multiplication, 108
+prefix, 88, 93
+string instruction, 233
+Byte-size operands, 308
+instructions with, 315
+and push instructions, 194
+C
+C, 1, 39
+C++, 39, 137
+Calculators
+for conversions, 2-3
+for converting negative 2’s
+complement representation
+to decimal number, 13-14
+call instructions, 204, 206, 207
+Carriage return, 8
+character, 48, 58
+Carry, 15, 16, 17, 19, 20
+Carry flag (CF), 33, 96, 98, 135, 147
+and addition/subtraction of
+larger numbers, 130, 131
+and Boolean instructions, 269
+control of, 132
+and imul instructions, 113
+and left shifts, 279
+and mul instructions, 110
+and rotate instructions, 289
+Case-insensitivity
+with assembly language, 45
+Case-sensitivity
+with ML switches, 53
+Case structures, 137
+cbw instructions, 123, 124, 135
+cdq instructions, 123, 124, 135
+Celsius to Fahrenheit temperature
+conversion program, 125,
+126, 127
+Central processing unit, 27, 30-34, 39,
+267
+basic operation cycle, 189
+and pipelining, 189-190, 191
+CF. See Carry flag
+Character codes, 6-7
+Character controls, 26
+Characters
+finding, in string, 247-248
+translation of, 254-257
+Character strings, 231
+CISC. See Complex instruction set
+computer designs
+clc instructions, 135
+cld instructions, 233
+Clipped points, 277
+Clock cycles, 88, 89, 199
+adc and sbb instructions, 131
+add and sub instructions, 99
+and, or, and xor instructions, 270
+call instructions, 206
+cld and std instructions, 233
+cmp instructions, 148
+cmps instructions, 242
+for conditional jump instructions,
+151, 176
+div instructions, 122
+double shift instructions, 287
+idiv instructions, 122
+490 Index
+TEAM LinG - Live, Informative, Non-cost and Genuine!

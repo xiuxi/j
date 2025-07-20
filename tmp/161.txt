@@ -1,0 +1,33 @@
+5.3 Implementing Loop Structures 161
+For a short example showing a complete loop body, suppose that the integer
+base 2 logarithm of a positive number needs to be determined. The integer base 2 logarithm of a number is the largest integer x such that
+2x ( number
+The following design does the job.
+x := 0;
+twoToX := 1;
+while twoToX ( number
+multiply twoToX by 2;
+add 1 to x;
+end while;
+subtract 1 from x;
+Assuming that number references a doubleword in memory, the following 80x86 code
+implements the design, using the EAX register for twoToX and the CX register for x.
+mov   cx, 0       ; x := 0
+mov   eax, 1      ; twoToX := 1
+whileLE:    cmp   eax, number ; twoToX <= number?
+jnle  endWhileLE  ; exit if not
+body:       add   eax, eax    ; multiply twoToX by 2
+inc   cx          ; add 1 to x
+jmp   whileLE     ; go check condition again
+endWhileLE:
+dec   cx          ; subtract 1 from x
+Often the continuation condition in a while is compound, having two parts
+connected by Boolean operators and or or. Both operands of an and must be true for a
+true conjunction. With an or, the only way the disjunction can be false is if both
+operands are false.
+Changing a previous example to include a compound condition, suppose that
+the following design is to be coded.
+while (sum < 1000) and (count ( 24) loop
+... { body of loop }
+end while;
+TEAM LinG - Live, Informative, Non-cost and Genuine!

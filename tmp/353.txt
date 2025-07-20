@@ -1,0 +1,48 @@
+The two diagrams below show the results after executing the instructions fsub
+st,st(3) and fsubr st,st(3).
+after after
+fsub st,st(3) fsubr st,st(3)
+Multiplication and division instructions are listed in Figs. 10.6 and 10.7, respectively. Multiplication instructions have the same forms as the addition instructions in
+Fig. 10.4. Division instructions have the same forms as subtraction instructions in Fig.
+10.5, that is, the R versions reverse the operands’ dividend and divisor roles.
+ST
+ST(1)
+ST(2)
+ST(3)
+ST(4)
+ST(5)
+ST(6)
+ST(7)
+–30.0
+25.0
+35.0
+45.0
+55.0
+ST
+ST(1)
+ST(2)
+ST(3)
+ST(4)
+ST(5)
+ST(6)
+ST(7)
+30.0
+25.0
+35.0
+45.0
+55.0
+ST
+ST(1)
+ST(2)
+ST(3)
+ST(4)
+ST(5)
+ST(6)
+ST(7)
+15.0
+25.0
+35.0
+45.0
+55.0
+10.1 80x86 Floating-Point Architecture 353
+TEAM LinG - Live, Informative, Non-cost and Genuine!

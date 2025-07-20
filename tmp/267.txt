@@ -1,0 +1,28 @@
+CHAPTER 8
+8.1 Logical Operations
+8.2 Shift and Rotate
+Instructions
+8.3 Converting an ASCII
+String to a 2’s
+Complement Integer
+8.4 The Hardware Level—
+Logic Gates
+Bit Manipulation
+A computer contains many integrated circuits that enable it
+to perform its functions. Each chip incorporates from a few
+to many thousand logic gates, each an elementary circuit
+that performs Boolean and, or, exclusive or, or not operations on bits that are represented by electronic states. The
+CPU is usually the most complex integrated circuit in a PC.
+Previous chapters have examined the 80x86 microprocessors’ instructions for moving data, performing arithmetic operations, handling strings, branching, and
+utilizing subroutines. The 80x86 (and most other CPUs)
+can also execute instructions that perform Boolean operations on multiple pairs of bits at one time. This chapter
+defines the Boolean operations and describes the 80x86
+instructions that implement them. It also covers the
+instructions that cause bit patterns to shift or rotate in a
+byte, word, or doubleword, or to shift from one location
+to another. Although bit manipulation instructions are
+very primitive, they are widely used in assembly language
+programming, often because they provide the sort of control that is rarely available in a high-level language. The
+chapter contains several application examples, including
+the procedure that is called by the atoi macro; this procedure uses bit manipulation instructions in several places.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

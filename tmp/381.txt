@@ -1,0 +1,45 @@
+10.3 Floating-Point Emulation 381
+; procedure fAddProc(Operand1, Operand2 : float;
+;                    Result : address of float)
+; parameters are passed in doublewords on the stack
+; parameters are removed by the procedure
+; author: R. Detmer   4/98
+.DATA
+sign1      BYTE  ?
+exponent1  WORD  ?
+fraction1  DWORD ?
+sign2      BYTE  ?
+exponent2  WORD  ?
+fraction2  DWORD ?
+sign3      BYTE  ?
+exponent3  WORD  ?
+fraction3  DWORD ?
+.CODE
+fAddProc   PROC NEAR32
+push    ebp            ; save base pointer
+mov     ebp,esp        ; copy stack pointer
+push    eax            ; save registers
+push    edx
+expand  [ebp+16], sign1, exponent1, fraction1
+expand  [ebp+12], sign2, exponent2, fraction2
+mov     ax, exponent1  ; copy exponent1
+while1:    cmp     ax, exponent2  ; exponent1 < exponent2?
+jnl     endWhile1      ; exit if not
+inc     ax             ; add 1 to exponent1
+shr     fraction1,1    ; shift fraction1 1 bit right
+jmp     while1         ; repeat
+endWhile1: mov     exponent1, ax  ; put fraction1 back in memory
+mov     ax, exponent2  ; copy exponent2
+while2:    cmp     ax, exponent1  ; exponent2 < exponent1?
+jnl     endWhile2      ; exit if not
+inc     ax             ; add 1 to exponent1
+shr     fraction2,1    ; shift fraction2 1 bit right
+jmp     while2         ; repeat
+endWhile2: mov     exponent2, ax  ; put fraction2 back in memory
+mov     exponent3, ax  ; save common exponent
+cmp     sign1, 1       ; sign1 = minus?
+jne     notNeg1        ; skip if not
+neg     fraction1      ; negate fraction1
+(continued)
+Figure 10.22 fAddProc procedure
+TEAM LinG - Live, Informative, Non-cost and Genuine!

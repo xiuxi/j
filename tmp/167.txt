@@ -1,0 +1,35 @@
+5.3 Implementing Loop Structures 167
+forever loop
+.
+.
+.
+if (response = ‘s’) or (response = ‘S’)
+then
+exit loop;
+end if;
+.
+.
+.
+end loop;
+Assuming that the value of response is in the AL register, this can be implemented as
+follows in 80x86 assembly language.
+forever:     .
+.
+.
+cmp   al, 's'       ; response = 's'?
+je    endLoop       ; exit loop if so
+cmp   al, 'S'       ; response = 'S'?
+je    endLoop       ; exit loop if so
+.
+.
+.
+jmp   forever       ; repeat loop body
+endLoop:
+Exercises 5.3
+1. Each part of this problem contains a design with a while loop. Assume
+that sum references a doubleword in the data segment and that the
+value of count is in the ECX register. Give a fragment of 80x86 code that
+implements the design.
+(a) sum := 0;
+count := 1;
+TEAM LinG - Live, Informative, Non-cost and Genuine!

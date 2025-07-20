@@ -1,0 +1,47 @@
+308 The Assembly Process
+Number 
+Field of bytes Purpose
+instruction prefix
+address size
+operand size
+segment override
+opcode
+mod-reg-r/m
+scaled index base byte
+displacement
+immediate
+Figure 9.2 80x86 instruction fields
+0 or 1
+0 or 1
+0 or 1
+0 or 1
+1 or 2
+0 or 1
+0 or 1
+0 to 4
+0 to 4
+F316 for REP, REPE, or REPZ
+F216 for REPNE or REPNZ
+F016 for LOCK
+value 6716 if present; indicates that a displacement is a 16-bit address rather than the
+default 32-bit size
+value 6616 if present; indicates that a memory operand is 16-bit if in 32-bit mode or 32bit if in 16-bit mode
+indicates that an operand is in a segment
+other than the default segment
+operation code
+indicates register or memory operand,
+encodes register(s)
+additional scaling and register information
+an address
+an immediate value
+When an address size byte of 6716 is coded, a two-byte rather than a four-byte displacement is used in the displacement field. This prefix byte will not appear in machine
+code generated from the assembly language code shown in this book.
+On the other hand, the operand size byte has frequently been generated from
+this book’s assembly language code. The 80x86 CPU has a status bit that determines
+whether operands are 16-bit or 32-bit. With the assembly and linking options we have
+used, that bit is always set to indicate 32-bit operands. Each time you code a word-size
+operand, the generated instruction includes the 6616 prefix byte to indicate the 16-bit
+operand. Other assembly and linking options—not used in this book—cause the default
+operand size to be 16-bit; in this case a 6616 prefix byte indicates a 32-bit operand.
+What indicates a byte-size operand? A different opcode. Why don’t 16-bit and
+32-bit operands use distinct opcodes? This design decision was made by Intel. The origTEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,35 @@
+166 Branching and Looping
+An 80x86 implementation of an until loop usually looks like the following
+code fragment.
+until:     .           ; start of loop body
+.           .
+.           .
+.           ; code to check termination condition
+endUntil:
+If the code to check the termination condition determines that the value is false, then
+there will be a jump to until. If it is determined that the value is true, then the code will
+either fall through to endUntil or there will be a jump to that label.
+The game program implemented in Fig. 5.8 contained two simple until loops.
+Here is an example with a compound terminating condition. Given the design
+count := 0;
+until (sum > 1000) or (count = 100) loop
+... { body of loop }
+add 1 to count;
+end until;
+the following 80x86 code provides an implementation. Assume that sum references a
+word in the data segment and that count is stored in CX.
+mov   cx, 0      ; count := 0
+until:       .               ; body of loop
+.
+.
+inc   cx         ; add 1 to count
+cmp   sum, 1000  ; sum > 1000 ?
+jg    endUntil   ; exit if sum > 1000
+cmp   cx, 100    ; count = 100 ?
+jne   until      ; continue if count not = 100
+endUntil:
+Other loop structures can also be coded in assembly language. The forever loop
+is frequently useful. As it appears in pseudocode, it almost always has an exit loop
+statement to transfer control to the end of the loop; this is often conditional—that is, in
+an if statement. Here is a fragment of a typical design.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

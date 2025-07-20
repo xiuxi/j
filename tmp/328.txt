@@ -1,0 +1,26 @@
+328 The Assembly Process
+The macro call
+addAll  ebx, ecx, 45        ; value1 + value2 + 45
+has only three arguments. The argument ebx becomes the value for parameter nbr1, ecx
+is substituted for nbr2, and 45 will be used for nbr3, but the parameters nbr4 and nbr5
+will be blank. Therefore the macro expands to the statements
+mov   eax, ebx    ; first operand
+add   eax, ecx    ; second operand
+add   eax, 45    ; third operand
+Although it would be unusual to do so, arguments other than trailing ones can
+be omitted. For example, the macro call
+addAll  ebx, ,ecx
+has ebx corresponding to nbr1 and ecx matched to nbr3, but all other parameters will be
+blank. Therefore the macro expands to
+mov   eax, ebx    ; first operand
+add   eax, ecx    ; third operand
+If the first argument is omitted in an addAll macro call, the macro will still be expanded.
+However, the resulting statement sequence will contain a mov instruction with a missing operand, and this statement will cause MASM to issue an error message. For example, the macro call
+addAll  , value1, value2
+expands to
+mov    eax,    ; first operand
+add    eax, value1    ; second operand
+add    eax, value2    ; third operand
+An unusual use of the addAll macro is illustrated by the call
+addAll  value, eax, eax, value, eax     ; 10 * value
+TEAM LinG - Live, Informative, Non-cost and Genuine!

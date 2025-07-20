@@ -1,0 +1,30 @@
+4.1 Copying Data 89
+Destination Clock Cycles Number
+Operand Source Operand 386 486 Pentium of Bytes Opcode
+memory byte immediate byte 2 1 1 C6
+direct 7
+register indirect 3
+other 3–8
+memory word immediate word 2 1 1 C7
+direct 8
+register indirect 4
+other 4–9
+memory doubleword immediate doubleword 2 1 1 C7
+direct 10
+register indirect 6
+other 6–11
+Figure 4.2 Immediate-to-memory mov instructions
+single clock cycle, while the 80386 takes two clock cycles. This is a relatively minor
+improvement compared to the original 8088, which took at least 14 clock cycles for each
+of these instructions.
+The number of bytes taken by a memory operand depends on the type of
+operand. A direct operand must be encoded as a 32-bit address, four bytes. A register indirect operand is encoded as three bits in the second object code byte. We will later examine
+encodings of other types of memory operands. The 66 prefix byte is again required for 16bit operands; it is not shown in the table since it is technically not part of the instruction.
+The C6 and C7 opcodes listed in Fig. 4.2 for immediate-to-memory moves can
+also be used for immediate-to-register moves. However, these forms require an extra
+byte of object code, and an assembler normally chooses the shorter form given in Fig. 4.1.
+Figure 4.3 lists most of the remaining 80x86 mov instructions. This table introduces some new terminology. Register 32 refers to one of the 32-bit registers EAX,
+EBX, ECX, EDX, EBP, ESI, EDI, or ESP. Similarly register 16 refers to one of the 16 bit
+registers AX, BX, CX, DX, SP, BP, SI or DI, and register 8 refers to an eight bit register,
+AL, AH, BL, BH, CL, CH, DL, or DH.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

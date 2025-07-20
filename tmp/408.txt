@@ -1,0 +1,39 @@
+408 Decimal Arithmetic
+addUnp    PROC NEAR32
+; add two 8-byte unpacked BCD numbers
+; parameter 1:  operand1 and destination address
+; parameter 2:  operand2 address
+; author:  R. Detmer   revised:  5/98
+push ebp            ; establish stack frame
+mov  ebp, esp
+push esi            ; save registers
+push edi
+push eax
+push ecx
+mov  edi, [ebp+12]  ; destination address
+mov  esi, [ebp+8]   ; source address
+add  esi, 8         ; point at byte after source
+add  edi, 8         ; byte after destination
+clc                 ; clear carry flag
+mov  ecx, 8         ; count of bytes to process
+forAdd:   dec  edi            ; point at operand bytes to left
+dec  esi
+mov  al, [edi]      ; get one operand byte
+adc  al, [esi]      ; add other operand byte
+aaa                 ; adjust to unpacked BCD
+mov  [edi], al      ; save sum
+loop forAdd         ; repeat for all 8 bytes
+pop  ecx            ; restore registers
+pop  eax
+pop  edi
+pop  esi
+pop  ebp
+ret  8         ; return, discarding paramters
+addUnp    ENDP
+Figure 11.7 Addition of two 8-byte unpacked BCD numbers
+than the similar addBcd1 procedure in Fig. 11.3. No effort is made to produce significant
+flag values. Since low-order digits are stored to the right, the bytes are processed right to
+left. (Programming Exercise 1 specifies the corresponding procedure for subtraction.)
+One interesting feature of the procedure addUnp is that it will give the correct
+unpacked BCD sum of eight byte ASCII (not unpacked BCD) numbers—Intel’s use of
+TEAM LinG - Live, Informative, Non-cost and Genuine!

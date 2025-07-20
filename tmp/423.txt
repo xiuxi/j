@@ -1,0 +1,38 @@
+12.1 Console I/O Using the Kernel32 Library 423
+ReadFile PROTO NEAR32 stdcall,
+hFile:DWORD, lpBuffer:NEAR32, nNumberOfCharsToRead:DWORD,
+lpNumberOfBytesRead:NEAR32, lpOverlapped:NEAR32
+WriteFile PROTO NEAR32 stdcall,
+hFile:DWORD, lpBuffer:NEAR32, nNumberOfCharsToWrite:DWORD,
+lpNumberOfBytesWritten:NEAR32, lpOverlapped:NEAR32
+STD_INPUT  EQU –10
+STD_OUTPUT EQU –11
+.STACK
+.DATA
+prompt  BYTE    "String to convert? "
+CrLf    BYTE    0ah, 0dh
+StrIn   BYTE    80 DUP (?)
+read    DWORD   ?
+written DWORD   ?
+hStdIn  DWORD   ?
+hStdOut DWORD   ?
+.CODE
+_start:
+INVOKE GetStdHandle,    ; get handle for console output
+STD_OUTPUT
+mov    hStdOut, eax
+INVOKE WriteFile,
+hStdOut,              ; file handle for screen
+NEAR32 PTR prompt,    ; address of prompt
+19,                   ; length of prompt
+NEAR32 PTR written,   ; bytes written
+0                     ; overlapped mode
+INVOKE GetStdHandle,    ; get handle for console input
+STD_INPUT
+mov    hStdIn, eax
+INVOKE ReadFile,
+hStdIn,               ; file handle for keyboard
+NEAR32 PTR StrIn,     ; address of string
+(continued)
+Figure 12.3 (continued)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

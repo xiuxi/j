@@ -1,0 +1,33 @@
+162 Branching and Looping
+Assuming that sum references a doubleword in memory and the value of count is in CX,
+an implementation is
+whileSum:   cmp   sum, 1000      ; sum < 1000?
+jnl   endWhileSum    ; exit if not
+cmp   cx, 24         ; count <= 24
+jnle  endWhileSum    ; exit if not
+.                   ; body of loop
+.
+.
+jmp   whileSum       ; go check condition again
+endWhileSum:
+Modifying the example another time, here is a design with an or instead of an and.
+while (sum < 1000) or (flag = 1) loop
+... { body of loop }
+end while;
+This time, assume that sum is in the EAX register and that flag is a single byte in the DH
+register. Here is 80x86 code that implements the design.
+whileSum:   cmp   eax, 1000      ; sum < 1000?
+jl    body           ; execute body if so
+cmp   dh,1           ; flag = 1?
+jne   endWhileSum    ; exit if not
+body:        .                   ; body of loop
+.
+.
+jmp   whileSum       ; go check condition again
+endWhileSum:
+Notice the difference in the previous two examples. For an and the loop is exited if
+either operand of the compound condition is false. For an or the loop body is executed
+if either operand of the compound condition is true.
+Sometimes processing in a loop is to continue while normal values are encountered and to terminate when some sentinel value is encountered. If data are being
+entered from the keyboard, this design can be written
+TEAM LinG - Live, Informative, Non-cost and Genuine!

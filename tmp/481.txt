@@ -1,0 +1,39 @@
+Number Timing Timing Timing
+Opcode Mnemonic Operand(s) Flags affected of bytes 386 486 Pentium
+A1 mov AX, direct none 5 4 1 1
+EAX, direct
+A2 mov direct ,AL none 5 2 1 1
+A3 mov direct, AX none 5 2 1 1
+direct, EAX
+A4 movsb none none 1 7 7 4
+A5 movsw none none 1 7 7 4
+movsd
+A6 cmpsb none none 1 10 8 5
+A7 cmpsw none none 1 10 8 5
+cmpsd
+A8 test AL,imm8 SF,ZF,OF,CF,PF,AF 2 2 1 1
+A9 test AX,imm16 SF,ZF,OF,CF,PF,AF 3 2 1 1
+EAX,imm32 5
+AA stosb none none 1 4 5 3
+AB stosw none none 1 4 5 3
+stosd
+AC lodsb none none 1 5 5 2
+AD lodsw none none 1 5 5 2
+lodsd
+AE scasb none none 1 7 6 4
+AE scasw none none 1 7 6 4
+scasd
+B0 mov AL, imm8 none 2 2 1 1
+B1 mov CL, imm8 none 2 2 1 1
+B2 mov DL, imm8 none 2 2 1 1
+B3 mov BL, imm8 none 2 2 1 1
+B4 mov AH, imm8 none 2 2 1 1
+B5 mov CH, imm8 none 2 2 1 1
+B6 mov DH, imm8 none 2 2 1 1
+B7 mov BH, imm8 none 2 2 1 1
+B8 mov AX, imm16 none 3 2 1 1
+EAX, imm32 5
+B9 mov CX, imm16 none 3 2 1 1
+ECX, imm32 5
+80x86 Instructions 481
+TEAM LinG - Live, Informative, Non-cost and Genuine!

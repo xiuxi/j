@@ -1,0 +1,44 @@
+4.3 Multiplication Instructions 109
+Clock Cycles Number
+Operand 386 486 Pentium of Bytes Opcode
+register 8 9–14 13–18 11 2 F6
+register 16 9–22 13–26 11 2 F7
+register 32 9–38 13–42 10 2 F7
+memory byte 12–17 13–18 11 2 + F6
+memory word 12–25 13–26 11 2 + F7
+memory doubleword 12–41 13–42 10 2 + F7
+Figure 4.10 mul instructions
+order half of the product is not zero, but are cleared to 0 if the high order half of the product is zero. These are the only meaningful flag values following multiplication operations;
+previously set values of AF, PF, SF, and ZF flags may be destroyed. In Chapter 5, instructions checking flag values will be covered; it is possible to check that the high order half
+of the product can be safely ignored.
+Figure 4.10 summarizes the allowable operand types for mul instructions. No
+immediate operand is allowed in a mul. Note the number of clock cycles required is
+appreciably larger than for addition or subtraction instructions. The actual number of
+clock cycles for the 80386 and 80486 depends on the numbers being multiplied.
+Here are some examples to illustrate how the mul instructions work.
+Example
+Before Instruction executed After
+AX: 00 05 mul  bx
+BX: 00 02
+DX: ?? ??
+EAX: 00 00 00 0A mul  eax
+EDX: ?? ?? ?? ??
+EDX
+EAX
+CF, OF 0
+00
+00
+00
+00
+00
+00
+00
+64
+DX
+AX
+CF, OF 0
+00
+00
+00
+0A
+TEAM LinG - Live, Informative, Non-cost and Genuine!

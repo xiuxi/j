@@ -1,0 +1,28 @@
+292 Bit Manipulation
+is represented in split octal by applying the 2–3–3 system to the highorder and low-order bytes separately. Write a NEAR32 procedure splitOctal which converts an 16-bit integer to a string of exactly six
+characters representing the value of the number in split octal. The procedure will have two parameters, passed on the stack:
+(1) the number
+(2) the address of the destination string
+The procedure will remove parameters from the stack and must modify
+no register.
+8.3 Converting an ASCII String to a 2’s Complement
+Integer
+The atoi and atod macros have been used to scan an area of memory containing an
+ASCII representation of an integer, producing the corresponding word-length 2’s complement integer in the EAX register. These macros and the procedures they call are very
+similar. This section uses atod as an example.
+The atod macro expands into the following sequence of instructions.
+lea    eax,source          ; source address to EAX
+push   eax                 ; source parameter on stack
+call   atodproc            ; call atodproc(source)
+These instructions simply call procedure atodproc using a single parameter, the address
+of the string of ASCII characters to be scanned. The EAX register is not saved by the
+macro code since the result is to be returned in EAX. The actual source identifier is used
+in the expanded macro, not the name source.
+The actual ASCII to 2’s complement integer conversion is done by the procedure atodproc. The assembled version of this procedure is contained in the file IO.OBJ.
+Source code for atodproc is shown in Fig. 8.9. The procedure begins with standard entry
+code. The flags are saved so that flag values that are not explicitly set or reset as promised in the comments can be returned unchanged. The popf and pop instructions at
+AToDExit restore these values; however, the word on the stack that is popped by popf
+will have been altered by the body of the procedure, as discussed below.
+The first job of atodproc is to skip leading spaces, if any. This is implemented
+with a straightforward while loop. Note that BYTE PTR [esi] uses register indirect
+TEAM LinG - Live, Informative, Non-cost and Genuine!

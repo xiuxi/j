@@ -1,0 +1,42 @@
+390 Decimal Arithmetic
+ptoaProc  PROC NEAR
+; convert 10-byte BCD number to a 19-byte-long ASCII string
+; parameter 1:  address of BCD number
+; parameter 2:  destination address
+; author:  R. Detmer     revised: 5/98
+push ebp       ; establish stack frame
+mov  ebp, esp
+push esi       ; save registers
+push edi
+push eax
+push ecx
+mov  esi, [ebp+12]  ; source address
+mov  edi, [ebp+8]   ; destination address
+add  edi, 18   ; point to last byte of destination
+mov  ecx, 9    ; count of bytes to process
+for1:     mov  al, [esi] ; byte with two bcd digits
+mov  ah, al    ; copy to high-order byte of AX
+and  al, 00001111b       ; mask out higher-order digit
+or   al, 30h   ; convert to ASCII character
+mov  [edi], al ; save lower-order digit
+dec  edi       ; point at next destination byte to left
+shr  ah, 4     ; shift out lower-order digit
+or   ah, 30h   ; convert to ASCII
+mov  [edi], ah ; save higher-order digit
+dec  edi       ; point at next destination byte to left
+inc  esi       ; point at next source byte
+loop for1      ; continue for 9 bytes
+mov  BYTE PTR [edi], ' '  ; space for positive number
+and  BYTE PTR [esi], 80h  ; check sign byte
+jz   nonNeg               ; skip if not negative
+mov  BYTE PTR [edi], '-'  ; minus sign
+nonNeg:
+pop ecx        ; restore registers
+pop eax
+pop esi
+pop edi
+pop ebp
+ret 8          ; return, removing parameters
+ptoaProc  ENDP
+Figure 11.1 Packed BCD to ASCII conversion
+TEAM LinG - Live, Informative, Non-cost and Genuine!

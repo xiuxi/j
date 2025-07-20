@@ -1,0 +1,29 @@
+118 Basic Instructions
+prompt for and input the number of dimes;
+total := total + 10 * number of dimes;
+add number of dimes to numberOfCoins;
+prompt for and input the number of quarters;
+total := total + 25 * number of quarters;
+add number of quarters to numberOfCoins;
+prompt for and input the number of fifty-cent pieces;
+total := total + 50 * number of fifty-cent pieces;
+add number of fifty-cent pieces to numberOfCoins;
+prompt for and input the number of dollars;
+total := total + 100 * number of dollars;
+add number of dollars to numberOfCoins;
+display “There are “, numberOfCoins, “  coins worth”;
+display total div 100, “  dollars and”, total mod 100,”  cents”;
+Note that you are displaying dollars and cents for the total. Assume
+that all values will fit in doublewords.
+4.4 Division Instructions
+The Intel 80x86 instructions for division parallel those of the single-operand multiplication instructions; idiv is for division of signed 2’s complement integers and div is for
+division of unsigned integers. Recall that the single-operand multiplication instructions
+start with a multiplier and multiplicand and produce a double-length product. Division
+instructions start with a double-length dividend and a single-length divisor, and produce
+a single-length quotient and a single-length remainder. The 80x86 has instructions that
+can be used to produce a double-length dividend prior to division.
+The division instructions have formats
+idiv   source
+and
+div    source
+TEAM LinG - Live, Informative, Non-cost and Genuine!

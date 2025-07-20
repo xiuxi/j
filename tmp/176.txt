@@ -1,0 +1,30 @@
+176 Branching and Looping
+loop  forIndex      ; repeat body number times
+endFor:
+If number is a signed value and might be negative, then
+jle   endFor       ; skip loop if number <= 0
+is a more appropriate conditional jump.
+There is another way to guard a for loop so that it is not executed when the
+value in ECX is zero. The 80x86 instruction set has a jecxz conditional jump instruction
+that jumps to its destination if the value in the ECX register is zero. Using the jecxz
+instruction, the example above can be coded as
+mov   ecx, number   ; number of iterations
+jecxz endFor        ; skip loop if number = 0
+forIndex:    .                  ; body of loop
+.
+.
+loop  forIndex      ; repeat body number times
+endFor:
+There is also a jcxz instruction that checks the CX register rather than the
+ECX register. Both instructions are two bytes long, the opcode E3 plus a single-byte
+displacement; the prefix byte 67 distinguishes between the 16-bit size and the 32-bit
+versions. Like the other conditional jump instructions, jcxz/jecxz affects no flag
+value. They do take longer to execute, six clock cycles on a Pentium if the jump takes
+place (if the value in ECX is zero), and five clock cycles to fall through to the next statement otherwise.
+The jecxz instruction can be used to code a backward for loop when the loop
+body is longer than 127 bytes, too large for the loop instruction’s single-byte displacement. For example, the structure
+for counter := 50 downto 1 loop
+... { body of loop }
+end for;
+could be coded as
+TEAM LinG - Live, Informative, Non-cost and Genuine!

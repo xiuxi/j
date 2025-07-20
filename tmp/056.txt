@@ -1,0 +1,16 @@
+56 Elements of Assembly Language
+Figure 3.4 Windbg ready for tracing a program
+window that shows contents of the 80x86 registers. Then select View and Memory... to
+open a window that shows contents of memory. For this window you must enter the
+starting memory address; for the example program, use &number1 as the starting
+address—the C/C++ address-of operator (&) is used to indicate the address of number1,
+the first item in the data section. Finally size and rearrange windows until your screen
+looks something like the screen shown in Fig. 3.4. Notice that the right edge of the
+example program’s output window is visible under the Windbg window. The rest of the
+desktop is covered by the window in which the assembler and linker were run, as well as
+a small strip of Microsoft Word that the author was also using.
+The first statement of the example program is highlighted. Clicking the step
+into button causes this statement to be executed. Although this statement is a macro, it
+is executed as a single instruction, and Enter first number: appears on the output
+screen. (You can click on the edge of the output screen to put it on top.) Clicking step
+TEAM LinG - Live, Informative, Non-cost and Genuine!

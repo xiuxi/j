@@ -1,0 +1,34 @@
+198 Procedures
+Example
+This example shows how pop instructions work. The doubleword at the address
+in ESP is copied to ECX before ESP is incremented by 4. The values popped
+from the stack are physically still there even though they logically have been
+removed. Note again that the bytes of a doubleword are stored backward in
+memory in the 80x86 architecture, but forward in the ECX register.
+Before
+increasing
+addresses
+Instructions After
+Stack
+ECX: ?? ?? ?? ??
+ESP: 006001FA
+ESP: 006001FE
+Stack
+ECX: 33 44 55 66
+66
+55
+44
+33
+22
+11
+66
+55
+44
+33
+22
+11
+pop  ecx
+One use of push and pop instructions is to save the contents of a register temporarily on the stack. We have noted previously that registers are a scarce resource
+when programming. Suppose, for example, that you are using EDX to store some program variable but need to do a division that requires you to extend a dividend into EDXEAX prior to the operation. One way to avoid losing your value in EDX is to push it on
+the stack.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

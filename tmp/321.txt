@@ -1,0 +1,30 @@
+9.3 Macro Definition and Expansion 321
+add2     MACRO  nbr1, nbr2
+; put sum of two doubleword parameters in EAX
+mov    eax, nbr1
+add    eax, nbr2
+ENDM
+Figure 9.8 Macro to add two integers
+is included in subsequent source code, then the assembler expands this macro call into
+the statements
+output pressMsg    ; "Press [Enter]"
+input  stringIn,5  ; input
+Of course, each of these statements is itself a macro call and will expand to additional
+statements. Notice that the pause macro is not self-contained; it references two fields in
+the data segment:
+pressMsg BYTE "Press [Enter] to continue", 0
+stringIn BYTE 5 DUP (?)
+Note again that the definition and expansion for the pause macro contain no
+ret statement. Although macros look much like procedures, they generate in-line code
+when the macro call is expanded at assembly time.
+Figure 9.8 gives a definition of a macro add2 that finds the sum of two parameters, putting the result in the EAX register. The parameters used to define the macro are
+nbr1 and nbr2. These labels are local to the definition. The same names could be used for
+other purposes in the program, although some human confusion might result.
+The statements to which add2 expands depends on the arguments used in a
+call. For example, the macro call
+add2  value, 30   ; value + 30
+expands to
+; put sum of two doubleword parameters in EAX
+mov    eax, value
+add    eax, 30
+TEAM LinG - Live, Informative, Non-cost and Genuine!

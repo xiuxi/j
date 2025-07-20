@@ -1,0 +1,33 @@
+186 Branching and Looping
+2. Modify the program in Fig. 5.10, replacing the last loop by one that displays all numbers that are within 5 of the average. Include values equal
+to average–5 or to average+5.
+3. Modify the program in Fig. 5.10, adding a loop that will display the list
+of numbers backwards. (Hint: Find the address of nbrArray[nbrElts],
+display the element at this address first, and subtract 4 repeatedly until
+all elements are displayed.)
+4. Modify the program in Fig. 5.10 to ensure that the user gives at most
+maxNbrs values.
+Programming Exercises 5.5
+1. It is often necessary to search an array for a given value. Write a complete program that inputs a collection of integers and then sequentially
+searches for values stored in the array. Implement the following design.
+nbrElts := 0;
+get address of first item of array;
+while (number from keyboard > 0) loop
+convert number to 2's complement;
+store number at address in array;
+add 1 to nbrElts;
+get address of next item of array;
+end while;
+until (response = 'N') or (response = 'n')
+display "Search for?  ";
+input keyValue;
+convert keyValue to 2's complement;
+get address of first item of array;
+count := 1;
+forever loop
+if count > nbrElts
+then
+display keyValue, "not in array";
+exit loop;
+end if;
+TEAM LinG - Live, Informative, Non-cost and Genuine!

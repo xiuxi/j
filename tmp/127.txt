@@ -1,0 +1,36 @@
+4.4 Division Instructions 127
+where F is the Fahrenheit temperature and C is the Celsius temperature. Since the arithmetic instructions covered so far perform only integer arithmetic, the program gives the
+integer to which the fractional answer would round. It is important to multiply 9 and C
+before dividing by 5; the integer quotient 9/5 would be simply 1. Dividing C by 5 before
+multiplying by 9 produces larger errors than if the multiplication is done first. Why? To
+get a rounded answer, half the divisor is added to the dividend before dividing. Since the
+divisor in this formula is 5, the number 2 is added for rounding. Notice that the cwd
+instruction is used to extend the partial result before division.
+Exercises 4.4
+1. For each part of this problem, assume the “before” values when the
+given instruction is executed. Give the requested “after” values. Some of
+these instructions will cause division errors; identify such instructions.
+Before Instruction After
+(a) EDX:  00 00 00 00
+EAX:  00 00 00 9A
+EBX:  00 00 00 0F idiv  ebx EDX, EAX
+(b) AX:  FF 75
+byte at Count:  FC idiv  Count AX
+(c) AX:  FF 75
+byte at Count:  FC div  Count AX
+(d) DX:  FF FF
+AX:  FF 9A
+CX:  00 00 idiv  cx DX, AX
+(e) EDX:  FF FF FF FF
+EAX:  FF FF FF 9A
+ECX:  FF FF FF C7 idiv  ecx EDX, EAX
+(f) DX:  00 00
+AX:  05 9A
+CX:  FF C7 idiv  cx DX, AX
+(g) DX:  00 00
+AX:  05 9A
+CX:  00 00 idiv  cx DX, AX
+(h) EDX: 00 00 00 00
+EAX:  00 00 01 5D
+EBX:  00 00 00 08 idiv  ebx EDX, EAX
+TEAM LinG - Live, Informative, Non-cost and Genuine!

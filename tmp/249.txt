@@ -1,0 +1,31 @@
+7.2 Repeat Prefixes and More String Instructions 249
+The store string instruction stos copies a byte, a word, or a doubleword from
+AL, AX, or EAX to an element of a destination string. A stos instruction affects no
+flag, so that when it is repeated with rep, it copies the same value into consecutive
+positions of a string. For example, the following code will store spaces in the first 30
+bytes of string.
+mov   ecx,30              ; 30 bytes
+mov   al, ' '             ; character to store
+lea   edi, string         ; address of string
+cld                       ; forward direction
+rep stosb                 ; store spaces
+Information about the stos instructions is in Fig. 7.11. As with previous
+repeated string instructions, the 80486 and Pentium have special timings when n=0.
+The load string instruction lods is the final string instruction. This instruction
+copies a source string element to the AL, AX, or EAX register, depending on the string
+element size. A lods instruction sets no flag. It is possible to use a rep prefix with lods
+but it is not helpful—all values except for the last string element would be replaced as
+successive values were copied to the destination register. A lods instruction is useful in
+a loop set up with other instructions, making it possible to easily process string elements
+one at a time. The lods instructions are summarized in Fig. 7.12. Repeated versions are
+not included since they are not used.
+Element Clock Cycles Number
+Mnemonic size 386 486 Pentium of bytes Opcode
+stosb byte 4 5 3 1 AA
+stosw word AB
+stosd doubleword AB
+rep stosb byte 5+5n 7+4n 9n 2 F3 A6
+rep stosw word F3 A7
+rep stosd doubleword F3 A7
+Figure 7.11 stos instructions (use EDI)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

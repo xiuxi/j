@@ -1,0 +1,39 @@
+11.2 Packed BCD Instructions 403
+addBcd    PROC NEAR32
+; add two arbitrary 10 byte packed BCD numbers
+; parameter1:  address of operand1 (and destination)
+; parameter2:  address of operand2
+; author:  R. Detmer     revised: 5/98
+push ebp            ; establish stack frame
+mov  ebp, esp
+push esi            ; save registers
+push edi
+mov  edi, [ebp+12]  ; destination address
+mov  esi, [ebp+8]   ; source address
+push edi            ; parameter1 for next call
+push esi            ; parameter2 for next call
+cmp  BYTE PTR [edi+9], 80h   ; operand1 >= 0?
+je   op1Neg
+cmp  BYTE PTR [esi+9], 80h   ; operand2 >= 0?
+je   op2Neg
+call addBcd1        ; add (>=0, >=0)
+jmp  endIfOp2Pos
+op2Neg:   call subBcd1        ; sub (>=0, <0)
+endIfOp2Pos:
+jmp  endIfOp1Pos    ; done
+op1Neg:   cmp  BYTE PTR [esi+9], 80h   ; operand2 < 0 ?
+jne  op2Pos
+call addBcd1        ; add (<0, <0)
+jmp  endIfOp2Neg
+op2Pos:   xor  BYTE PTR [edi+9], 80h  ; change sign byte
+call subBcd1        ; sub (<0, >=0)
+xor  BYTE PTR [edi+9], 80h  ; change sign byte
+endIfOp2Neg:
+endIfOp1Pos:
+pop  edi            ; restore registers
+pop  esi
+pop  ebp
+ret  8              ; return to caller
+addBcd    ENDP
+Figure 11.5 General BCD addition procedure
+TEAM LinG - Live, Informative, Non-cost and Genuine!

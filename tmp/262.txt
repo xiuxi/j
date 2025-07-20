@@ -1,0 +1,33 @@
+262 String Operations
+character. For instance, dividing the number 2895 (0B4F16) by 10 gives a remainder of 5
+and a quotient of 289 (012116), the last digit of the number and a new number with
+which to repeat the process. This scheme works nicely for positive numbers, but a negative number must be changed to its absolute value before starting the division loop. To
+complicate things further, the bit pattern 800016 represents the negative number
+32,76810, but +32,768 cannot be represented in 2’s complement form in a 16-bit word.
+After standard entry code, the value parameter is copied to AX and the destination address to EDI. The procedure then checks for the special case 800016. If this is the
+value, then the ASCII codes for 32768 are moved one at a time to the destination, using
+the fact that the destination address is in EDI. The location for the minus sign is in the
+EDI register, so register indirect addressing can be used to put this character in the correct memory byte. The location for the character 3 is one byte beyond the address contained in EDI; this address is referenced by [edi+1]. The remaining four characters are
+similarly put in place, and the procedure is exited.
+The next step of the procedure is to put five leading blanks in the six-byte-long
+destination field. The procedure does this with a rep stosb, which uses EDI to point to
+successive bytes in destination field. Note that EDI is left pointing at the last byte of the
+destination field.
+The procedure next stores the correct “sign” in the CL register. A blank is used
+for a number greater than or equal to zero, and minus character () is used for a negative
+number. A negative number is also negated, giving its absolute value for subsequent
+processing.
+Finally the main idea is executed. The divisor 10 is placed in the BX register.
+The non-negative number is extended to a doubleword by moving zeros to DX. Division
+by 10 in BX gives a remainder from 0 to 9 in DX, the last decimal digit of the number.
+This is converted to the corresponding ASCII code by adding 3016; recall that the ASCII
+codes for digits 0 through 9 are 3016 through 3916. A mov using register indirect addressing puts the character in place in the destination string, and EDI is decremented to point
+at the next position to the left.
+This process is repeated until the quotient is zero. Finally the “sign” stored in
+CL (blank or ) is copied to the immediate left of the last code for a digit. Other positions
+to the left, if any, were previously filled with blanks.
+Exercises 7.4
+1. Why does itoaproc use a destination string six bytes long?
+2. Suppose that negative numbers are not changed before the division
+loop of itoaproc begins and that an idiv instruction is used rather than
+TEAM LinG - Live, Informative, Non-cost and Genuine!

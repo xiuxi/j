@@ -1,0 +1,15 @@
+The EDIT command is used to create or modify a text file. EDIT filename
+invokes a simple text editor opening filename if it exists or creating it if it doesn’t. EDIT
+has its own help system with more information than you need about this editor.
+The REN command is used to rename files. Its format is REN oldName newName.
+The DOSKEY command loads an extension to the command processor that
+allows you to use the up-arrow key to recall a previous command, which then can be
+executed again or edited.
+You can get more information about most commands by typing command /?
+Note: Just because you are doing some work in MS-DOS doesn’t mean that you
+can’t use other Windows tools. It is fine to use My Computer or Explorer to create directories, copy files, rename files, etc. You can use Notepad to edit files, but be careful since
+Notepad likes to put a TXT extension on every file name. (You can end up with crazy
+names like program.asm.txt.) In general you should avoid using a word processor to edit
+text files such as assembly language source code files.
+444 Appendix B
+TEAM LinG - Live, Informative, Non-cost and Genuine!

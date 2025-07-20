@@ -1,0 +1,30 @@
+160 Branching and Looping
+It often takes several statements to check the value of the Boolean expression. If it is
+determined that the value is false, then there will be a jump to endWhile. If it is determined that the continuation condition is true, then the code will either fall through to
+body or there will be a jump to its label. Notice that the body of the loop ends with a jmp
+to go check the condition again. Two common mistakes are to omit this jump or to jump
+to the body instead.
+The label while in this model is not allowed in actual code since while is a
+reserved word in MASM. In fact, MASM 6.11 has a while directive that simplifies writing code for while loops. It is not used in this book since our main concern is understanding how structures are implemented at the machine language level.
+For an example, suppose that the design
+while (sum < 1000) loop
+... { body of loop }
+end while;
+is to be coded in 80x86 assembly language. Assuming that sum references a doubleword
+in memory, one possible implementation is
+whileSum:    cmp   sum, 1000      ; sum < 1000?
+jnl   endWhileSum    ; exit loop if not
+.                   ; body of loop
+.
+.
+jmp   whileSum       ; go check condition again
+endWhileSum:
+The statement
+jnl   endWhileSum
+directly implements the design. An alternative would be to use
+jge  endWhileSum
+which transfers control to the end of the loop if sum ≥ 1000. This works since the
+inequality (sum ≥ 1000) will be true exactly when the (sum < 1000) is false, but the jnl
+mnemonic makes it easier to implement the design without having to reverse the
+inequality.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

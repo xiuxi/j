@@ -1,0 +1,32 @@
+20 Representing Data in a Computer
+Discarding the extra 1, the hex digits 023E do represent 574. This addition has a carry,
+so there is no borrow in the corresponding subtraction.
+Overflow is also defined for subtraction. When you are thinking like a person, you
+can detect it by the wrong answer that you will expect when you know that the difference
+is going to be outside of the range that can be represented in the chosen length for the
+representation. A computer detects overflow in subtraction by determining whether or
+not overflow occurs in the corresponding addition problem. If overflow occurs in the addition problem, then it occurs in the original subtraction problem; if it does not occur in the
+addition, then it does not occur in the original subtraction. There was no overflow in either
+of the above subtraction examples. Overflow does occur if you use word-length 2’s complement representations to attempt the subtraction 29123  15447. As a human, you
+know that the correct answer 44570 is outside the range 32,768 to +32,767. In the
+computer hardware
+8E3D
+- 3C57
+is changed to addition of C3A9, the 2’s complement of 3C57.
+1    1   11  111   1
+8E3D 1000 1110 0011 1101
++ C3A9 + 1100 0011 1010 1001
+151E6 1 0101 0001 1110 0110
+There is a carry out of the sign position, but no carry in, so overflow occurs.
+Although examples in this section have use word-size 2’s complement representations, the same techniques apply when performing addition or subtraction with
+byte-size, doubleword-size, or other size 2’s complement numbers.
+Exercises 1.4
+Perform each of the following operations on word-size 2’s complement
+numbers. For each, find the specified sum or difference. Determine
+whether overflow occurs. For a sum, determine whether there is a carry.
+For a difference, determine whether there is a borrow. Check your
+answers by converting the problem to decimal.
+1. 003F + 02A4 2. 1B48 + 39E1
+3. 6C34 + 5028 4. 7FFE + 0002
+5. FF07 + 06BD 6. 2A44 + D9CC
+TEAM LinG - Live, Informative, Non-cost and Genuine!

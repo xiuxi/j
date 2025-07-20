@@ -1,0 +1,30 @@
+Chapter Summary 417
+The COBOL language directly supports packed decimal types and operations. If
+you were writing a COBOL compiler for a VAX, then the packed decimal instructions
+would greatly simplify the job. The resulting compiler would yield much more compact
+and efficient code than if each packed decimal operation were emulated by a software
+procedure.
+Chapter Summary
+Integers may be stored in a computer in binary coded decimal form instead
+of unsigned or 2’s complement binary form. There are two basic BCD systems, packed and unpacked. Packed BCD values store two decimal digits
+per byte, and unpacked BCD values store a single decimal digit per byte.
+Binary representations are much more compact than BCD representations and the 80x86 processor has more instructions for doing arithmetic with binary numbers. However, BCD representations can easily store
+very large integers and are simple to convert to or from ASCII.
+BCD systems may use a variable or a fixed number of bytes and
+may or may not store a sign indicator. The MASM assembler provides a DT
+directive that can produce a ten byte signed, packed BCD number.
+Unpacked BCD numbers can be initialized using BYTE directives.
+Arithmetic is done with BCD numbers by combining pairs of bytes
+from two operands using ordinary binary arithmetic instructions. The
+binary results are then adjusted to BCD. Packed decimal representations use
+daa (decimal adjust for addition) and das (decimal adjust for subtraction)
+instructions. Using these instructions along with binary arithmetic instructions, arithmetic procedures for packed BCD numbers can be developed.
+Four instructions are used for unpacked BCD arithmetic: aaa (ASCII
+adjust for addition), aas (ASCII adjust for subtraction), aam (ASCII adjust for
+multiplication), and aad (ASCII adjust for division). The aad instruction is
+different from the others in that it is applied to a BCD result to convert it to
+binary before applying a div instruction.
+Some other architectures provide a much more complete set of
+packed decimal instructions. In particular, the VAX architecture includes
+arithmetic, data movement, comparison, and conversion instructions.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

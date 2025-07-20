@@ -1,0 +1,26 @@
+206 Procedures
+Clock Cycles Number
+Operand 386 486 Pentium of Bytes Opcode
+near relative 7+ 3 1 5 E8
+near indirect FF
+using register 7+ 5 2 2
+using memory 10+ 5 2 2+
+far direct 17+ 18 4 7 9A
+far indirect 22+ 17 5 6 FF
+Figure 6.8 call instructions
+different segment from the calling code. In fact, with 16-bit segmented programming,
+segments were limited to 65,536 bytes, so procedures were often in separate segments.
+The 80x86 architecture uses a far call to transfer control to a procedure in a different
+memory segment: A far call pushes both EIP and CS onto the stack. A far return pops
+both off the stack. With 32-bit flat memory model programming, there is no need for anything other than near calls.
+The syntax of the 80x86 call statement is
+call destination
+Figure 6.8 lists some of the available 80x86 call instructions, omitting 16-bit forms and
+forms used primarily for systems programming. The “+” notations on the timings for the
+80386 processor indicate that there are additional clock cycles that depend on the next
+instruction. The program in Fig. 6.6 included a near procedure, designated by the PROC
+operand NEAR32. In general, the assembler determines whether destination references a
+near or far procedure from the PROC directive or from some other directive or operand.
+No call instruction modifies any flag.
+All of the procedures used in this book will be the first type, near relative. For a
+near relative procedure, the assembler calculates a 32-bit displacement to the destination, and the E8 opcode plus this displacement comprise the five bytes of the instrucTEAM LinG - Live, Informative, Non-cost and Genuine!

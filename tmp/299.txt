@@ -1,0 +1,41 @@
+Chapter Summary 299
+adder circuit has three inputs x, y, and carry in, and two outputs, sum
+and carry out.
+1. Make a chart similar to the one in Fig. 8.11 showing the inputs and outputs for a full adder. The chart will have five columns (x, y, carry in, sum,
+and carry out) and eight rows below the header row.
+2. Draw a full adder circuit. Hint: Use two half adders and an or gate to
+combine their carry outputs.
+3. Use three full adders and a half adder to draw a circuit that can add two
+four bit numbers. This circuit will have eight inputs (four pairs of bits) and
+five outputs (four sum bits and a carry bit). For simplicity, you can draw
+each adder or half adder as a block diagram, without showing all its gates.
+Chapter Summary
+This chapter has explored the various 80x86 instructions that allow bits in a
+byte, word, or doubleword destination to be manipulated. The logical
+instructions and, or, and xor perform Boolean operations using pairs of
+Figure 8.11 Half adder circuit
+x
+0
+0
+1
+1
+y
+0
+1
+0
+1
+carry
+0
+0
+0
+1
+sum
+0
+1
+1
+0
+x
+y
+carry
+sum
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,38 @@
+12.1 Console I/O Using the Kernel32 Library 421
+; Program to display a simple message
+; Author:  R. Detmer
+; Date:    6/98
+.386
+.MODEL FLAT
+ExitProcess PROTO NEAR32 stdcall, dwExitCode:DWORD
+GetStdHandle PROTO NEAR32 stdcall,
+nStdHandle:DWORD
+WriteFile PROTO NEAR32 stdcall,
+hFile:DWORD, lpBuffer:NEAR32, nNumberOfCharsToWrite:DWORD,
+lpNumberOfBytesWritten:NEAR32, lpOverlapped:NEAR32
+STD_OUTPUT EQU –11
+cr      EQU     0dh     ; carriage return character
+Lf      EQU     0ah     ; line feed
+.STACK
+.DATA
+OldProg BYTE    "Old programmers never die.", cr, lf
+BYTE    "They just lose their byte.", cr, lf
+msgLng  DWORD   56   ; number of characters in above message
+written DWORD   ?
+hStdOut DWORD   ?
+.CODE
+_start:
+INVOKE GetStdHandle,    ; get handle for console output
+STD_OUTPUT
+mov    hStdOut, eax
+INVOKE WriteFile,
+hStdOut,              ; file handle for screen
+NEAR32 PTR OldProg,   ; address of string
+msgLng,               ; length of string
+NEAR32 PTR written,   ; bytes written
+0                     ; overlapped mode
+INVOKE  ExitProcess, 0  ; exit with return code 0
+PUBLIC _start
+END
+Figure 12.1 Console output using kernel32 functions
+TEAM LinG - Live, Informative, Non-cost and Genuine!

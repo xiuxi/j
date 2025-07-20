@@ -1,0 +1,37 @@
+426 Input/Output
+inc    strLength           ; increment character count
+inc    esi                 ; point at next character
+jmp    WhileChar
+EndWhileChar:
+INVOKE GetStdHandle,       ; get handle for console output
+STD_OUTPUT
+mov    hStdOut, eax
+INVOKE WriteFile,
+hStdOut,                 ; file handle for screen
+strAddr,                 ; address of string
+strLength,               ; length of string
+NEAR32 PTR written,      ; bytes written
+0                        ; overlapped mode
+popfd                      ; restore flags
+popad                      ; restore registers
+pop    ebp
+ret    4                   ;exit, discarding parameter
+outproc     ENDP
+; inproc(dest,length)
+; Procedure to input a string from keyboard.
+; The string will be stored at the address given by dest.
+; The length parameter gives the size of the user's buffer.  It is 
+; assumed that there will be room for the string and a null byte.
+; The string will be terminated by a null character (00h).
+; Flags are unchanged.
+inproc      PROC   NEAR32
+push   ebp                 ; save base pointer
+mov    ebp, esp            ; establish stack frame
+pushad                     ; save all registers
+pushfd                     ; save flags
+INVOKE GetStdHandle,       ; get handle for console
+STD_INPUT
+mov    hStdIn, eax
+(continued)
+Figure 12.4 (continued)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

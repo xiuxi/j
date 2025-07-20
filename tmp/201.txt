@@ -1,0 +1,30 @@
+6.2 Procedure Body, Call and Return 201
+(b) ESP:  02 00 0B 7C pushd 20 ESP, EBX
+EBX:  12 34 56 78 push  ebx
+(c) ESP:  00 00 F8 3A push  eax ESP, EAX, BX, ECX
+EAX:  12 34 56 78 pushw 30
+pop   bx
+pop   ecx
+3. Many microprocessors do not have an instruction equivalent to xchg.
+With such systems, a sequence of instructions like the following can be
+used to exchange the contents of two registers:
+push  eax
+push  ebx
+pop   eax
+pop   ebx
+Explain why this sequence works to exchange the contents of the EAX
+and EBX registers. Compare the number of bytes of code and clock
+cycles required to execute this sequence with those required for the
+instruction xchg eax,ebx.
+4. Another alternative to the xchg instruction is to use
+push  eax
+mov   eax, ebx
+pop   ebx
+Explain why this sequence works to exchange the contents of the EAX
+and EBX registers. Compare the number of bytes of code and clock
+cycles required to execute this sequence with those required for the
+instruction xchg eax,ebx.
+6.2 Procedure Body, Call and Return
+The word procedure is used in high-level languages to describe a subprogram that is
+almost a self-contained unit. The main program or another subprogram can call a procedure by including a statement that consists of the procedure name followed by a parenthesized list of arguments to be associated with the procedure’s formal parameters.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

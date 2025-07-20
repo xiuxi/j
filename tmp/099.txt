@@ -1,0 +1,31 @@
+4.2 Integer Addition and Subtraction Instructions 99
+Destination Clock Cycles Number Opcode
+Operand Source Operand 386 486 Pentium of Bytes add sub
+register 8 immediate 8 2 1 1 3 80 80
+register 16 immediate 8 2 1 1 3 83 83
+register 32 immediate 8 2 1 1 3 83 83
+register 16 immediate 16 2 1 1 4 81 81
+register 32 immediate 32 2 1 1 6 81 81
+AL immediate 8 2 1 1 2 04 2C
+AX immediate 16 2 1 1 3 05 2D
+EAX immediate 32 2 1 1 5 05 2D
+memory byte immediate 8 7 3 3 3+ 80 80
+memory word immediate 8 7 3 3 3+ 83 83
+memory doubleword immediate 8 7 3 3 3+ 83 83
+memory word immediate 16 7 3 3 4+ 81 81
+memory doubleword immediate 32 7 3 3 6+ 81 81
+register 8 register 8 2 1 1 2 02 2A
+register 16 register 16 2 1 1 2 03 2B
+register 32 register 32 2 1 1 2 03 2B
+register 8 memory byte 6 2 2 2+ 02 2A
+register 16 memory word 6 2 2 2+ 03 2B
+register 32 memory doubleword 6 2 2 2+ 03 2B
+memory byte register 8 7 3 3 2+ 00 28
+memory word register 16 7 3 3 2+ 01 29
+memory doubleword register 32 7 3 3 2+ 01 29
+Figure 4.5 add and sub instructions
+Notice that an immediate source can be a single byte even when the destination is a word or doubleword. Since immediate operands are often small, this makes the
+object code more compact. Byte-size operands are sign-extended to word or doubleword size at run time before the addition or subtraction operation. If the original operand
+is negative (viewed as 2’s complement number), then it is extended with one or three FF
+bytes to get the corresponding word or doubleword-length value. A non-negative
+TEAM LinG - Live, Informative, Non-cost and Genuine!

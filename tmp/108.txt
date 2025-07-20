@@ -1,0 +1,31 @@
+108 Basic Instructions
+3. Write a complete 80x86 assembly language program to prompt for the
+length and width of a rectangle and to display its perimeter (2*length
++ 2*width).
+4.3 Multiplication Instructions
+The 80x86 architecture has two multiplication instruction mnemonics. Any imul
+instruction treats its operands as signed numbers; the sign of the product is determined
+by the usual rules for multiplying signed numbers. A mul instruction treats its operands
+as unsigned binary numbers; the product is also unsigned. If only non-negative numbers are to be multiplied, mul should usually be chosen instead of imul since it is a little faster.
+There are fewer variants of mul than of imul, so we consider it first. The mul
+instruction has a single operand; its format is
+mul   source
+The source operand may be byte, word, or doubleword-length, and it may be in a register or
+in memory. The location of the other number to be multiplied is always the accumulator—AL
+for a byte source, AX for a word source, and EAX for a doubleword source. If source has byte
+length, then it is multiplied by the byte in AL; the product is 16 bits long, with a destination
+of the AX register. If source has word length, then it is multiplied by the word in AX; the
+product is 32 bits long, with its low order 16 bits going to the AX register and its high order
+16 bits going to the DX register. If source is a doubleword, then it is multiplied by the doubleword in EAX; the product is 64 bits long, with its low order 32 bits in the EAX register and its
+high order 32 bits in the EDX register. For byte multiplication, the original value in AX is
+replaced. For word multiplication, the original values in AX and DX are both wiped out. Similarly, for doubleword multiplication the values in EAX and EDX are replaced by the product.
+In each case the source operand is unchanged unless it is half of the destination location.
+At first glance, it may seem strange that the product is twice the length of its
+two factors. However, this also occurs in ordinary decimal multiplication; if, for example,
+two four-digit numbers are multiplied, the product will be seven or eight digits long.
+Computers that have multiplication operations often put the product in double-length
+locations so that there is no danger that the destination location will be too small.
+Even when provision is made for double-length products, it is useful to be able
+to tell whether the product is the same size as the source; that is, if the high-order half is
+zero. With mul instructions, the carry flag CF and overflow flag OF are set to 1 if the high
+TEAM LinG - Live, Informative, Non-cost and Genuine!

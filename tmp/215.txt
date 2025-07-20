@@ -1,0 +1,32 @@
+6.3 Parameters and Local Variables 215
+make up the entry code for a procedure. However, the two instructions here are always
+the first entry code instructions. Because they are, you can count on the last parameter
+being exactly eight bytes above the reference point stored in EBP. The EBP register itself
+is always the first pushed and last popped so that upon return to the calling program it
+has the same value as prior to the call.
+We now show how the stack can provide space for local variables. For this purpose, we revisit the algorithm for computing the greatest common divisor of two integers that appeared in Programming Exercises 5.3.
+gcd := number1;
+remainder := number2;
+until (remainder = 0) loop
+dividend := gcd;
+gcd := remainder;
+remainder := dividend mod gcd;
+end until;
+Figure 6.14 shows this design implemented as a NEAR32 procedure that computes the
+greatest common divisor of two doubleword-size integer values passed to the procedure
+on the stack, returning the GCD in EAX. Figure 6.14 includes more than the procedure
+itself. It shows a complete file, ready for separate assembly.
+In this procedure, gcd is stored on the stack until it is time to return the value in
+EAX. The instruction
+sub    esp,4       ; space for one local doubleword
+moves the stack pointer down four bytes, reserving one doubleword of space below
+where EBP was stored and above where other registers are stored. After EDX and the
+flags register are pushed, the stack has the contents shown in Fig. 6.15. Now the local
+variable gcd can be accessed as [ebp–4], since it is four bytes below the fixed reference point stored in EBP.
+The rest of the procedure is a straightforward implementation of the design. In
+this example, a register could have been used to store gcd, but many procedures have
+too many local variables to store them all in registers. Within reason, you can reserve as
+many local variables on the stack as you wish, accessing each by [ebp-offset].
+Notice that registers are saved after local variable space is reserved, so that the number
+of registers saved does not affect the offset down to a variable. Note also that most
+TEAM LinG - Live, Informative, Non-cost and Genuine!

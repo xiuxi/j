@@ -1,0 +1,31 @@
+314 The Assembly Process
+This type of instruction is useful to process an array almost as in a high level language.
+You can store the starting address of the array in EBX, and the array index in ECX
+(assuming that indexing starts at 0). The index is multiplied by the scaling factor 4 (the
+size of a doubleword), and added to the base address to get the address of the array element. Figure 4.5 gives the opcode as 03. The mod-reg-r/m byte is 00 000 100 or 04 for no
+displacement, destination register EAX, and SIB byte used. The SIB byte is required
+since the instruction includes both base and index registers. Its fields are scale=10 for 4,
+index=001 for ECX, and base=011 for EBX, giving a SIB byte of 10 001 011 or 8B. The
+object code is therefore 03 04 8B.
+Next we look at
+sub ecx, value[ebx + 2*edi]
+where value references an address in the data segment. The opcode for this sub instruction
+is 2B. This address is treated as a 32-bit displacement, and there is both a base and an index
+register. Therefore mod=10, reg=001 (for ECX), and r/m=100 (for SIB needed). The fields of
+the SIB byte are 01 (for scaling factor 2), 111 (for index register EDI), and 011 (for base register EBX). The displacement doubleword will contain the run-time address of value. The
+machine code is therefore 2B 8C 7B xxxxxxxx, where the x’s represent the address of value.
+If the second operand in the last example is changed to value[EBX+2*EDI+10],
+then the displacement/address (represented above by xxxxxxxx) is simply 10 larger. That is,
+the assembler combines the displacement 10 and the displacement corresponding to value.
+You may have noticed that the first group in Fig. 9.5 does not show how to encode
+the operand [ebp]. It is encoded as [ebp+0], using a byte-size displacement. For example
+mov eax, [ebp]
+is encoded as 8B 45 00, opcode 8B, mod-reg-r/m byte 01 000 101 (1-byte displacement,
+destination EAX, base register EBP), and displacement 00.
+Figure 9.5 points out again that indirect addresses using ESP and EBP are in
+the stack segment, not the data segment. One would rarely want to override this. However, you might want to reference data in, say, the extra segment. To do this, you might
+code an instruction like
+This example has been chosen to involve almost all of the possible components of an
+80x86 instruction. It uses operand size prefix since word-size operands are being used. It
+uses a segment override prefix for ES. It uses base and index registers and a 32-bit discmp ax, WORD PTR es:[edx + 2*esi + 512]
+TEAM LinG - Live, Informative, Non-cost and Genuine!

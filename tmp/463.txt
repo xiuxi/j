@@ -1,0 +1,39 @@
+Number Timing Timing Timing
+Mnemonic Operand(s) Flags affected Opcode of Bytes 386 486 Pentium
+repne none none F2 AE 2 5+8n 7+5n 9+4n
+scasb
+repne none none F2 AF 2 5+8n 7+5n 9+4n
+scasw
+repne
+scasd
+repnz none none F2 1
+repne (string instruction 
+prefix)
+ret (far) none none CB 1 18+ 13 4
+ret (far) imm16 none CA 3 18+ 14 4
+ret (near) none none C3 1 10+ 5 2
+ret (near) imm16 none C2 3 10+ 5 3
+rol reg8 SF,ZF,OF,CF,PF D0 2 3 3 1
+ror AF ?
+rol reg16 SF,ZF,OF,CF,PF D1 2 3 3 1
+ror reg32 AF ?
+rol mem8 SF,ZF,OF,CF,PF D0 2+ 7 4 3
+ror AF ?
+rol reg16 SF,ZF,OF,CF,PF D1 2+ 7 4 3
+ror reg32 AF ?
+rol reg8, imm8 SF,ZF,OF,CF,PF C0 3 3 2 1
+ror AF ?
+rol reg16,imm8 SF,ZF,OF,CF,PF C1 3 3 2 1
+ror reg32,imm8 AF ?
+rol mem8, imm8 SF,ZF,OF,CF,PF C0 3+ 7 4 3
+ror AF ?
+rol mem16,imm8 SF,ZF,OF,CF,PF C1 3+ 7 4 3
+ror mem32,imm8 AF ?
+rol reg8, CL SF,ZF,OF,CF,PF D2 2 3 2 1
+ror AF ?
+rol reg16,CL SF,ZF,OF,CF,PF D3 2 3 2 1
+ror reg32,CL AF ?
+rol mem8, CL SF,ZF,OF,CF,PF D2 2+ 7 4 4
+ror AF ?
+80x86 Instructions 463
+TEAM LinG - Live, Informative, Non-cost and Genuine!

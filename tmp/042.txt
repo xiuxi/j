@@ -1,0 +1,29 @@
+42 Elements of Assembly Language
+3.1 Assembly Language Statements
+An assembly language source code file consists of a collection of statements. Most
+statements fit easily on an 80-character line, a good limit to observe so that source code
+can easily be printed or displayed on a monitor. However, MASM 6.1 accepts statements
+up to 512 characters long; these can be extended over more than one physical line using
+backslash (\) characters at the end of each line except the last.
+Because assembly language programs are far from self-documenting, it is
+important to use an adequate number of comments. Comments can be used with any
+statement. A semicolon (;) begins the comment, and the comment then extends until the
+end of the line. An entire line is a comment if the semicolon is in column 1 or if a comment can follow working parts of a statement. In those rare cases where you use a backslash character to break a statement into multiple lines, a comment can follow the
+backslash.
+There are three types of functional assembly language statements: instructions,
+directives, and macros. An instruction is translated by the assembler into one or more
+bytes of object code (machine code), which will be executed at run time. Each instruction corresponds to one of the operations that can be executed by the 80x86 CPU. The
+instruction
+add  eax, 158
+was used as an example in Chapter 2.
+A directive tells the assembler to take some action. Such an action does not
+result in machine instructions and often has no effect on the object code. For example,
+the assembler can produce a listing file showing the original source code, the object
+code, and other information. The directive
+.NOLIST
+anywhere in the source file tells the assembler to stop displaying source statements in
+the listing file. The object code produced is the same with or without the .NOLIST
+directive. (There is a .LIST directive to resume listing source statements.) These directives and many others start with a period, but others do not.
+A macro is “shorthand” for a sequence of other statements, be they instructions, directives, or even other macros. The assembler expands a macro to the statements it represents and then assembles these new statements. Several macros will
+appear in the example program later in this chapter.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

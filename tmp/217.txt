@@ -1,0 +1,81 @@
+6.3 Parameters and Local Variables 217
+Figure 6.15 Stack usage with local variables
+EBP
+ESP
+increasing
+addresses
+p
+a
+r
+a
+m
+e
+t
+e
+r
+ 1
+p
+a
+r
+a
+m
+e
+t
+e
+r
+ 2
+r
+e
+t
+u
+r
+n
+a
+d
+d
+r
+e
+s
+s
+o
+ld
+ v
+a
+lu
+e
+o
+f 
+E
+B
+P
+lo
+c
+a
+l 
+v
+a
+r
+ia
+b
+le
+g
+c
+d
+o
+ld
+ v
+a
+lu
+e
+o
+f 
+E
+D
+X
+o
+ld
+fl
+a
+g
+s
+TEAM LinG - Live, Informative, Non-cost and Genuine!

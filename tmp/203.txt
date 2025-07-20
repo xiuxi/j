@@ -1,0 +1,33 @@
+6.2 Procedure Body, Call and Return 203
+; procedure structure example
+; Author:  R. Detmer
+; Date:    revised 10/97
+.386
+.MODEL FLAT
+ExitProcess PROTO NEAR32 stdcall, dwExitCode:DWORD
+.STACK  4096             ; reserve 4096-byte stack
+.DATA                    ; reserve storage for data
+Count1      DWORD   11111111h
+Count2      DWORD   22222222h
+Total1      DWORD   33333333h
+Total2      DWORD   44444444h
+;           other data here
+.CODE                           ; program code
+Initialize  PROC   NEAR32
+mov    Count1,0         ; zero first count
+mov    Count2,0         ; zero second count
+mov    Total1,0         ; zero first total
+mov    Total2,0         ; zero second total
+mov    ebx,0            ; zero balance
+ret                     ; return
+Initialize  ENDP
+_start:                             ; program entry point
+call   Initialize       ; initialize variables
+; — other program tasks here
+call   Initialize       ; reinitialize variables
+; — more program tasks here
+INVOKE ExitProcess, 0   ; exit with return code 0
+PUBLIC _start                   ; make entry point public
+END                             ; end of source code
+Figure 6.5 Procedure structure
+TEAM LinG - Live, Informative, Non-cost and Genuine!

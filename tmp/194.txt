@@ -1,0 +1,26 @@
+6.1 The 80x86 Stack
+Programs in this book have allocated stacks with the code
+.STACK   4096
+This .STACK directive tells the assembler to reserve 4096 bytes of uninitialized storage.
+The operating system initializes ESP to the address of the first byte above the 4096 bytes
+in the stack. A larger or smaller stack could be allocated, depending on the anticipated
+usage in the program.
+The stack is most often used by pushing words or doublewords on it or by popping them off it. This pushing or popping is done automatically as part of the execution
+of call and return instructions (Section 6.2). It is also done manually with push and pop
+instructions. This section covers the mechanics of push and pop instructions, describing how they affect the contents of the stack.
+Source code for a push instruction has the syntax
+push source
+The source operand can be a register 16, a register 32, a segment register, a word in
+memory, a doubleword in memory, an immediate byte, an immediate word, or an immediate doubleword. The only byte-size operand is immediate, and as you will see, multiple
+bytes are pushed on the stack for an immediate byte operand. Figure 6.1 lists the allowable operand types. The usual mnemonic for a push instruction is just push. However, if
+there is ambiguity about the size of the operand (as would be with a small immediate
+value), then you can use pushw or pushd mnemonics to specify word or doublewordsize operands, respectively.
+When a push instruction is executed for a word-size operand, the stack pointer
+ESP is decremented by 2. Recall that initially ESP contains the address of the byte just
+above the allocated space. Subtracting 2 makes ESP point to the top word in the stack.
+The operand is then stored at the address in ESP; that is, at the high-memory end of the
+stack space. Execution is similar for a doubleword-size operand, except that ESP is
+decremented by 4 before the operand is stored. The immediate byte operand is interesting. Although a single byte is stored in the instruction, it is sign-extended to a doubleword that is actually stored on the stack. The byte-size operand saves three bytes of
+object code, but no stack space at execution time.
+194 Procedures
+TEAM LinG - Live, Informative, Non-cost and Genuine!

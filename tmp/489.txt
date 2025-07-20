@@ -1,0 +1,120 @@
+INDEX
+Note: Page locators for figures are
+italicized.
+A
+aaa instructions, 406, 407, 409, 417
+aad instructions, 411, 417
+aam instructions, 409, 412, 417
+aas instructions, 406, 407
+Abstraction levels, 133-134, 135
+Accumulators, 93, 94
+add and sub instructions, 98
+Ada, 137
+adc instructions, 130, 131, 135
+addAll macro 
+using conditional assembly, 326,
+327, 328
+add instructions, 95, 96, 98, 99, 100,
+101, 102, 134, 269, 407
+flags set/cleared by, 145
+functioning of, at execution time,
+96-97
+Addition
+algorithm for floating-point, 380
+and floating-point instructions,
+349
+of floating-point numbers, 374,
+380
+in floating-point routines, 340
+of hex digits, 12
+instructions, 135
+of larger numbers, 130-132
+of non-negative packed BCD
+numbers, 398, 399
+overflow in, 17
+for packed BCD numbers, 396
+of two 8 byte unpacked BCD
+numbers, 408
+of 2’s complement numbers, 1518, 26
+ADDP (add packed) instructions, 416
+Addresses/addressing
+80x86 modes, 73
+I/O, 36
+register indirect, 75
+Address parameters
+procedure using, 220
+Address size byte, 308
+addUnp procedure, 407, 408
+AF flag, 96
+Algorithms
+for assembly language program,
+45-46
+AL register, 76
+American National Standards
+Institute, 24
+American Standard Code for
+Information Interchange. See
+ASCII
+and instructions, 270, 272, 299
+and operations, 153, 267
+and 80x86, 269
+and logic gates, 298
+and operator, 161, 162
+ANSI. See American National
+Standards Institute
+Application level of abstraction, 133,
+135
+Application software, 27
+Arguments
+for macro calls, 331-332, 337
+Argument values
+passing, 213
+Arithmetic shifts, 278
+left, 279
+right, 280, 282
+Array elements
+accessing, 185, 191
+Arrays, 180-185, 190, 191
+indexes, 32
+passing to procedure, 219
+processing, 314
+program using, 182-184
+ASCII, 6, 386
+BCD representation conversions
+to/from, 417
+to doubleword integer
+conversion, 293-295
+to floating-point algorithm,
+361-363, 364
+floating-point to, conversion
+algorithm, 366-367
+floating point to, conversion
+procedure, 369-372
+to packed BCD conversion, 390,
+391-392
+procedure for integer conversion
+to, 260-261
+unpacked BCD value converted
+to/from, 405
+ASCII codes, 9, 23, 26
+logical instructions for
+manipulating, 273
+and logical operations, 274
+and macros defined in IO.H, 78-80
+and text editors, 38
+translating, 257
+ASCII string
+converting 2’s complement
+integer to, 259-262
+Assemblers, 38, 39, 40, 44, 74
+job of, 301
+listing files for, 60-67
+one-pass and two-pass, 302
+responsibilities of, 305
+and storage, 304-305
+symbol tables used by, 302
+Assembly language, 82
+for loops in, 173-178
+procedure in, 202
+statements, 42-45, 82
+TEAM LinG - Live, Informative, Non-cost and Genuine!

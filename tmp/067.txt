@@ -1,0 +1,35 @@
+3.4 The Assembler Listing File 67
+of the EAX register to the address given in the next four bytes of the instruction. The
+notation R indicates that the address is relocatable, that is, the linker and loader will
+determine the run-time address, substituting it for 00000000 in this instruction in the
+code that is actually executed at run time. Figure 3.5 showed that address as 00404000
+for one run of the program—it may be different every time the program is executed.
+The add instruction
+0000006B  03 05 00000004 R     add     eax, number2
+starts at an offset of 0000006B and has an opcode of 03, one of several opcodes used for
+different add instructions. The 03 opcode itself is used for add instructions with several
+different formats, and the CPU must also look at the next byte to determine what the
+operands are. The 05 byte tells the 80x86 that the EAX register is the destination for the
+sum (and one source) and that the other source is in memory at the address given in the
+next four bytes. Chapter 9 provides more details about formats of 80x86 instructions and
+how they are assembled.
+The final part of the assembly listing shows all the symbols that are used in the
+program. The first few lines show the macro names that are defined by including IO.H
+even though not all are used in this program. After listing segment and procedure
+names, the assembler shows the remaining symbols. This list includes familiar symbols
+such as Lf, number2, and _start. It also shows several symbols starting with an at
+sign (@); these give information about the assembly process. Some of the remaining
+symbols are names of procedures that are called by the macros in IO.H; for instance,
+atoiproc is called by the atod macro.
+Exercises 3.4
+Answer the following questions by looking at the assembly listing in
+Fig. 3.7.
+1. What are the ASCII codes for characters in the string “The sum is”?
+2. What is the offset of the label sum in the data section?
+3. If the following statements were added at the end of the data section
+(just before .CODE), what offsets and values would appear for them in
+the assembly listing?
+extra     DWORD 999
+label2    BYTE  "The End", cr, Lf, 0
+(Hint: An ASCII/hexadecimal conversion chart is useful for this problem.)
+TEAM LinG - Live, Informative, Non-cost and Genuine!

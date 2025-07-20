@@ -1,0 +1,34 @@
+7.2 Repeat Prefixes and More String Instructions 251
+3. Suppose that the following instructions are executed:
+mov   al, 'w'
+lea   edi, dest
+cld
+mov   ecx, 5
+repe scasb
+Assuming that EDI starts at 00010005, what will be the value stored in
+EDI following the repe scasb instruction? What will be stored in ECX?
+4. Suppose that the following instructions are executed:
+mov   al, 'n'
+lea   edi, dest
+cld
+mov   ecx, 5
+repne scasb
+Assuming that EDI starts at 00010005, what will be the value stored in
+EDI following the repne scasb instruction? What will be stored in ECX?
+5. Suppose that the following instructions are executed:
+mov   al, '*'
+lea   edi, dest
+cld
+mov   ecx, 5
+rep stosb
+Assuming that EDI starts at 00010005, what will be the value stored in
+EDI following the rep stosb instruction? What will be stored in ECX?
+What will be stored in the destination string?
+6. Suppose that the following instructions are executed:
+lea   esi, source
+lea   edi, dest
+cld
+mov   ecx, 5
+for6: lodsb
+inc   al
+TEAM LinG - Live, Informative, Non-cost and Genuine!

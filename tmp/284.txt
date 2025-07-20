@@ -1,0 +1,37 @@
+284 Bit Manipulation
+.DATA                               ; reserve storage for data
+prompt      BYTE   "Enter a number:  ",0
+number      BYTE   20 DUP (?)
+result      BYTE   cr,Lf,"The 2's complement representation is "
+hexOut      BYTE   8 DUP (?),cr,Lf,0
+.CODE                               ; start of main program code
+_start:
+output prompt           ; prompt for number
+input  number,20        ; read ASCII characters
+atod   number           ; convert to integer
+lea    ebx,hexOut+7     ; address for last character
+mov    ecx,8            ; number of characters
+forCount:   mov    edx,eax          ; copy pattern
+and    edx,0000000fh    ; zero all but last hex digit
+cmp    edx,9            ; digit?
+jnle   elseLetter       ; letter if not
+or     edx,30h          ; convert to character
+jmp    endifDigit
+elseLetter: add    edx,'A'–10       ; convert to letter
+endifDigit:
+mov    BYTE PTR [ebx],dl ; copy character to memory
+dec    ebx              ; point at next character
+shr    eax,4            ; shift one hex digit right
+loop   forCount         ; repeat
+output result           ; output label and hex value
+INVOKE  ExitProcess, 0  ; exit with return code 0
+PUBLIC _start                       ; make entry point public
+END                                 ; end of source code
+Figure 8.7 (continued)
+groups of four bits must be extracted from the value in EAX. Each group of four bits represents a decimal value from 0 to 15, and each group must be converted to a character
+for display. This character is a digit 0 through 9 for integer value 0 (00002) through 9
+(10012) or a letter A through F for integer value 10 (10102) through 15 (11112).
+The eight characters are stored right to left in contiguous bytes of memory as
+they are generated; the EBX register is used to point at the destination byte for each
+character. The design for the middle of the program is
+TEAM LinG - Live, Informative, Non-cost and Genuine!

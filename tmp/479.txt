@@ -1,0 +1,41 @@
+Number Timing Timing Timing
+Opcode Mnemonic Operand(s) Flags affected of bytes 386 486 Pentium
+83 and mem16,imm8 SF,ZF,OF,CF,PF,AF 3+ 7 3 3
+mem32,imm8
+83 cmp reg16,imm8 SF,ZF,OF,CF,PF,AF 3 2 1 1
+reg32,imm8
+83 cmp mem16,imm8 SF,ZF,OF,CF,PF,AF 3+ 5 2 2
+mem32,imm8
+83 or reg16,imm8 SF,ZF,OF,CF,PF,AF 3 2 1 1
+reg32,imm8
+83 or mem16,imm8 SF,ZF,OF,CF,PF,AF 3+ 7 3 3
+mem32,imm8
+83 sbb reg16,imm8 SF,ZF,OF,CF,PF,AF 3 2 1 1
+reg32,imm8
+83 sbb mem16,imm8 SF,ZF,OF,CF,PF,AF 3+ 7 3 3
+mem32,imm8
+83 sub reg16,imm8 SF,ZF,OF,CF,PF,AF 3 2 1 1
+reg32,imm8
+83 sub mem16,imm8 SF,ZF,OF,CF,PF,AF 3+ 7 3 3
+mem32,imm8
+83 xor reg16,imm8 SF,ZF,OF,CF,PF,AF 3 2 1 1
+reg32,imm8
+83 xor mem16,imm8 SF,ZF,OF,CF,PF,AF 3+ 7 3 3
+mem32,imm8
+84 test reg8,reg8 SF,ZF,OF,CF,PF,AF 2 2 1 1
+84 test mem8,reg8 SF,ZF,OF,CF,PF,AF 2+ 5 2 2
+85 test reg16,reg16 SF,ZF,OF,CF,PF,AF 2 2 1 1
+reg32,reg32
+85 test mem16,reg16 SF,ZF,OF,CF,PF,AF 2+ 5 2 2
+mem32,reg32
+86 xchg reg8,reg8 none 2 3 3 3
+86 xchg reg8,mem8 none 2+ 5 5 3
+87 xchg reg16,reg16 none 2 3 3 3
+87 xchg reg16,mem16 none 2+ 5 5 3
+88 mov mem8,reg8 none 2+ 2 1 1
+89 mov mem16,reg16 none 2+ 2 1 1
+mem32,reg32
+8A mov reg8,reg8 none 2 2 1 1
+8A mov reg8,mem8 none 2+ 4 1 1
+80x86 Instructions 479
+TEAM LinG - Live, Informative, Non-cost and Genuine!

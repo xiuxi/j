@@ -1,0 +1,39 @@
+Number Timing Timing Timing
+Opcode Mnemonic Operand(s) Flags affected of bytes 386 486 Pentium
+0F 8D jge rel32 none 7+,3 3,1 1 6
+jnl
+0F 8E jle rel32 none 7+,3 3,1 1 6
+jng
+0F 8F jg rel32 none 7+,3 3,1 1 6
+jnle
+0F A0 push FS none 2 2 3 1
+0F A1 pop FS none 2 7 3 3
+0F A8 push GS none 2 2 3 1
+0F A9 pop GS none 2 7 3 3
+0F AC shrd reg16,reg16,imm8 SF,ZF,CF,PF 4 3 2 4
+reg32,reg32,imm8 OF,AF ?
+0F AC shrd mem16,reg16,imm8 SF,ZF,CF,PF 4+ 7 4 4
+mem32,reg32,imm8 OF,AF ?
+0F AD shrd reg16,reg16,CL SF,ZF,CF,PF 3 3 3 4
+reg32,reg32,CL OF,AF ?
+0F AD shrd mem16,reg16,CL SF,ZF,CF,PF 3+ 7 4 5
+mem32,reg32,CL OF,AF ?
+0F AF imul reg16,reg16 OF,CF 3 9-22 13-26 11
+reg32,reg32 SF,ZF, PF,AF ? 9-38 13-42 10
+0F AF imul reg16,mem16 OF,CF 3+ 12-25 13-26 11
+reg32,mem32 SF,ZF, PF,AF ? 12-41 13-42 10
+0F B6 movzx reg16,reg8 none 3 3 3 3
+reg32,reg8
+0F B6 movzx reg16,mem8 none 3+ 6 3 3
+reg32,mem8
+0F B7 movzx reg32,reg16 none 3 3 3 3
+0F B7 movzx reg32,mem16 none 3+ 6 3 3
+0F BE movsx reg16,reg8 none 3 3 3 3
+reg32,reg8
+0F BE movsx reg16,mem8 none 3+ 6 3 3
+reg32,mem8
+0F BF movsx reg32,reg16 none 3 3 3 3
+0F BF movsx reg32,mem16 none 3+ 6 3 3
+10 adc mem8,reg8 SF,ZF,OF,CF,PF,AF 2+ 7 3 3
+80x86 Instructions 471
+TEAM LinG - Live, Informative, Non-cost and Genuine!

@@ -1,0 +1,35 @@
+116 Basic Instructions
+3. For each part of this problem, assume the “before” values when the
+given instruction is executed. Give the requested “after” values.
+Before Instruction After
+(a) BX:  00 17
+CX:  00 B2 imul  bx,cx BX, CF, OF
+(b) EAX:  FF FF FF E4
+EBX:  00 00 04 C2 imul  eax,ebx EAX, CF, OF
+(c) AX:  0F B2 imul  ax, 15 AX, CF, OF
+(d) ECX:  00 00 7C E4
+doubleword at Mult: imul  ecx,Mult ECX, CF, OF
+00 00 65 ED
+(e) DX:  7C E4
+BX:  49 30 imul  dx,bx DX, CF, OF
+(f) DX:  0F E4
+word at Value:  04 C2 imul  dx,Value DX, CF, OF
+(g) EBX:  00 00 04 C2 imul  ebx,–10 EBX, CF, OF
+(h) ECX:  FF FF FF E4 imul  ebx,ecx,5 EBX, CF, OF
+(i) DX:  00 64 imul  ax,dx,10 AX, CF, OF
+4. Give the opcode for each instruction in Exercise 3.
+5. Suppose that the value for x is in the AX register and you need the
+value of 5x in AX. Compare the number of clock cycles for execution on
+a Pentium system and the number of bytes of object code for each of
+the following schemes.
+mov   bx,ax        ; copy value of x
+add   ax,ax        ; x + x gives 2x
+add   ax,ax        ; 2x + 2x gives 4x
+add   ax,bx        ; 4x + x gives 5x
+and
+imul  ax,5         ; 5x
+6. Suppose you need to evaluate the polynomial
+p(x) = 5x3   7x2 + 3x   10
+for some value of x. If this is done in the obvious way, as
+5*x*x*x   7*x*x + 3*x   10
+TEAM LinG - Live, Informative, Non-cost and Genuine!

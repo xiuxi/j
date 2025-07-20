@@ -1,0 +1,28 @@
+22 Representing Data in a Computer
+Decimal BCD bit pattern
+0 0000
+1 0001
+2 0010
+3 0011
+4 0100
+5 0101
+6 0110
+7 0111
+8 1000
+9 1001
+Figure 1.3 Binary coded decimal representation
+subtraction method presented in Section 1.3. You were asked to verify the equivalence
+of these methods in Exercise 1.3.9.
+In binary coded decimal (BCD) schemes, each decimal digit is coded with a
+string of bits with fixed length, and these strings are pieced together to form the representation. Most frequently four bits are used for each decimal digit; the choices for bit
+patterns are shown in Fig. 1.3. Only these ten bit patterns are used.
+One BCD representation of the decimal number 926708 is 1001 0010 0110 0111
+0000 1000. Using one hex digit as shorthand for four bits, and grouping two hex digits
+per byte, this BCD representation can be expressed in three bytes as
+Notice that the BCD representation in hex looks just like the decimal number.
+Often BCD numbers are encoded using some fixed number of bytes. For purposes of illustration, assume a four-byte representation. For now, the question of how to
+represent a sign will be ignored; without leaving room for a sign, eight binary-coded decimal digits can be stored in four bytes. Given these choices, the decimal number 3691
+has the BCD representation
+00 00 36 91
+92 67 08
+TEAM LinG - Live, Informative, Non-cost and Genuine!

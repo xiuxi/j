@@ -1,0 +1,36 @@
+4.1 Copying Data 91
+noted that instructions that access memory may require more than the number of clock
+cycles listed. One reason this can occur is memory that does not respond rapidly enough; in
+this case wait states, wasted clock cycles, are inserted until the memory responds. Even
+with fast memory, extra cycles can be required to access a word or doubleword that is not
+aligned in memory—that is, stored on an address that is a multiple of two or four, respectively. A programmer should plan to keep frequently-used data in registers when possible.
+This book does not discuss mov instructions that copy data to and from special
+registers used primarily in systems programming.
+When you first look at all the mov instructions summarized in Figs. 4.1–4.3, you
+may think that you can use them to copy any source value to any destination location.
+However, many seemingly logical combinations are not available. These include
+• a move with both source and destination in memory
+• immediate source to segment register destination
+• any move to or from the flag register
+• any move to the instruction pointer register
+• a move from one segment register to another segment register
+• any move where the operands are not the same size
+• a move of several objects
+You may need to do some of these operations. We describe below how to accomplish
+some of them.
+Although there is no mov instruction to copy from a memory source to a memory
+destination, two moves using an intermediate register can accomplish the same thing.
+For doubleword length data referenced by Count and Number, the illegal instruction
+mov  Count, Number      ; illegal for two memory operands
+can be replaced by
+mov  eax, Number         ; Count := Number
+mov  Count, eax
+each using the accumulator EAX and one direct memory operand. Some register other
+than EAX could be used, but each of these instructions using the accumulator requires
+five bytes, while each of the corresponding instructions using some other register takes
+six bytes—EAX is chosen in the interest of space efficiency.
+To load an immediate value into a segment register, one can use an immediate
+to register 16 move, followed by a register 16 to segment register move. This sequence
+is needed to initialize the data segment register DS when coding with segmented
+memory models.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

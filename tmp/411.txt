@@ -1,0 +1,34 @@
+11.3 Unpacked BCD Representations and Instructions 411
+{ multiply X7X6X5X4X3X2X1X0 times Y giving Z7Z6Z5Z4Z3Z2Z1Z0}
+lastCarry := 0;
+for i := 0 to 7 loop
+multiply Xi times Y;
+add lastCarry;
+Zi := units digit;
+lastCarry := tens digit;
+end for;
+In the code for mulUnp1, the value for lastCarry is stored in the BH register.
+After a digit from the eight-byte BCD value is multiplied by the single digit in BL, the
+product is adjusted to unpacked BCD and lastCarry is added. It is then necessary to
+adjust the sum to unpacked BCD.
+The aad instruction essentially reverses the action of the aam instruction. It
+combines a two-digit unpacked BCD value in AH and AL into a single binary value in
+AX, multiplying the digit in AH by 10 and adding the digit in AL. The AH register is
+always cleared to 00. The PF, SF, and ZF flags are given values corresponding to the
+result; AF, CF, and OF are undefined.
+The aad instruction is used before a div instruction, contrary to the other
+ASCII adjust instructions that are used after the corresponding arithmetic instructions.
+The examples below assume that the instructions
+aad
+div  dh
+are executed.
+Before After aad After div
+AX: 07 05 AX: 00 4B AX: 03 09
+DH: 08 DH: 08
+AX: 06 02 AX: 00 3E AX: 02 0F
+DH: 04 DH: 04
+AX: 09 03 AX: 00 5D AX: 01 2E
+DH: 02 DH: 02
+In the first example, the quotient and remainder are in BCD format in AL and AH,
+respectively, following the div instruction. However, the second and third examples show
+TEAM LinG - Live, Informative, Non-cost and Genuine!

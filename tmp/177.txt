@@ -1,0 +1,29 @@
+5.4 for Loops in Assembly Language 177
+mov   ecx, 50       ; number of iterations
+forCounter:  .                  ; body of loop
+.
+.
+dec   ecx           ; decrement loop counter
+jecxz endFor        ; exit if counter = 0
+jmp   forCounter    ; otherwise repeat body
+endFor:
+However, since the dec instruction sets or resets the zero flag ZF, the faster conditional jump
+jz  endFor
+can be used instead of the jecxz instruction.
+It is often convenient to use a loop statement to implement a for loop, even
+when the loop index increases and must be used within the body of the loop. The loop
+statement uses ECX to control the number of iterations, while a separate counter serves
+as the loop index.
+For example, to implement the for loop
+for index := 1 to 50 loop
+...{ loop body using index }
+end for;
+the EBX register might be used to store index counting from 1 to 50 while the ECX register counts down from 50 to 1.
+mov   ebx, 1     ; index := 1
+mov   ecx, 50    ; number of iterations for loop
+forNbr:  .
+.               ; use value in EBX for index
+.
+inc   ebx        ; add 1 to index
+loop  forNbr     ; repeat
+TEAM LinG - Live, Informative, Non-cost and Genuine!

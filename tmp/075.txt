@@ -1,0 +1,27 @@
+3.6 Instruction Operands 75
+Figure 3.10 Register indirect addressing
+. . .
+memory
+operand . . .
+address of operandEDX
+DWORD, or WORD directive in the data segment or with an instruction in the code segment.
+The location corresponding to such a symbol will be relocatable so that the assembler
+listing shows an assembly-time address that may be adjusted later. In the statement
+add     eax, number2    ; 05 00000004
+from the example program in Fig. 3.1, the first operand is register mode and the second
+operand is direct mode. The memory operand has been encoded as the 32-bit address
+00000004, the offset of number2 in the data segment.
+The first operand of the instruction
+add     eax, [edx]      ; 03 02
+is register mode, and the second operand is register indirect mode. We will later discuss how the assembler gets the object code 03 02 for this instruction, but for now
+notice that it is not long enough to contain a 32-bit memory address. Instead, it contains bits that say to use the address in the EDX register to locate a doubleword in
+memory to add to the doubleword already in EAX. In other words, the second number is
+not in EDX, but its address is. The square bracket notation ([]) indicates indirect
+addressing with MASM 6.11. Figure 3.10 illustrates how register indirect addressing
+works in this example.
+Any of the general registers EAX, EBX, ECX, and EDX or the index registers ESI
+and EDI can be used for register indirect addressing. The base pointer EBP can also be
+used, but for an address in the stack rather than for an address in the data segment.
+Although the stack pointer ESP can be used for register indirect addressing in certain
+special circumstances, we will have no need to do so.
+TEAM LinG - Live, Informative, Non-cost and Genuine!

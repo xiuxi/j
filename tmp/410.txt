@@ -1,0 +1,40 @@
+410 Decimal Arithmetic
+mulUnp1   PROC NEAR32
+; multiply 8 byte and 1 byte unpacked BCD numbers
+; parameter 1:  destination address
+; parameter 2:  address of 8 byte unpacked BCD number
+; parameter 3:  word w/ low-order byte containing 1-digit BCD nbr
+push ebp            ; establish stack frame
+mov  ebp, esp
+push esi            ; save registers
+push edi
+push eax
+push ebx
+push ecx
+mov  edi, [ebp+14]  ; destination address
+mov  esi, [ebp+10]  ; source address
+mov  bx, [ebp+8]    ; multiplier
+add  esi, 8         ; point at byte after source
+add  edi, 8         ; byte after destination
+mov  bh, 0          ; lastCarry := 0
+mov  ecx, 8         ; count of bytes to process
+forMul:   dec  esi            ; point at operand byte to left
+dec  edi            ; and at destination byte
+mov  al, [esi]      ; digit from 8 byte number
+mul  bl             ; multiply by single byte
+aam                 ; adjust to unpacked BCD
+add  al, bh         ; add lastCarry
+aaa                 ; adjust to unpacked BCD
+mov  [edi], al      ; store units digit
+mov  bh, ah         ; store lastCarry
+loop forMul         ; repeat for all 8 bytes
+pop  ecx            ; restore registers
+pop  ebx
+pop  eax
+pop  edi
+pop  esi
+pop  ebp
+ret  10             ; return, discarding paramters
+mulUnp1   ENDP
+Figure 11.8 Multiplication of unpacked BCD numbers
+TEAM LinG - Live, Informative, Non-cost and Genuine!
