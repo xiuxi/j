@@ -1,9 +1,0 @@
-At the hardware level, I/O may either use separate port addresses
-for external devices or it may use memory-mapped I/O, with a portion of
-the regular memory space assigned to external devices rather than memory.
-Devices may be accessed by polling or—more efficiently—by
-using interrupt-driven I/O. The 80x86 architecture provides for up to 256
-different interrupts, although these are often assigned other uses than
-servicing I/O requests.
-440 Input/Output
-TEAM LinG - Live, Informative, Non-cost and Genuine!
